@@ -1,0 +1,35 @@
+.ingredient-add-field {
+  float:left;
+  width:80%;
+  border-radius: 7px 0px 0px 7px;
+}
+.ingredient-create-button  {
+  border-radius: 0px !important;
+}
+.ingredient-add-box {
+  border: 0.5px solid grey;
+  border-radius: 5px;
+  padding: 3px;
+  margin-top:10px;
+  background-color: white;
+}
+.ingredient-header {
+  margin: 5px;
+}
+.ingredient-amount-field{
+  width: 25%;
+  float:left;
+  margin: 5px;
+}
+.ingredient-unit-select {
+  width: 25%;
+  float:left;
+  margin: 5px;
+}
+.ingredient-add-button {
+  margin: 5px;
+}
+.ingredient-instruction-field {
+  margin: 5px;
+  width: 90%;
+}

@@ -1,0 +1,17 @@
+.tag-add-field {
+  float:left;
+  width:80%;
+  border-radius: 7px 0px 0px 7px;
+}
+.tag-add-button  {
+  border-radius: 0px 0px 0px 0px !important;
+}
+.tag-label {
+  background-color: #cc6699;
+  margin-right: 5px;
+  font-family: 'Handlee', cursive;
+  font-size: 100%;
+}
+.tag-box {
+  min-height: 40%;
+}

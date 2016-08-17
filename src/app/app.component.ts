@@ -1,11 +1,28 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { ROUTER_DIRECTIVES, Router }  from "@angular/router";
+import { Authentication } from "./authentication/authentication";
+import { isLoggedin } from "./authentication/is-loggedin";
+
+import { Recipe } from "./models/recipe";
+import { FriendlyApiService } from "./services/friendlyapi.service";
 
 @Component({
-  moduleId: module.id,
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css']
+  selector: "friendly-app",
+  templateUrl: "app/app.component.html",
+  directives: [ROUTER_DIRECTIVES],
+  providers: [FriendlyApiService],
 })
+
+
 export class AppComponent {
-  title = 'app works!';
+  title = "Friendly Spoon";
+  recipe: Recipe;
+  showNav: boolean;
+  username: string;
+  sub: any = null;
+
+  constructor(private friendlyApiService: FriendlyApiService, public router: Router) {
+    this.username = localStorage.getItem('username');
+
+  }
 }

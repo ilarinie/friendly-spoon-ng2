@@ -1,0 +1,39 @@
+    <link rel="stylesheet" href="/app/authentication/signin.css">
+
+<body>
+    <div class="sign-in-container container-fluid">
+        <button (click)="button()">btn</button>
+
+        <div class="container-fluid">
+
+            <div class="row hidden-xs">
+                <div class="col-md-10 hidden-xs padder "></div>
+            </div>
+            <div class="row">
+                <div class="col-centered col-md-8  signin-div">
+
+                    <h2 class="signin-header">Welcome to Friendly Spoon</h2>
+                    <h2 class="signin-header">Please log in</h2>
+
+                  <form [ngFormModel]="form" (submit)="onSubmit(form.value)">
+                    <div class="field-div">
+                        <div class="signin-field-container col-centered ">
+                            <h4 class="field-header">Username</h4>
+                            <input class="signin-field" type="text" ngControl="email">
+                        </div>
+                        <div class="signin-field-container col-centered ">
+                            <h4 class="field-header">Password</h4>
+                            <input class="signin-field" type="password" ngControl="password">
+                        </div>
+                        <div class="signin-field-container col-centered signin-button">
+                             <button type="submit" [disabled]="!form.valid" class="signin-button">Login</button>
+                        </div>
+
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>

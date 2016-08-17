@@ -1,3 +1,16 @@
-<h1>
-  {{title}}
-</h1>
+<nav *ngIf=" !router.url.includes('login') && !router.url.includes('logout')" class="navbar navbar-default navbar-fixed-top navi">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">Friendly Spoon</a> </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="addrecipe">Add Recipe</a></li>
+                <li ><a href="/logout">Log out</a></li>
+                <li><a class="username">Hello there <span class="username2">{{username}}</span></a></li>
+             </ul>
+        </div>
+    </div>
+</nav>
+<main role="main" class="container">
+    <router-outlet></router-outlet>
+</main>

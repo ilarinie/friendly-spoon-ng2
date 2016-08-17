@@ -1,0 +1,70 @@
+/* vaakasuora viiva pääotsikon ja aliotsikoiden alla */
+.hline {
+	margin-top: 0px;
+	width:100%;
+}
+/* vaakasuora kikkailuviiva desktopnäkymässä kuvien alla */
+.subline {
+	margin-top: 34px;
+	width:130%;
+}
+/* kuvat reseptinäkymässä */
+.recipe-img {
+	margin-top: 10px;
+	border-radius: 25px;
+
+}
+.recipe-img-last {
+	margin-top: 10px;
+	border-radius: 25px;
+}
+/* Listan tyylit, ei palloja eikä jäätävää sisennystä */
+ul {
+	list-style-type: none;
+}
+li {
+	margin-left: -20px;
+}
+/* pääotsikon tyylit, lähemmäs viivaa */
+.main-heading{
+	margin-top: 25px;
+	margin-bottom: 0px;
+	color: #cc6699;
+
+}
+/* pääotsikkorivin nappuloiden tyylit */
+.header-btn{
+	margin-top: 32px;
+	margin-bottom: 0px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	width: 75px;
+	color: white;
+	background-color: #dddddd;
+	border-radius: 10px 10px 0px 0px
+}
+.header-btn:hover{
+	color: white;
+}
+/* aliotsikkojen tyylit */
+.sub-heading {
+	color: black;
+}
+/* Valmistusohjeen divider, vähän ylemmäs kuin norm */
+.instruction-div {
+	margin-top: -5px;
+}
+
+/* Kellot "Time"-otsikon alla */
+.timespan {
+	margin-left: 3px;
+}
+.empty-div{
+	height:200px;
+}
+/*sarakkeet note-näkymässä */
+.note-td {
+	word-wrap: break-word;
+	min-width: 210px;
+	max-width: 210px;
+}

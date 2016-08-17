@@ -1,0 +1,57 @@
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+.sign-in-container {
+  font-family: 'Handlee', cursive;
+
+/*  font-family: 'The Girl Next Door', cursive;
+  font-family: 'Loved by the King', cursive;
+  font-family: 'Amatic SC', cursive;
+  font-family: 'Clicker Script', cursive;
+  font-family: 'Homemade Apple', cursive;*/
+  color: white;
+  background-image:url("/img/signinBG.png");
+ background-position: center top;
+  background-color: #022f32;
+  background-repeat: no-repeat;
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 900px;
+}
+.padder {
+  height: 400px;
+}
+.border {
+  border: 1px solid white;
+}
+.signin-div  {
+  text-align: center;
+  }
+.signin-header{
+  text-align: center;
+}
+.signin-field-container {
+  text-align: center;
+}
+.field-div {
+  margin-top: 40px;
+}
+.signin-field {
+  text-align: center;
+  color: grey;
+  border-radius: 8px;
+  width: 250px;
+  height: 30px;
+}
+.notice-text {
+  margin-top: 20px;
+  color: pink;
+}
+.signin-button {
+  margin-top:20px;
+  color: grey;
+}

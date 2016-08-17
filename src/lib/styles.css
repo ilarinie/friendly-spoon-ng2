@@ -1,0 +1,24 @@
+@import url(https://fonts.googleapis.com/css?family=The+Girl+Next+Door|Loved+by+the+King|Handlee|Amatic+SC|Clicker+Script|Homemade+Apple);
+body {
+    background-color: #f4f4f0;
+}
+main {
+    background-color: #f4f4f0;
+    padding-bottom: 80px;
+    width: 100%;
+    margin-top: 52px; // accommodate the navbar
+}
+.navbar-default {
+    background-color: #022f32 !important;
+}
+.navbar-brand {
+    color: white !important;
+    font-family: 'Handlee', cursive;
+}
+.username2 {
+    font-family: 'Handlee', cursive;
+    font-size: 15 !important;
+}
+.navbar a {
+    color: white !important;
+}

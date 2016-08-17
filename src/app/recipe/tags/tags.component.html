@@ -1,0 +1,13 @@
+<h4 class="headings sub-heading">Tags</h4>
+<div *ngIf="!editheading"> <span *ngFor="let recipetag of recipe.recipe_tags" class="label label-default label-pill tag-label">{{recipetag.tag.title}}</span> </div>
+<div *ngIf="editheading">
+    <div class="tag-box">
+    <h4>Current tags</h4>
+    <span *ngFor="let recipetag of recipe.recipe_tags" class="label label-pill label-default tag-label" (click)="removeRecipeTag(recipetag)">{{recipetag.tag.title}} <span class="glyphicon glyphicon-remove"></span></span>
+    </div>
+
+    <h5>Click to add tags</h5> <span *ngFor="let tag of recipe.allTags" class="label label-pill label-default tag-label" (click)="saveRecipeTag(tag)">{{tag.title}} <span class="glyphicon glyphicon-plus"></span></span>
+    <h4>Create a new Tag</h4>
+    <input [(ngModel)]="tag.title" placeholder="Tag title" class="form-control tag-add-field">
+    <button class="btn btn-success tag-add-button" (click)="saveTag()" >Create</button>
+</div>
