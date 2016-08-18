@@ -17,9 +17,10 @@ import { Notes } from "./notes/notes.component";
 
 @Component({
   selector: "recipeshow",
-  templateUrl: "app/recipe/recipe.component.html",
-  styleUrls: ["app/recipe/recipe.component.css"],
-  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, FORM_DIRECTIVES, Notes]
+  templateUrl: "recipe.component.html",
+  styleUrls: ["recipe.component.css"],
+  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, FORM_DIRECTIVES, Notes],
+  moduleId: module.id
 })
 
 export class RecipeComponent implements OnInit {

@@ -8,9 +8,10 @@ import { FriendlyApiService } from "./services/friendlyapi.service";
 
 @Component({
   selector: "friendly-app",
-  templateUrl: "app/app.component.html",
+  templateUrl: "app.component.html",
   directives: [ROUTER_DIRECTIVES],
   providers: [FriendlyApiService],
+  moduleId: module.id
 })
 
 

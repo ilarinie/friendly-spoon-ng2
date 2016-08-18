@@ -12,10 +12,11 @@ import { ReverseArrayPipe } from '../pipes/filter-array-pipe';
 
 @Component({
   selector: 'add-ingredients',
-  templateUrl: 'app/add-ingredients/add-ingredients.component.html',
-  styleUrls: ['app/add-ingredients/add-ingredients.component.css'],
+  templateUrl: 'add-ingredients.component.html',
+  styleUrls: ['add-ingredients.component.css'],
   pipes: [ReverseArrayPipe],
-  directives: [AddRecipeIngredient]
+  directives: [AddRecipeIngredient],
+  moduleId: module.id
 })
 export class AddIngredients implements OnInit {
   @Input()
@@ -42,7 +43,7 @@ export class AddIngredients implements OnInit {
   saveIngredient() {
     this.friendlyApiService.saveIngredient(this.ingredient).then(ingredient => this.ingredients.push(ingredient));
   }
- //TODO: remove recipe ingredient from group array / add recipe ingredient to group array
+  //TODO: remove recipe ingredient from group array / add recipe ingredient to group array
   saveRecipeIngredient(ingredient_id: number, group_id?: number) {
     this.recipe_ingredient.ingredient_id = ingredient_id;
 
@@ -75,7 +76,7 @@ export class AddIngredients implements OnInit {
         this.recipe.recipe_ingredients.splice(index, 1);
       }
     } else {
-        console.log(recipe_ingredient.recipe_ingredient_group_id)
+      console.log(recipe_ingredient.recipe_ingredient_group_id)
     }
   }
   saveGroup() {

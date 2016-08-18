@@ -4,18 +4,19 @@ import {Router} from '@angular/router';
 import {Authentication} from './authentication';
 
 @Component({
-    selector: 'logout',
-    directives: [FORM_DIRECTIVES, NgIf],
-    templateUrl: '/app/authentication/logout.html'
+  selector: 'logout',
+  directives: [FORM_DIRECTIVES, NgIf],
+  templateUrl: 'logout.html',
+  moduleId: module.id
 })
 
 export class Logout {
-    form: ControlGroup;
-    error: boolean = false;
-    constructor(public auth: Authentication, public router: Router) {
-    }
+  form: ControlGroup;
+  error: boolean = false;
+  constructor(public auth: Authentication, public router: Router) {
+  }
 
-    onInit() {
-        this.auth.logout();
-    }
+  onInit() {
+    this.auth.logout();
+  }
 }

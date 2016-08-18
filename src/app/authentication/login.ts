@@ -5,36 +5,37 @@ import {Authentication} from './authentication';
 
 
 @Component({
-    selector: 'login',
-    directives: [FORM_DIRECTIVES, NgIf],
-    templateUrl: '/app/authentication/login.html',
-    providers: [FormBuilder],
+  selector: 'login',
+  directives: [FORM_DIRECTIVES, NgIf],
+  templateUrl: 'login.html',
+  providers: [FormBuilder],
+  moduleId: module.id,
 })
 
 export class Login {
-    form: ControlGroup;
-    error: boolean = false;
-    constructor(fb: FormBuilder, public auth: Authentication, public router: Router) {
-        this.form = fb.group({
-            email: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-    }
+  form: ControlGroup;
+  error: boolean = false;
+  constructor(fb: FormBuilder, public auth: Authentication, public router: Router) {
+    this.form = fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
 
-    button() {
-        console.log(this.auth.isExpired())
-    }
-    check() {
+  button() {
+    console.log(this.auth.isExpired())
+  }
+  check() {
 
-    }
+  }
 
 
-    onSubmit(value: any) {
-        this.auth.login(value.email, value.password)
-            .subscribe(
-            (token: any) => this.router.navigate(['/']),
-            () => { this.error = true; }
-            );
-    }
+  onSubmit(value: any) {
+    this.auth.login(value.email, value.password)
+      .subscribe(
+      (token: any) => this.router.navigate(['/']),
+      () => { this.error = true; }
+      );
+  }
 }

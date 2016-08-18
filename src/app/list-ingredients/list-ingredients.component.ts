@@ -5,8 +5,9 @@ import { RecipeIngredient } from "../models/recipe_ingredient";
 
 @Component({
   selector: 'list-ingredients',
-  templateUrl: 'app/list-ingredients/list-ingredients.component.html',
-  styleUrls: ['app/list-ingredients/list-ingredients.component.css']
+  templateUrl: 'list-ingredients.component.html',
+  styleUrls: ['list-ingredients.component.css'],
+  moduleId: module.id
 })
 export class ListIngredients {
   @Input()

@@ -6,9 +6,10 @@ import { Recipe } from "../../models/recipe";
 import { Note } from "../../models/note";
 
 @Component({
-  templateUrl: 'app/recipe/notes/notes.component.html',
-  styleUrls: ['app/recipe/notes/notes.component.css'],
+  templateUrl: 'notes.component.html',
+  styleUrls: ['notes.component.css'],
   selector: 'notes',
+  moduleId: module.id
 })
 export class Notes {
   @Input()
