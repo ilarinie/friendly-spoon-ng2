@@ -14,6 +14,11 @@ import { ListIngredients} from "./list-ingredients/list-ingredients.component";
 import {AddIngredients} from "./add-ingredients/add-ingredients.component";
 import {TinyEditor} from "./directives/tinymce.directive";
 import {AddRecipeIngredient} from "./add-recipe-ingredient/add-recipe-ingredient.component";
+import { Login } from "./authentication/login";
+import { Logout } from "./authentication/logout";
+
+import {enableProdMode} from "@angular/core";
+enableProdMode();
 
 
 @NgModule({
@@ -27,6 +32,8 @@ import {AddRecipeIngredient} from "./add-recipe-ingredient/add-recipe-ingredient
     AddIngredients,
     TinyEditor,
     AddRecipeIngredient,
+    Login,
+    Logout
   ],
   imports: [
     BrowserModule,

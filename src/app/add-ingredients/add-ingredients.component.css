@@ -33,3 +33,9 @@
   margin: 5px;
   width: 90%;
 }
+select :first-child{
+  color:green !important;
+}
+.info:first-child{
+  color:green !important;
+}

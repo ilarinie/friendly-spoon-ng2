@@ -32,7 +32,17 @@ export class RecipeListComponent implements OnInit {
   ngOnInit() {
     this.order = "name";
     this.searchTag = "";
-    this.friendlyApiService.getRecipes().then(recipes => this.recipes = recipes);
+    if (localStorage.getItem("recipes") == null) {
+      this.friendlyApiService.getRecipes().then(recipes => { this.recipes = recipes; localStorage.setItem("recipes", JSON.stringify(recipes)) });
+    } else {
+      this.recipes = JSON.parse(localStorage.getItem("recipes"))
+    }
+    if (localStorage.getItem("tags") == null) {
+      this.friendlyApiService.getTags().then(tags => { this.tags = tags; localStorage.setItem("tags", JSON.stringify(tags)) });
+    } else {
+      this.tags = JSON.parse(localStorage.getItem("tags"))
+    }
+
     this.friendlyApiService.getTags().then(tags => this.tags = tags);
   }
   random() {

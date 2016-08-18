@@ -57,16 +57,32 @@ export class RecipeComponent implements OnInit {
     } else {
       this.sub = this.route.params.subscribe(params => {
         let id = +params['id'];
-        this.friendlyApiService.getRecipe(id)
-          .then(recipe => this.recipe = recipe);
+        let recipes: Recipe[] = JSON.parse(localStorage.getItem("recipes"))
+        if (recipes != null) {
+          let notfound = true;
+          for (let i = 0; i < recipes.length; i++) {
+            if (recipes[i].id == id) {
+              this.recipe = recipes[i];
+              notfound = false;
+              break;
+            }
+          }
+          if (notfound) {
+            this.friendlyApiService.getRecipe(id)
+              .then(recipe => this.recipe = recipe);
+          }
+        } else {
+          this.friendlyApiService.getRecipe(id)
+            .then(recipe => this.recipe = recipe);
+        }
+
       })
     }
   }
   ngOnInit() {
     this.getRecipe();
-    this.friendlyApiService.getLevels().then(levels => this.levels = levels);
-    this.friendlyApiService.getDurations().then(durations => this.durations = durations);
-
+    this.durations = JSON.parse(localStorage.getItem("levels"));
+    this.durations = JSON.parse(localStorage.getItem("durations"));
   }
 
   get diagnostic() { return JSON.stringify(this.recipe); }
