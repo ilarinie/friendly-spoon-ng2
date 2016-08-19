@@ -37,8 +37,11 @@ export class Login {
       .then(
       res => {
         this.router.navigate(['/'])
-        this.friendlyApiService.getDurations().then(durations => localStorage.setItem("durations", JSON.stringify(durations)))
-        this.friendlyApiService.getLevels().then(levels => localStorage.setItem("levels", JSON.stringify(levels)))
+        //load static assets if not in browser cache
+        if (localStorage.getItem("durations") == null || localStorage.getItem("levels")) {
+          this.friendlyApiService.getDurations().then(durations => localStorage.setItem("durations", JSON.stringify(durations)))
+          this.friendlyApiService.getLevels().then(levels => localStorage.setItem("levels", JSON.stringify(levels)))
+        }
       }
       );
   }

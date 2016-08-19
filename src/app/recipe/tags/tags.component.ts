@@ -50,6 +50,7 @@ export class Tags {
       recTag.recipe_id = this.recipe.id;
       this.recipe.recipe_tags.push(recTag);
       this.friendlyApiService.saveRecipeTag(recTag);
+      this.friendlyApiService.getTags().then(tags => localStorage.setItem("tags", JSON.stringify(tags)));
     });
     this.tag = new Tag();
   }

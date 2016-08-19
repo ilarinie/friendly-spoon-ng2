@@ -81,7 +81,7 @@ export class RecipeComponent implements OnInit {
   }
   ngOnInit() {
     this.getRecipe();
-    this.durations = JSON.parse(localStorage.getItem("levels"));
+    this.levels = JSON.parse(localStorage.getItem("levels"));
     this.durations = JSON.parse(localStorage.getItem("durations"));
   }
 
@@ -97,8 +97,12 @@ export class RecipeComponent implements OnInit {
       .then(recipe => {
         this.getRecipe();
         if (this.router.url.includes('addrecipe')) {
-          this.router.navigate(['recipes/' + this.recipe.id])
+          this.router.navigate(['recipes/' + recipe.id])
         }
+        //load updated recipe list to cache
+        this.friendlyApiService.getRecipes().then(recipes => {
+          localStorage.setItem("recipes", JSON.stringify(recipes));
+        })
       })
       .catch(error => this.error = error);
 

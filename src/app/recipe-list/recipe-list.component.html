@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid recipe-list">
     <h1>Friendly Spoon</h1>
     <h3>is here for you!</h3>
     <div class="row main-row">
@@ -6,7 +6,7 @@
             <form role="form">
                 <label for="searchText">Search recipes</label>
                 <br />
-                <input type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="...filter"> </form>
+                <input class="form-control" type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Filter recipes"> </form>
         </div>
     </div>
     <div class="row main-row">
@@ -19,16 +19,21 @@
         </div>
     </div>
     <div class="row main-row">
-        <div class="col-xs-11"> <a class="btn" (click)="sortByName()">ABC <span class="glyphicon glyphicon-sort"></span></a> <a class="btn" (click)="sortByRating()">Rating <span class="glyphicon glyphicon-sort"></span></a> <a class="btn" (click)="sortByTime()">Time <span class="glyphicon glyphicon-sort"></span></a>            <a class="btn" (click)="random()">Random</a> </div>
+        <div class="col-xs-11 buttons-row">
+            <h5 style="float:left">Sort by:  </h5>
+            <a class="btn btn-default" (click)="sortByName()">ABC <span class="glyphicon glyphicon-sort"></span></a> <a class="btn btn-default" (click)="sortByRating()">Rating <span class="glyphicon glyphicon-sort"></span></a> <a class="btn btn-default" (click)="sortByTime()">Time <span class="glyphicon glyphicon-sort"></span></a>            <a class="btn btn-default" (click)="random()">Pick a random recipe!</a> <a class="btn btn-default" (click)="refreshRecipes()">Refresh recipe list <span class="glyphicon glyphicon-refresh"></span></a></div>
     </div>
     <div class="row main-row">
         <div class="col-xs-11">
+            <div *ngIf="!loading">
             <table class="table">
                 <thead>
-                    <th> <a (click)="button()">Recipe</a> </th>
-                    <th> <a>Rating</a> </th>
-                    <th> Tags </th>
-                    <th> <a>Time</a> </th>
+                    <tr class="recipe-list-headers">
+                    <th class="col-md-4"> <a (click)="sortByName()">Recipe</a> </th>
+                    <th class="col-md-3"> <a (click)="sortByRating()">Rating</a> </th>
+                    <th class="col-md-4"> Tags </th>
+                    <th class="col-md-3"> <a (click)="sortByTime()">Time</a> </th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let recipe of recipes| filter:listFilter.value | orderBy: order">
@@ -39,6 +44,11 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div *ngIf="loading" class="loading-div">
+            <img src="img/gears.svg" align="center"><br>
+            Fetching recipes from the nether realms..
+        </div>
         </div>
     </div>
 </div>

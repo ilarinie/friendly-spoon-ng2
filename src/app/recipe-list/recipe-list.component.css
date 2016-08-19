@@ -1,0 +1,51 @@
+a{
+  color:black;
+  text-decoration: none;
+}
+
+a:link {
+
+}
+
+/* visited link */
+a:visited {
+
+}
+
+/* mouse over link */
+a:hover {
+  color: white;
+  background-color: black;
+}
+
+/* selected link */
+a:active {
+
+}
+
+.buttons-row {
+  padding: 10px;
+}
+.recipe-list {
+  min-height: 120em;
+}
+.table {
+  background-color: #022f32;
+  color: white;
+  font-family: 'Handlee', cursive;
+}
+.table a {
+  color:white;
+}
+.recipe-list-headers th{
+  background-color: #f4f4f0
+  color: black;
+}
+.loading-div {
+  text-align:center;
+  padding-top: 30px;
+  img {
+    display:block;
+    margin: 0 auto;
+  }
+}

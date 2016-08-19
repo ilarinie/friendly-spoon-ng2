@@ -61,13 +61,19 @@ export class AddIngredients implements OnInit {
       this.recipe_ingredient.recipe_id = this.recipe.id;
     }
     let rinc: RecipeIngredient;
-    this.friendlyApiService.saveRecipeIngredient(this.recipe_ingredient).then(recipe_ingredient => this.recipe.recipe_ingredients.push(recipe_ingredient));
+    this.friendlyApiService.saveRecipeIngredient(this.recipe_ingredient).then(recipe_ingredient => {
+      this.recipe.recipe_ingredients.push(recipe_ingredient);
+      this.friendlyApiService.getRecipes().then(recipes => {
+        localStorage.setItem("recipes", JSON.stringify(recipes));
+      })
+    });
 
     let id: number = this.recipe.id
 
     this.recipe_ingredient = new RecipeIngredient;
   }
   removeRecipeIngredient(recipe_ingredient: RecipeIngredient) {
+    console.log(recipe_ingredient.recipe_ingredient_group_id + "= ryhma")
     this.friendlyApiService.deleteRecipeIngredient(recipe_ingredient);
 
     if (!recipe_ingredient.recipe_ingredient_group_id) {
@@ -81,7 +87,9 @@ export class AddIngredients implements OnInit {
   }
   saveGroup() {
     this.recipe_ingredient_group.recipe_id = this.recipe.id;
-    this.friendlyApiService.saveRecipeIngredientGroup(this.recipe_ingredient_group)
+    this.friendlyApiService.saveRecipeIngredientGroup(this.recipe_ingredient_group).then(res => {
+      this.friendlyApiService.getRecipes().then(recipes => localStorage.setItem("recipes", JSON.stringify(recipes)));
+    })
     this.recipe.recipe_ingredient_groups.push(this.recipe_ingredient_group);
     this.recipe_ingredient_group = new RecipeIngredientGroup;
   }

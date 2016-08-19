@@ -12,7 +12,7 @@ import { FriendlyApiService } from "../services/friendlyapi.service";
 @Component({
   selector: "recipe-list",
   templateUrl: "recipe-list.component.html",
-  //styleUrls: ["recipe-list.component.css"],
+  styleUrls: ["recipe-list.component.css"],
   pipes: [FilterArrayPipe, OrderBy, TagFilter],
   moduleId: module.id
 })
@@ -24,6 +24,8 @@ export class RecipeListComponent implements OnInit {
   tags: Tag[];
   searchTag: string;
 
+  loading: boolean;
+
   constructor(
     private router: Router,
     private friendlyApiService: FriendlyApiService,
@@ -33,7 +35,12 @@ export class RecipeListComponent implements OnInit {
     this.order = "name";
     this.searchTag = "";
     if (localStorage.getItem("recipes") == null) {
-      this.friendlyApiService.getRecipes().then(recipes => { this.recipes = recipes; localStorage.setItem("recipes", JSON.stringify(recipes)) });
+      this.loading = true;
+      this.friendlyApiService.getRecipes().then(recipes => {
+        this.recipes = recipes;
+        localStorage.setItem("recipes", JSON.stringify(recipes));
+        this.loading = false;
+      });
     } else {
       this.recipes = JSON.parse(localStorage.getItem("recipes"))
     }
@@ -50,6 +57,14 @@ export class RecipeListComponent implements OnInit {
   }
   button() {
     console.log(this.searchTag)
+  }
+  refreshRecipes() {
+    this.loading = true;
+    this.friendlyApiService.getRecipes().then(recipes => {
+      this.recipes = recipes;
+      this.recipes = recipes; localStorage.setItem("recipes", JSON.stringify(recipes));
+      this.loading = false;
+    })
   }
   tagChange(value) {
     console.log("diip" + typeof (value))
