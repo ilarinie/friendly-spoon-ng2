@@ -32,7 +32,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let recipe of recipes| filter:listFilter.value | orderBy: order">
-                        <td><a href="/recipes/{{recipe.id}}"> {{recipe.name}}</a> </td>
+                        <td><a routerLink="/recipes/{{recipe.id}}"> {{recipe.name}}</a> </td>
                         <td><span *ngIf="recipe.ratingaverage">{{recipe.ratingaverage}} / 10</span></td>
                         <td> <span *ngFor="let tag of recipe.recipe_tags" class="label label-default">{{tag.title}}</span> </td>
                         <td> <span *ngIf="recipe.duration">{{recipe.duration.range}}</span> </td>
