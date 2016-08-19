@@ -28,6 +28,11 @@ export class AddIngredients implements OnInit {
   recipe_ingredient: RecipeIngredient = new RecipeIngredient();
   recipe_ingredient_group: RecipeIngredientGroup = new RecipeIngredientGroup();
 
+  //loading indicators
+  addingGroup: boolean;
+  addingRecInc: boolean;
+  addingInc: boolean;
+
 
   AMOUNT_MIXED_REGEX = /^\d{0,2}\d(\s[1-9]\/[1-9])$/i
   AMOUNT_DECIMAL_REGEX = /^[0-9]{1,4}[,.]{0,1}[0-9]{0,3}$/
@@ -41,12 +46,13 @@ export class AddIngredients implements OnInit {
   }
 
   saveIngredient() {
-    this.friendlyApiService.saveIngredient(this.ingredient).then(ingredient => this.ingredients.push(ingredient));
+    this.addingInc = true;
+    this.friendlyApiService.saveIngredient(this.ingredient).then(ingredient => { this.ingredients.push(ingredient); this.addingInc = false });
   }
   //TODO: remove recipe ingredient from group array / add recipe ingredient to group array
   saveRecipeIngredient(ingredient_id: number, group_id?: number) {
     this.recipe_ingredient.ingredient_id = ingredient_id;
-
+    this.addingRecInc = true;
     if (this.recipe_ingredient.amount == undefined) {
     } else {
       this.recipe_ingredient.amount = this.parseAmount(this.recipe_ingredient.amount);
@@ -55,25 +61,36 @@ export class AddIngredients implements OnInit {
       }
     }
 
-    if (group_id) {
-      this.recipe_ingredient.recipe_ingredient_group_id = group_id;
+    if (this.recipe_ingredient.recipe_ingredient_group_id) {
+
+      this.friendlyApiService.saveRecipeIngredient(this.recipe_ingredient).then(recipe_ingredient => {
+        this.addingRecInc = false;
+        let index = this.findGroupIndex(recipe_ingredient.recipe_ingredient_group_id)
+        if (index > -1) {
+          this.recipe.recipe_ingredient_groups[index].recipe_ingredients.push(recipe_ingredient);
+        }
+        this.friendlyApiService.getRecipes().then(recipes => {
+          localStorage.setItem("recipes", JSON.stringify(recipes));
+        })
+      });
+
     } else {
       this.recipe_ingredient.recipe_id = this.recipe.id;
+      this.friendlyApiService.saveRecipeIngredient(this.recipe_ingredient).then(recipe_ingredient => {
+        this.addingRecInc = false;
+        this.recipe.recipe_ingredients.push(recipe_ingredient);
+        this.friendlyApiService.getRecipes().then(recipes => {
+          localStorage.setItem("recipes", JSON.stringify(recipes));
+        })
+      });
     }
-    let rinc: RecipeIngredient;
-    this.friendlyApiService.saveRecipeIngredient(this.recipe_ingredient).then(recipe_ingredient => {
-      this.recipe.recipe_ingredients.push(recipe_ingredient);
-      this.friendlyApiService.getRecipes().then(recipes => {
-        localStorage.setItem("recipes", JSON.stringify(recipes));
-      })
-    });
+
 
     let id: number = this.recipe.id
-
+    this.ingredient.name = "";
     this.recipe_ingredient = new RecipeIngredient;
   }
   removeRecipeIngredient(recipe_ingredient: RecipeIngredient) {
-    console.log(recipe_ingredient.recipe_ingredient_group_id + "= ryhma")
     this.friendlyApiService.deleteRecipeIngredient(recipe_ingredient);
 
     if (!recipe_ingredient.recipe_ingredient_group_id) {
@@ -82,16 +99,32 @@ export class AddIngredients implements OnInit {
         this.recipe.recipe_ingredients.splice(index, 1);
       }
     } else {
-      console.log(recipe_ingredient.recipe_ingredient_group_id)
+      let grpindex = this.findGroupIndex(recipe_ingredient.recipe_ingredient_group_id)
+      if (grpindex > -1) {
+        let index = this.recipe.recipe_ingredient_groups[grpindex].recipe_ingredients.indexOf(recipe_ingredient);
+        if (index > -1) {
+          this.recipe.recipe_ingredient_groups[grpindex].recipe_ingredients.splice(index, 1);
+        }
+      }
     }
   }
   saveGroup() {
+    this.addingGroup = true;
     this.recipe_ingredient_group.recipe_id = this.recipe.id;
     this.friendlyApiService.saveRecipeIngredientGroup(this.recipe_ingredient_group).then(res => {
+      this.addingGroup = false;
       this.friendlyApiService.getRecipes().then(recipes => localStorage.setItem("recipes", JSON.stringify(recipes)));
     })
     this.recipe.recipe_ingredient_groups.push(this.recipe_ingredient_group);
     this.recipe_ingredient_group = new RecipeIngredientGroup;
+  }
+  deleteGroup(recipe_ingredient_group: RecipeIngredientGroup) {
+    this.friendlyApiService.deleteRecipeIngredientGroup(recipe_ingredient_group).then(res => {
+      let index = this.recipe.recipe_ingredient_groups.indexOf(recipe_ingredient_group);
+      if (index > -1) {
+        this.recipe.recipe_ingredient_groups.splice(index, 1);
+      }
+    })
   }
 
   parseAmount(amount: any) {
@@ -112,6 +145,14 @@ export class AddIngredients implements OnInit {
     }
   }
 
+  findGroupIndex(group_id: number) {
+    for (let i = 0; i < this.recipe.recipe_ingredient_groups.length; i++) {
+      if (this.recipe.recipe_ingredient_groups[i].id == group_id) {
+        return i;
+      }
+    }
+    return -1;
+  }
 
 
 }

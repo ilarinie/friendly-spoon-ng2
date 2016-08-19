@@ -52,6 +52,10 @@ export class FriendlyApiService {
 
   //TODO: REFACTOR TO SEPARATE SERVICES
 
+
+
+
+
   //GET STATIC VARIABLES FROM API
   getDurations() {
     return this.http.get(this.unitsUrl + 'durations.json', { headers: this.headers, body: '' })
@@ -134,6 +138,17 @@ export class FriendlyApiService {
 
     return this.http
       .put(url, JSON.stringify(recipe_ingredient_group), { headers: this.headers })
+      .toPromise()
+      .then(() => recipe_ingredient_group)
+      .catch(this.handleError);
+  }
+  deleteRecipeIngredientGroup(recipe_ingredient_group: RecipeIngredientGroup) {
+    this.headers.append('Content-Type', 'application/json');
+
+    let url = `${this.recipeIngredientGroupUrl}/${recipe_ingredient_group.id}`;
+
+    return this.http
+      .delete(url, { headers: this.headers, body: '' })
       .toPromise()
       .then(() => recipe_ingredient_group)
       .catch(this.handleError);

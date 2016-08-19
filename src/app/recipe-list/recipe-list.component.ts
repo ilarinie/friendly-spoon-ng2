@@ -46,6 +46,7 @@ export class RecipeListComponent implements OnInit {
     }
     if (localStorage.getItem("tags") == null) {
       this.friendlyApiService.getTags().then(tags => { this.tags = tags; localStorage.setItem("tags", JSON.stringify(tags)) });
+      console.log("joo")
     } else {
       this.tags = JSON.parse(localStorage.getItem("tags"))
     }

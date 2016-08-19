@@ -10,7 +10,7 @@
   </tr>
 </table>
 <div *ngFor="let group of recipe.recipe_ingredient_groups">
-  <h4>{{group.name}}</h4>
+  <h4>{{group.name}}  <span class="glyphicon glyphicon-remove" (click)="deleteGroup(group)"></span></h4>
   <table class="table">
     <tr *ngFor="let inc of group.recipe_ingredients">
       <td class="col-md-2"> {{inc.ramount.integer}} <span *ngIf="inc.ramount.numerator"><sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub></span> {{inc.unit?.name}} </td>
@@ -22,22 +22,31 @@
     </tr>
   </table>
 </div>
+<div *ngIf="addingRecInc">
+
+</div>
 <h4>Add Ingredients</h4>
 <div>
   <input class="ingredient-add-field form-control" #listFilter type="text" [(ngModel)]="ingredient.name" placeholder="Ingredient" /> <a class="btn btn-success ingredient-create-button" (click)="saveIngredient()">Create</a> </div>
-<div class="ingredient-add-box" *ngFor="let listingredient of ingredients | reverseFilter:listFilter.value">
+<div *ngIf="!addingRecInc">
+<div  class="ingredient-add-box" *ngFor="let listingredient of ingredients | reverseFilter:listFilter.value">
   <h4 class="ingredient-header">{{listingredient.name}}</h4>
   <input class="form-control ingredient-amount-field" type="text" placeholder="Amount" [(ngModel)]="recipe_ingredient.amount">
   <select class="form-control info ingredient-unit-select" [(ngModel)]="recipe_ingredient.unit_id">
     <option value="" [selected]="!recipe_ingredient.unit_id">Unit</option>
     <option *ngFor="let unit of units" value="{{unit.id}}">{{unit.name}}</option>
   </select>
-  <button class="btn ingredient-add-button" (click)="saveRecipeIngredient(listingredient.id)">Add to Recipe</button>
+  <button class="btn ingredient-add-button" (click)="saveRecipeIngredient(listingredient.id)" [disabled]="addingRecInc">Add to Recipe</button>
   <input class="form-control ingredient-instruction-field" type="text" placeholder="Instruction - optional" [(ngModel)]="recipe_ingredient.instruction" />
   <select class="form-control info ingredient-instruction-field" [(ngModel)]="recipe_ingredient.recipe_ingredient_group_id">
     <option class="info" value="" [selected]="!recipe_ingredient.recipe_ingredient_group_id">Group</option>
     <option *ngFor="let group of recipe.recipe_ingredient_groups" value="{{group.id}}">{{group.name}}</option>
   </select>
+</div>
+</div>
+<div class="ingredient-add-box" *ngIf="addingRecInc">
+  <img src="img/gears.svg">
+  Adding..
 </div>
 <!--
 <div *ngFor="let group of recipe.recipe_ingredient_groups">
@@ -64,4 +73,6 @@
 <add-recipe-ingredient *ngFor="let group of recipe.recipe_ingredient_groups" [group]="group"> </add-recipe-ingredient>
 -->
 <h4>Add a new ingredient group, eg. "Frosting"</h4>
-<input class="ingredient-add-field form-control" [(ngModel)]="recipe_ingredient_group.name" placeholder="New Group"><a class="btn btn-success ingredient-create-button" (click)="saveGroup()">Create</a>
+<input class="ingredient-add-field form-control" [(ngModel)]="recipe_ingredient_group.name" placeholder="New Group">
+<span *ngIf="!addingGroup"><a class="btn btn-success ingredient-create-button" (click)="saveGroup()">Create</a></span>
+<span *ngIf="addingGroup"><a class="btn btn-warning ingredient-create-button" disabled="disabled">Adding</a></span>
