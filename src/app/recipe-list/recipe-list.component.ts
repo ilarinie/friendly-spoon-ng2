@@ -2,6 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { Router }            from "@angular/router";
 import { FilterArrayPipe, OrderBy, TagFilter } from "../pipes/filter-array-pipe";
 import { Authentication } from "../authentication/authentication";
+import {MdInput} from "@angular2-material/input";
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR
+} from '@angular/forms';
+
 
 
 import { Recipe } from "../models/recipe";
@@ -14,6 +20,7 @@ import { FriendlyApiService } from "../services/friendlyapi.service";
   templateUrl: "recipe-list.component.html",
   styleUrls: ["recipe-list.component.css"],
   pipes: [FilterArrayPipe, OrderBy, TagFilter],
+  directives: [MdInput],
   moduleId: module.id
 })
 

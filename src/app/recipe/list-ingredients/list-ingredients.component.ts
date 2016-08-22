@@ -16,19 +16,56 @@ export class ListIngredients {
 
   checked: RecipeIngredient[] = [];
 
-  toggleInc(inc, group_index?) {
-    let index = this.recipe.recipe_ingredients.indexOf(inc)
-    if (index > -1) {
-      this.checked.push(inc)
-      this.recipe.recipe_ingredients.splice(index, 1);
+  toggleInc(inc) {
+
+    let group_index = this.findRecipeGroupIndex(inc);
+    console.log("group index "+group_index)
+
+    if (group_index == -1) {
+      let index = this.recipe.recipe_ingredients.indexOf(inc)
+      if (index > -1) {
+        this.checked.push(inc)
+        this.recipe.recipe_ingredients.splice(index, 1);
+      }
+    } else {
+      let index = this.recipe.recipe_ingredient_groups[group_index].recipe_ingredients.indexOf(inc)
+      if (index > -1) {
+        
+        this.checked.push(inc)
+        this.recipe.recipe_ingredient_groups[group_index].recipe_ingredients.splice(index, 1);
+      }
     }
   }
   unToggleInc(inc) {
-    let index = this.checked.indexOf(inc)
-    if (index > -1) {
-      this.recipe.recipe_ingredients.push(inc)
-      this.checked.splice(index, 1);
+    let group_index = this.findRecipeGroupIndex(inc);
+    console.log("group index "+group_index)
+
+    if (group_index == -1) {
+      let index = this.checked.indexOf(inc)
+      if (index > -1) {
+        this.recipe.recipe_ingredients.push(inc)
+        this.checked.splice(index, 1);
+      }
+    } else {
+      let index = this.checked.indexOf(inc)
+      if (index > -1) {
+        this.recipe.recipe_ingredient_groups[group_index].recipe_ingredients.push(inc)
+        this.checked.splice(index, 1);
+      }
     }
+  }
+
+
+  findRecipeGroupIndex(recipe_ingredient) {
+    for (let i = 0; i < this.recipe.recipe_ingredient_groups.length; i++) {
+      if (this.recipe.recipe_ingredient_groups[i].recipe_ingredients != undefined) {
+        if (this.recipe.recipe_ingredient_groups[i].recipe_ingredients.indexOf(recipe_ingredient) > -1) {
+          return i;
+        }
+      }
+    }
+    return -1;
+
   }
 
 }

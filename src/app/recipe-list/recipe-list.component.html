@@ -4,9 +4,7 @@
     <div class="row main-row">
         <div class="col-xs-11">
             <form role="form">
-                <label for="searchText">Search recipes</label>
-                <br />
-                <input class="form-control" type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Filter recipes"> </form>
+                <md-input  type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Filter recipes"></md-input> </form>
         </div>
     </div>
     <div class="row main-row">

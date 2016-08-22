@@ -17,7 +17,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class FriendlyApiService {
-  private baseUrl = 'http://friendly-spoon-api.herokuapp.com';
+  private baseUrl = 'http://localhost:3000';
 
   private recipesUrl = this.baseUrl + '/recipes';
   private unitsUrl = this.baseUrl + '/get'

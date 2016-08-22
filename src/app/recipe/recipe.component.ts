@@ -107,7 +107,9 @@ export class RecipeComponent implements OnInit {
       .save(this.recipe)
       .then(recipe => {
         console.log("joo")
+        console.log("id on "+this.recipe.id)
         this.recipe = recipe;
+
         //load updated recipe list to cache
         this.friendlyApiService.updateRecipeToList(this.recipe);
         if (this.router.url.includes('addrecipe')) {

@@ -9,7 +9,7 @@ import { Router, CanActivate } from "@angular/router";
 export class Authentication implements CanActivate {
   private locationWatcher = new EventEmitter();
 
-  private apiUrl = "http://friendly-spoon-api.herokuapp.com"
+  private apiUrl = "http://localhost:3000"
 
   token: string;
   client: string;

@@ -17,7 +17,8 @@ module.exports = function(defaults) {
       'rxjs/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)',
       'jquery/dist/jquery.min.js',
-      'angular2-bootstrap-confirm/**/*.+(js|js.map|ts)'
+      'angular2-bootstrap-confirm/**/*.+(js|js.map|ts)',
+      '@angular2-material/**/*'
     ]
   });
 };

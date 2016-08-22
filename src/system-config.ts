@@ -10,7 +10,8 @@
 /** Map relative paths to URLs. */
 const map: any = {
   'jquery': 'vendor/jquery/dist/jquery.js',
-  'angular2-bootstrap-confirm': 'vendor/angular2-bootstrap-confirm'
+  'angular2-bootstrap-confirm': 'vendor/angular2-bootstrap-confirm',
+  '@angular2-material': 'vendor/@angular2-material'
 };
 
 /** User packages configuration. */
@@ -20,6 +21,17 @@ const packages: any = {
     main: 'angular2-bootstrap-confirm.js'
   }
 };
+
+const materialPkgs:string[] = [
+  'core',
+  'button',
+  'card',
+  'input'
+];
+
+materialPkgs.forEach((pkg) => {
+  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
+});
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************

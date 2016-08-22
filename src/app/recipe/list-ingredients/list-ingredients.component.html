@@ -17,7 +17,7 @@
     <h4>{{group.name}}</h4>
     <ul>
         <li *ngFor="let inc of group.recipe_ingredients; let i = index">
-            <input type="checkbox" ng-click="toggleInc(i, g)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
+            <input type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
             <span [hidden]="!inc.ramount.numerator">
               <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
             </span> </span> <span [hidden]="amount_shown!=2">{{inc.double.integer}}
