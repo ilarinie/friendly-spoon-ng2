@@ -16,7 +16,8 @@ module.exports = function(defaults) {
       'reflect-metadata/**/*.+(ts|js|js.map)',
       'rxjs/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)',
-      'jquery/dist/jquery.min.js'
+      'jquery/dist/jquery.min.js',
+      'angular2-bootstrap-confirm/**/*.+(js|js.map|ts)'
     ]
   });
 };

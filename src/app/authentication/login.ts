@@ -21,11 +21,13 @@ export class Login {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+
   }
 
 
   button() {
-    console.log(this.auth.isExpired())
+    this.auth.canActivate().then(res => console.log(res))
   }
   check() {
 
@@ -36,6 +38,7 @@ export class Login {
     this.auth.login(value.email, value.password)
       .then(
       res => {
+
         this.router.navigate(['/'])
         //load static assets if not in browser cache
         if (localStorage.getItem("durations") == null || localStorage.getItem("levels")) {

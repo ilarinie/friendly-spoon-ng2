@@ -51,33 +51,40 @@ export class FriendlyApiService {
   }
 
   //TODO: REFACTOR TO SEPARATE SERVICES
-
+  refreshHeaders() {
+    let headers = new Headers();
+    headers.append('Access-Token', localStorage.getItem('token'));
+    headers.append('Client', localStorage.getItem('client'));
+    headers.append('Uid', localStorage.getItem('uid'));
+    headers.append('Content-Type', 'application/json');
+    return headers;
+  }
 
 
 
 
   //GET STATIC VARIABLES FROM API
   getDurations() {
-    return this.http.get(this.unitsUrl + 'durations.json', { headers: this.headers, body: '' })
+    return this.http.get(this.unitsUrl + 'durations.json', { headers: this.refreshHeaders(), body: '' })
       .toPromise()
       .then(response => response.json() as Duration[])
       .catch(this.handleError);
   }
   getLevels() {
-    return this.http.get(this.unitsUrl + 'levels.json', { headers: this.headers, body: '' })
+    return this.http.get(this.unitsUrl + 'levels.json', { headers: this.refreshHeaders(), body: '' })
       .toPromise()
       .then(response => response.json() as Level[])
       .catch(this.handleError);
   }
   getUnits() {
-    return this.http.get(this.unitsUrl + 'units.json', { headers: this.headers, body: '' })
+    return this.http.get(this.unitsUrl + 'units.json', { headers: this.refreshHeaders(), body: '' })
       .toPromise()
       .then(response => response.json() as Unit[])
       .catch(this.handleError);
   }
   //INGREDIENTS
   getIngredients() {
-    return this.http.get(this.ingredientsUrl + ".json", { headers: this.headers, body: '' })
+    return this.http.get(this.ingredientsUrl + ".json", { headers: this.refreshHeaders(), body: '' })
       .toPromise()
       .then(response => response.json() as Ingredient[])
       .catch(this.handleError);
@@ -94,7 +101,7 @@ export class FriendlyApiService {
     this.headers.append('Content-Type', 'application/json');
 
     return this.http
-      .post(this.ingredientsUrl, JSON.stringify(ingredient), { headers: this.headers })
+      .post(this.ingredientsUrl, JSON.stringify(ingredient), { headers: this.refreshHeaders() })
       .toPromise()
       .then(res => res.json()
       )
@@ -106,7 +113,7 @@ export class FriendlyApiService {
     let url = `${this.ingredientsUrl}/${ingredient.id}`;
 
     return this.http
-      .put(url, JSON.stringify(ingredient), { headers: this.headers })
+      .put(url, JSON.stringify(ingredient), { headers: this.refreshHeaders() })
       .toPromise()
       .then(() => ingredient)
       .catch(this.handleError);
@@ -124,7 +131,7 @@ export class FriendlyApiService {
     this.headers.append('Content-Type', 'application/json');
 
     return this.http
-      .post(this.recipeIngredientGroupUrl, JSON.stringify(recipe_ingredient_group), { headers: this.headers })
+      .post(this.recipeIngredientGroupUrl, JSON.stringify(recipe_ingredient_group), { headers: this.refreshHeaders() })
       .toPromise()
       .then(res => res.json()
 
@@ -137,7 +144,7 @@ export class FriendlyApiService {
     let url = `${this.recipeIngredientGroupUrl}/${recipe_ingredient_group.id}`;
 
     return this.http
-      .put(url, JSON.stringify(recipe_ingredient_group), { headers: this.headers })
+      .put(url, JSON.stringify(recipe_ingredient_group), { headers: this.refreshHeaders() })
       .toPromise()
       .then(() => recipe_ingredient_group)
       .catch(this.handleError);
@@ -148,7 +155,7 @@ export class FriendlyApiService {
     let url = `${this.recipeIngredientGroupUrl}/${recipe_ingredient_group.id}`;
 
     return this.http
-      .delete(url, { headers: this.headers, body: '' })
+      .delete(url, { headers: this.refreshHeaders(), body: '' })
       .toPromise()
       .then(() => recipe_ingredient_group)
       .catch(this.handleError);
@@ -161,7 +168,7 @@ export class FriendlyApiService {
     let url = `${this.recipeIngredientsUrl}/${recipe_ingredient.id}`;
 
     return this.http
-      .delete(url, { headers: this.headers, body: '' })
+      .delete(url, { headers: this.refreshHeaders(), body: '' })
       .toPromise()
       .catch(this.handleError);
   }
@@ -177,7 +184,7 @@ export class FriendlyApiService {
     this.headers.append('Content-Type', 'application/json');
 
     return this.http
-      .post(this.recipeIngredientsUrl, JSON.stringify(recipe_ingredient), { headers: this.headers })
+      .post(this.recipeIngredientsUrl, JSON.stringify(recipe_ingredient), { headers: this.refreshHeaders() })
       .toPromise()
       .then(res => res.json() as RecipeIngredient
 
@@ -194,35 +201,43 @@ export class FriendlyApiService {
     let url = `${this.recipeIngredientsUrl}/${recipe_ingredient.id}`;
 
     return this.http
-      .put(url, JSON.stringify(recipe_ingredient), { headers: this.headers })
+      .put(url, JSON.stringify(recipe_ingredient), { headers: this.refreshHeaders() })
       .toPromise()
       .then(() => recipe_ingredient)
       .catch(this.handleError);
   }
   //RECIPES
   getRecipe(id: any) {
-    return this.http.get(this.recipesUrl + '/' + id + '.json', { headers: this.headers, body: '' })
+    return this.http.get(this.recipesUrl + '/' + id + '.json', { headers: this.refreshHeaders(), body: '' })
       .toPromise()
       .then(response => response.json() as Recipe)
       .catch(this.handleError);
   }
+  updateRecipeToList(recipe: Recipe) {
+    let recipes: Recipe[] = JSON.parse(localStorage.getItem("recipes"));
+    for (let i = 0; i < recipes.length; i++) {
+      if (recipes[i].id == recipe.id) {
+        recipes.splice(i, 1);
+        break;
+      }
+    }
+    recipes.push(recipe);
+    localStorage.setItem("recipes", JSON.stringify(recipes));
+  }
   getRecipes() {
-    return this.http.get(this.recipesUrl + ".json", { headers: this.headers, body: '' })
+    return this.http.get(this.recipesUrl + ".json", { headers: this.refreshHeaders(), body: '' })
       .toPromise()
       .then(response => response.json() as Recipe[])
       .catch(this.handleError);
 
   }
   delete(recipe: Recipe) {
-    let newheaders = this.headers
-    newheaders.append('Content-Type', 'application/json');
-    console.log("debugging " + recipe.id)
 
     let url = this.recipesUrl + "/" + recipe.id;
 
-    console.log("debugging " + url)
+
     return this.http
-      .delete(url, { headers: newheaders, body: '' })
+      .delete(url, { headers: this.refreshHeaders(), body: '' })
       .toPromise()
       .catch(this.handleError);
   }
@@ -237,7 +252,7 @@ export class FriendlyApiService {
     this.headers.append('Content-Type', 'application/json');
 
     return this.http
-      .post(this.recipesUrl, JSON.stringify(recipe), { headers: this.headers })
+      .post(this.recipesUrl, JSON.stringify(recipe), { headers: this.refreshHeaders() })
       .toPromise()
       .then(res => res.json() as Recipe
 
@@ -254,9 +269,9 @@ export class FriendlyApiService {
     let url = `${this.recipesUrl}/${recipe.id}`;
 
     return this.http
-      .put(url, JSON.stringify(recipe), { headers: this.headers })
+      .put(url, JSON.stringify(recipe), { headers: this.refreshHeaders() })
       .toPromise()
-      .then(() => recipe)
+      .then(res => res.json() as Recipe)
       .catch(this.handleError);
   }
 
@@ -265,7 +280,7 @@ export class FriendlyApiService {
   saveRecipeTag(recipeTag: RecipeTag): Promise<RecipeTag> {
     this.headers.append('Content-Type', 'application/json');
     return this.http
-      .post(this.recipeTagsUrl, JSON.stringify(recipeTag), { headers: this.headers })
+      .post(this.recipeTagsUrl, JSON.stringify(recipeTag), { headers: this.refreshHeaders() })
       .toPromise()
       .then(res => res.json() as RecipeTag)
       .catch(this.handleError)
@@ -275,13 +290,13 @@ export class FriendlyApiService {
     let url = `${this.recipeTagsUrl}/${recipeTag.id}`;
 
     return this.http
-      .delete(url, { headers: this.headers, body: '' }).toPromise()
+      .delete(url, { headers: this.refreshHeaders(), body: '' }).toPromise()
 
   }
   getTags() {
     this.headers.append('Content-Type', 'application/json');
     return this.http
-      .get(this.tagsUrl, { headers: this.headers, body: '' })
+      .get(this.tagsUrl, { headers: this.refreshHeaders(), body: '' })
       .toPromise()
       .then(res => res.json() as Tag[])
       .catch(this.handleError)
@@ -295,7 +310,7 @@ export class FriendlyApiService {
   private postTag(tag: Tag): Promise<Tag> {
     this.headers.append('Content-Type', 'application/json');
     return this.http
-      .post(this.tagsUrl, JSON.stringify(tag), { headers: this.headers })
+      .post(this.tagsUrl, JSON.stringify(tag), { headers: this.refreshHeaders() })
       .toPromise()
       .then(res => res.json() as Tag)
       .catch(this.handleError)
@@ -304,7 +319,7 @@ export class FriendlyApiService {
   saveNote(note: Note): Promise<Note> {
     this.headers.append('Content-Type', 'application/json');
     return this.http
-      .post(this.notesUrl, JSON.stringify(note), { headers: this.headers })
+      .post(this.notesUrl, JSON.stringify(note), { headers: this.refreshHeaders() })
       .toPromise()
       .then(res => res.json() as Note)
       .catch(this.handleError)
@@ -315,7 +330,7 @@ export class FriendlyApiService {
     let url = `${this.notesUrl}/${note.id}`;
 
     return this.http
-      .delete(url, { headers: this.headers, body: '' })
+      .delete(url, { headers: this.refreshHeaders(), body: '' })
       .toPromise()
   }
 

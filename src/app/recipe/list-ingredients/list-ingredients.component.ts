@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 
-import { Recipe } from "../models/recipe";
-import { RecipeIngredient } from "../models/recipe_ingredient";
+import { Recipe } from "../../models/recipe";
+import { RecipeIngredient } from "../../models/recipe_ingredient";
 
 @Component({
   selector: 'list-ingredients',

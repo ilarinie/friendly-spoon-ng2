@@ -3,6 +3,9 @@
 <div *ngIf="editheading">
     <div class="tag-box">
     <h4>Current tags</h4>
+    <div *ngIf="addingTag">
+        <img src="img/ellipsis.svg" >
+    </div>
     <span *ngFor="let recipetag of recipe.recipe_tags" class="label label-pill label-default tag-label" (click)="removeRecipeTag(recipetag)">{{recipetag.tag.title}} <span class="glyphicon glyphicon-remove"></span></span>
     </div>
 

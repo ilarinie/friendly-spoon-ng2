@@ -19,19 +19,25 @@ export class Tags {
   editheading: boolean;
 
   tag: Tag = new Tag();
+  addingTag: boolean = false;
+  tagError: boolean = false;
 
   constructor(private friendlyApiService: FriendlyApiService) { }
 
   saveRecipeTag(tag: Tag) {
+    this.addingTag = true;
     let recipeTag: RecipeTag = new RecipeTag();
     recipeTag.recipe_id = this.recipe.id;
     console.log(tag.id)
     recipeTag.tag_id = tag.id;
-    this.friendlyApiService.saveRecipeTag(recipeTag).then(recipeTag => this.recipe.recipe_tags.push(recipeTag));
-    let index = this.recipe.allTags.indexOf(tag);
-    if (index > -1) {
-      this.recipe.allTags.splice(index, 1);
-    }
+
+    this.friendlyApiService.saveRecipeTag(recipeTag).then(recipeTag => {
+      this.recipe.recipe_tags.push(recipeTag); this.friendlyApiService.updateRecipeToList(this.recipe); this.addingTag = false; let index = this.recipe.allTags.indexOf(tag);
+      if (index > -1) {
+        this.recipe.allTags.splice(index, 1);
+      }
+    }).catch(error => this.tagError = true);
+
   }
   removeRecipeTag(recipeTag: RecipeTag) {
     this.friendlyApiService.deleteRecipeTag(recipeTag);
@@ -41,17 +47,23 @@ export class Tags {
     tag.title = recipeTag.tag.title
     tag.id = recipeTag.tag.id
     this.recipe.allTags.push(tag)
+    this.friendlyApiService.updateRecipeToList(this.recipe);
   }
   saveTag() {
+    this.addingTag = true;
     this.friendlyApiService.saveTag(this.tag).then(tag => {
       let recTag = new RecipeTag();
       recTag.tag_id = tag.id;
       recTag.tag = tag;
       recTag.recipe_id = this.recipe.id;
-      this.recipe.recipe_tags.push(recTag);
-      this.friendlyApiService.saveRecipeTag(recTag);
+
+      this.friendlyApiService.saveRecipeTag(recTag).then(tag => {
+        this.recipe.recipe_tags.push(recTag);
+        this.addingTag = false;
+      });
       this.friendlyApiService.getTags().then(tags => localStorage.setItem("tags", JSON.stringify(tags)));
     });
+    this.friendlyApiService.updateRecipeToList(this.recipe);
     this.tag = new Tag();
   }
   deleteTag() {

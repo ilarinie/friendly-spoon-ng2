@@ -9,11 +9,16 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-  'jquery': 'vendor/jquery/dist/jquery.js'
+  'jquery': 'vendor/jquery/dist/jquery.js',
+  'angular2-bootstrap-confirm': 'vendor/angular2-bootstrap-confirm'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'angular2-bootstrap-confirm': {
+    format: 'cjs',
+    main: 'angular2-bootstrap-confirm.js'
+  }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

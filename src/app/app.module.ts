@@ -4,16 +4,17 @@ import { AppComponent }   from './app.component';
 import { routing } from './app.routes';
 import { HttpModule } from '@angular/http';
 import { Authentication } from './authentication/authentication';
-
+import {ConfirmModule} from 'angular2-bootstrap-confirm';
+import {ConfirmOptions, Position} from 'angular2-bootstrap-confirm';
+import {Positioning} from 'angular2-bootstrap-confirm/position/position';
 
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {RecipeComponent} from "./recipe/recipe.component";
 import {Tags} from "./recipe/tags/tags.component";
 import {Notes} from "./recipe/notes/notes.component";
-import { ListIngredients} from "./list-ingredients/list-ingredients.component";
-import {AddIngredients} from "./add-ingredients/add-ingredients.component";
+import { ListIngredients} from "./recipe/list-ingredients/list-ingredients.component";
+import {AddIngredients} from "./recipe/add-ingredients/add-ingredients.component";
 import {TinyEditor} from "./directives/tinymce.directive";
-import {AddRecipeIngredient} from "./add-recipe-ingredient/add-recipe-ingredient.component";
 import { Login } from "./authentication/login";
 import { Logout } from "./authentication/logout";
 
@@ -31,16 +32,17 @@ enableProdMode();
     ListIngredients,
     AddIngredients,
     TinyEditor,
-    AddRecipeIngredient,
     Login,
     Logout
   ],
   imports: [
     BrowserModule,
     routing,
-    HttpModule
+    HttpModule,
+    ConfirmModule
   ],
   bootstrap: [AppComponent],
-  providers: [Authentication],
+  providers: [Authentication, ConfirmOptions,
+    { provide: Position, useClass: Positioning }],
 })
 export class AppModule { }

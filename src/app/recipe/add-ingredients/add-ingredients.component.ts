@@ -1,21 +1,20 @@
-import {AddRecipeIngredient} from './../add-recipe-ingredient/add-recipe-ingredient.component';
-import {RecipeIngredientGroup} from './../models/recipe_ingredient_group';
+import {RecipeIngredientGroup} from '../../models/recipe_ingredient_group';
 import { Component, Input, OnInit } from '@angular/core';
-import { Recipe } from '../models/recipe';
-import { RecipeIngredient } from '../models/recipe_ingredient';
-import { Unit } from '../models/unit';
-import { FriendlyApiService} from '../services/friendlyapi.service';
-import { Ingredient } from '../models/ingredient';
+import { Recipe } from '../../models/recipe';
+import { RecipeIngredient } from '../../models/recipe_ingredient';
+import { Unit } from '../../models/unit';
+import { FriendlyApiService} from '../../services/friendlyapi.service';
+import { Ingredient } from '../../models/ingredient';
 
 
-import { ReverseArrayPipe } from '../pipes/filter-array-pipe';
+
+import { ReverseArrayPipe } from '../../pipes/filter-array-pipe';
 
 @Component({
   selector: 'add-ingredients',
   templateUrl: 'add-ingredients.component.html',
   styleUrls: ['add-ingredients.component.css'],
   pipes: [ReverseArrayPipe],
-  directives: [AddRecipeIngredient],
   moduleId: module.id
 })
 export class AddIngredients implements OnInit {
@@ -69,9 +68,6 @@ export class AddIngredients implements OnInit {
         if (index > -1) {
           this.recipe.recipe_ingredient_groups[index].recipe_ingredients.push(recipe_ingredient);
         }
-        this.friendlyApiService.getRecipes().then(recipes => {
-          localStorage.setItem("recipes", JSON.stringify(recipes));
-        })
       });
 
     } else {
@@ -79,14 +75,11 @@ export class AddIngredients implements OnInit {
       this.friendlyApiService.saveRecipeIngredient(this.recipe_ingredient).then(recipe_ingredient => {
         this.addingRecInc = false;
         this.recipe.recipe_ingredients.push(recipe_ingredient);
-        this.friendlyApiService.getRecipes().then(recipes => {
-          localStorage.setItem("recipes", JSON.stringify(recipes));
-        })
       });
     }
 
 
-    let id: number = this.recipe.id
+    this.friendlyApiService.updateRecipeToList(this.recipe);
     this.ingredient.name = "";
     this.recipe_ingredient = new RecipeIngredient;
   }
@@ -107,16 +100,18 @@ export class AddIngredients implements OnInit {
         }
       }
     }
+    this.friendlyApiService.updateRecipeToList(this.recipe);
   }
   saveGroup() {
     this.addingGroup = true;
     this.recipe_ingredient_group.recipe_id = this.recipe.id;
     this.friendlyApiService.saveRecipeIngredientGroup(this.recipe_ingredient_group).then(res => {
       this.addingGroup = false;
-      this.friendlyApiService.getRecipes().then(recipes => localStorage.setItem("recipes", JSON.stringify(recipes)));
+      this.friendlyApiService.updateRecipeToList(this.recipe);
+      this.recipe.recipe_ingredient_groups.push(this.recipe_ingredient_group);
+      this.recipe_ingredient_group = new RecipeIngredientGroup;
     })
-    this.recipe.recipe_ingredient_groups.push(this.recipe_ingredient_group);
-    this.recipe_ingredient_group = new RecipeIngredientGroup;
+
   }
   deleteGroup(recipe_ingredient_group: RecipeIngredientGroup) {
     this.friendlyApiService.deleteRecipeIngredientGroup(recipe_ingredient_group).then(res => {
@@ -124,6 +119,7 @@ export class AddIngredients implements OnInit {
       if (index > -1) {
         this.recipe.recipe_ingredient_groups.splice(index, 1);
       }
+      this.friendlyApiService.updateRecipeToList(this.recipe);
     })
   }
 

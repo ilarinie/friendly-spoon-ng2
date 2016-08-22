@@ -30,6 +30,11 @@ const appRoutes: Routes = [
     path: "recipes/:id",
     component: RecipeComponent,
     canActivate: [Authentication]
+  },
+  {
+    path: "recipes/:id/edit",
+    component: RecipeComponent,
+    canActivate: [Authentication]
   }
 ];
 

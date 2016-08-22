@@ -32,13 +32,14 @@ export class Notes {
 
   saveNote() {
     this.note.recipe_id = this.recipe.id;
-    this.friendlyApiService.saveNote(this.note).then(note => this.recipe.notes.push(note));
+    this.friendlyApiService.saveNote(this.note).then(note => { this.recipe.notes.push(note); this.friendlyApiService.updateRecipeToList(this.recipe); });
   }
   deleteNote(note: Note) {
     let index = this.recipe.notes.indexOf(note);
     if (index > -1) {
       this.recipe.notes.splice(index, 1);
     }
+    this.friendlyApiService.updateRecipeToList(this.recipe);
     this.friendlyApiService.deleteNote(note).then(res => {
 
     })

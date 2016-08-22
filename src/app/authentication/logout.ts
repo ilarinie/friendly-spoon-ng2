@@ -10,13 +10,14 @@ import {Authentication} from './authentication';
   moduleId: module.id
 })
 
-export class Logout {
+export class Logout implements OnInit {
   form: ControlGroup;
   error: boolean = false;
   constructor(public auth: Authentication, public router: Router) {
   }
 
-  onInit() {
+  ngOnInit() {
     this.auth.logout();
+    console.log("plaa");
   }
 }

@@ -10,8 +10,8 @@ import { Duration } from "../models/duration";
 import { FriendlyApiService } from "../services/friendlyapi.service";
 
 //Recipe directives
-import { AddIngredients } from "../add-ingredients/add-ingredients.component";
-import { ListIngredients } from "../list-ingredients/list-ingredients.component";
+import { AddIngredients } from "./add-ingredients/add-ingredients.component";
+import { ListIngredients } from "./list-ingredients/list-ingredients.component";
 import { Tags } from "./tags/tags.component";
 import { Notes } from "./notes/notes.component";
 
@@ -34,6 +34,14 @@ export class RecipeComponent implements OnInit {
   duration_array;
   checked = [];
 
+  deleting: boolean = false;
+
+
+  public title: string = 'Popover title';
+  public message: string = 'Popover description';
+  public confirmClicked: boolean = false;
+  public cancelClicked: boolean = false;
+  public isOpen: boolean = false;
 
 
   editheading: boolean = false;
@@ -77,6 +85,9 @@ export class RecipeComponent implements OnInit {
         }
 
       })
+      if (this.router.url.includes('edit')) {
+        this.editheading = true;
+      }
     }
   }
   ngOnInit() {
@@ -95,18 +106,19 @@ export class RecipeComponent implements OnInit {
     this.friendlyApiService
       .save(this.recipe)
       .then(recipe => {
-        this.getRecipe();
-        if (this.router.url.includes('addrecipe')) {
-          this.router.navigate(['recipes/' + recipe.id])
-        }
+        console.log("joo")
+        this.recipe = recipe;
         //load updated recipe list to cache
-        this.friendlyApiService.getRecipes().then(recipes => {
-          localStorage.setItem("recipes", JSON.stringify(recipes));
-        })
+        this.friendlyApiService.updateRecipeToList(this.recipe);
+        if (this.router.url.includes('addrecipe')) {
+          this.router.navigate(['recipes/' + recipe.id + '/edit'])
+        }
+        this.editheading = !this.editheading;
+
       })
       .catch(error => this.error = error);
 
-    this.editheading = !this.editheading;
+
 
 
 
@@ -115,7 +127,14 @@ export class RecipeComponent implements OnInit {
     this.recipe.instruction = event.value;
   }
   delete() {
-    this.friendlyApiService.delete(this.recipe);
+    this.deleting = true;
+    this.friendlyApiService.delete(this.recipe).then(res => {
+      this.friendlyApiService.getRecipes().then(recipes => {
+        localStorage.setItem("recipes", JSON.stringify(recipes)); this.deleting = false;
+        this.router.navigate(['/'])
+      })
+
+    });
   }
 
   noteSwitch() {

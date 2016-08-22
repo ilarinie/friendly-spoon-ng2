@@ -40,7 +40,8 @@ export class Authentication implements CanActivate {
           'Content-Type': 'application/json'
         })
       })
-      .map((res: any) => {
+      .toPromise()
+      .then((res: any) => {
         this.token = res.headers.get('Access-Token');
         this.client = res.headers.get('Client');
         this.uid = res.headers.get('Uid');
@@ -49,9 +50,6 @@ export class Authentication implements CanActivate {
         this.username = res.json().data.name;
         this.user_id = res.json().data.id;
 
-
-        alert("at: " + this.expiry)
-
         localStorage.setItem('token', this.token);
         localStorage.setItem('client', this.client);
         localStorage.setItem('uid', this.uid);
@@ -59,24 +57,22 @@ export class Authentication implements CanActivate {
         localStorage.setItem('expiry', this.expiry);
         localStorage.setItem('username', this.username);
         localStorage.setItem('user_id', this.user_id);
-
-      }).toPromise();
-  }
-  public subscribe(onNext: (value: any) => void, onThrow?: (exception: any) => void, onReturn?: () => void) {
-    return this.locationWatcher.subscribe(onNext, onThrow, onReturn);
+      })
   }
 
   logout() {
-    return this.http.get(this.apiUrl + '/auth/logout', {
+    console.log("plee")
+    return this.http.delete(this.apiUrl + '/auth/sign_out', {
       headers: new Headers({
         'Access-Token': this.token,
         'Client': this.client,
         'Uid': this.uid,
         'token-type': this.tokentype,
         'expiry': this.expiry
-      })
-    })
-      .map((res: any) => {
+      }), body: ''
+    }).toPromise()
+      .then((res: any) => {
+        console.log("pluu")
         this.token = undefined;
         localStorage.removeItem('token');
         localStorage.removeItem('client');
@@ -85,7 +81,6 @@ export class Authentication implements CanActivate {
         localStorage.removeItem('expiry');
         localStorage.removeItem('username');
         localStorage.removeItem('user_id');
-        this.router.navigate(['Login']);
       });
 
   }
@@ -104,13 +99,27 @@ export class Authentication implements CanActivate {
   }
 
   canActivate() {
-    if (localStorage.getItem("token") === null) {
-      //if (this.isExpired) {
-      this.router.navigate(['login']);
-      return false;
-    } else {
-      return true;
-    }
+    return this.http.request(this.apiUrl + '/auth/validate_token', {
+      headers: new Headers({
+        'Access-Token': this.token,
+        'Client': this.client,
+        'Uid': this.uid,
+        'token-type': this.tokentype,
+        'expiry': this.expiry
+      })
+    }).toPromise()
+      .then(res => {
+        if (res.status == 401) {
+          return false;
+        } else {
+          return true;
+        }
+      }).catch((error: any) => {
+        this.router.navigate(['login']);
+        return false;
+      });
   }
-
+  errorHandler(error: any) {
+    console.log("error derror")
+  }
 }
