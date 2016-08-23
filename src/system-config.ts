@@ -11,7 +11,8 @@
 const map: any = {
   'jquery': 'vendor/jquery/dist/jquery.js',
   'angular2-bootstrap-confirm': 'vendor/angular2-bootstrap-confirm',
-  '@angular2-material': 'vendor/@angular2-material'
+  '@angular2-material': 'vendor/@angular2-material',
+  "ng2-rating": "vendor/ng2-rating"
 };
 
 /** User packages configuration. */
@@ -19,10 +20,12 @@ const packages: any = {
   'angular2-bootstrap-confirm': {
     format: 'cjs',
     main: 'angular2-bootstrap-confirm.js'
-  }
+  },
+  "ng2-rating": { "main": "index.js", "defaultExtension": "js" }
+
 };
 
-const materialPkgs:string[] = [
+const materialPkgs: string[] = [
   'core',
   'button',
   'card',
@@ -30,7 +33,7 @@ const materialPkgs:string[] = [
 ];
 
 materialPkgs.forEach((pkg) => {
-  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
+  packages[`@angular2-material/${pkg}`] = { main: `${pkg}.js` };
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

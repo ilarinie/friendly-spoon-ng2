@@ -49,3 +49,10 @@ a:active {
     margin: 0 auto;
   }
 }
+.tag-td{
+  word-wrap: break-word;
+}
+.list-tag-label {
+    background-color: #cc6699;
+    margin-right: 2px;
+}

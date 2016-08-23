@@ -59,11 +59,12 @@ export class Tags {
 
       this.friendlyApiService.saveRecipeTag(recTag).then(tag => {
         this.recipe.recipe_tags.push(recTag);
+        this.friendlyApiService.updateRecipeToList(this.recipe);
         this.addingTag = false;
       });
       this.friendlyApiService.getTags().then(tags => localStorage.setItem("tags", JSON.stringify(tags)));
     });
-    this.friendlyApiService.updateRecipeToList(this.recipe);
+
     this.tag = new Tag();
   }
   deleteTag() {

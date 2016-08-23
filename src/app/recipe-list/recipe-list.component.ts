@@ -3,6 +3,7 @@ import { Router }            from "@angular/router";
 import { FilterArrayPipe, OrderBy, TagFilter } from "../pipes/filter-array-pipe";
 import { Authentication } from "../authentication/authentication";
 import {MdInput} from "@angular2-material/input";
+import {Rating } from "ng2-rating";
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR
@@ -20,7 +21,7 @@ import { FriendlyApiService } from "../services/friendlyapi.service";
   templateUrl: "recipe-list.component.html",
   styleUrls: ["recipe-list.component.css"],
   pipes: [FilterArrayPipe, OrderBy, TagFilter],
-  directives: [MdInput],
+  directives: [MdInput, Rating],
   moduleId: module.id
 })
 
@@ -63,9 +64,7 @@ export class RecipeListComponent implements OnInit {
   random() {
     this.listfilter = this.recipes[Math.floor((Math.random() * this.recipes.length))].name
   }
-  button() {
-    console.log(this.searchTag)
-  }
+
   refreshRecipes() {
     this.loading = true;
     this.friendlyApiService.getRecipes().then(recipes => {
@@ -75,8 +74,7 @@ export class RecipeListComponent implements OnInit {
     })
   }
   tagChange(value) {
-    console.log("diip" + typeof (value))
-    this.searchTag = "aapeli";
+    console.log("diip" + value)
   }
 
   sortByName() {

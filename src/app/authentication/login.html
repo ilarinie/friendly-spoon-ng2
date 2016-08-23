@@ -14,23 +14,27 @@
 
                     <h2 class="signin-header">Welcome to Friendly Spoon</h2>
                     <h2 class="signin-header">Please log in</h2>
+                <div *ngIf="!loggingIn">
 
-                  <form [ngFormModel]="form" (submit)="onSubmit(form.value)">
                     <div class="field-div">
                         <div class="signin-field-container col-centered ">
                             <h4 class="field-header">Username</h4>
-                            <input class="signin-field" type="text" ngControl="email">
+                            <input placeholder="Username" class="signin-field" type="text" [(ngModel)]="email">
                         </div>
                         <div class="signin-field-container col-centered ">
                             <h4 class="field-header">Password</h4>
-                            <input class="signin-field" type="password" ngControl="password">
+                            <input placeholder="Password" class="signin-field" type="password" [(ngModel)]="password">
                         </div>
                         <div class="signin-field-container col-centered signin-button">
-                             <button type="submit" [disabled]="!form.valid" class="signin-button">Login</button>
+                             <button type="submit" class="signin-button" (click)="submit()">Login</button>
                         </div>
 
                     </div>
-                    </form>
+                </div>
+                <div *ngIf="loggingIn">
+                    <h2 class="signin-header"> Logging in..</h2>
+                    <img src="img/ellipsis.svg">
+                </div>
                 </div>
             </div>
         </div>

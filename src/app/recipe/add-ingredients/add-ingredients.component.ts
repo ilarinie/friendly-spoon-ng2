@@ -48,6 +48,7 @@ export class AddIngredients implements OnInit {
     this.addingInc = true;
     this.friendlyApiService.saveIngredient(this.ingredient).then(ingredient => { this.ingredients.push(ingredient); this.addingInc = false });
   }
+  get diagnostic() { return JSON.stringify(this.recipe_ingredient); }
   //TODO: remove recipe ingredient from group array / add recipe ingredient to group array
   saveRecipeIngredient(ingredient_id: number, group_id?: number) {
     this.recipe_ingredient.ingredient_id = ingredient_id;
@@ -59,8 +60,9 @@ export class AddIngredients implements OnInit {
         return;
       }
     }
-
+    console.log(this.recipe_ingredient.recipe_ingredient_group_id + " = group id")
     if (this.recipe_ingredient.recipe_ingredient_group_id) {
+      console.log("kyl")
 
       this.friendlyApiService.saveRecipeIngredient(this.recipe_ingredient).then(recipe_ingredient => {
         this.addingRecInc = false;

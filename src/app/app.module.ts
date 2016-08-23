@@ -3,6 +3,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
 import { routing } from './app.routes';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from "@angular/forms";
 import { Authentication } from './authentication/authentication';
 import {ConfirmModule} from 'angular2-bootstrap-confirm';
 import {ConfirmOptions, Position} from 'angular2-bootstrap-confirm';
@@ -39,7 +40,8 @@ enableProdMode();
     BrowserModule,
     routing,
     HttpModule,
-    ConfirmModule
+    ConfirmModule,
+    FormsModule
   ],
   bootstrap: [AppComponent],
   providers: [Authentication, ConfirmOptions,

@@ -3,16 +3,21 @@
   <div class="col-sm-13 col-md-13 maindiv col-centered">
     <!-- Yläotsikkorivi -->
     <div class="row">
-      <div class="col-sm-7 col-md-7  heading-div"> <span *ngIf="!editheading">
+      <div class="col-sm-3 col-md-3  heading-div"> <span *ngIf="!editheading">
                 <h3 class="main-heading">{{recipe.name}}</h3>
             </span> <span *ngIf="editheading">
                 <h3 class="main-heading" ><input  [(ngModel)]="recipe.name" value="{{recipe.name}}" placeholder="Enter name for your recipe"></h3>
             </span> </div>
-      <div class="col-sm-5 col-md-5  heading-div"> <a class="btn header-btn" (click)="divide()">{{divideButton}}</a> <a class="btn header-btn" (click)="double()">{{doubleButton}}</a> <a class="btn header-btn" (click)="noteSwitch()" [ngClass]="{ disabled: editheading}">{{noteSwitchButton}}</a> <span><a class="btn header-btn" (click)="editheadings()"><span *ngIf="editheading">Back</span>
-        <span
-            *ngIf="!editheading">Edit</span>
+      <div class="col-sm-6 col-md-6  heading-div button-group">
+        <a class="btn header-btn" (click)="divide()">{{divideButton}}</a>
+        <a class="btn header-btn" (click)="double()">{{doubleButton}}</a>
+        <a class="btn header-btn" (click)="noteSwitch()" [ngClass]="{ disabled: editheading}">{{noteSwitchButton}}</a>
+        <span>
+          <a class="btn header-btn" (click)="editheadings()">
+            <span *ngIf="editheading">Back</span>
+            <span *ngIf="!editheading">Edit</span>
           </a>
-          </span>
+        </span>
       </div>
     </div>
     <!-- END yläotsikkorivi -->
@@ -36,7 +41,8 @@
             <h4 style="color:green;">Save recipe to add ingredients!</h4> </div>
           <!-- muut tiedot -näkymä -->
           <div class="col-sm-5 col-md-5 ">
-            <h4 class="sub-heading">Average Rating: {{recipe.ratingaverage}} / 10</h4>
+            <h4 class="sub-heading">Average Rating:</h4>
+            <rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>
             <h4 class="headings sub-heading">Difficulty</h4>
             <div *ngIf="!editheading">
               <div [ngSwitch]="recipe.level.id"> <span *ngSwitchCase="3" class="label label-danger">Difficult</span> <span *ngSwitchCase="1" class="label label-success">Easy</span> <span *ngSwitchCase="2" class="label label-warning">Medium</span> </div>

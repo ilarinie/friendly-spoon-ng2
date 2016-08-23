@@ -17,7 +17,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class FriendlyApiService {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = 'http://friendly-spoon-api.herokuapp.com';
 
   private recipesUrl = this.baseUrl + '/recipes';
   private unitsUrl = this.baseUrl + '/get'
@@ -214,15 +214,20 @@ export class FriendlyApiService {
       .catch(this.handleError);
   }
   updateRecipeToList(recipe: Recipe) {
-    let recipes: Recipe[] = JSON.parse(localStorage.getItem("recipes"));
-    for (let i = 0; i < recipes.length; i++) {
-      if (recipes[i].id == recipe.id) {
-        recipes.splice(i, 1);
-        break;
+    return this.getRecipe(recipe.id).then(recipe => {
+      let recipes: Recipe[] = JSON.parse(localStorage.getItem("recipes"));
+      for (let i = 0; i < recipes.length; i++) {
+        if (recipes[i].id == recipe.id) {
+          recipes.splice(i, 1);
+          break;
+        }
       }
-    }
-    recipes.push(recipe);
-    localStorage.setItem("recipes", JSON.stringify(recipes));
+      recipes.push(recipe);
+      localStorage.setItem("recipes", JSON.stringify(recipes));
+      return recipe;
+    });
+
+
   }
   getRecipes() {
     return this.http.get(this.recipesUrl + ".json", { headers: this.refreshHeaders(), body: '' })

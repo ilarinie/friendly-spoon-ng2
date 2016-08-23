@@ -4,7 +4,7 @@
     <td class="col-md-2"> {{inc.ramount.integer}} <span *ngIf="inc.ramount.numerator"><sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub></span> {{inc.unit?.name}} </td>
     <td class="col-md-5"> {{inc.ingredient.name}} </td>
     <td class="col-md-5"> {{inc.instruction}} </td>
-    <td class="col-md-2">
+    <td class="col-md-2" style="text-align:right;">
       <button class="btn btn-danger" (click)="removeRecipeIngredient(inc)">Remove</button>
     </td>
   </tr>
@@ -16,7 +16,7 @@
       <td class="col-md-2"> {{inc.ramount.integer}} <span *ngIf="inc.ramount.numerator"><sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub></span> {{inc.unit?.name}} </td>
       <td class="col-md-5"> {{inc.ingredient.name}} </td>
       <td class="col-md-5"> {{inc.instruction}} </td>
-      <td class="col-md-2">
+      <td class="col-md-2" style="text-align:right;">
         <button class="btn btn-danger" (click)="removeRecipeIngredient(inc)">Remove</button>
       </td>
     </tr>

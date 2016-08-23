@@ -17,9 +17,7 @@ export class ListIngredients {
   checked: RecipeIngredient[] = [];
 
   toggleInc(inc) {
-
     let group_index = this.findRecipeGroupIndex(inc);
-    console.log("group index "+group_index)
 
     if (group_index == -1) {
       let index = this.recipe.recipe_ingredients.indexOf(inc)
@@ -30,7 +28,6 @@ export class ListIngredients {
     } else {
       let index = this.recipe.recipe_ingredient_groups[group_index].recipe_ingredients.indexOf(inc)
       if (index > -1) {
-        
         this.checked.push(inc)
         this.recipe.recipe_ingredient_groups[group_index].recipe_ingredients.splice(index, 1);
       }
@@ -38,8 +35,6 @@ export class ListIngredients {
   }
   unToggleInc(inc) {
     let group_index = this.findRecipeGroupIndex(inc);
-    console.log("group index "+group_index)
-
     if (group_index == -1) {
       let index = this.checked.indexOf(inc)
       if (index > -1) {
@@ -55,17 +50,19 @@ export class ListIngredients {
     }
   }
 
-
   findRecipeGroupIndex(recipe_ingredient) {
+    if (!recipe_ingredient.recipe_ingredient_group_id) {
+      return -1;
+    }
     for (let i = 0; i < this.recipe.recipe_ingredient_groups.length; i++) {
       if (this.recipe.recipe_ingredient_groups[i].recipe_ingredients != undefined) {
-        if (this.recipe.recipe_ingredient_groups[i].recipe_ingredients.indexOf(recipe_ingredient) > -1) {
+
+        if (this.recipe.recipe_ingredient_groups[i].id == recipe_ingredient.recipe_ingredient_group_id) {
           return i;
         }
       }
     }
     return -1;
-
   }
 
 }

@@ -36,12 +36,18 @@ li {
 .header-btn{
 	margin-top: 32px;
 	margin-bottom: 0px;
+	margin-left: 5px;
 	padding-top: 1px;
 	padding-bottom: 1px;
 	width: 75px;
 	color: white;
 	background-color: #dddddd;
-	border-radius: 10px 10px 0px 0px
+	border-radius: 10px 10px 0px 0px;
+	float:right;
+}
+.button-group {
+	float: right;
+	padding-left: 0px;
 }
 .header-btn:hover{
 	color: white;

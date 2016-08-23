@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, NgIf} from '@angular/common';
+import {FormBuilder, Validators, ControlGroup, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
 import {Authentication} from './authentication';
 
 @Component({
   selector: 'logout',
-  directives: [FORM_DIRECTIVES, NgIf],
+  directives: [NgIf],
   templateUrl: 'logout.html',
   moduleId: module.id
 })
@@ -18,6 +18,5 @@ export class Logout implements OnInit {
 
   ngOnInit() {
     this.auth.logout();
-    console.log("plaa");
   }
 }

@@ -3,23 +3,27 @@
     <h3>is here for you!</h3>
     <div class="row main-row">
         <div class="col-xs-11">
-            <form role="form">
-                <md-input  type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Filter recipes"></md-input> </form>
+                <md-input  type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Filter recipes"></md-input>
         </div>
     </div>
     <div class="row main-row">
         <div class="col-xs-11">
-            <label>Tags</label>
-            <select class="form-control" (change)="tagChange($event.target.value)">
+        <!--    <label>Tags</label>
+            <select class="form-control" #searchTagger (change)="tagChange($event.target.value)">
                 <option></option>
                 <option *ngFor="let tag of tags" value="{{tag.title}}">{{tag.title}}</option>
-            </select>
+            </select> -->
         </div>
     </div>
     <div class="row main-row">
         <div class="col-xs-11 buttons-row">
+            <div [hidden]="true">
             <h5 style="float:left">Sort by:  </h5>
-            <a class="btn btn-default" (click)="sortByName()">ABC <span class="glyphicon glyphicon-sort"></span></a> <a class="btn btn-default" (click)="sortByRating()">Rating <span class="glyphicon glyphicon-sort"></span></a> <a class="btn btn-default" (click)="sortByTime()">Time <span class="glyphicon glyphicon-sort"></span></a>            <a class="btn btn-default" (click)="random()">Pick a random recipe!</a> <a class="btn btn-default" (click)="refreshRecipes()">Refresh recipe list <span class="glyphicon glyphicon-refresh"></span></a></div>
+            <a class="btn btn-default" (click)="sortByName()">ABC <span class="glyphicon glyphicon-sort"></span></a> <a class="btn btn-default" (click)="sortByRating()">Rating <span class="glyphicon glyphicon-sort"></span></a> <a class="btn btn-default" (click)="sortByTime()">Time <span class="glyphicon glyphicon-sort"></span></a>
+        </div>
+            <a class="btn btn-default" (click)="random()">Pick a random recipe!</a>
+            <a class="btn btn-default" (click)="refreshRecipes()">Refresh recipe list <span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
     </div>
     <div class="row main-row">
         <div class="col-xs-11">
@@ -27,17 +31,17 @@
             <table class="table">
                 <thead>
                     <tr class="recipe-list-headers">
-                    <th class="col-md-4"> <a (click)="sortByName()">Recipe</a> </th>
-                    <th class="col-md-3"> <a (click)="sortByRating()">Rating</a> </th>
+                    <th class="col-md-4"> <a (click)="sortByName()">Recipe <span class="glyphicon glyphicon-sort"></span></a> </th>
+                    <th class="col-md-3"> <a (click)="sortByRating()">Rating <span class="glyphicon glyphicon-sort"></span></a> </th>
                     <th class="col-md-4"> Tags </th>
-                    <th class="col-md-3"> <a (click)="sortByTime()">Time</a> </th>
+                    <th class="col-md-3"> <a (click)="sortByTime()">Time <span class="glyphicon glyphicon-sort"></span></a> </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let recipe of recipes| filter:listFilter.value | orderBy: order">
                         <td><a routerLink="/recipes/{{recipe.id}}"> {{recipe.name}}</a> </td>
-                        <td><span *ngIf="recipe.ratingaverage">{{recipe.ratingaverage}} / 10</span></td>
-                        <td> <span *ngFor="let tag of recipe.recipe_tags" class="label label-default">{{tag.title}}</span> </td>
+                        <td><span *ngIf="recipe.ratingaverage"><rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating></span></td>
+                        <td class="tag-td"> <span *ngFor="let tag of recipe.recipe_tags" class="label label-default list-tag-label">{{tag.tag.title}}</span> </td>
                         <td> <span *ngIf="recipe.duration">{{recipe.duration.range}}</span> </td>
                     </tr>
                 </tbody>

@@ -9,7 +9,7 @@ import { Router, CanActivate } from "@angular/router";
 export class Authentication implements CanActivate {
   private locationWatcher = new EventEmitter();
 
-  private apiUrl = "http://localhost:3000"
+  private apiUrl = "http://friendly-spoon-api.herokuapp.com"
 
   token: string;
   client: string;
@@ -61,7 +61,6 @@ export class Authentication implements CanActivate {
   }
 
   logout() {
-    console.log("plee")
     return this.http.delete(this.apiUrl + '/auth/sign_out', {
       headers: new Headers({
         'Access-Token': this.token,
@@ -72,7 +71,6 @@ export class Authentication implements CanActivate {
       }), body: ''
     }).toPromise()
       .then((res: any) => {
-        console.log("pluu")
         this.token = undefined;
         localStorage.removeItem('token');
         localStorage.removeItem('client');
@@ -83,19 +81,6 @@ export class Authentication implements CanActivate {
         localStorage.removeItem('user_id');
       });
 
-  }
-
-  isExpired() {
-    return Promise.resolve(this.http.request(this.apiUrl + '/auth/validate_token', {
-      headers: new Headers({
-        'Access-Token': this.token,
-        'Client': this.client,
-        'Uid': this.uid,
-        'token-type': this.tokentype,
-        'expiry': this.expiry
-      })
-    }).toPromise()
-      .then(res => res.json()))
   }
 
   canActivate() {

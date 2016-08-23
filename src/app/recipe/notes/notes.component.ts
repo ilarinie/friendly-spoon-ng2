@@ -1,5 +1,8 @@
 import { Component, Input } from "@angular/core";
 import { FriendlyApiService } from "../../services/friendlyapi.service";
+import {Rating} from "ng2-rating";
+import {MdCard} from "@angular2-material/card/card";
+
 
 
 import { Recipe } from "../../models/recipe";
@@ -9,7 +12,8 @@ import { Note } from "../../models/note";
   templateUrl: 'notes.component.html',
   styleUrls: ['notes.component.css'],
   selector: 'notes',
-  moduleId: module.id
+  moduleId: module.id,
+  directives: [Rating, MdCard]
 })
 export class Notes {
   @Input()
@@ -24,15 +28,21 @@ export class Notes {
 
 
   note: Note = new Note();
-  starsCount: number;
+  savingNote: boolean = false;
 
   user_id = localStorage.getItem('user_id');
 
 
-
+  get diagnostic() { return JSON.stringify(this.note); }
   saveNote() {
+    this.savingNote = true;
     this.note.recipe_id = this.recipe.id;
-    this.friendlyApiService.saveNote(this.note).then(note => { this.recipe.notes.push(note); this.friendlyApiService.updateRecipeToList(this.recipe); });
+    this.friendlyApiService.saveNote(this.note).then(note => {
+      this.recipe.notes.push(note);
+      this.friendlyApiService.updateRecipeToList(this.recipe).then(recipe => this.recipe = recipe);
+      this.savingNote = false;
+      this.note = new Note();
+    });
   }
   deleteNote(note: Note) {
     let index = this.recipe.notes.indexOf(note);

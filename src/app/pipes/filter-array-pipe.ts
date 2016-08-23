@@ -9,7 +9,11 @@ export class FilterArrayPipe implements PipeTransform {
     if (items == null) {
       return null;
     }
+    let regex = new RegExp(queryString, "i");
     return items.filter((recipe) => new RegExp(queryString, "i").test(recipe.name));
+    /*return items.filter((recipe) => function(val) {
+      return regex.test(recipe.name) || regex.test(recipe.instruction);
+    })*/
   }
 }
 
@@ -49,7 +53,7 @@ export class TagFilter implements PipeTransform {
     if (queryString = "") {
       return items;
     }
-    console.log("dapper " + queryString)
+    console.log("dapper " + queryString.length)
 
     return items.filter(filterByTags);
 
@@ -59,7 +63,7 @@ export class TagFilter implements PipeTransform {
       }
       for (let i = 0; i < recipe.recipe_tags.length; i++) {
 
-        if (new RegExp(queryString, "i").test(recipe.recipe_tags[i].title)) {
+        if (new RegExp(queryString, "i").test(recipe.recipe_tags[i].tag.title)) {
           console.log("asd" + queryString);
           return true;
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { FORM_DIRECTIVES } from "@angular/common";
 import { Router, ActivatedRoute }            from "@angular/router";
 import { TinyEditor } from "../directives/tinymce.directive";
+import { Rating } from "ng2-rating";
 
 
 import { Recipe } from "../models/recipe";
@@ -19,7 +19,7 @@ import { Notes } from "./notes/notes.component";
   selector: "recipeshow",
   templateUrl: "recipe.component.html",
   styleUrls: ["recipe.component.css"],
-  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, FORM_DIRECTIVES, Notes],
+  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, Notes, Rating],
   moduleId: module.id
 })
 
@@ -107,7 +107,7 @@ export class RecipeComponent implements OnInit {
       .save(this.recipe)
       .then(recipe => {
         console.log("joo")
-        console.log("id on "+this.recipe.id)
+        console.log("id on " + this.recipe.id)
         this.recipe = recipe;
 
         //load updated recipe list to cache
