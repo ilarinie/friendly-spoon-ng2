@@ -8,6 +8,10 @@ import { Authentication } from './authentication/authentication';
 import {ConfirmModule} from 'angular2-bootstrap-confirm';
 import {ConfirmOptions, Position} from 'angular2-bootstrap-confirm';
 import {Positioning} from 'angular2-bootstrap-confirm/position/position';
+import { MdButtonModule } from '@angular2-material/button';
+import {MdGridListModule} from '@angular2-material/grid-list';
+import {MdCardModule} from '@angular2-material/card';
+import {MdListModule} from '@angular2-material/list';
 
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {RecipeComponent} from "./recipe/recipe.component";
@@ -41,7 +45,11 @@ enableProdMode();
     routing,
     HttpModule,
     ConfirmModule,
-    FormsModule
+    FormsModule,
+    MdButtonModule,
+    MdGridListModule,
+    MdCardModule,
+    MdListModule
   ],
   bootstrap: [AppComponent],
   providers: [Authentication, ConfirmOptions,

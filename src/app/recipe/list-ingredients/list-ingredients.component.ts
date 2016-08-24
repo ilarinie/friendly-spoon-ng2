@@ -3,11 +3,12 @@ import { Component, Input } from "@angular/core";
 import { Recipe } from "../../models/recipe";
 import { RecipeIngredient } from "../../models/recipe_ingredient";
 
+
 @Component({
   selector: 'list-ingredients',
   templateUrl: 'list-ingredients.component.html',
   styleUrls: ['list-ingredients.component.css'],
-  moduleId: module.id
+  moduleId: module.id,
 })
 export class ListIngredients {
   @Input()
@@ -18,6 +19,7 @@ export class ListIngredients {
 
   toggleInc(inc) {
     let group_index = this.findRecipeGroupIndex(inc);
+
 
     if (group_index == -1) {
       let index = this.recipe.recipe_ingredients.indexOf(inc)

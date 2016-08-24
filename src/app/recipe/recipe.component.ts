@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute }            from "@angular/router";
 import { TinyEditor } from "../directives/tinymce.directive";
 import { Rating } from "ng2-rating";
+import { MdCheckbox } from "@angular2-material/checkbox";
+
+
 
 
 import { Recipe } from "../models/recipe";
@@ -19,7 +22,7 @@ import { Notes } from "./notes/notes.component";
   selector: "recipeshow",
   templateUrl: "recipe.component.html",
   styleUrls: ["recipe.component.css"],
-  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, Notes, Rating],
+  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, Notes, Rating, MdCheckbox],
   moduleId: module.id
 })
 
@@ -65,7 +68,9 @@ export class RecipeComponent implements OnInit {
     } else {
       this.sub = this.route.params.subscribe(params => {
         let id = +params['id'];
-        let recipes: Recipe[] = JSON.parse(localStorage.getItem("recipes"))
+        /*  NOTE: this can be used to load recipe from the preloaded list rather than from the api
+          let recipes: Recipe[] = JSON.parse(localStorage.getItem("recipes"))
+
         if (recipes != null) {
           let notfound = true;
           for (let i = 0; i < recipes.length; i++) {
@@ -79,10 +84,10 @@ export class RecipeComponent implements OnInit {
             this.friendlyApiService.getRecipe(id)
               .then(recipe => this.recipe = recipe);
           }
-        } else {
-          this.friendlyApiService.getRecipe(id)
-            .then(recipe => this.recipe = recipe);
-        }
+        } else { */
+        this.friendlyApiService.getRecipe(id)
+          .then(recipe => this.recipe = recipe);
+        //  }
 
       })
       if (this.router.url.includes('edit')) {
@@ -106,8 +111,6 @@ export class RecipeComponent implements OnInit {
     this.friendlyApiService
       .save(this.recipe)
       .then(recipe => {
-        console.log("joo")
-        console.log("id on " + this.recipe.id)
         this.recipe = recipe;
 
         //load updated recipe list to cache

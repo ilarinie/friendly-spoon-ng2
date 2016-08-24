@@ -4,10 +4,6 @@ import { FilterArrayPipe, OrderBy, TagFilter } from "../pipes/filter-array-pipe"
 import { Authentication } from "../authentication/authentication";
 import {MdInput} from "@angular2-material/input";
 import {Rating } from "ng2-rating";
-import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR
-} from '@angular/forms';
 
 
 

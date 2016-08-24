@@ -1,16 +1,30 @@
-<h4 class="headings sub-heading">Tags</h4>
-<div *ngIf="!editheading"> <span *ngFor="let recipetag of recipe.recipe_tags" class="label label-default label-pill tag-label">{{recipetag.tag.title}}</span> </div>
-<div *ngIf="editheading">
-    <div class="tag-box">
-    <h4>Current tags</h4>
-    <div *ngIf="addingTag">
-        <img src="img/ellipsis.svg" >
-    </div>
-    <span *ngFor="let recipetag of recipe.recipe_tags" class="label label-pill label-default tag-label" (click)="removeRecipeTag(recipetag)">{{recipetag.tag.title}} <span class="glyphicon glyphicon-remove"></span></span>
-    </div>
 
-    <h5>Click to add tags</h5> <span *ngFor="let tag of recipe.allTags" class="label label-pill label-default tag-label" (click)="saveRecipeTag(tag)">{{tag.title}} <span class="glyphicon glyphicon-plus"></span></span>
-    <h4>Create a new Tag</h4>
-    <input [(ngModel)]="tag.title" placeholder="Tag title" class="form-control tag-add-field">
-    <button class="btn btn-success tag-add-button" (click)="saveTag()" >Create</button>
+<div *ngIf="!editheading">
+    <h4>Tags</h4>
+  <span *ngFor="let recipetag of recipe.recipe_tags" class="label label-default label-pill tag-label">{{recipetag.tag.title}}</span>
+
+</div>
+<div *ngIf="editheading">
+  <md-card>
+    <md-card-title>Current tags</md-card-title>
+    <md-card-subtitle>click to remove</md-card-subtitle>
+    <!--<div *ngIf="addingTag"> <img src="img/ellipsis.svg"> </div>-->
+    <md-grid-list cols="4" rowHeight="30px" gutterSize="4px">
+    <md-grid-tile *ngFor="let recipetag of recipe.recipe_tags" class="tag-label" (click)="removeRecipeTag(recipetag)">{{recipetag.tag.title}}</md-grid-tile>
+    <md-grid-tile *ngIf="addingTag"><img src="img/ellipsis.svg"></md-grid-tile>
+  </md-grid-list>
+  </md-card>
+  <md-card>
+    <md-card-title>Available tags</md-card-title>
+    <md-card-subtitle>Click to add to recipe</md-card-subtitle>
+    <md-grid-list cols="4" rowHeight="30px" gutterSize="4px">
+    <md-grid-tile *ngFor="let tag of recipe.allTags" class="tag-label" (click)="saveRecipeTag(tag)">{{tag.title}}</md-grid-tile>
+  </md-grid-list>
+  </md-card>
+  <md-card>
+    <md-card-title>Create a new Tag</md-card-title>
+    <md-card-subtitle>This will be added to the recipe</md-card-subtitle>
+    <md-input [(ngModel)]="tag.title" placeholder="Tag title" class="tag-add-field"></md-input>
+    <button class="btn btn-success tag-add-button" (click)="saveTag()">Create</button>
+  </md-card>
 </div>

@@ -8,6 +8,7 @@ import { Ingredient } from '../../models/ingredient';
 
 
 
+
 import { ReverseArrayPipe } from '../../pipes/filter-array-pipe';
 
 @Component({
@@ -108,9 +109,8 @@ export class AddIngredients implements OnInit {
     this.addingGroup = true;
     this.recipe_ingredient_group.recipe_id = this.recipe.id;
     this.friendlyApiService.saveRecipeIngredientGroup(this.recipe_ingredient_group).then(res => {
-      this.addingGroup = false;
-      this.friendlyApiService.updateRecipeToList(this.recipe);
-      this.recipe.recipe_ingredient_groups.push(this.recipe_ingredient_group);
+      this.friendlyApiService.updateRecipeToList(this.recipe).then(recipe => { this.recipe = recipe; this.addingGroup = false; });
+      this.recipe.recipe_ingredient_groups.push(res);
       this.recipe_ingredient_group = new RecipeIngredientGroup;
     })
 

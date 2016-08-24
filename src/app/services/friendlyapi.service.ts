@@ -133,7 +133,7 @@ export class FriendlyApiService {
     return this.http
       .post(this.recipeIngredientGroupUrl, JSON.stringify(recipe_ingredient_group), { headers: this.refreshHeaders() })
       .toPromise()
-      .then(res => res.json()
+      .then(res => res.json() as RecipeIngredientGroup
 
       )
       .catch(this.handleError);

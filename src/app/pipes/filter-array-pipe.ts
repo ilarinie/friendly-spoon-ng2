@@ -23,9 +23,10 @@ export class FilterArrayPipe implements PipeTransform {
 })
 export class ReverseArrayPipe implements PipeTransform {
   transform(items: any[], queryString: string): any {
-    if (items == null || queryString == "") {
+    if (items == null || queryString == "" || queryString == undefined) {
       return null;
     }
+    console.log(queryString + " = qrstr")
     items.sort(this.compare);
     items = items.filter((recipe) => new RegExp(queryString, "i").test(recipe.name));
     return items.slice(0, 1);

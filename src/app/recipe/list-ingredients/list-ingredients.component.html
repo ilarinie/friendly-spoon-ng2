@@ -1,8 +1,8 @@
 <h4 class="sub-heading">Ingredients I need </h4>
 <hr class="hline" />
-<ul>
-    <li *ngFor="let inc of recipe.recipe_ingredients; let i = index">
-        <input type="checkbox" (click)="toggleInc(inc)" >&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
+<md-list dense>
+  <md-list-item *ngFor="let inc of recipe.recipe_ingredients; let i = index">
+    <md-checkbox md-line type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
         <span *ngIf="inc.ramount.numerator">
           <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
         </span> </span> <span [hidden]="amount_shown!=2">{{inc.double.integer}}
@@ -11,13 +11,15 @@
         </span> </span> <span [hidden]="amount_shown!==-1">{{inc.half.integer}}
         <span [hidden]="!inc.half.numerator">
           <sup>{{inc.half.numerator}}</sup>&frasl;<sub>{{inc.half.denominator}}</sub>
-      </span> </span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}} </li>
-</ul>
+      </span> </span> {{inc.unit?.name}} {{inc.ingredient.name}} </md-checkbox>
+      <p md-line>{{inc.instruction}}</p>
+  </md-list-item>
+</md-list>
 <div *ngFor="let group of recipe.recipe_ingredient_groups; let g = index">
-    <h4>{{group.name}}</h4>
-    <ul>
-        <li *ngFor="let inc of group.recipe_ingredients; let i = index">
-            <input type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
+  <h4>{{group.name}}</h4>
+  <md-list dense>
+    <md-list-item *ngFor="let inc of group.recipe_ingredients; let i = index">
+      <md-checkbox type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
             <span [hidden]="!inc.ramount.numerator">
               <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
             </span> </span> <span [hidden]="amount_shown!=2">{{inc.double.integer}}
@@ -26,14 +28,15 @@
             </span> </span> <span [hidden]="amount_shown!==-1">{{inc.half.integer}}
             <span [hidden]="!inc.half.numerator">
               <sup>{{inc.half.numerator}}</sup>&frasl;<sub>{{inc.half.denominator}}</sub>
-          </span> </span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}} </li>
-    </ul>
+          </span> </span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}}</md-checkbox>
+      </md-list-item>
+  </md-list>
 </div>
 <h4 class="sub-heading">Ingredients I have</h4>
 <hr class="hline" />
-<ul>
-    <li *ngFor="let inc of checked">
-        <input type="checkbox" (click)="unToggleInc(inc)" checked="true">&#09;<strike>
+<md-list dense>
+  <md-list-item *ngFor="let inc of checked">
+    <md-checkbox type="checkbox" (click)="unToggleInc(inc)" checked="true">&#09;<strike>
 <span *ngIf="amount_shown==1">{{inc.ramount.integer}}
 <span *ngIf="inc.ramount.numerator">
 <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
@@ -50,5 +53,7 @@
 </span>
 </span>
 {{inc.unit?.name}}
-{{inc.ingredient.name}}</strike> </li>
-</ul>
+{{inc.ingredient.name}}</strike> </md-checkbox>
+    <br/>
+  </md-list-item>
+</md-list>

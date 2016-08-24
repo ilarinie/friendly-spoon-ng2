@@ -56,3 +56,6 @@ a:active {
     background-color: #cc6699;
     margin-right: 2px;
 }
+md-card {
+  margin-top: 10px;
+}

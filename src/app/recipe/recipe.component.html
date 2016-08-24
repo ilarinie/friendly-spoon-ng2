@@ -6,17 +6,11 @@
       <div class="col-sm-3 col-md-3  heading-div"> <span *ngIf="!editheading">
                 <h3 class="main-heading">{{recipe.name}}</h3>
             </span> <span *ngIf="editheading">
-                <h3 class="main-heading" ><input  [(ngModel)]="recipe.name" value="{{recipe.name}}" placeholder="Enter name for your recipe"></h3>
+                <h3 class="main-heading" ><input  class="heading-input" [(ngModel)]="recipe.name" value="{{recipe.name}}" placeholder="Recipe name"></h3>
             </span> </div>
-      <div class="col-sm-6 col-md-6  heading-div button-group">
-        <a class="btn header-btn" (click)="divide()">{{divideButton}}</a>
-        <a class="btn header-btn" (click)="double()">{{doubleButton}}</a>
-        <a class="btn header-btn" (click)="noteSwitch()" [ngClass]="{ disabled: editheading}">{{noteSwitchButton}}</a>
-        <span>
+      <div class="col-sm-6 col-md-6  heading-div button-group"> <a class="btn header-btn" (click)="divide()">{{divideButton}}</a> <a class="btn header-btn" (click)="double()">{{doubleButton}}</a> <a class="btn header-btn" (click)="noteSwitch()" [ngClass]="{ disabled: editheading}">{{noteSwitchButton}}</a> <span>
           <a class="btn header-btn" (click)="editheadings()">
-            <span *ngIf="editheading">Back</span>
-            <span *ngIf="!editheading">Edit</span>
-          </a>
+            <span *ngIf="editheading">Back</span> <span *ngIf="!editheading">Edit</span> </a>
         </span>
       </div>
     </div>
@@ -41,8 +35,10 @@
             <h4 style="color:green;">Save recipe to add ingredients!</h4> </div>
           <!-- muut tiedot -näkymä -->
           <div class="col-sm-5 col-md-5 ">
-            <h4 class="sub-heading">Average Rating:</h4>
-            <rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>
+            <div *ngIf="!editheading">
+              <h4 class="sub-heading">Average Rating:</h4>
+              <rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>
+            </div>
             <h4 class="headings sub-heading">Difficulty</h4>
             <div *ngIf="!editheading">
               <div [ngSwitch]="recipe.level.id"> <span *ngSwitchCase="3" class="label label-danger">Difficult</span> <span *ngSwitchCase="1" class="label label-success">Easy</span> <span *ngSwitchCase="2" class="label label-warning">Medium</span> </div>
@@ -52,66 +48,77 @@
                 <option *ngFor="let level of levels" value="{{level.id}}">{{level.level}}</option>
               </select>
             </div>
-            <h4 class="headings sub-heading">Time</h4>
+            <h4 class="headings sub-heading">Preparation time</h4>
             <div *ngIf="!editheading"><span *ngFor="let i of duration_array.slice(0,recipe.duration.id)" class="glyphicon glyphicon-time timespan"></span></div>
             <div *ngIf="editheading">
               <select class="form-control" [(ngModel)]="recipe.duration.id">
                 <option *ngFor="let duration of durations" value="{{duration.id}}">{{duration.range}}</option>
               </select>
             </div>
-            <div *ngIf="!recipe.id">
-              <h4 style="color:green;">Save recipe to add Tags!</h4> </div>
-            <div *ngIf="recipe.id">
-              <add-tags [recipe]="recipe" [editheading]="editheading"></add-tags>
+            <div *ngIf="editheading" class="keywords-public">
+              <md-checkbox [(ngModel)]="recipe.public">Make recipe visible to anyone</md-checkbox>
+              <br/>
+              <md-input class="keyword-input" [(ngModel)]="recipe.keyword" placeholder="Search keywords"></md-input>
+              <div>
+                <div *ngIf="!recipe.id">
+                  <h4 style="color:green;">Save recipe to add Tags!</h4> </div>
+                <div *ngIf="recipe.id">
+                  <add-tags [recipe]="recipe" [editheading]="editheading"></add-tags>
+                </div>
+                <md-card class="savetools" *ngIf="editheading"><a class="btn btn-success" (click)="save()">Save changes to Recipe</a>
+                  <div class="dangerzone" *ngIf="!router.url.includes('addrecipe')">
+                    <div *ngIf="!deleting">
+                      <h4>Danger Zone</h4> <a class="btn btn-danger " (click)="delete()">Delete Recipe</a> </div>
+                  </div>
+                  <div *ngIf="deleting"> <img src="img/ellipsis.svg"> Recipe is kill </div>
+                </md-card>
+              </div>
+              <!-- END muut tiedot -näkymä -->
             </div>
-            <div class="savetools" *ngIf="editheading"><a class="btn btn-success" (click)="save()">Save changes to Recipe</a>
-              <div class="dangerzone">
-                <div *ngIf="!deleting">
-                <h4 >Danger Zone</h4> <a class="btn btn-danger " (click)="delete()">Delete Recipe</a> </div>
-              </div>
-              <div *ngIf="deleting">
-                <img src="img/ellipsis.svg"> Recipe is kill
-              </div>
+            <!-- END oletusreseptinäkymä -->
+            <!-- notes-näkymä -->
+            <div class="animate-switch" *ngSwitchCase="'Recipe'">
+              <notes [recipe]="recipe"></notes>
+            </div>
+            <!-- END notes-näkymä -->
+          </div>
+          <!-- END muuttuva näkymä-containeri -->
+        </div>
+        <!-- END Alempi rivi -->
+        <!-- alarivi, jossa valmistusohje -->
+        <div [hidden]="noteSwitchButton != 'Notes'" class="row">
+          <!-- tyhjä div desktop-näkymää varten, ei näy pienessä tai mobiilissa -->
+          <div class="col-md-2 hidden-sm hidden-xs empty-div">
+            <hr class="subline" /> </div>
+          <!-- END Tyhjä desktop div -->
+          <!-- valmistusohjenäkymä -->
+          <div *ngIf="!editheading">
+            <div class="col-sm-7 col-md-7 instruction-div">
+              <h4 class="sub-heading">Instruction</h4>
+              <hr class="hline" />
+              <div [innerHTML]="recipe.instruction"></div>
             </div>
           </div>
-          <!-- END muut tiedot -näkymä -->
+          <div *ngIf="editheading">
+            <div class="col-sm-10 col-md-10">
+              <h4 class="sub-heading">Edit instructions</h4>
+              <!--Instruction editori -->
+              <input [tinyMce]="" [text]="recipe.instruction" (textfield)="textfieldChange($event)" [(ngModel)]="recipe.instruction">
+              <!--<textarea id="editinst" [(ngModel)]="recipe.instruction" class="instruction"></textarea>-->
+            </div>
+          </div>
+          <!-- END valmistusohjenäkymä -->
         </div>
-        <!-- END oletusreseptinäkymä -->
-        <!-- notes-näkymä -->
-        <div class="animate-switch" *ngSwitchCase="'Recipe'">
-          <notes [recipe]="recipe"></notes>
-        </div>
-        <!-- END notes-näkymä -->
+        <!-- END alin rivi -->
       </div>
-      <!-- END muuttuva näkymä-containeri -->
+      <!-- END mainDiv -->
     </div>
-    <!-- END Alempi rivi -->
-    <!-- alarivi, jossa valmistusohje -->
-    <div [hidden]="noteSwitchButton != 'Notes'" class="row">
-      <!-- tyhjä div desktop-näkymää varten, ei näy pienessä tai mobiilissa -->
-      <div class="col-md-2 hidden-sm hidden-xs empty-div">
-        <hr class="subline" /> </div>
-      <!-- END Tyhjä desktop div -->
-      <!-- valmistusohjenäkymä -->
-      <div *ngIf="!editheading">
-        <div class="col-sm-7 col-md-7 instruction-div">
-          <h4 class="sub-heading">Instruction</h4>
-          <hr class="hline" />
-          <div [innerHTML]="recipe.instruction"></div>
-        </div>
-      </div>
-      <div *ngIf="editheading">
-        <div class="col-sm-7 col-md-7 instruction-div">
-          <h4 class="sub-heading">Edit instructions</h4>
-          <!--Instruction editori -->
-          <input [tinyMce]="" [text]="recipe.instruction" (textfield)="textfieldChange($event)" [(ngModel)]="recipe.instruction">
-          <!--<textarea id="editinst" [(ngModel)]="recipe.instruction" class="instruction"></textarea>-->
-        </div>
-      </div>
-      <!-- END valmistusohjenäkymä -->
-    </div>
-    <!-- END alin rivi -->
+    <!-- END main container -->
   </div>
-  <!-- END mainDiv -->
 </div>
-<!-- END main container -->
+<div *ngIf="!recipe" class="loading-recipe">
+  <div class="loading-container">
+    <img src="img/ellipsis.svg">
+    <p>Fetching recipe :E</p>
+  </div>
+</div>

@@ -1,7 +1,5 @@
 .tag-add-field {
-  float:left;
-  width:80%;
-  border-radius: 7px 0px 0px 7px;
+  width:75%;
 }
 .tag-add-button  {
   border-radius: 0px 0px 0px 0px !important;
@@ -10,8 +8,13 @@
   background-color: #cc6699;
   margin-right: 5px;
   font-family: 'Handlee', cursive;
+  color: white;
   font-size: 100%;
+  cursor: pointer;
 }
 .tag-box {
   min-height: 75px;
+}
+md-card {
+  margin-top: 10px;
 }

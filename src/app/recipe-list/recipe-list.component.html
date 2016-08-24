@@ -1,33 +1,38 @@
 <div class="container-fluid recipe-list">
-    <h1>Friendly Spoon</h1>
-    <h3>is here for you!</h3>
-    <div class="row main-row">
-        <div class="col-xs-11">
-                <md-input  type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Filter recipes"></md-input>
-        </div>
+  <h1>Friendly Spoon</h1>
+  <h3>is here for you!</h3>
+  <div class="row main-row">
+    <div class="col-xs-11">
+      <md-input type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Filter recipes"></md-input>
     </div>
-    <div class="row main-row">
-        <div class="col-xs-11">
-        <!--    <label>Tags</label>
+  </div>
+  <div class="row main-row">
+    <div class="col-xs-11">
+      <!--    <label>Tags</label>
             <select class="form-control" #searchTagger (change)="tagChange($event.target.value)">
                 <option></option>
                 <option *ngFor="let tag of tags" value="{{tag.title}}">{{tag.title}}</option>
             </select> -->
-        </div>
     </div>
-    <div class="row main-row">
-        <div class="col-xs-11 buttons-row">
-            <div [hidden]="true">
-            <h5 style="float:left">Sort by:  </h5>
-            <a class="btn btn-default" (click)="sortByName()">ABC <span class="glyphicon glyphicon-sort"></span></a> <a class="btn btn-default" (click)="sortByRating()">Rating <span class="glyphicon glyphicon-sort"></span></a> <a class="btn btn-default" (click)="sortByTime()">Time <span class="glyphicon glyphicon-sort"></span></a>
-        </div>
-            <a class="btn btn-default" (click)="random()">Pick a random recipe!</a>
-            <a class="btn btn-default" (click)="refreshRecipes()">Refresh recipe list <span class="glyphicon glyphicon-refresh"></span></a>
-        </div>
-    </div>
-    <div class="row main-row">
-        <div class="col-xs-11">
-            <div *ngIf="!loading">
+  </div>
+  <div class="row main-row">
+    <div class="col-xs-11 buttons-row">
+      <div [hidden]="true">
+        <h5 style="float:left">Sort by:  </h5> <a class="btn btn-default" (click)="sortByName()">ABC <span class="glyphicon glyphicon-sort"></span></a> <a class="btn btn-default" (click)="sortByRating()">Rating <span class="glyphicon glyphicon-sort"></span></a> <a class="btn btn-default"
+            (click)="sortByTime()">Time <span class="glyphicon glyphicon-sort"></span></a> </div> <a class="btn btn-default" (click)="random()">Pick a random recipe!</a> <a class="btn btn-default" (click)="refreshRecipes()">Refresh recipe list <span class="glyphicon glyphicon-refresh"></span></a>      </div>
+  </div>
+  <div class="row main-row">
+    <div class="col-xs-11">
+      <div *ngIf="!loading">
+          <md-card *ngFor="let recipe of recipes | filter:listFilter.value | orderBy: order">
+            <md-card-title-group>
+             <img md-card-lg-img src="img/baking.png" alt="nice pic yo">
+              <md-card-title><a routerLink="/recipes/{{recipe.id}}">{{recipe.name}}</a></md-card-title>
+              <md-card-subtitle><span *ngIf="recipe.ratingaverage"><rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating></span></md-card-subtitle>
+              <md-card-subtitle><span *ngIf="recipe.duration.range">{{recipe.duration.range}}</span></md-card-subtitle>
+            </md-card-title-group>
+          </md-card>
+        <!--
             <table class="table">
                 <thead>
                     <tr class="recipe-list-headers">
@@ -46,11 +51,10 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <div *ngIf="loading" class="loading-div">
-            <img src="img/gears.svg" align="center"><br>
-            Fetching recipes from the nether realms..
-        </div>
-        </div>
+        -->
+      </div>
+      <div *ngIf="loading" class="loading-div"> <img src="img/gears.svg" align="center">
+        <br> Fetching recipes from the nether realms.. </div>
     </div>
+  </div>
 </div>

@@ -33,9 +33,15 @@
   margin: 5px;
   width: 90%;
 }
+.ingredient-create-field {
+  width: 75%;
+}
 select :first-child{
   color:green !important;
 }
 .info:first-child{
   color:green !important;
+}
+md-card {
+  margin-top: 10px;
 }
