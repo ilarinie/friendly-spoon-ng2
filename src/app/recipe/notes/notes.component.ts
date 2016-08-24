@@ -1,7 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { FriendlyApiService } from "../../services/friendlyapi.service";
-import {Rating} from "ng2-rating";
-import {MdCard} from "@angular2-material/card/card";
+
 
 
 
@@ -12,8 +11,7 @@ import { Note } from "../../models/note";
   templateUrl: 'notes.component.html',
   styleUrls: ['notes.component.css'],
   selector: 'notes',
-  moduleId: module.id,
-  directives: [Rating, MdCard]
+  moduleId: module.id
 })
 export class Notes {
   @Input()

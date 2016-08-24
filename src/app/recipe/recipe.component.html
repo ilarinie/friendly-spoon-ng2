@@ -36,8 +36,7 @@
           <!-- muut tiedot -näkymä -->
           <div class="col-sm-5 col-md-5 ">
             <div *ngIf="!editheading">
-              <h4 class="sub-heading">Average Rating:</h4>
-              <rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>
+              <h4 class="sub-heading">Average Rating: {{recipe.ratingaverage | number}}</h4>
             </div>
             <h4 class="headings sub-heading">Difficulty</h4>
             <div *ngIf="!editheading">
@@ -59,7 +58,7 @@
               <md-checkbox [(ngModel)]="recipe.public">Make recipe visible to anyone</md-checkbox>
               <br/>
               <md-input class="keyword-input" [(ngModel)]="recipe.keyword" placeholder="Search keywords"></md-input>
-              <div>
+            </div>
                 <div *ngIf="!recipe.id">
                   <h4 style="color:green;">Save recipe to add Tags!</h4> </div>
                 <div *ngIf="recipe.id">
@@ -114,8 +113,6 @@
       <!-- END mainDiv -->
     </div>
     <!-- END main container -->
-  </div>
-</div>
 <div *ngIf="!recipe" class="loading-recipe">
   <div class="loading-container">
     <img src="img/ellipsis.svg">

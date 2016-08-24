@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute }            from "@angular/router";
 import { TinyEditor } from "../directives/tinymce.directive";
-import { Rating } from "ng2-rating";
 import { MdCheckbox } from "@angular2-material/checkbox";
 
 
@@ -22,7 +21,7 @@ import { Notes } from "./notes/notes.component";
   selector: "recipeshow",
   templateUrl: "recipe.component.html",
   styleUrls: ["recipe.component.css"],
-  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, Notes, Rating, MdCheckbox],
+  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, Notes, MdCheckbox],
   moduleId: module.id
 })
 
@@ -100,7 +99,6 @@ export class RecipeComponent implements OnInit {
     this.levels = JSON.parse(localStorage.getItem("levels"));
     this.durations = JSON.parse(localStorage.getItem("durations"));
   }
-
   get diagnostic() { return JSON.stringify(this.recipe); }
   save() {
     this.recipe.level_id = this.recipe.level.id;

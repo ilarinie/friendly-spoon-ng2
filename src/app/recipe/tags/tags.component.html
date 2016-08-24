@@ -1,8 +1,8 @@
-
 <div *ngIf="!editheading">
-    <h4>Tags</h4>
-  <span *ngFor="let recipetag of recipe.recipe_tags" class="label label-default label-pill tag-label">{{recipetag.tag.title}}</span>
-
+  <h4>Tags</h4>
+  <md-grid-list cols="4" rowHeight="30px" gutterSize="4px">
+    <md-grid-tile *ngFor="let recipetag of recipe.recipe_tags" class="tag-label tag-display">{{recipetag.tag.title}}</md-grid-tile>
+  </md-grid-list>
 </div>
 <div *ngIf="editheading">
   <md-card>
@@ -10,16 +10,16 @@
     <md-card-subtitle>click to remove</md-card-subtitle>
     <!--<div *ngIf="addingTag"> <img src="img/ellipsis.svg"> </div>-->
     <md-grid-list cols="4" rowHeight="30px" gutterSize="4px">
-    <md-grid-tile *ngFor="let recipetag of recipe.recipe_tags" class="tag-label" (click)="removeRecipeTag(recipetag)">{{recipetag.tag.title}}</md-grid-tile>
-    <md-grid-tile *ngIf="addingTag"><img src="img/ellipsis.svg"></md-grid-tile>
-  </md-grid-list>
+      <md-grid-tile *ngFor="let recipetag of recipe.recipe_tags" class="tag-label pointer" (click)="removeRecipeTag(recipetag)">{{recipetag.tag.title}}</md-grid-tile>
+      <md-grid-tile *ngIf="addingTag"><img src="img/ellipsis.svg"></md-grid-tile>
+    </md-grid-list>
   </md-card>
   <md-card>
     <md-card-title>Available tags</md-card-title>
     <md-card-subtitle>Click to add to recipe</md-card-subtitle>
     <md-grid-list cols="4" rowHeight="30px" gutterSize="4px">
-    <md-grid-tile *ngFor="let tag of recipe.allTags" class="tag-label" (click)="saveRecipeTag(tag)">{{tag.title}}</md-grid-tile>
-  </md-grid-list>
+      <md-grid-tile *ngFor="let tag of recipe.allTags" class="tag-label pointer" (click)="saveRecipeTag(tag)">{{tag.title}}</md-grid-tile>
+    </md-grid-list>
   </md-card>
   <md-card>
     <md-card-title>Create a new Tag</md-card-title>

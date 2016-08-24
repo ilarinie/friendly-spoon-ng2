@@ -10,6 +10,11 @@
   font-family: 'Handlee', cursive;
   color: white;
   font-size: 100%;
+}
+.tag-display {
+  border-radius: 25px;
+}
+.pointer {
   cursor: pointer;
 }
 .tag-box {
