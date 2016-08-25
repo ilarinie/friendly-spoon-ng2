@@ -3,6 +3,7 @@ import { Router }            from "@angular/router";
 import { FilterArrayPipe, OrderBy, TagFilter } from "../pipes/filter-array-pipe";
 import { Authentication } from "../authentication/authentication";
 import {MdInput} from "@angular2-material/input";
+import {Rating } from 'ng2-rating';
 
 
 
@@ -16,7 +17,7 @@ import { FriendlyApiService } from "../services/friendlyapi.service";
   templateUrl: "recipe-list.component.html",
   styleUrls: ["recipe-list.component.css"],
   pipes: [FilterArrayPipe, OrderBy, TagFilter],
-  directives: [MdInput],
+  directives: [MdInput, Rating],
   moduleId: module.id
 })
 

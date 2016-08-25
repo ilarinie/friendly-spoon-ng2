@@ -36,7 +36,8 @@
           <!-- muut tiedot -näkymä -->
           <div class="col-sm-5 col-md-5 ">
             <div *ngIf="!editheading">
-              <h4 class="sub-heading">Average Rating: {{recipe.ratingaverage | number}}</h4>
+              <h4 class="sub-heading">Average Rating:</h4>
+              <rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>
             </div>
             <h4 class="headings sub-heading">Difficulty</h4>
             <div *ngIf="!editheading">

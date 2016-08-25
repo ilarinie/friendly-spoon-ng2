@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute }            from "@angular/router";
 import { TinyEditor } from "../directives/tinymce.directive";
 import { MdCheckbox } from "@angular2-material/checkbox";
-
+import {Rating } from 'ng2-rating';
 
 
 
@@ -21,7 +21,7 @@ import { Notes } from "./notes/notes.component";
   selector: "recipeshow",
   templateUrl: "recipe.component.html",
   styleUrls: ["recipe.component.css"],
-  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, Notes, MdCheckbox],
+  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, Notes, MdCheckbox, Rating],
   moduleId: module.id
 })
 

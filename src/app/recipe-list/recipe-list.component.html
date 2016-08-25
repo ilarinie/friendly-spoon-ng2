@@ -28,7 +28,7 @@
             <md-card-title-group>
              <img md-card-lg-img src="img/baking.png" alt="nice pic yo">
               <md-card-title><a routerLink="/recipes/{{recipe.id}}">{{recipe.name}}</a></md-card-title>
-              <md-card-subtitle><span *ngIf="recipe.ratingaverage">{{recipe.ratingaverage | number}}</span></md-card-subtitle>
+              <md-card-subtitle><span *ngIf="recipe.ratingaverage"><rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating></span></md-card-subtitle>
               <md-card-subtitle><span *ngIf="recipe.duration.range">{{recipe.duration.range}}</span></md-card-subtitle>
             </md-card-title-group>
           </md-card>
