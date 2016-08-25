@@ -4,6 +4,8 @@ import { RecipeListComponent } from "./recipe-list/recipe-list.component";
 import { RecipeComponent } from "./recipe/recipe.component";
 import { Login } from "./authentication/login";
 import { Logout } from "./authentication/logout"
+import {TagList} from "./tag-list/tag-list.component";
+import {IngredientList} from "./ingredient-list/ingredient-list.component";
 
 import {Authentication } from "./authentication/authentication";
 
@@ -34,6 +36,16 @@ const appRoutes: Routes = [
   {
     path: "recipes/:id/edit",
     component: RecipeComponent,
+    canActivate: [Authentication]
+  },
+  {
+    path: "tags",
+    component: TagList,
+    canActivate: [Authentication]
+  },
+  {
+    path: "ingredients",
+    component: IngredientList,
     canActivate: [Authentication]
   }
 ];

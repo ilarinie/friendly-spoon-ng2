@@ -1,0 +1,14 @@
+<div class="container container-fluid">
+  <h2>Edit Ingredients</h2>
+  <div class="col-md-5">
+    <md-list>
+      <md-list-item *ngFor="let inc of ingredients">
+      <md-input [(ngModel)]="inc.name"></md-input>
+      <a class="btn btn-success" (click)="saveIngredient(inc)">Save</a>
+      <a class="btn btn-danger" (click)="deleteIngredient(inc)">Delete</a>
+    </md-list-item>
+    </md-list>
+  </div>
+
+
+</div>

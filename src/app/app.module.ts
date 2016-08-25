@@ -22,6 +22,8 @@ import {AddIngredients} from "./recipe/add-ingredients/add-ingredients.component
 import {TinyEditor} from "./directives/tinymce.directive";
 import { Login } from "./authentication/login";
 import { Logout } from "./authentication/logout";
+import {TagList} from "./tag-list/tag-list.component";
+import {IngredientList} from "./ingredient-list/ingredient-list.component";
 
 import {enableProdMode} from "@angular/core";
 enableProdMode();
@@ -38,7 +40,9 @@ enableProdMode();
     AddIngredients,
     TinyEditor,
     Login,
-    Logout
+    Logout,
+    TagList,
+    IngredientList
   ],
   imports: [
     BrowserModule,

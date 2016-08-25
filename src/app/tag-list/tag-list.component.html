@@ -1,0 +1,16 @@
+<div class="container container-fluid">
+  <div class col-md-5>
+    <md-list>
+      <md-list-item *ngFor="let tag of tags">
+        <md-input [(ngModel)]="tag.title"></md-input>
+        <a class="btn btn-success" (click)="saveTag(tag)">Save</a>
+        <a class="btn btn-danger" (click)="deleteTag(tag)">Delete</a>
+      </md-list-item>
+    </md-list>
+  </div>
+
+
+
+
+
+</div>

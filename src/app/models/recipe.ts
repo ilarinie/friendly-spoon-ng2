@@ -23,5 +23,6 @@ export class Recipe {
   allTags: any[];
   notes: any[];
   recipe_ingredient_groups: RecipeIngredientGroup[];
+  introduction: string;
 
 }

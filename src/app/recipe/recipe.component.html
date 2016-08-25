@@ -65,6 +65,10 @@
                 <div *ngIf="recipe.id">
                   <add-tags [recipe]="recipe" [editheading]="editheading"></add-tags>
                 </div>
+                <md-card class="savetools" *ngIf="editheading">
+                  <md-card-title>Add an introduction</md-card-title>
+                  <textarea class="form-control" [(ngModel)]="recipe.introduction"></textarea>
+                </md-card>
                 <md-card class="savetools" *ngIf="editheading"><a class="btn btn-success" (click)="save()">Save changes to Recipe</a>
                   <div class="dangerzone" *ngIf="!router.url.includes('addrecipe')">
                     <div *ngIf="!deleting">

@@ -17,7 +17,8 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class FriendlyApiService {
-  private baseUrl = 'http://api.friendlyspoon.me';
+  // private baseUrl = 'http://api.friendlyspoon.me'; //prod api
+  private baseUrl = 'http://friendly-spoon-api.herokuapp.com' //dev api
 
   private recipesUrl = this.baseUrl + '/recipes';
   private unitsUrl = this.baseUrl + '/get'
@@ -117,6 +118,11 @@ export class FriendlyApiService {
       .toPromise()
       .then(() => ingredient)
       .catch(this.handleError);
+  }
+  deleteIngredient(ingredient: Ingredient) {
+    let url = `${this.ingredientsUrl}/${ingredient.id}`;
+    return this.http
+      .delete(url, { headers: this.refreshHeaders(), body: '' }).toPromise();
   }
 
   //RECIPE INGREDIENT Group
@@ -307,10 +313,18 @@ export class FriendlyApiService {
       .catch(this.handleError)
   }
   saveTag(tag: Tag): Promise<Tag> {
+    if (tag.id) {
+      return this.putTag(tag);
+    }
     return this.postTag(tag);
   }
   private putTag(tag: Tag) {
-
+    let url = `${this.tagsUrl}/${tag.id}`
+    return this.http
+      .put(url, JSON.stringify(tag), { headers: this.refreshHeaders() })
+      .toPromise()
+      .then(res => res.json() as Tag)
+      .catch(this.handleError)
   }
   private postTag(tag: Tag): Promise<Tag> {
     this.headers.append('Content-Type', 'application/json');
@@ -320,6 +334,15 @@ export class FriendlyApiService {
       .then(res => res.json() as Tag)
       .catch(this.handleError)
   }
+  deleteTag(tag: Tag) {
+    let url = `${this.tagsUrl}/${tag.id}`
+    return this.http
+      .delete(url, { headers: this.refreshHeaders(), body: '' })
+      .toPromise()
+
+  }
+
+
   //Notes
   saveNote(note: Note): Promise<Note> {
     this.headers.append('Content-Type', 'application/json');
