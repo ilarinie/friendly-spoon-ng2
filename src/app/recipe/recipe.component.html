@@ -8,9 +8,9 @@
             </span> <span *ngIf="editheading">
                 <h3 class="main-heading" ><input  class="heading-input" [(ngModel)]="recipe.name" value="{{recipe.name}}" placeholder="Recipe name"></h3>
             </span> </div>
-      <div class="col-sm-6 col-md-6  heading-div button-group"> <a class="btn header-btn" (click)="divide()">{{divideButton}}</a> <a class="btn header-btn" (click)="double()">{{doubleButton}}</a> <a class="btn header-btn" (click)="noteSwitch()" [ngClass]="{ disabled: editheading}">{{noteSwitchButton}}</a> <span>
-          <a class="btn header-btn" (click)="editheadings()">
-            <span *ngIf="editheading">Back</span> <span *ngIf="!editheading">Edit</span> </a>
+      <div class="col-sm-6 col-md-6  heading-div button-group"> <a class="btn header-btn" (click)="divide()"  [ngClass]="{ disabled: editheading}"> {{divideButton}}</a> <a class="btn header-btn" (click)="double()"  [ngClass]="{ disabled: editheading}">{{doubleButton}}</a> <a class="btn header-btn" (click)="noteSwitch()" [ngClass]="{ disabled: editheading}">{{noteSwitchButton}}</a> <span>
+          <a class="btn header-btn" (click)="editheadings()" [ngClass]="{ disabled: addrecipe}">
+            <span *ngIf="editheading"  >Back</span> <span *ngIf="!editheading">Edit</span> </a>
         </span>
       </div>
     </div>
@@ -68,6 +68,9 @@
                 <md-card class="savetools" *ngIf="editheading">
                   <md-card-title>Add an introduction</md-card-title>
                   <textarea class="form-control" [(ngModel)]="recipe.introduction"></textarea>
+                </md-card>
+                <md-card [hidden]="true" class="savetools" *ngIf="editheading">
+                  <input type="file" class="form-control" (change)="onChange($event)">
                 </md-card>
                 <md-card class="savetools" *ngIf="editheading"><a class="btn btn-success" (click)="save()">Save changes to Recipe</a>
                   <div class="dangerzone" *ngIf="!router.url.includes('addrecipe')">

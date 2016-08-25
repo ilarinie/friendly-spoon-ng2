@@ -10,7 +10,7 @@ import {FriendlyApiService} from "../services/friendlyapi.service";
 })
 export class TagList implements OnInit {
 
-  tags: Tag[];
+  tags: Tag[] = [];
   newTag: Tag = new Tag();
   savingTag: boolean = false;
   deletingTag: boolean = false;
@@ -24,7 +24,7 @@ export class TagList implements OnInit {
   saveTag(tag: Tag) {
     this.savingTag = true;
     this.friendlyApiService.saveTag(tag).then(res => {
-      this.friendlyApiService.getTags().then(tags => { this.tags = tags; this.savingTag = false });
+      this.friendlyApiService.getTags().then(tags => { this.tags = tags; this.savingTag = false;this.newTag = new Tag(); });
     })
   }
   deleteTag(tag: Tag) {

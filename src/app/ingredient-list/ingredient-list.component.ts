@@ -8,7 +8,9 @@ import {FriendlyApiService} from "../services/friendlyapi.service";
   moduleId: module.id
 })
 export class IngredientList implements OnInit {
-  ingredients: Ingredient[];
+  ingredients: Ingredient[] = [];
+  newinc: Ingredient = new Ingredient();
+  updatingInc: number;
 
   constructor(private friendlyApiService: FriendlyApiService) { }
 
@@ -17,8 +19,21 @@ export class IngredientList implements OnInit {
   }
 
   saveIngredient(inc: Ingredient) {
+    let id = undefined;
+    console.log(inc.id)
+    if (inc.id){
+    id = inc.id;
+  }
+    if (id != undefined){
+      console.log(id)
+      this.updatingInc = id;
+    }
     this.friendlyApiService.saveIngredient(inc).then(res => {
-      this.friendlyApiService.getIngredients().then(ingredients => this.ingredients = ingredients)
+      this.friendlyApiService.getIngredients().then(ingredients => this.ingredients = ingredients);
+      if (inc == this.newinc){
+        this.newinc = new Ingredient();
+      }
+      this.updatingInc = undefined;
     })
   }
   deleteIngredient(inc: Ingredient) {

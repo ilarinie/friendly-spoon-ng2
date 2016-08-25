@@ -1,14 +1,23 @@
 <div class="container container-fluid">
-  <h2>Edit Ingredients</h2>
   <div class="col-md-5">
+    <md-card>
+
     <md-list>
-      <md-list-item *ngFor="let inc of ingredients">
-      <md-input [(ngModel)]="inc.name"></md-input>
-      <a class="btn btn-success" (click)="saveIngredient(inc)">Save</a>
-      <a class="btn btn-danger" (click)="deleteIngredient(inc)">Delete</a>
+      <md-card-title>Edit Ingredients</md-card-title>
+      <md-list-item *ngFor="let inc of ingredients" >
+        <span *ngIf="updateInc != inc.id">
+        <md-input [(ngModel)]="inc.name" ></md-input> <a class="btn btn-success" (click)="saveIngredient(inc)">Save</a> <a class="btn btn-danger" (click)="deleteIngredient(inc)">Delete</a> </span></md-list-item>
+
+    <md-list-item *ngIf="ingredients.length == 0">
+      <h4>The list appears to be empty, huh.</h4>
     </md-list-item>
-    </md-list>
+        </md-list>
+  </md-card>
   </div>
-
-
+  <div class="col-md-5">
+    <md-card>
+    <md-card-title>Create Ingredient</md-card-title>
+    <md-input [(ngModel)]="newinc.name"></md-input> <a class="btn btn-success" (click)="saveIngredient(newinc)">Save</a>
+  </md-card>
+  </div>
 </div>

@@ -37,6 +37,7 @@ export class RecipeComponent implements OnInit {
   checked = [];
 
   deleting: boolean = false;
+  addrecipe: boolean = false;
 
 
   public title: string = 'Popover title';
@@ -58,12 +59,19 @@ export class RecipeComponent implements OnInit {
 
   }
 
+  onChange(event) {
+    let files:File = event.srcElement.files;
+    //console.log(files[0]);
+    this.recipe.picture = files[0];
+  }
+
   getRecipe() {
     if (this.router.url.includes('addrecipe')) {
       this.recipe = new Recipe();
       this.recipe.level = new Level();
       this.recipe.duration = new Duration();
       this.editheading = true;
+      this.addrecipe = true;
     } else {
       this.sub = this.route.params.subscribe(params => {
         let id = +params['id'];
@@ -104,7 +112,7 @@ export class RecipeComponent implements OnInit {
     this.recipe.level_id = this.recipe.level.id;
     this.recipe.duration_id = this.recipe.duration.id;
 
-    console.log(this.recipe.instruction);
+    console.log(this.recipe.picture)
 
     this.friendlyApiService
       .save(this.recipe)

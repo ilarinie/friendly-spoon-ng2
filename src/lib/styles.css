@@ -28,3 +28,6 @@ main {
 .navbar a {
   color: white !important;
 }
+md-card {
+  margin-top: 10px;
+}

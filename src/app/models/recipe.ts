@@ -24,5 +24,6 @@ export class Recipe {
   notes: any[];
   recipe_ingredient_groups: RecipeIngredientGroup[];
   introduction: string;
+  picture: File;
 
 }
