@@ -30,10 +30,8 @@
               <md-card-title><a routerLink="/recipes/{{recipe.id}}">{{recipe.name}}</a></md-card-title>
               <md-card-subtitle><span *ngIf="recipe.ratingaverage"><rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating></span></md-card-subtitle>
               <md-card-subtitle><span *ngIf="recipe.duration.range">{{recipe.duration.range}}</span></md-card-subtitle>
+              <md-card-subtitle>  <span *ngIf="recipe.introduction">{{recipe.introduction}}</span></md-card-subtitle>
             </md-card-title-group>
-            <md-card-content>
-              <span *ngIf="recipe.introduction">{{recipe.introduction}}</span>
-            </md-card-content>
           </md-card>
         <!--
             <table class="table">
