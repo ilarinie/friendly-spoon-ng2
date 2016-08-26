@@ -4,7 +4,7 @@
   margin: 0 auto;
 }
 .sign-in-container {
-  font-family: 'Handlee', cursive;
+
 
 /*  font-family: 'The Girl Next Door', cursive;
   font-family: 'Loved by the King', cursive;
@@ -23,7 +23,7 @@
   height: 900px;
 }
 .padder {
-  height: 400px;
+  height: 40vh;
 }
 .border {
   border: 1px solid white;
@@ -32,6 +32,7 @@
   text-align: center;
   }
 .signin-header{
+    font-family: 'Handlee', cursive;
   text-align: center;
 }
 .signin-field-container {

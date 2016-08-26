@@ -14,7 +14,31 @@
 
 </head>
 <body>
-    <friendly-app><div  style="width:100%;"><div class="main-loader"><img src="img/gears.svg"></div></div></friendly-app>
+    <friendly-app>
+      <link rel="stylesheet" href="/app/authentication/signin.css">
+
+
+      <div class="sign-in-container container-fluid">
+
+
+          <div class="container-fluid">
+
+              <div class="row hidden-xs">
+                  <div class="col-md-10 hidden-xs padder "></div>
+              </div>
+              <div class="row">
+                  <div class="col-centered col-md-8  signin-div">
+                      <h2 class="signin-header">Welcome to Friendly Spoon</h2>
+                      <h2 class="signin-header">Please wait while we set everything up for you</h2>
+                      <img src="img/ellipsis.svg">
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+
+      <!--<div class="main-loader-holder"><div class="loader-img-container"><img class="main-loader" src="img/gears.svg"></div></div>--></friendly-app>
     {{#each scripts.polyfills}}
   <script src="{{.}}"></script>
   {{/each}}

@@ -13,7 +13,7 @@ const appRoutes: Routes = [
   {
     path: "",
     component: RecipeListComponent,
-    canActivate: [Authentication]
+    //  canActivate: [Authentication]
   },
   {
     path: "addrecipe",

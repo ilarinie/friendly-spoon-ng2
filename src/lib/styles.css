@@ -8,12 +8,6 @@ main {
   width: 100%;
   margin-top: 52px; // accommodate the navbar
 }
-.main-loader {
-  img {
-    display: block;
-    margin: 0 auto;
-  }
-}
 .navbar-default {
   background-color: #022f32 !important;
 }
@@ -30,4 +24,18 @@ main {
 }
 md-card {
   margin-top: 10px;
+}
+.main-loader-holder {
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  text-align: center;
+}
+.loader-img-container {
+  border: 1px solid black;
+  margin: 0 auto;
+  width: auto;
+}
+.main-loader {
+  margin-top: 50vh;
 }
