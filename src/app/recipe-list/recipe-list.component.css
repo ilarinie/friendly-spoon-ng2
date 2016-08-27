@@ -58,5 +58,8 @@ a:active {
 }
 md-card {
   margin-top: 10px;
-  width: 500px;
+  margin-left: 10px;
+  float: left;
+  min-width: 400px;
+
 }
