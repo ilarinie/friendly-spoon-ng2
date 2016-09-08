@@ -11,7 +11,6 @@ import { FriendlyApiService } from "./services/friendlyapi.service";
   templateUrl: "app.component.html",
   directives: [ROUTER_DIRECTIVES],
   providers: [FriendlyApiService],
-  moduleId: module.id
 })
 
 

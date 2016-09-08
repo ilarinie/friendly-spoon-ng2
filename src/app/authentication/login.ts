@@ -10,8 +10,7 @@ import {MdInput} from "@angular2-material/input";
   selector: 'login',
   directives: [NgIf, MdInput],
   templateUrl: 'login.html',
-  providers: [FormBuilder],
-  moduleId: module.id,
+  providers: [FormBuilder]
 
 })
 

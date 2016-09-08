@@ -8,7 +8,6 @@ import { RecipeIngredient } from "../../models/recipe_ingredient";
   selector: 'list-ingredients',
   templateUrl: 'list-ingredients.component.html',
   styleUrls: ['list-ingredients.component.css'],
-  moduleId: module.id,
 })
 export class ListIngredients {
   @Input()

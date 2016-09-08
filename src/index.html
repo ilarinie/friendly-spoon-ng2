@@ -1,54 +1,44 @@
 <!doctype html>
 <html>
-
 <head>
-    <base href="/">
-    <title>Friendly Spoon Angular</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 1. Load libraries -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <title>FriendlySpoon</title>
+  <base href="/">
 
-    <link rel="stylesheet" href="lib/styles.css">
-    <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="lib/styles.css">
+  <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
 
 </head>
 <body>
-    <friendly-app>
-      <link rel="stylesheet" href="/app/authentication/signin.css">
+  <friendly-app>
+    <link rel="stylesheet" href="/app/authentication/signin.css">
 
 
-      <div class="sign-in-container container-fluid">
+    <div class="sign-in-container container-fluid">
 
 
-          <div class="container-fluid">
+        <div class="container-fluid">
 
-              <div class="row hidden-xs">
-                  <div class="col-md-10 hidden-xs padder "></div>
-              </div>
-              <div class="row">
-                  <div class="col-centered col-md-8  signin-div">
-                      <h2 class="signin-header">Welcome to Friendly Spoon</h2>
-                      <h2 class="signin-header">Please wait while we set everything up for you</h2>
-                      <img src="img/ellipsis.svg">
-                  </div>
-              </div>
-          </div>
+            <div class="row hidden-xs">
+                <div class="col-md-10 hidden-xs padder "></div>
+            </div>
+            <div class="row">
+                <div class="col-centered col-md-8  signin-div">
+                    <h2 class="signin-header">Welcome to Friendly Spoon</h2>
+                    <h2 class="signin-header">Please wait while we set everything up for you</h2>
+                    <img src="img/ellipsis.svg">
+                </div>
+            </div>
+        </div>
 
-      </div>
+    </div>
 
 
-      <!--<div class="main-loader-holder"><div class="loader-img-container"><img class="main-loader" src="img/gears.svg"></div></div>--></friendly-app>
-    {{#each scripts.polyfills}}
-  <script src="{{.}}"></script>
-  {{/each}}
-  <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script>
-    System.import('system-config.js').then(function () {
-      System.import('main');
-    }).catch(console.error.bind(console));
-  </script>
+    <!--<div class="main-loader-holder"><div class="loader-img-container"><img class="main-loader" src="img/gears.svg"></div></div>--></friendly-app>
+
 </body>
-
 </html>

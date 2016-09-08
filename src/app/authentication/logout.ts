@@ -6,8 +6,7 @@ import {Authentication} from './authentication';
 @Component({
   selector: 'logout',
   directives: [NgIf],
-  templateUrl: 'logout.html',
-  moduleId: module.id
+  templateUrl: 'logout.html'
 })
 
 export class Logout implements OnInit {

@@ -21,8 +21,7 @@ import { Notes } from "./notes/notes.component";
   selector: "recipeshow",
   templateUrl: "recipe.component.html",
   styleUrls: ["recipe.component.css"],
-  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, Notes, MdCheckbox, Rating],
-  moduleId: module.id
+  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, Notes, MdCheckbox, Rating]
 })
 
 export class RecipeComponent implements OnInit {

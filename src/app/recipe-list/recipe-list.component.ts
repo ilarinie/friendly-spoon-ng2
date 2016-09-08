@@ -18,7 +18,6 @@ import { FriendlyApiService } from "../services/friendlyapi.service";
   styleUrls: ["recipe-list.component.css"],
   pipes: [FilterArrayPipe, OrderBy, TagFilter],
   directives: [MdInput, Rating],
-  moduleId: module.id
 })
 
 export class RecipeListComponent implements OnInit {

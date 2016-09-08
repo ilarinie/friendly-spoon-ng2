@@ -9,8 +9,7 @@ import { FriendlyApiService } from "../../services/friendlyapi.service";
 @Component({
   templateUrl: 'tags.component.html',
   styleUrls: ['tags.component.css'],
-  selector: 'add-tags',
-  moduleId: module.id
+  selector: 'add-tags'
 })
 export class Tags {
   @Input()

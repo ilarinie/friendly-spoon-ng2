@@ -11,7 +11,6 @@ import { Note } from "../../models/note";
   templateUrl: 'notes.component.html',
   styleUrls: ['notes.component.css'],
   selector: 'notes',
-  moduleId: module.id,
   directives: [Rating]
 })
 export class Notes {

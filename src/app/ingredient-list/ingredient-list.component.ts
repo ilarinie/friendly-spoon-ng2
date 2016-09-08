@@ -4,8 +4,7 @@ import {FriendlyApiService} from "../services/friendlyapi.service";
 
 @Component({
   selector: 'ingredient-list',
-  templateUrl: 'ingredient-list.component.html',
-  moduleId: module.id
+  templateUrl: 'ingredient-list.component.html'
 })
 export class IngredientList implements OnInit {
   ingredients: Ingredient[] = [];
@@ -21,16 +20,16 @@ export class IngredientList implements OnInit {
   saveIngredient(inc: Ingredient) {
     let id = undefined;
     console.log(inc.id)
-    if (inc.id){
-    id = inc.id;
-  }
-    if (id != undefined){
+    if (inc.id) {
+      id = inc.id;
+    }
+    if (id != undefined) {
       console.log(id)
       this.updatingInc = id;
     }
     this.friendlyApiService.saveIngredient(inc).then(res => {
       this.friendlyApiService.getIngredients().then(ingredients => this.ingredients = ingredients);
-      if (inc == this.newinc){
+      if (inc == this.newinc) {
         this.newinc = new Ingredient();
       }
       this.updatingInc = undefined;

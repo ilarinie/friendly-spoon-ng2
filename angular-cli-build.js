@@ -19,7 +19,9 @@ module.exports = function(defaults) {
       'jquery/dist/jquery.min.js',
       'angular2-bootstrap-confirm/**/*.+(js|js.map|ts)',
       '@angular2-material/**/*',
-      'ng2-rating/**/*'
+      'ng2-rating/**/*',
+      'typescript/*/.+(js|js.map)',
+      'traceur/**/*'
     ]
   });
 };

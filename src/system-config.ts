@@ -12,7 +12,7 @@ const map: any = {
   'jquery': 'vendor/jquery/dist/jquery.js',
   'angular2-bootstrap-confirm': 'vendor/angular2-bootstrap-confirm',
   '@angular2-material': 'vendor/@angular2-material',
-  "ng2-rating": "vendor/ng2-rating"
+  "ng2-rating": "vendor/ng2-rating",
 };
 
 /** User packages configuration. */

@@ -6,7 +6,6 @@ import {FriendlyApiService} from "../services/friendlyapi.service";
 @Component({
   selector: 'tag-list',
   templateUrl: 'tag-list.component.html',
-  moduleId: module.id
 })
 export class TagList implements OnInit {
 
@@ -24,7 +23,7 @@ export class TagList implements OnInit {
   saveTag(tag: Tag) {
     this.savingTag = true;
     this.friendlyApiService.saveTag(tag).then(res => {
-      this.friendlyApiService.getTags().then(tags => { this.tags = tags; this.savingTag = false;this.newTag = new Tag(); });
+      this.friendlyApiService.getTags().then(tags => { this.tags = tags; this.savingTag = false; this.newTag = new Tag(); });
     })
   }
   deleteTag(tag: Tag) {
