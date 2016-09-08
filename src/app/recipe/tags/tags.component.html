@@ -8,10 +8,10 @@
   <md-card>
     <md-card-title>Current tags</md-card-title>
     <md-card-subtitle>click to remove</md-card-subtitle>
-    <!--<div *ngIf="addingTag"> <img src="img/ellipsis.svg"> </div>-->
+    <!--<div *ngIf="addingTag"> <img src="assets/ellipsis.svg"> </div>-->
     <md-grid-list cols="4" rowHeight="30px" gutterSize="4px">
       <md-grid-tile *ngFor="let recipetag of recipe.recipe_tags" class="tag-label pointer" (click)="removeRecipeTag(recipetag)">{{recipetag.tag.title}}</md-grid-tile>
-      <md-grid-tile *ngIf="addingTag"><img src="img/ellipsis.svg"></md-grid-tile>
+      <md-grid-tile *ngIf="addingTag"><img src="assets/ellipsis.svg"></md-grid-tile>
     </md-grid-list>
   </md-card>
   <md-card>

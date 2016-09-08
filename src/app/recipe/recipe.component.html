@@ -77,7 +77,7 @@
                     <div *ngIf="!deleting">
                       <h4>Danger Zone</h4> <a class="btn btn-danger " (click)="delete()">Delete Recipe</a> </div>
                   </div>
-                  <div *ngIf="deleting"> <img src="img/ellipsis.svg"> Recipe is kill </div>
+                  <div *ngIf="deleting"> <img src="assets/ellipsis.svg"> Recipe is kill </div>
                 </md-card>
               </div>
               <!-- END muut tiedot -näkymä -->
@@ -123,7 +123,7 @@
     <!-- END main container -->
 <div *ngIf="!recipe" class="loading-recipe">
   <div class="loading-container">
-    <img src="img/ellipsis.svg">
+    <img src="assets/ellipsis.svg">
     <p>Fetching recipe :E</p>
   </div>
 </div>

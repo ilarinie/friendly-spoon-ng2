@@ -6,11 +6,14 @@ import { isLoggedin } from "./authentication/is-loggedin";
 import { Recipe } from "./models/recipe";
 import { FriendlyApiService } from "./services/friendlyapi.service";
 
+
+
 @Component({
   selector: "friendly-app",
   templateUrl: "app.component.html",
   directives: [ROUTER_DIRECTIVES],
   providers: [FriendlyApiService],
+  styleUrls: ['styles.css']
 })
 
 
@@ -25,4 +28,5 @@ export class AppComponent {
     this.username = localStorage.getItem('username');
 
   }
+
 }
