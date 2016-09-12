@@ -324,7 +324,7 @@ export class FriendlyApiService {
     return this.http
       .put(url, JSON.stringify(tag), { headers: this.refreshHeaders() })
       .toPromise()
-      .then(res => res.json() as Tag)
+      .then(() => tag)
       .catch(this.handleError)
   }
   private postTag(tag: Tag): Promise<Tag> {

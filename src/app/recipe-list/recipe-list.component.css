@@ -14,8 +14,7 @@ a:visited {
 
 /* mouse over link */
 a:hover {
-  color: white;
-  background-color: black;
+
 }
 
 /* selected link */
@@ -30,12 +29,10 @@ a:active {
   min-height: 120em;
 }
 .table {
-  background-color: #022f32;
-  color: white;
-  font-family: 'Handlee', cursive;
+  color: black;
 }
 .table a {
-  color:white;
+  color:black;
 }
 .recipe-list-headers th{
   background-color: #f4f4f0;

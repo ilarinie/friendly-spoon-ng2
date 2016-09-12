@@ -13,6 +13,8 @@ import { MdButtonModule } from '@angular2-material/button';
 import {MdGridListModule} from '@angular2-material/grid-list';
 import {MdCardModule} from '@angular2-material/card';
 import {MdListModule} from '@angular2-material/list';
+import {     DragulaModule} from "ng2-dragula/ng2-dragula";
+
 
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {RecipeComponent} from "./recipe/recipe.component";
@@ -53,7 +55,8 @@ enableProdMode();
     MdButtonModule,
     MdGridListModule,
     MdCardModule,
-    MdListModule
+    MdListModule,
+    DragulaModule
   ],
   bootstrap: [AppComponent],
   providers: [Authentication, ConfirmOptions,

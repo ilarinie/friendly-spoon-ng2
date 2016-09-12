@@ -26,7 +26,6 @@ export class ReverseArrayPipe implements PipeTransform {
     if (items == null || queryString == "" || queryString == undefined) {
       return null;
     }
-    console.log(queryString + " = qrstr")
     items.sort(this.compare);
     items = items.filter((recipe) => new RegExp(queryString, "i").test(recipe.name));
     return items.slice(0, 1);

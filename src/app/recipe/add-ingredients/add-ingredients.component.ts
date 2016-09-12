@@ -5,6 +5,8 @@ import { RecipeIngredient } from '../../models/recipe_ingredient';
 import { Unit } from '../../models/unit';
 import { FriendlyApiService} from '../../services/friendlyapi.service';
 import { Ingredient } from '../../models/ingredient';
+import { DragulaService } from 'ng2-dragula/ng2-dragula';
+
 
 
 
@@ -21,11 +23,15 @@ export class AddIngredients implements OnInit {
   @Input()
   recipe: Recipe;
 
+
+
   units: Unit[];
   ingredients: Ingredient[];
   ingredient: Ingredient = new Ingredient();
   recipe_ingredient: RecipeIngredient = new RecipeIngredient();
   recipe_ingredient_group: RecipeIngredientGroup = new RecipeIngredientGroup();
+
+  items: any[] = ["item1", "item2", "item3", "item4"];
 
   //loading indicators
   addingGroup: boolean;
@@ -37,7 +43,48 @@ export class AddIngredients implements OnInit {
   AMOUNT_DECIMAL_REGEX = /^[0-9]{1,4}[,.]{0,1}[0-9]{0,3}$/
   AMOUNT_FRACTION_REGEX = /^[1-9]\/[1-9]$/
 
-  constructor(private friendlyApiService: FriendlyApiService) { }
+  constructor(private friendlyApiService: FriendlyApiService, private dragulaService: DragulaService) {
+    dragulaService.drag.subscribe((value) => {
+
+      console.log(`drag: ${value[0]}`);
+      this.onDrag(value.slice(1));
+    });
+    dragulaService.drop.subscribe((value) => {
+      console.log(`drop: ${value[0]}`);
+      this.onDrop(value.slice(1));
+    });
+    dragulaService.over.subscribe((value) => {
+      console.log(`over: ${value[0]}`);
+      this.onOver(value.slice(1));
+    });
+    dragulaService.out.subscribe((value) => {
+      console.log(`out: ${value[0]}`);
+      this.onOut(value.slice(1));
+    });
+  }
+
+  private onDrag(args) {
+    let [e, el] = args;
+  }
+
+  private onDrop(args) {
+    let [e, el] = args;
+    console.log(e.id)
+    var elementPos = this.recipe.recipe_ingredients.map(function(x) { return x.id; }).indexOf(e.id);
+    console.log(elementPos);
+  }
+
+  private onOver(args) {
+    let [e, el, container] = args;
+    // do something
+  }
+
+  private onOut(args) {
+    let [e, el, container] = args;
+    // do something
+
+  }
+
 
   ngOnInit() {
     this.friendlyApiService.getUnits().then(units => this.units = units);
@@ -122,6 +169,13 @@ export class AddIngredients implements OnInit {
       }
       this.friendlyApiService.updateRecipeToList(this.recipe);
     })
+  }
+  editGroup(recipe_ingredient_group: RecipeIngredientGroup) {
+    let index = this.recipe.recipe_ingredient_groups.indexOf(recipe_ingredient_group);
+    recipe_ingredient_group.name = prompt("Change group name", recipe_ingredient_group.name);
+    this.friendlyApiService.saveRecipeIngredientGroup(recipe_ingredient_group).then(res => {
+      this.recipe.recipe_ingredient_groups.splice(index, 1, res);
+    });
   }
 
   parseAmount(amount: any) {

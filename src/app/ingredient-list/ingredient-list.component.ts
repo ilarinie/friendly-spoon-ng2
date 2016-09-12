@@ -19,12 +19,10 @@ export class IngredientList implements OnInit {
 
   saveIngredient(inc: Ingredient) {
     let id = undefined;
-    console.log(inc.id)
     if (inc.id) {
       id = inc.id;
     }
     if (id != undefined) {
-      console.log(id)
       this.updatingInc = id;
     }
     this.friendlyApiService.saveIngredient(inc).then(res => {
