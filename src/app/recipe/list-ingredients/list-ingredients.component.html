@@ -37,7 +37,7 @@
 <hr class="hline" />
 <md-list dense>
   <md-list-item *ngFor="let inc of checked">
-    <md-checkbox type="checkbox" (click)="unToggleInc(inc)" checked="true">&#09;<strike>
+    <md-checkbox type="checkbox" (click)="unToggleInc(inc)" checked="true">&#09;
 <span *ngIf="amount_shown==1">{{inc.ramount.integer}}
 <span *ngIf="inc.ramount.numerator">
 <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
@@ -54,7 +54,7 @@
 </span>
 </span>
 {{inc.unit?.name}}
-{{inc.ingredient.name}}</strike> </md-checkbox>
+{{inc.ingredient.name}}</md-checkbox>
     <br/>
   </md-list-item>
 </md-list>

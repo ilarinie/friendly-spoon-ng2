@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ROUTER_DIRECTIVES, Router }  from "@angular/router";
+import { Router }  from "@angular/router";
 import { Authentication } from "./authentication/authentication";
 import { isLoggedin } from "./authentication/is-loggedin";
 
@@ -11,7 +11,6 @@ import { FriendlyApiService } from "./services/friendlyapi.service";
 @Component({
   selector: "friendly-app",
   templateUrl: "app.component.html",
-  directives: [ROUTER_DIRECTIVES],
   providers: [FriendlyApiService],
   styleUrls: ['styles.css']
 })

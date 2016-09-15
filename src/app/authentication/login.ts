@@ -1,16 +1,12 @@
 import {Component} from '@angular/core';
-import { FormBuilder, Validators, ControlGroup, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
 import {Authentication} from './authentication';
 import { FriendlyApiService } from "../services/friendlyapi.service";
-import {MdInput} from "@angular2-material/input";
 
 
 @Component({
   selector: 'login',
-  directives: [NgIf, MdInput],
   templateUrl: 'login.html',
-  providers: [FormBuilder]
 
 })
 

@@ -1,4 +1,6 @@
-
+import {FilterArrayPipe, ReverseArrayPipe, OrderBy, TagFilter} from "./pipes/filter-array-pipe";
+import {FriendlyApiService} from "./services/friendlyapi.service";
+import { Rating } from "ng2-rating";
 import { NgModule }       from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
@@ -13,6 +15,8 @@ import { MdButtonModule } from '@angular2-material/button';
 import {MdGridListModule} from '@angular2-material/grid-list';
 import {MdCardModule} from '@angular2-material/card';
 import {MdListModule} from '@angular2-material/list';
+import {MdInputModule} from '@angular2-material/input';
+import { MdCheckboxModule } from '@angular2-material/checkbox';
 import {     DragulaModule} from "ng2-dragula/ng2-dragula";
 
 
@@ -33,6 +37,11 @@ enableProdMode();
 
 @NgModule({
   declarations: [
+    FilterArrayPipe,
+    ReverseArrayPipe,
+    OrderBy,
+    TagFilter,
+    Rating,
     AppComponent,
     RecipeListComponent,
     RecipeComponent,
@@ -56,10 +65,13 @@ enableProdMode();
     MdGridListModule,
     MdCardModule,
     MdListModule,
-    DragulaModule
+    DragulaModule,
+    MdInputModule,
+    MdCheckboxModule
   ],
+  providers: [Authentication, FriendlyApiService],
+  entryComponents: [AppComponent],
   bootstrap: [AppComponent],
-  providers: [Authentication, ConfirmOptions,
-    { provide: Position, useClass: Positioning }],
+
 })
 export class AppModule { }

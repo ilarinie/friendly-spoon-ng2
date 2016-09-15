@@ -16,8 +16,7 @@ import { ReverseArrayPipe } from '../../pipes/filter-array-pipe';
 @Component({
   selector: 'add-ingredients',
   templateUrl: 'add-ingredients.component.html',
-  styleUrls: ['add-ingredients.component.css'],
-  pipes: [ReverseArrayPipe],
+  styleUrls: ['add-ingredients.component.css']
 })
 export class AddIngredients implements OnInit {
   @Input()

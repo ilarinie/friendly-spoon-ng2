@@ -10,8 +10,7 @@ import { Note } from "../../models/note";
 @Component({
   templateUrl: 'notes.component.html',
   styleUrls: ['notes.component.css'],
-  selector: 'notes',
-  directives: [Rating]
+  selector: 'notes'
 })
 export class Notes {
   @Input()

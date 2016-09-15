@@ -20,8 +20,7 @@ import { Notes } from "./notes/notes.component";
 @Component({
   selector: "recipeshow",
   templateUrl: "recipe.component.html",
-  styleUrls: ["recipe.component.css"],
-  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, Notes, MdCheckbox, Rating]
+  styleUrls: ["recipe.component.css"]
 })
 
 export class RecipeComponent implements OnInit {
