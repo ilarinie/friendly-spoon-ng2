@@ -21,7 +21,6 @@ export class AppComponent {
   recipe: Recipe;
   showNav: boolean;
   username: string;
-  sub: any = null;
 
   constructor(private friendlyApiService: FriendlyApiService, public router: Router) {
     this.username = localStorage.getItem('username');

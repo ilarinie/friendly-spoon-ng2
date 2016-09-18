@@ -37,12 +37,8 @@ export class RecipeComponent implements OnInit {
   deleting: boolean = false;
   addrecipe: boolean = false;
 
-
-  public title: string = 'Popover title';
-  public message: string = 'Popover description';
-  public confirmClicked: boolean = false;
-  public cancelClicked: boolean = false;
-  public isOpen: boolean = false;
+  user_id: number = parseInt(localStorage.getItem('user_id'));
+  recipe_user_id: number;
 
 
   editheading: boolean = false;
@@ -87,7 +83,11 @@ export class RecipeComponent implements OnInit {
           }
         } else { */
         this.friendlyApiService.getRecipe(id)
-          .then(recipe => this.recipe = recipe);
+          .then(recipe => {
+            this.recipe = recipe;
+            this.recipe_user_id = recipe.user_id;
+            console.log(this.recipe_user_id + " recipe user");
+          });
         //  }
 
       })
@@ -105,7 +105,7 @@ export class RecipeComponent implements OnInit {
   save() {
     this.recipe.level_id = this.recipe.level.id;
     this.recipe.duration_id = this.recipe.duration.id;
-
+    this.saveOrders();
 
     this.friendlyApiService
       .save(this.recipe)
@@ -127,6 +127,30 @@ export class RecipeComponent implements OnInit {
 
 
   }
+  saveOrders() {
+    if (this.recipe.recipe_ingredients != null && this.recipe.recipe_ingredients.length != 0) {
+      for (let i = 0; i < this.recipe.recipe_ingredients.length; i++) {
+        this.recipe.recipe_ingredients[i].index = i;
+        this.friendlyApiService.saveRecipeIngredient(this.recipe.recipe_ingredients[i]).then();
+      }
+    }
+    if (this.recipe.recipe_ingredient_groups != null && this.recipe.recipe_ingredient_groups.length != 0) {
+      for (let i = 0; i < this.recipe.recipe_ingredient_groups.length; i++) {
+        this.recipe.recipe_ingredient_groups[i].index = i;
+        this.friendlyApiService.saveRecipeIngredientGroup(this.recipe.recipe_ingredient_groups[i]).then();
+        console.log(this.recipe)
+        if (this.recipe.recipe_ingredient_groups[i] != undefined && this.recipe.recipe_ingredient_groups[i].recipe_ingredients.length != 0) {
+          for (let j = 0; j < this.recipe.recipe_ingredient_groups[i].recipe_ingredients.length; i++) {
+            this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].index = j;
+            this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].recipe_ingredient_group_id = this.recipe.recipe_ingredient_groups[i].id;
+            this.friendlyApiService.saveRecipeIngredient(this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j]).then();
+          }
+        }
+      }
+    }
+
+  }
+
   textfieldChange(event) {
     this.recipe.instruction = event.value;
   }

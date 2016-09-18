@@ -14,6 +14,7 @@ export class Login {
   error: boolean = false;
 
   loggingIn: boolean = false;
+  loginFailed: boolean = false;
 
   email: string;
   password: string;
@@ -38,12 +39,16 @@ export class Login {
     this.auth.login(this.email, this.password)
       .then(
       res => {
-
-        this.router.navigate(['/'])
-        //load static assets if not in browser cache
-        if (localStorage.getItem("durations") == null || localStorage.getItem("levels")) {
-          this.friendlyApiService.getDurations().then(durations => localStorage.setItem("durations", JSON.stringify(durations)))
-          this.friendlyApiService.getLevels().then(levels => localStorage.setItem("levels", JSON.stringify(levels)))
+        if (res == "failed to log in") {
+          this.loggingIn = false;
+          this.loginFailed = true;
+        } else {
+          this.router.navigate(['/'])
+          //load static assets if not in browser cache
+          if (localStorage.getItem("durations") == null || localStorage.getItem("levels")) {
+            this.friendlyApiService.getDurations().then(durations => localStorage.setItem("durations", JSON.stringify(durations)))
+            this.friendlyApiService.getLevels().then(levels => localStorage.setItem("levels", JSON.stringify(levels)))
+          }
         }
 
       }

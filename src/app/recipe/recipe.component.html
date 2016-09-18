@@ -10,7 +10,7 @@
             </span> </div>
       <div class="col-sm-6 col-md-6  heading-div button-group"> <a class="btn header-btn" (click)="divide()"  [ngClass]="{ disabled: editheading}"> {{divideButton}}</a> <a class="btn header-btn" (click)="double()"  [ngClass]="{ disabled: editheading}">{{doubleButton}}</a> <a class="btn header-btn" (click)="noteSwitch()" [ngClass]="{ disabled: editheading}">{{noteSwitchButton}}</a> <span>
           <a class="btn header-btn" (click)="editheadings()" [ngClass]="{ disabled: addrecipe}">
-            <span *ngIf="editheading"  >Back</span> <span *ngIf="!editheading">Edit</span> </a>
+            <span *ngIf="editheading"  >Back</span> <span *ngIf="!editheading && user_id== recipe_user_id">Edit</span> </a>
         </span>
       </div>
     </div>

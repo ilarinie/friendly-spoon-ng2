@@ -2,8 +2,11 @@
   <md-card-title>Ingredients</md-card-title>
   <md-card-subtitle>(ungrouped)</md-card-subtitle>
   <md-list dense>
-    <div [dragula]='"bag-one"' [dragulaModel]="incs">
-      <div id="{{inc.id}}" *ngFor="let inc of recipe.recipe_ingredients">
+    <div [dragula]='"bag-one"' [dragulaModel]="recipe.recipe_ingredients">
+      <div style="min-height: 20px;" *ngIf="!recipe.recipe_ingredients.length">
+
+      </div>
+      <div *ngFor="let inc of recipe.recipe_ingredients">
         <md-list-item>
           <p md-line> <b>
     {{inc.ramount.integer}} <span *ngIf="inc.ramount.numerator"><sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub></span> {{inc.unit?.name}}
@@ -15,21 +18,31 @@
     </div>
   </md-list>
 </md-card>
-<div [dragula]='"bag-two"' [dragulaModel]="group">
+<!--<div [dragula]='"bag-two"' [dragulaModel]="recipe.recipe_ingredient_groups">-->
+<div>
   <div *ngFor="let group of recipe.recipe_ingredient_groups">
+
     <md-card>
       <md-card-title>{{group.name}} <span (click)="editGroup(group)" class="glyphicon glyphicon-pencil"></span></md-card-title>
       <md-list dense>
-        <md-list-item *ngFor="let inc of group.recipe_ingredients">
-          <p md-line><b>
+        <div [dragula]='"bag-one"' [dragulaModel]="group.recipe_ingredients">
+          <div style="min-height: 20px;" *ngIf="!group.recipe_ingredients.length">
+
+          </div>
+          <div *ngFor="let inc of group.recipe_ingredients" >
+            <md-list-item>
+              <p md-line><b>
     {{inc.ramount.integer}} <span *ngIf="inc.ramount.numerator"><sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub></span> {{inc.unit?.name}}
      {{inc.ingredient.name}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
    </b></p>
-          <p md-line> {{inc.instruction}} </p>
-        </md-list-item>
+              <p md-line> {{inc.instruction}} </p>
+            </md-list-item>
+          </div>
+        </div>
       </md-list>
       <md-card-actions>
         <button md-button (click)="deleteGroup(group)">Delete Group</button>
+        <span class="group-handle glyphicon glyphicon-move"></span>
       </md-card-actions>
     </md-card>
   </div>
@@ -60,6 +73,3 @@
   <md-card-title>New ingredient group</md-card-title>
   <md-card-subtitle>eg. "Frosting"</md-card-subtitle>
   <md-input class="ingredient-create-field" [(ngModel)]="recipe_ingredient_group.name" placeholder="New Group"> </md-input> <span *ngIf="!addingGroup"><a class="btn btn-success ingredient-create-button" (click)="saveGroup()">Create</a></span> <span *ngIf="addingGroup"><a class="btn btn-warning ingredient-create-button" disabled="disabled">Adding</a></span> </md-card>
-<ul [dragula]='"bag-one"' [dragulaModel]="items">
-  <li *ngFor="let item of items">{{item}}</li>
-</ul>

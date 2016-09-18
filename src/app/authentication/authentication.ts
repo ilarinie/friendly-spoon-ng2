@@ -59,6 +59,8 @@ export class Authentication implements CanActivate {
         localStorage.setItem('expiry', this.expiry);
         localStorage.setItem('username', this.username);
         localStorage.setItem('user_id', this.user_id);
+      }).catch((error: any) => {
+        return "failed to log in";
       })
   }
 

@@ -5,4 +5,5 @@ export class RecipeIngredientGroup {
   name: string;
   id: number;
   recipe_id: number;
+  index: number;
 }

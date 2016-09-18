@@ -120,6 +120,9 @@ export class OrderBy implements PipeTransform {
       case "timereverse":
         items.sort(this.byTime);
         return items.reverse();
+      case "index":
+        items.sort(this.byIndex);
+        return items;
       default:
         return items;
     }
@@ -157,5 +160,14 @@ export class OrderBy implements PipeTransform {
       return 1;
     }
     return 0;
+  }
+  byIndex(a, b) {
+    if (a.index == null) {
+      return 1;
+    }
+    if (b.index == null) {
+      return -1;
+    }
+    return a.index - b.index;
   }
 }

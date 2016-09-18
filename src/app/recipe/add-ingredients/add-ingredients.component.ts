@@ -16,7 +16,7 @@ import { ReverseArrayPipe } from '../../pipes/filter-array-pipe';
 @Component({
   selector: 'add-ingredients',
   templateUrl: 'add-ingredients.component.html',
-  styleUrls: ['add-ingredients.component.css']
+  styleUrls: ['add-ingredients.component.css', 'dragula.min.css']
 })
 export class AddIngredients implements OnInit {
   @Input()
@@ -30,7 +30,6 @@ export class AddIngredients implements OnInit {
   recipe_ingredient: RecipeIngredient = new RecipeIngredient();
   recipe_ingredient_group: RecipeIngredientGroup = new RecipeIngredientGroup();
 
-  items: any[] = ["item1", "item2", "item3", "item4"];
 
   //loading indicators
   addingGroup: boolean;
@@ -43,49 +42,28 @@ export class AddIngredients implements OnInit {
   AMOUNT_FRACTION_REGEX = /^[1-9]\/[1-9]$/
 
   constructor(private friendlyApiService: FriendlyApiService, private dragulaService: DragulaService) {
-    dragulaService.drag.subscribe((value) => {
-
-      console.log(`drag: ${value[0]}`);
-      this.onDrag(value.slice(1));
-    });
-    dragulaService.drop.subscribe((value) => {
-      console.log(`drop: ${value[0]}`);
-      this.onDrop(value.slice(1));
-    });
-    dragulaService.over.subscribe((value) => {
-      console.log(`over: ${value[0]}`);
-      this.onOver(value.slice(1));
-    });
-    dragulaService.out.subscribe((value) => {
-      console.log(`out: ${value[0]}`);
-      this.onOut(value.slice(1));
-    });
-  }
-
-  private onDrag(args) {
-    let [e, el] = args;
-  }
-
-  private onDrop(args) {
-    let [e, el] = args;
-    console.log(e.id)
-    var elementPos = this.recipe.recipe_ingredients.map(function(x) { return x.id; }).indexOf(e.id);
-    console.log(elementPos);
-  }
-
-  private onOver(args) {
-    let [e, el, container] = args;
-    // do something
-  }
-
-  private onOut(args) {
-    let [e, el, container] = args;
-    // do something
 
   }
+  sortByIndex(a, b) {
+    if (a.index == null) {
+      return 1;
+    }
+    if (b.index == null) {
+      return -1;
+    }
+    return a.index - b.index;
+  }
+
 
 
   ngOnInit() {
+
+    this.recipe.recipe_ingredients.sort(this.sortByIndex);
+    this.recipe.recipe_ingredient_groups.sort(this.sortByIndex);
+    for (let i = 0; i < this.recipe.recipe_ingredient_groups.length; i++) {
+      if (this.recipe.recipe_ingredient_groups[i] != undefined)
+        this.recipe.recipe_ingredient_groups[i].recipe_ingredients.sort(this.sortByIndex);
+    }
     this.friendlyApiService.getUnits().then(units => this.units = units);
     this.friendlyApiService.getIngredients().then(ingredients => this.ingredients = ingredients);
   }
