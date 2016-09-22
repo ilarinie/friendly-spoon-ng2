@@ -3,7 +3,7 @@ import { Router, ActivatedRoute }            from "@angular/router";
 import { TinyEditor } from "../directives/tinymce.directive";
 import { MdCheckbox } from "@angular2-material/checkbox";
 import {Rating } from 'ng2-rating';
-
+import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
 
 import { Recipe } from "../models/recipe";
@@ -20,8 +20,7 @@ import { Notes } from "./notes/notes.component";
 @Component({
   selector: "recipeshow",
   templateUrl: "recipe.component.html",
-  styleUrls: ["recipe.component.css"],
-  directives: [AddIngredients, ListIngredients, Tags, TinyEditor, Notes, MdCheckbox, Rating]
+  styleUrls: ["recipe.component.css"]
 })
 
 export class RecipeComponent implements OnInit {
@@ -38,24 +37,31 @@ export class RecipeComponent implements OnInit {
   deleting: boolean = false;
   addrecipe: boolean = false;
 
-
-  public title: string = 'Popover title';
-  public message: string = 'Popover description';
-  public confirmClicked: boolean = false;
-  public cancelClicked: boolean = false;
-  public isOpen: boolean = false;
+  user_id: number = parseInt(localStorage.getItem('user_id'));
+  recipe_user_id: number;
 
 
   editheading: boolean = false;
   levels: Level[];
   durations: Duration[];
+
+  dragulaService: DragulaService;
   constructor(
     private router: Router,
     private friendlyApiService: FriendlyApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    dragulaService: DragulaService
   ) {
+    this.dragulaService = dragulaService;
     this.duration_array = Array(5).fill(4);
-
+    dragulaService.setOptions('bag-two', {
+      moves: function(el, container, handle) {
+        return handle.classList.contains('group-handle');
+      }
+    });
+    dragulaService.setOptions('bag-one', {
+      revertOnSpill: true
+    });
   }
 
 
@@ -88,7 +94,11 @@ export class RecipeComponent implements OnInit {
           }
         } else { */
         this.friendlyApiService.getRecipe(id)
-          .then(recipe => this.recipe = recipe);
+          .then(recipe => {
+            this.recipe = recipe;
+            this.recipe_user_id = recipe.user_id;
+            console.log(this.recipe_user_id + " recipe user");
+          });
         //  }
 
       })
@@ -106,7 +116,7 @@ export class RecipeComponent implements OnInit {
   save() {
     this.recipe.level_id = this.recipe.level.id;
     this.recipe.duration_id = this.recipe.duration.id;
-
+    this.saveOrders();
 
     this.friendlyApiService
       .save(this.recipe)
@@ -128,6 +138,30 @@ export class RecipeComponent implements OnInit {
 
 
   }
+  saveOrders() {
+    console.log(this.recipe.recipe_ingredient_groups.length + " groupit");
+    if (this.recipe.recipe_ingredients != null && this.recipe.recipe_ingredients.length != 0) {
+      for (let i = 0; i < this.recipe.recipe_ingredients.length; i++) {
+        this.recipe.recipe_ingredients[i].index = i;
+        this.recipe.recipe_ingredients[i].recipe_ingredient_group_id = null;
+        this.friendlyApiService.saveRecipeIngredient(this.recipe.recipe_ingredients[i]).then();
+      }
+    }
+    if (this.recipe.recipe_ingredient_groups != null && this.recipe.recipe_ingredient_groups.length != 0) {
+      for (let i = 0; i < this.recipe.recipe_ingredient_groups.length; i++) {
+        for (let j = 0; j < this.recipe.recipe_ingredient_groups[i].recipe_ingredients.length; j++) {
+          this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].index = j;
+          this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].recipe_ingredient_group_id = this.recipe.recipe_ingredient_groups[i].id;
+          this.friendlyApiService.saveRecipeIngredient(this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j]).then();
+        }
+        this.recipe.recipe_ingredient_groups[i].index = i;
+        this.friendlyApiService.saveRecipeIngredientGroup(this.recipe.recipe_ingredient_groups[i]).then();
+      }
+    }
+
+
+  }
+
   textfieldChange(event) {
     this.recipe.instruction = event.value;
   }

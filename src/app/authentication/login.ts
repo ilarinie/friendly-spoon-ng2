@@ -1,16 +1,12 @@
 import {Component} from '@angular/core';
-import { FormBuilder, Validators, ControlGroup, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
 import {Authentication} from './authentication';
 import { FriendlyApiService } from "../services/friendlyapi.service";
-import {MdInput} from "@angular2-material/input";
 
 
 @Component({
   selector: 'login',
-  directives: [NgIf, MdInput],
   templateUrl: 'login.html',
-  providers: [FormBuilder]
 
 })
 
@@ -18,6 +14,7 @@ export class Login {
   error: boolean = false;
 
   loggingIn: boolean = false;
+  loginFailed: boolean = false;
 
   email: string;
   password: string;
@@ -42,12 +39,16 @@ export class Login {
     this.auth.login(this.email, this.password)
       .then(
       res => {
-
-        this.router.navigate(['/'])
-        //load static assets if not in browser cache
-        if (localStorage.getItem("durations") == null || localStorage.getItem("levels")) {
-          this.friendlyApiService.getDurations().then(durations => localStorage.setItem("durations", JSON.stringify(durations)))
-          this.friendlyApiService.getLevels().then(levels => localStorage.setItem("levels", JSON.stringify(levels)))
+        if (res == "failed to log in") {
+          this.loggingIn = false;
+          this.loginFailed = true;
+        } else {
+          this.router.navigate(['/'])
+          //load static assets if not in browser cache
+          if (localStorage.getItem("durations") == null || localStorage.getItem("levels")) {
+            this.friendlyApiService.getDurations().then(durations => localStorage.setItem("durations", JSON.stringify(durations)))
+            this.friendlyApiService.getLevels().then(levels => localStorage.setItem("levels", JSON.stringify(levels)))
+          }
         }
 
       }

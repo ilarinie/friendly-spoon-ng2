@@ -7,4 +7,5 @@ export class RecipeIngredient {
   amount: number;
   recipe_id: number;
   recipe_ingredient_group_id: number;
+  index: number;
 }

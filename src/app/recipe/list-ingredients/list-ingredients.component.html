@@ -2,7 +2,7 @@
 <hr class="hline" />
 <div>
 <md-list dense>
-  <md-list-item *ngFor="let inc of recipe.recipe_ingredients| orderBy: id">
+  <md-list-item *ngFor="let inc of recipe.recipe_ingredients| orderBy: 'index'">
     <md-checkbox type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
           <span [hidden]="!inc.ramount.numerator">
             <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
@@ -16,10 +16,10 @@
   </md-list-item>
 </md-list>
 </div>
-<div *ngFor="let group of recipe.recipe_ingredient_groups; let g = index">
+<div *ngFor="let group of recipe.recipe_ingredient_groups | orderBy: 'index'">
   <h4>{{group.name}}</h4>
   <md-list dense>
-    <md-list-item *ngFor="let inc of group.recipe_ingredients | orderBy: id">
+    <md-list-item *ngFor="let inc of group.recipe_ingredients | orderBy: 'index'">
       <md-checkbox type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
             <span [hidden]="!inc.ramount.numerator">
               <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
@@ -37,7 +37,7 @@
 <hr class="hline" />
 <md-list dense>
   <md-list-item *ngFor="let inc of checked">
-    <md-checkbox type="checkbox" (click)="unToggleInc(inc)" checked="true">&#09;<strike>
+    <md-checkbox type="checkbox" (click)="unToggleInc(inc)" checked="true">&#09;
 <span *ngIf="amount_shown==1">{{inc.ramount.integer}}
 <span *ngIf="inc.ramount.numerator">
 <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
@@ -54,7 +54,7 @@
 </span>
 </span>
 {{inc.unit?.name}}
-{{inc.ingredient.name}}</strike> </md-checkbox>
+{{inc.ingredient.name}}</md-checkbox>
     <br/>
   </md-list-item>
 </md-list>
