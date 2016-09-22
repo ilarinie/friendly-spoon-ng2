@@ -143,6 +143,7 @@ export class RecipeComponent implements OnInit {
     if (this.recipe.recipe_ingredients != null && this.recipe.recipe_ingredients.length != 0) {
       for (let i = 0; i < this.recipe.recipe_ingredients.length; i++) {
         this.recipe.recipe_ingredients[i].index = i;
+        this.recipe.recipe_ingredients[i].recipe_id = this.recipe.id;
         this.recipe.recipe_ingredients[i].recipe_ingredient_group_id = null;
         this.friendlyApiService.saveRecipeIngredient(this.recipe.recipe_ingredients[i]).then();
       }
@@ -152,6 +153,7 @@ export class RecipeComponent implements OnInit {
         for (let j = 0; j < this.recipe.recipe_ingredient_groups[i].recipe_ingredients.length; j++) {
           this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].index = j;
           this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].recipe_ingredient_group_id = this.recipe.recipe_ingredient_groups[i].id;
+          this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].recipe_id = this.recipe.id;
           this.friendlyApiService.saveRecipeIngredient(this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j]).then();
         }
         this.recipe.recipe_ingredient_groups[i].index = i;
