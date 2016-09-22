@@ -54,14 +54,14 @@ export class RecipeComponent implements OnInit {
   ) {
     this.dragulaService = dragulaService;
     this.duration_array = Array(5).fill(4);
-    dragulaService.setOptions('bag-two', {
-      moves: function(el, container, handle) {
-        return handle.classList.contains('group-handle');
-      }
-    });
-    dragulaService.setOptions('bag-one', {
-      revertOnSpill: true
-    });
+    /*  dragulaService.setOptions('bag-two', {
+        moves: function(el, container, handle) {
+          return handle.classList.contains('group-handle');
+        }
+      });
+      dragulaService.setOptions('bag-one', {
+        revertOnSpill: true
+      });*/
   }
 
 
