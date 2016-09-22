@@ -3,7 +3,7 @@ import { Router, ActivatedRoute }            from "@angular/router";
 import { TinyEditor } from "../directives/tinymce.directive";
 import { MdCheckbox } from "@angular2-material/checkbox";
 import {Rating } from 'ng2-rating';
-
+import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
 
 import { Recipe } from "../models/recipe";
@@ -44,13 +44,24 @@ export class RecipeComponent implements OnInit {
   editheading: boolean = false;
   levels: Level[];
   durations: Duration[];
+
+  dragulaService: DragulaService;
   constructor(
     private router: Router,
     private friendlyApiService: FriendlyApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    dragulaService: DragulaService
   ) {
+    this.dragulaService = dragulaService;
     this.duration_array = Array(5).fill(4);
-
+    dragulaService.setOptions('bag-two', {
+      moves: function(el, container, handle) {
+        return handle.classList.contains('group-handle');
+      }
+    });
+    dragulaService.setOptions('bag-one', {
+      revertOnSpill: true
+    });
   }
 
 
@@ -128,26 +139,26 @@ export class RecipeComponent implements OnInit {
 
   }
   saveOrders() {
+    console.log(this.recipe.recipe_ingredient_groups.length + " groupit");
     if (this.recipe.recipe_ingredients != null && this.recipe.recipe_ingredients.length != 0) {
       for (let i = 0; i < this.recipe.recipe_ingredients.length; i++) {
         this.recipe.recipe_ingredients[i].index = i;
+        this.recipe.recipe_ingredients[i].recipe_ingredient_group_id = null;
         this.friendlyApiService.saveRecipeIngredient(this.recipe.recipe_ingredients[i]).then();
       }
     }
     if (this.recipe.recipe_ingredient_groups != null && this.recipe.recipe_ingredient_groups.length != 0) {
       for (let i = 0; i < this.recipe.recipe_ingredient_groups.length; i++) {
+        for (let j = 0; j < this.recipe.recipe_ingredient_groups[i].recipe_ingredients.length; j++) {
+          this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].index = j;
+          this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].recipe_ingredient_group_id = this.recipe.recipe_ingredient_groups[i].id;
+          this.friendlyApiService.saveRecipeIngredient(this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j]).then();
+        }
         this.recipe.recipe_ingredient_groups[i].index = i;
         this.friendlyApiService.saveRecipeIngredientGroup(this.recipe.recipe_ingredient_groups[i]).then();
-        console.log(this.recipe)
-        if (this.recipe.recipe_ingredient_groups[i] != undefined && this.recipe.recipe_ingredient_groups[i].recipe_ingredients.length != 0) {
-          for (let j = 0; j < this.recipe.recipe_ingredient_groups[i].recipe_ingredients.length; i++) {
-            this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].index = j;
-            this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].recipe_ingredient_group_id = this.recipe.recipe_ingredient_groups[i].id;
-            this.friendlyApiService.saveRecipeIngredient(this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j]).then();
-          }
-        }
       }
     }
+
 
   }
 

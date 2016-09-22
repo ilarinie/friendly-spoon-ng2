@@ -22,6 +22,9 @@ export class AddIngredients implements OnInit {
   @Input()
   recipe: Recipe;
 
+  @Input()
+  dragulaService: DragulaService;
+
 
 
   units: Unit[];
@@ -41,7 +44,7 @@ export class AddIngredients implements OnInit {
   AMOUNT_DECIMAL_REGEX = /^[0-9]{1,4}[,.]{0,1}[0-9]{0,3}$/
   AMOUNT_FRACTION_REGEX = /^[1-9]\/[1-9]$/
 
-  constructor(private friendlyApiService: FriendlyApiService, private dragulaService: DragulaService) {
+  constructor(private friendlyApiService: FriendlyApiService) {
 
   }
   sortByIndex(a, b) {
