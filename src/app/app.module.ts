@@ -1,4 +1,4 @@
-import {FilterArrayPipe, ReverseArrayPipe, OrderBy, TagFilter} from "./pipes/filter-array-pipe";
+import {FilterArrayPipe, ReverseArrayPipe, OrderBy} from "./pipes/filter-array-pipe";
 import {FriendlyApiService} from "./services/friendlyapi.service";
 import { Rating } from "ng2-rating";
 import { NgModule }       from '@angular/core';
@@ -15,7 +15,7 @@ import {MdCardModule} from '@angular2-material/card';
 import {MdListModule} from '@angular2-material/list';
 import {MdInputModule} from '@angular2-material/input';
 import { MdCheckboxModule } from '@angular2-material/checkbox';
-import {     DragulaModule} from "ng2-dragula/ng2-dragula";
+import { DragulaModule} from "ng2-dragula/ng2-dragula";
 
 
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
@@ -38,7 +38,6 @@ enableProdMode();
     FilterArrayPipe,
     ReverseArrayPipe,
     OrderBy,
-    TagFilter,
     Rating,
     AppComponent,
     RecipeListComponent,

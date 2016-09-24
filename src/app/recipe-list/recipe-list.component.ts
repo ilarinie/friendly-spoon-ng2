@@ -14,6 +14,7 @@ import { FriendlyApiService } from "../services/friendlyapi.service";
 
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[];
+  shownRecipes: Recipe[];
   listfilter: string;
   order: string;
   tags: Tag[];
@@ -27,6 +28,7 @@ export class RecipeListComponent implements OnInit {
   ngOnInit() {
     this.order = "name";
     this.searchTag = "";
+
     /*if (localStorage.getItem("recipes") == null) {
       this.loading = true;
       this.friendlyApiService.getRecipes().then(recipes => {
@@ -42,13 +44,13 @@ export class RecipeListComponent implements OnInit {
       console.log("joo")
     } else {
       this.tags = JSON.parse(localStorage.getItem("tags"))
-    }
+    }*/
 
-    this.friendlyApiService.getTags().then(tags => this.tags = tags); */
+    this.friendlyApiService.getTags().then(tags => this.tags = tags);
     this.refreshRecipes();
   }
   random() {
-    this.listfilter = this.recipes[Math.floor((Math.random() * this.recipes.length))].name
+    this.listfilter = this.shownRecipes[Math.floor((Math.random() * this.shownRecipes.length))].name
   }
 
   refreshRecipes() {
@@ -56,11 +58,25 @@ export class RecipeListComponent implements OnInit {
     this.friendlyApiService.getRecipes().then(recipes => {
       this.recipes = recipes;
       this.recipes = recipes; localStorage.setItem("recipes", JSON.stringify(recipes));
+      this.shownRecipes = recipes;
       this.loading = false;
     })
   }
   tagChange(value) {
-    console.log("diip" + value)
+    console.log(value);
+    this.shownRecipes = [];
+    if (value == ""){
+      this.shownRecipes = this.recipes;
+    }
+
+    for (let i = 0; i < this.recipes.length; i++ ){
+      for (let j = 0; j < this.recipes[i].recipe_tags.length; j++){
+        if (this.recipes[i].recipe_tags[j].tag.title == value){
+          this.shownRecipes.push(this.recipes[i]);
+          j = j+9999;
+        }
+      }
+    }
   }
 
   sortByName() {

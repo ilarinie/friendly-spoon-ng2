@@ -58,53 +58,6 @@ export class ReverseArrayPipe implements PipeTransform {
     return 0;
   }
 }
-@Pipe({
-  name: "tagFilter",
-  pure: false
-})
-export class TagFilter implements PipeTransform {
-  transform(items: any[], queryString: string): any {
-    if (items == null) {
-      return null;
-    }
-    if (queryString = "") {
-      return items;
-    }
-    console.log("dapper " + queryString.length);
-
-    return items.filter(filterByTags);
-
-    function filterByTags(recipe) {
-      if (recipe.recipe_tags == null || recipe.recipe_tags.lenght == 0) {
-        return false;
-      }
-      for (let i = 0; i < recipe.recipe_tags.length; i++) {
-
-        if (new RegExp(queryString, "i").test(recipe.recipe_tags[i].tag.title)) {
-          console.log("asd" + queryString);
-          return true;
-
-        }
-      }
-      return false;
-    }
-
-  }
-  compare(a, b) {
-    if (a.name < b.name) {
-      return -1;
-    }
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
-  }
-
-}
-
-
-
-
 
 @Pipe({
   name: "orderBy",
@@ -156,10 +109,10 @@ export class OrderBy implements PipeTransform {
   }
   byRating(a, b) {
     if (a.ratingaverage == null) {
-      return 1;
+      return -1;
     }
     if (b.ratingaverage == null) {
-      return -1;
+      return 1;
     }
     return a.ratingaverage - b.ratingaverage;
   }

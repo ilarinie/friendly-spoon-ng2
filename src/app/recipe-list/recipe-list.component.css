@@ -22,6 +22,10 @@ a:active {
 
 }
 
+.recipe-search{
+  width: 100%;
+}
+
 .buttons-row {
   padding: 10px;
 }
