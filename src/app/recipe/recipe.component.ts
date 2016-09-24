@@ -1,8 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute }            from "@angular/router";
-import { TinyEditor } from "../directives/tinymce.directive";
-import { MdCheckbox } from "@angular2-material/checkbox";
-import {Rating } from 'ng2-rating';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
 
@@ -20,7 +17,10 @@ import { Notes } from "./notes/notes.component";
 @Component({
   selector: "recipeshow",
   templateUrl: "recipe.component.html",
-  styleUrls: ["recipe.component.css"]
+  styleUrls: ["recipe.component.css"],
+  viewProviders: [
+    DragulaService
+  ]
 })
 
 export class RecipeComponent implements OnInit {
@@ -45,23 +45,13 @@ export class RecipeComponent implements OnInit {
   levels: Level[];
   durations: Duration[];
 
-  dragulaService: DragulaService;
   constructor(
     private router: Router,
     private friendlyApiService: FriendlyApiService,
-    private route: ActivatedRoute,
-    dragulaService: DragulaService
+    private route: ActivatedRoute
   ) {
-    this.dragulaService = dragulaService;
     this.duration_array = Array(5).fill(4);
-    /*  dragulaService.setOptions('bag-two', {
-        moves: function(el, container, handle) {
-          return handle.classList.contains('group-handle');
-        }
-      });
-      dragulaService.setOptions('bag-one', {
-        revertOnSpill: true
-      });*/
+
   }
 
 
@@ -101,7 +91,7 @@ export class RecipeComponent implements OnInit {
           });
         //  }
 
-      })
+      });
       if (this.router.url.includes('edit')) {
         this.editheading = true;
       }
@@ -139,7 +129,6 @@ export class RecipeComponent implements OnInit {
 
   }
   saveOrders() {
-    console.log(this.recipe.recipe_ingredient_groups.length + " groupit");
     if (this.recipe.recipe_ingredients != null && this.recipe.recipe_ingredients.length != 0) {
       for (let i = 0; i < this.recipe.recipe_ingredients.length; i++) {
         this.recipe.recipe_ingredients[i].index = i;

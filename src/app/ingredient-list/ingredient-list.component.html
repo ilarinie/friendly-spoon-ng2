@@ -4,7 +4,7 @@
 
     <md-list>
       <md-card-title>Edit Ingredients</md-card-title>
-      <md-list-item *ngFor="let inc of ingredients" >
+      <md-list-item *ngFor="let inc of ingredients | filter:incFilter.value" >
         <span *ngIf="updateInc != inc.id">
         <md-input [(ngModel)]="inc.name" ></md-input> <a class="btn btn-success" (click)="saveIngredient(inc)">Save</a> <a class="btn btn-danger" (click)="deleteIngredient(inc)">Delete</a> </span></md-list-item>
 
@@ -15,6 +15,10 @@
   </md-card>
   </div>
   <div class="col-md-5">
+    <md-card>
+      <md-card-title>Search for ingredients</md-card-title>
+      <md-input #incFilter></md-input>
+    </md-card>
     <md-card>
     <md-card-title>Create Ingredient</md-card-title>
     <md-input [(ngModel)]="newinc.name"></md-input> <a class="btn btn-success" (click)="saveIngredient(newinc)">Save</a>

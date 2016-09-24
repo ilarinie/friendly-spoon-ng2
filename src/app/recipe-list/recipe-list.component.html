@@ -24,9 +24,9 @@
   <div class="row main-row">
     <div class="col-xs-11">
       <div *ngIf="!loading">
-        <!--
-        <div class="col-xs-10 col-md-4 col-lg-3"*ngFor="let recipe of recipes | filter:listFilter.value | orderBy: order" >
-          <md-card style="margin-left:-20px; max-width:90vw;">
+
+        <div *ngFor="let recipe of recipes | filter:listFilter.value | orderBy: order" >
+          <md-card >
             <md-card-title-group>
              <img md-card-sm-img src="assets/baking.png" alt="nice pic yo">
               <md-card-title><a routerLink="/recipes/{{recipe.id}}">{{recipe.name}}</a></md-card-title>
@@ -35,10 +35,8 @@
               <md-card-subtitle>  <span *ngIf="recipe.introduction">{{recipe.introduction}}</span></md-card-subtitle>
             </md-card-title-group>
           </md-card>
-</div>-->
-
-
-
+</div>
+<!--
             <table class="table">
                 <thead>
                     <tr class="recipe-list-headers">
@@ -56,8 +54,8 @@
                         <td> <span *ngIf="recipe.duration">{{recipe.duration.range}}</span> </td>
                     </tr>
                 </tbody>
-            </table>
-        
+            </table>-->
+
       </div>
       <div *ngIf="loading" class="loading-div"> <img src="assets/gears.svg" align="center">
         <br> Fetching recipes from the nether realms.. </div>

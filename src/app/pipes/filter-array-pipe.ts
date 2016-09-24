@@ -26,7 +26,24 @@ export class ReverseArrayPipe implements PipeTransform {
     if (items == null || queryString == "" || queryString == undefined) {
       return null;
     }
+    //Sortataan ainekset aakkosiin
     items.sort(this.compare);
+
+    //Ensin kokeillaan onko 100% matchia etsintään
+    let strictQuery = '^'+queryString+'$';
+    let strictitems = items.filter((recipe) => new RegExp(strictQuery, "i").test(recipe.name));
+    //palautetaan jos on
+    if (strictitems.length != 0){
+      return strictitems;
+    }
+    //Jos ei 100% matchia, testataan onko matchia ainesosan nimen alkuun
+    let secondaryQuery = '^'+queryString;
+    let secondaryItems = items.filter((recipe) => new RegExp(secondaryQuery, "i").test(recipe.name));
+    if (secondaryItems.length != 0){
+      return secondaryItems.slice(0,1);
+    }
+
+    //jos kumpaakaan ei löydy, filteröidään löysästi
     items = items.filter((recipe) => new RegExp(queryString, "i").test(recipe.name));
     return items.slice(0, 1);
   }
@@ -53,7 +70,7 @@ export class TagFilter implements PipeTransform {
     if (queryString = "") {
       return items;
     }
-    console.log("dapper " + queryString.length)
+    console.log("dapper " + queryString.length);
 
     return items.filter(filterByTags);
 

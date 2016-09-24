@@ -11,19 +11,18 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
 
 
-import { ReverseArrayPipe } from '../../pipes/filter-array-pipe';
-
 @Component({
   selector: 'add-ingredients',
   templateUrl: 'add-ingredients.component.html',
-  styleUrls: ['add-ingredients.component.css', 'dragula.min.css']
+  styleUrls: ['add-ingredients.component.css', 'dragula.min.css'],
+  viewProviders: [
+    DragulaService
+  ]
 })
 export class AddIngredients implements OnInit {
   @Input()
   recipe: Recipe;
 
-  @Input()
-  dragulaService: DragulaService;
 
 
 
@@ -40,12 +39,19 @@ export class AddIngredients implements OnInit {
   addingInc: boolean;
 
 
-  AMOUNT_MIXED_REGEX = /^\d{0,2}\d(\s[1-9]\/[1-9])$/i
-  AMOUNT_DECIMAL_REGEX = /^[0-9]{1,4}[,.]{0,1}[0-9]{0,3}$/
-  AMOUNT_FRACTION_REGEX = /^[1-9]\/[1-9]$/
+  AMOUNT_MIXED_REGEX = /^\d{0,2}\d(\s[1-9]\/[1-9])$/i;
+  AMOUNT_DECIMAL_REGEX = /^[0-9]{1,4}[,.]{0,1}[0-9]{0,3}$/;
+  AMOUNT_FRACTION_REGEX = /^[1-9]\/[1-9]$/;
 
-  constructor(private friendlyApiService: FriendlyApiService) {
-
+  constructor(private friendlyApiService: FriendlyApiService, private dragulaService: DragulaService) {
+    dragulaService.setOptions('bag-two', {
+      moves: function(el, container, handle) {
+        return handle.classList.contains('group-handle');
+      }
+    });
+    dragulaService.setOptions('bag-one', {
+      revertOnSpill: true
+    });
   }
   sortByIndex(a, b) {
     if (a.index == null) {
@@ -75,7 +81,7 @@ export class AddIngredients implements OnInit {
     this.addingInc = true;
     this.friendlyApiService.saveIngredient(this.ingredient).then(ingredient => { this.ingredients.push(ingredient); this.addingInc = false });
   }
-  get diagnostic() { return JSON.stringify(this.recipe_ingredient); }
+
   //TODO: remove recipe ingredient from group array / add recipe ingredient to group array
   saveRecipeIngredient(ingredient_id: number, group_id?: number) {
     this.recipe_ingredient.ingredient_id = ingredient_id;
@@ -87,13 +93,13 @@ export class AddIngredients implements OnInit {
         return;
       }
     }
-    console.log(this.recipe_ingredient.recipe_ingredient_group_id + " = group id")
+    console.log(this.recipe_ingredient.recipe_ingredient_group_id + " = group id");
     if (this.recipe_ingredient.recipe_ingredient_group_id) {
-      console.log("kyl")
+      console.log("kyl");
 
       this.friendlyApiService.saveRecipeIngredient(this.recipe_ingredient).then(recipe_ingredient => {
         this.addingRecInc = false;
-        let index = this.findGroupIndex(recipe_ingredient.recipe_ingredient_group_id)
+        let index = this.findGroupIndex(recipe_ingredient.recipe_ingredient_group_id);
         if (index > -1) {
           this.recipe.recipe_ingredient_groups[index].recipe_ingredients.push(recipe_ingredient);
         }
@@ -121,7 +127,7 @@ export class AddIngredients implements OnInit {
         this.recipe.recipe_ingredients.splice(index, 1);
       }
     } else {
-      let grpindex = this.findGroupIndex(recipe_ingredient.recipe_ingredient_group_id)
+      let grpindex = this.findGroupIndex(recipe_ingredient.recipe_ingredient_group_id);
       if (grpindex > -1) {
         let index = this.recipe.recipe_ingredient_groups[grpindex].recipe_ingredients.indexOf(recipe_ingredient);
         if (index > -1) {
@@ -163,13 +169,13 @@ export class AddIngredients implements OnInit {
     if (this.AMOUNT_DECIMAL_REGEX.test(amount)) {
       return parseFloat(amount.replace(',', '.'))
     } else if (this.AMOUNT_FRACTION_REGEX.test(amount)) {
-      let values = amount.split('/')
+      let values = amount.split('/');
       return values[0] / values[1]
     } else if (this.AMOUNT_MIXED_REGEX.test(amount)) {
-      let values = amount.split(' ')
-      let integer = parseInt(values[0])
-      let values2 = values[1].split('/')
-      let fraction1 = parseFloat(values2[0])
+      let values = amount.split(' ');
+      let integer = parseInt(values[0]);
+      let values2 = values[1].split('/');
+      let fraction1 = parseFloat(values2[0]);
       let fraction2 = parseFloat(values2[1]);
       let fraction = fraction1 / fraction2;
       return integer + fraction

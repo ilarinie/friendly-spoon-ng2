@@ -18,17 +18,17 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class FriendlyApiService {
 
-  private baseUrl = 'https://api.friendlyspoon.me'; //prod api
+  //private baseUrl = 'https://api.friendlyspoon.me'; //prod api
   //private baseUrl = 'http://friendly-spoon-api.herokuapp.com' //dev api
-  //private baseUrl = 'http://localhost:3000'
+  private baseUrl = 'http://localhost:3000';
 
   private recipesUrl = this.baseUrl + '/recipes';
-  private unitsUrl = this.baseUrl + '/get'
+  private unitsUrl = this.baseUrl + '/get';
   private ingredientsUrl = this.baseUrl + '/ingredients';
-  private recipeIngredientsUrl = this.baseUrl + '/recipe_ingredients'
-  private recipeIngredientGroupUrl = this.baseUrl + '/recipe_ingredient_groups'
-  private tagsUrl = this.baseUrl + '/tags'
-  private recipeTagsUrl = this.baseUrl + '/recipe_tags'
+  private recipeIngredientsUrl = this.baseUrl + '/recipe_ingredients';
+  private recipeIngredientGroupUrl = this.baseUrl + '/recipe_ingredient_groups';
+  private tagsUrl = this.baseUrl + '/tags';
+  private recipeTagsUrl = this.baseUrl + '/recipe_tags';
   private notesUrl = this.baseUrl + '/notes';
 
   token: string;
@@ -278,7 +278,7 @@ export class FriendlyApiService {
   }
   private put(recipe: Recipe) {
     this.headers.append('Content-Type', 'application/json');
-    console.log("debugging " + recipe.id)
+    console.log("debugging " + recipe.id);
     let url = `${this.recipesUrl}/${recipe.id}`;
 
     return this.http
@@ -321,7 +321,7 @@ export class FriendlyApiService {
     return this.postTag(tag);
   }
   private putTag(tag: Tag) {
-    let url = `${this.tagsUrl}/${tag.id}`
+    let url = `${this.tagsUrl}/${tag.id}`;
     return this.http
       .put(url, JSON.stringify(tag), { headers: this.refreshHeaders() })
       .toPromise()
@@ -337,7 +337,7 @@ export class FriendlyApiService {
       .catch(this.handleError)
   }
   deleteTag(tag: Tag) {
-    let url = `${this.tagsUrl}/${tag.id}`
+    let url = `${this.tagsUrl}/${tag.id}`;
     return this.http
       .delete(url, { headers: this.refreshHeaders(), body: '' })
       .toPromise()

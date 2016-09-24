@@ -28,9 +28,7 @@ a:active {
 .recipe-list {
   min-height: 120em;
 }
-.table {
-  color: black;
-}
+
 .table a {
   color:black;
 }
@@ -41,17 +39,6 @@ a:active {
 .loading-div {
   text-align:center;
   padding-top: 30px;
-  img {
-    display:block;
-    margin: 0 auto;
-  }
-}
-.tag-td{
-  word-wrap: break-word;
-}
-.list-tag-label {
-    background-color: #cc6699;
-    margin-right: 2px;
 }
 md-card {
   margin-top: 10px;

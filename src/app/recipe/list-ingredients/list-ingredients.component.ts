@@ -21,15 +21,15 @@ export class ListIngredients {
 
 
     if (group_index == -1) {
-      let index = this.recipe.recipe_ingredients.indexOf(inc)
+      let index = this.recipe.recipe_ingredients.indexOf(inc);
       if (index > -1) {
-        this.checked.push(inc)
+        this.checked.push(inc);
         this.recipe.recipe_ingredients.splice(index, 1);
       }
     } else {
-      let index = this.recipe.recipe_ingredient_groups[group_index].recipe_ingredients.indexOf(inc)
+      let index = this.recipe.recipe_ingredient_groups[group_index].recipe_ingredients.indexOf(inc);
       if (index > -1) {
-        this.checked.push(inc)
+        this.checked.push(inc);
         this.recipe.recipe_ingredient_groups[group_index].recipe_ingredients.splice(index, 1);
       }
     }
@@ -37,15 +37,15 @@ export class ListIngredients {
   unToggleInc(inc) {
     let group_index = this.findRecipeGroupIndex(inc);
     if (group_index == -1) {
-      let index = this.checked.indexOf(inc)
+      let index = this.checked.indexOf(inc);
       if (index > -1) {
-        this.recipe.recipe_ingredients.push(inc)
+        this.recipe.recipe_ingredients.push(inc);
         this.checked.splice(index, 1);
       }
     } else {
-      let index = this.checked.indexOf(inc)
+      let index = this.checked.indexOf(inc);
       if (index > -1) {
-        this.recipe.recipe_ingredient_groups[group_index].recipe_ingredients.push(inc)
+        this.recipe.recipe_ingredient_groups[group_index].recipe_ingredients.push(inc);
         this.checked.splice(index, 1);
       }
     }

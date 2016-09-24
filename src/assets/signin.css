@@ -12,10 +12,7 @@
   font-family: 'Clicker Script', cursive;
   font-family: 'Homemade Apple', cursive;*/
   color: white;
-  background-image:url("/assets/signinBG.png");
- background-position: center top;
-  background-color: #022f32;
-  background-repeat: no-repeat;
+  background: #022f32 url("/assets/signinBG.png") no-repeat center top;
   position: absolute;
   top:0;
   left:0;
@@ -25,9 +22,7 @@
 .padder {
   height: 40vh;
 }
-.border {
-  border: 1px solid white;
-}
+
 .signin-div  {
   text-align: center;
   }
@@ -48,10 +43,7 @@
   width: 250px;
   height: 30px;
 }
-.notice-text {
-  margin-top: 20px;
-  color: pink;
-}
+
 .signin-button {
   margin-top:20px;
   color: grey;

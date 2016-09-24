@@ -17,9 +17,7 @@
 .pointer {
   cursor: pointer;
 }
-.tag-box {
-  min-height: 75px;
-}
+
 md-card {
   margin-top: 10px;
 }

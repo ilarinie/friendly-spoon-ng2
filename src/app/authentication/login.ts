@@ -7,6 +7,7 @@ import { FriendlyApiService } from "../services/friendlyapi.service";
 @Component({
   selector: 'login',
   templateUrl: 'login.html',
+  styleUrls: ['signin.css']
 
 })
 
@@ -43,10 +44,10 @@ export class Login {
           this.loggingIn = false;
           this.loginFailed = true;
         } else {
-          this.router.navigate(['/'])
+          this.router.navigate(['/']);
           //load static assets if not in browser cache
           if (localStorage.getItem("durations") == null || localStorage.getItem("levels")) {
-            this.friendlyApiService.getDurations().then(durations => localStorage.setItem("durations", JSON.stringify(durations)))
+            this.friendlyApiService.getDurations().then(durations => localStorage.setItem("durations", JSON.stringify(durations)));
             this.friendlyApiService.getLevels().then(levels => localStorage.setItem("levels", JSON.stringify(levels)))
           }
         }

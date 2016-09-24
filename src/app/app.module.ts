@@ -9,8 +9,6 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from "@angular/forms";
 import { Authentication } from './authentication/authentication';
 import {ConfirmModule} from 'angular2-bootstrap-confirm';
-import {ConfirmOptions, Position} from 'angular2-bootstrap-confirm';
-import {Positioning} from 'angular2-bootstrap-confirm/position/position';
 import { MdButtonModule } from '@angular2-material/button';
 import {MdGridListModule} from '@angular2-material/grid-list';
 import {MdCardModule} from '@angular2-material/card';

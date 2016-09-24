@@ -13,7 +13,7 @@ export class TinyEditor {
   text: string;
 
   @Output()
-  textfield = new EventEmitter()
+  textfield = new EventEmitter();
 
   public constructor(private elRef: ElementRef, private zone: NgZone) {
   }
@@ -42,7 +42,7 @@ export class TinyEditor {
               this.text = value;
               this.textfield.emit({
                 value: value
-              })
+              });
               //    this.theControl.updateValue(value, { emitEvent: true });
               //    this.theControl.markAsDirty();
               //    this.theControl.markAsTouched();

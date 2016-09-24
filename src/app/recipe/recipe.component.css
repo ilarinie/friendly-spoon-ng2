@@ -69,11 +69,6 @@ li {
 	height:200px;
 }
 /*sarakkeet note-näkymässä */
-.note-td {
-	word-wrap: break-word;
-	min-width: 210px;
-	max-width: 210px;
-}
 .dangerzone {
 	background: repeating-linear-gradient(
 	  45deg,

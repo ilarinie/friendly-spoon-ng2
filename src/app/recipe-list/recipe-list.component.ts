@@ -1,12 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router }            from "@angular/router";
-import { FilterArrayPipe, OrderBy, TagFilter } from "../pipes/filter-array-pipe";
 import { Authentication } from "../authentication/authentication";
-import {MdInput} from "@angular2-material/input";
-import {Rating } from 'ng2-rating';
-
-
-
 import { Recipe } from "../models/recipe";
 import { Tag } from "../models/tag";
 import { FriendlyApiService } from "../services/friendlyapi.service";
@@ -28,14 +22,12 @@ export class RecipeListComponent implements OnInit {
   loading: boolean;
 
   constructor(
-    private router: Router,
-    private friendlyApiService: FriendlyApiService,
-    private authentication: Authentication
+    private friendlyApiService: FriendlyApiService
   ) { }
   ngOnInit() {
     this.order = "name";
     this.searchTag = "";
-    if (localStorage.getItem("recipes") == null) {
+    /*if (localStorage.getItem("recipes") == null) {
       this.loading = true;
       this.friendlyApiService.getRecipes().then(recipes => {
         this.recipes = recipes;
@@ -52,7 +44,8 @@ export class RecipeListComponent implements OnInit {
       this.tags = JSON.parse(localStorage.getItem("tags"))
     }
 
-    this.friendlyApiService.getTags().then(tags => this.tags = tags);
+    this.friendlyApiService.getTags().then(tags => this.tags = tags); */
+    this.refreshRecipes();
   }
   random() {
     this.listfilter = this.recipes[Math.floor((Math.random() * this.recipes.length))].name

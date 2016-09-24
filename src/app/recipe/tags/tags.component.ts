@@ -27,7 +27,7 @@ export class Tags {
     this.addingTag = true;
     let recipeTag: RecipeTag = new RecipeTag();
     recipeTag.recipe_id = this.recipe.id;
-    console.log(tag.id)
+    console.log(tag.id);
     recipeTag.tag_id = tag.id;
 
     this.friendlyApiService.saveRecipeTag(recipeTag).then(recipeTag => {
@@ -41,11 +41,11 @@ export class Tags {
   removeRecipeTag(recipeTag: RecipeTag) {
     this.friendlyApiService.deleteRecipeTag(recipeTag);
     let index = this.recipe.recipe_tags.indexOf(recipeTag);
-    this.recipe.recipe_tags.splice(index, 1)
-    let tag = new Tag()
-    tag.title = recipeTag.tag.title
-    tag.id = recipeTag.tag.id
-    this.recipe.allTags.push(tag)
+    this.recipe.recipe_tags.splice(index, 1);
+    let tag = new Tag();
+    tag.title = recipeTag.tag.title;
+    tag.id = recipeTag.tag.id;
+    this.recipe.allTags.push(tag);
     this.friendlyApiService.updateRecipeToList(this.recipe);
   }
   saveTag() {

@@ -28,7 +28,7 @@
               <list-ingredients [recipe]="recipe" [amount_shown]="amount_shown"></list-ingredients>
             </div>
             <div class="col-sm-5 col-md-5 " *ngIf="editheading">
-              <add-ingredients [dragulaService]="dragulaService" [recipe]="recipe"></add-ingredients>
+              <add-ingredients [recipe]="recipe"></add-ingredients>
             </div>
           </div>
           <div *ngIf="!recipe.id" class="col-sm-5 col-md-5 ">
