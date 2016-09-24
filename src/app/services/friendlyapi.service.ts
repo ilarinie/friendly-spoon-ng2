@@ -18,9 +18,9 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class FriendlyApiService {
 
-  //private baseUrl = 'https://api.friendlyspoon.me'; //prod api
+  private baseUrl = 'https://api.friendlyspoon.me'; //prod api
   //private baseUrl = 'http://friendly-spoon-api.herokuapp.com' //dev api
-  private baseUrl = 'http://localhost:3000';
+  //private baseUrl = 'http://localhost:3000';
 
   private recipesUrl = this.baseUrl + '/recipes';
   private unitsUrl = this.baseUrl + '/get';
@@ -199,10 +199,7 @@ export class FriendlyApiService {
       )
       .catch(this.handleError);
   }
-  private incerror(error: any) {
-    console.error('An asd occurred', error);
-    return Promise.reject(error.message || error);
-  }
+
   private putRecipeIngredient(recipe_ingredient: RecipeIngredient) {
     this.headers.append('Content-Type', 'application/json');
 
