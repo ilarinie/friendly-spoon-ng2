@@ -23,6 +23,9 @@ export class Pictures implements OnInit{
 
   uploaded: any;
 
+  //baseUrl: string = "http://localhost:3000/";
+  baseUrl: string = "https://api.friendlyspoon.me/";
+
   constructor(private friendlyApiService: FriendlyApiService, private dragulaService: DragulaService){}
 
   ngOnInit(){

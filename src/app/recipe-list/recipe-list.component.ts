@@ -20,7 +20,7 @@ export class RecipeListComponent implements OnInit {
   zeroRating = 0;
 
   //baseUrl: string = "http://localhost:3000/";
-  baseUrl: string = "http://api.friendlyspoon.me/";
+  baseUrl: string = "https://api.friendlyspoon.me/";
 
   loading: boolean;
 

@@ -36,7 +36,7 @@ export class RecipeComponent implements OnInit {
   checked = [];
   image: any;
   //baseUrl: string = "http://localhost:3000/";
-  baseUrl: string = "http://api.friendlyspoon.me/";
+  baseUrl: string = "https://api.friendlyspoon.me/";
 
   deleting: boolean = false;
   addrecipe: boolean = false;
