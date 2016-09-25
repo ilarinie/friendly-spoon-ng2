@@ -19,8 +19,8 @@ export class RecipeListComponent implements OnInit {
   searchTag: string;
   zeroRating = 0;
 
-  baseUrl: string = "http://localhost:3000/";
-  //baseUrl: string = "http://api.friendlyspoon.me/";
+  //baseUrl: string = "http://localhost:3000/";
+  baseUrl: string = "http://api.friendlyspoon.me/";
 
   loading: boolean;
 
