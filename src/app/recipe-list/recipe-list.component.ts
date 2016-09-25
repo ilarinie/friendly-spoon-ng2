@@ -1,6 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Router }            from "@angular/router";
-import { Authentication } from "../authentication/authentication";
 import { Recipe } from "../models/recipe";
 import { Tag } from "../models/tag";
 import { FriendlyApiService } from "../services/friendlyapi.service";
@@ -19,6 +17,7 @@ export class RecipeListComponent implements OnInit {
   order: string;
   tags: Tag[];
   searchTag: string;
+  zeroRating = 0;
 
   loading: boolean;
 
@@ -51,6 +50,9 @@ export class RecipeListComponent implements OnInit {
   }
   random() {
     this.listfilter = this.shownRecipes[Math.floor((Math.random() * this.shownRecipes.length))].name
+  }
+  clearSearch(){
+    this.listfilter = "";
   }
 
   refreshRecipes() {

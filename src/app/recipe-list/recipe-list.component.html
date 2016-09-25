@@ -2,63 +2,77 @@
   <h1>Friendly Spoon</h1>
   <h3>is here for you!</h3>
   <div class="row main-row">
-    <div class="col-xs-11">
+    <div class="col-xs-13 col-sm-13 col-md-13 col-lg-13">
       <md-input class="recipe-search" type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Filter recipes"></md-input>
+      <span class="clearbutton glyphicon glyphicon-remove" (click)="clearSearch()"></span>
     </div>
   </div>
   <div class="row main-row">
-    <div class="col-xs-11">
+    <div class="col-xs-13 col-sm-13 col-md-13 col-lg-13">
       <label>Filter by tags</label>
-            <select class="form-control" #searchTagger (change)="tagChange($event.target.value)">
-                <option></option>
-                <option *ngFor="let tag of tags" value="{{tag.title}}">{{tag.title}}</option>
-            </select>
+      <select class="form-control" #searchTagger (change)="tagChange($event.target.value)">
+        <option></option>
+        <option *ngFor="let tag of tags" value="{{tag.title}}">{{tag.title}}</option>
+      </select>
     </div>
   </div>
   <div class="row main-row">
-    <div class="col-xs-11 buttons-row">
-      <div>
-        <h5 style="float:left">Sort by:  </h5> <a class="btn btn-default" (click)="sortByName()">ABC <span class="glyphicon glyphicon-sort"></span></a> <a class="btn btn-default" (click)="sortByRating()">Rating <span class="glyphicon glyphicon-sort"></span></a> <a class="btn btn-default"
-            (click)="sortByTime()">Time <span class="glyphicon glyphicon-sort"></span></a> </div> <a class="btn btn-default" (click)="random()">Pick a random recipe!</a> <a class="btn btn-default" (click)="refreshRecipes()">Refresh recipe list <span class="glyphicon glyphicon-refresh"></span></a>      </div>
+    <div class="col-xs-13 col-sm-13 col-md-13 col-lg-13 buttons-row">
+        <button md-raised-button (click)="sortByName()">ABC <span class="glyphicon glyphicon-sort"></span></button>
+        <button md-raised-button (click)="sortByRating()">Rating <span class="glyphicon glyphicon-sort"></span></button>
+        <button md-raised-button (click)="sortByTime()">Time <span class="glyphicon glyphicon-sort"></span></button>
+        <button md-raised-button (click)="random()">Random recipe!</button>
+        <button md-raised-button (click)="refreshRecipes()"><span class="glyphicon glyphicon-refresh refresh"></span></button>
+    </div>
   </div>
   <div class="row main-row">
-    <div class="col-xs-11">
+    <div class="col-xs-13 col-sm-13 col-md-13 col-lg-13">
       <div *ngIf="!loading">
 
-        <div *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order" >
-          <md-card >
+        <div class="col-xs-13 col-sm-13 col-md-6 col-lg-6" *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order">
+          <md-card>
             <md-card-title-group>
-             <img md-card-sm-img src="assets/baking.png" alt="nice pic yo">
+              <img md-card-sm-img src="assets/baking.png" alt="nice pic yo">
               <md-card-title><a routerLink="/recipes/{{recipe.id}}">{{recipe.name}}</a></md-card-title>
-              <md-card-subtitle><span *ngIf="recipe.ratingaverage"><rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating></span></md-card-subtitle>
-              <md-card-subtitle><span *ngIf="recipe.duration.range">{{recipe.duration.range}}</span></md-card-subtitle>
-              <md-card-subtitle>  <span *ngIf="recipe.introduction">{{recipe.introduction}}</span></md-card-subtitle>
+              <md-card-subtitle>
+                <span *ngIf="recipe.ratingaverage"><rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating></span>
+                <span *ngIf="!recipe.ratingaverage"><rating [(ngModel)]="zeroRating" [readonly]="true"></rating></span>
+              </md-card-subtitle>
+              <md-card-subtitle>
+                <span *ngIf="recipe.duration.range">{{recipe.duration.range}}</span>
+                <span *ngIf="!recipe.duration.range">No duration set</span>
+              </md-card-subtitle>
+              <md-card-subtitle>
+                <span *ngIf="recipe.introduction">{{recipe.introduction}}</span>
+                <span *ngIf="!recipe.introduction">No introduction set</span>
+              </md-card-subtitle>
             </md-card-title-group>
           </md-card>
-</div>
-<!--
-            <table class="table">
-                <thead>
-                    <tr class="recipe-list-headers">
-                    <th class="col-md-4"> <a (click)="sortByName()">Recipe <span class="glyphicon glyphicon-sort"></span></a> </th>
-                    <th class="col-md-3"> <a (click)="sortByRating()">Rating <span class="glyphicon glyphicon-sort"></span></a> </th>
-                    <th class="col-md-4"> Tags </th>
-                    <th class="col-md-3"> <a (click)="sortByTime()">Time <span class="glyphicon glyphicon-sort"></span></a> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let recipe of recipes| filter:listFilter.value | orderBy: order">
-                        <td><a routerLink="/recipes/{{recipe.id}}"> {{recipe.name}}</a> </td>
-                        <td><span *ngIf="recipe.ratingaverage"><rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating></span></td>
-                        <td class="tag-td"> <span *ngFor="let tag of recipe.recipe_tags" class="label label-default list-tag-label">{{tag.tag.title}}</span> </td>
-                        <td> <span *ngIf="recipe.duration">{{recipe.duration.range}}</span> </td>
-                    </tr>
-                </tbody>
-            </table>-->
+        </div>
+        <!--
+                    <table class="table">
+                        <thead>
+                            <tr class="recipe-list-headers">
+                            <th class="col-md-4"> <a (click)="sortByName()">Recipe <span class="glyphicon glyphicon-sort"></span></a> </th>
+                            <th class="col-md-3"> <a (click)="sortByRating()">Rating <span class="glyphicon glyphicon-sort"></span></a> </th>
+                            <th class="col-md-4"> Tags </th>
+                            <th class="col-md-3"> <a (click)="sortByTime()">Time <span class="glyphicon glyphicon-sort"></span></a> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let recipe of recipes| filter:listFilter.value | orderBy: order">
+                                <td><a routerLink="/recipes/{{recipe.id}}"> {{recipe.name}}</a> </td>
+                                <td><span *ngIf="recipe.ratingaverage"><rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating></span></td>
+                                <td class="tag-td"> <span *ngFor="let tag of recipe.recipe_tags" class="label label-default list-tag-label">{{tag.tag.title}}</span> </td>
+                                <td> <span *ngIf="recipe.duration">{{recipe.duration.range}}</span> </td>
+                            </tr>
+                        </tbody>
+                    </table>-->
 
       </div>
-      <div *ngIf="loading" class="loading-div"> <img src="assets/gears.svg" align="center">
-        <br> Fetching recipes from the nether realms.. </div>
+      <div *ngIf="loading" class="loading-div"><img src="assets/gears.svg" align="center">
+        <br> Fetching recipes from the nether realms..
+      </div>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
-a{
-  color:black;
+a {
+  color: black;
   text-decoration: none;
 }
 
@@ -22,32 +22,45 @@ a:active {
 
 }
 
-.recipe-search{
-  width: 100%;
+.refresh {
+  color: green;
+}
+
+.recipe-search {
+  width: 85%;
+  float:left;
+}
+.clearbutton {
+  width: 15%;
 }
 
 .buttons-row {
   padding: 10px;
+  text-align: center;
 }
+
 .recipe-list {
   min-height: 120em;
 }
 
 .table a {
-  color:black;
+  color: black;
 }
-.recipe-list-headers th{
+
+.recipe-list-headers th {
   background-color: #f4f4f0;
   color: black;
 }
+
 .loading-div {
-  text-align:center;
+  text-align: center;
   padding-top: 30px;
 }
+
 md-card {
-  margin-top: 10px;
-  margin-left: 10px;
+  margin: 5px;
   float: left;
-  min-width: 400px;
+  width: 100%;
+  height: 225px;
 
 }

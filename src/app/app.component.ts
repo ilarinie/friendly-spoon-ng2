@@ -10,7 +10,7 @@ import { FriendlyApiService } from "./services/friendlyapi.service";
   selector: "friendly-app",
   templateUrl: "app.component.html",
   providers: [FriendlyApiService],
-  styleUrls: ['styles.css']
+  styleUrls: ['styles.css','app.component.css']
 })
 
 
@@ -20,9 +20,7 @@ export class AppComponent {
   username: string;
 
   constructor(private friendlyApiService: FriendlyApiService, public router: Router) {
-    this.username = localStorage.getItem('username');
-
-
+    router.events.subscribe((event) =>this.username = localStorage.getItem('username') );
   }
 
 }
