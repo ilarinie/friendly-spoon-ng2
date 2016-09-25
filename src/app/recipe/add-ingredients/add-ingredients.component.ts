@@ -95,7 +95,6 @@ export class AddIngredients implements OnInit {
     }
     console.log(this.recipe_ingredient.recipe_ingredient_group_id + " = group id");
     if (this.recipe_ingredient.recipe_ingredient_group_id) {
-      console.log("kyl");
 
       this.friendlyApiService.saveRecipeIngredient(this.recipe_ingredient).then(recipe_ingredient => {
         this.addingRecInc = false;

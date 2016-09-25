@@ -1,0 +1,8 @@
+<h3>Pictures</h3>
+<div *ngFor="let picture of pictures">
+  <img src="http://localhost:3000/{{picture.picture.url}}">
+  <button md-raised-button (click)="deletePic(picture)">Delete</button>
+</div>
+<h3>Upload a new picture</h3>
+<input type="file" accept="image/*" (change)="changeListener($event)">
+<button md-raised-button (click)="uploadPic()">Save</button>

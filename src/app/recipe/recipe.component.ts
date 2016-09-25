@@ -13,6 +13,7 @@ import { AddIngredients } from "./add-ingredients/add-ingredients.component";
 import { ListIngredients } from "./list-ingredients/list-ingredients.component";
 import { Tags } from "./tags/tags.component";
 import { Notes } from "./notes/notes.component";
+import {RecipePicture} from "../models/recipe_picture";
 
 @Component({
   selector: "recipeshow",
@@ -33,6 +34,9 @@ export class RecipeComponent implements OnInit {
   sub;
   duration_array;
   checked = [];
+  image: any;
+  baseUrl: string = "http://localhost:3000/";
+  //baseUrl: string = "http://api.friendlyspoon.me/";
 
   deleting: boolean = false;
   addrecipe: boolean = false;
@@ -53,6 +57,7 @@ export class RecipeComponent implements OnInit {
     this.duration_array = Array(5).fill(4);
 
   }
+
 
 
 
@@ -107,6 +112,10 @@ export class RecipeComponent implements OnInit {
     this.recipe.level_id = this.recipe.level.id;
     this.recipe.duration_id = this.recipe.duration.id;
     this.saveOrders();
+    let upload: RecipePicture = new RecipePicture();
+    upload.recipe_id = this.recipe.id;
+    upload.picture = this.image;
+    this.friendlyApiService.uploadPicture(upload);
 
     this.friendlyApiService
       .save(this.recipe)

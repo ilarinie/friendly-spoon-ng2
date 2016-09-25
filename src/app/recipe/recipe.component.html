@@ -18,7 +18,15 @@
     <hr class="hline" />
     <!-- Alempi rivi, kuvat, aineosat, muut tiedot -->
     <div class="row">
-      <div class="col-md-2 img-div hidden-xs hidden-sm"> <img class="recipe-img" src="assets/baking.png"> <img class=" recipe-img" src="assets/muffins.png"> <img class="recipe-img-last" src="assets/pumpkin.png"> </div>
+      <div class="col-md-2 img-div hidden-xs hidden-sm">
+        <div *ngIf="!recipe.recipe_pictures[0]"><img class="recipe-img" src="assets/baking.png"> </div>
+        <div *ngIf="!recipe.recipe_pictures[1]"><img class=" recipe-img" src="assets/muffins.png"></div>
+        <div *ngIf="!recipe.recipe_pictures[2]"><img class="recipe-img-last" src="assets/pumpkin.png"></div>
+        <div *ngIf="recipe.recipe_pictures[0]"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.url}}"></div>
+        <div *ngIf="recipe.recipe_pictures[1]"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[1].picture.url}}"></div>
+        <div *ngIf="recipe.recipe_pictures[2]"><img class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.url}}"></div>
+
+          </div>
       <!-- muuttuva näkymä aineosat, muut tiedot <-> notesit -->
       <div [ngSwitch]="noteSwitchButton" class="animate-switch-container">
         <div class="animate-switch" *ngSwitchCase="'Notes'">
@@ -108,9 +116,13 @@
           </div>
           <div *ngIf="editheading">
             <div class="col-sm-10 col-md-10">
+
+
+
               <h4 class="sub-heading">Edit instructions</h4>
               <!--Instruction editori -->
               <input [tinyMce]="" [text]="recipe.instruction" (textfield)="textfieldChange($event)" [(ngModel)]="recipe.instruction">
+              <recipe-pictures [recipe]="recipe"></recipe-pictures>
               <!--<textarea id="editinst" [(ngModel)]="recipe.instruction" class="instruction"></textarea>-->
             </div>
           </div>

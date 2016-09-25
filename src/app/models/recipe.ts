@@ -4,6 +4,7 @@ import { Duration } from "./duration";
 import { RecipeIngredient } from "./recipe_ingredient";
 import { Ingredient } from "./ingredient";
 import { RecipeTag } from "./recipe_tag";
+import {RecipePicture} from "./recipe_picture";
 
 
 export class Recipe {
@@ -24,5 +25,6 @@ export class Recipe {
   notes: any[];
   recipe_ingredient_groups: RecipeIngredientGroup[];
   introduction: string;
+  recipe_pictures: RecipePicture[];
 
 }

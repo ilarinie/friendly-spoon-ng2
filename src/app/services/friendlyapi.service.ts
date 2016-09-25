@@ -14,6 +14,7 @@ import {Tag} from '../models/tag';
 
 
 import 'rxjs/add/operator/toPromise';
+import {RecipePicture} from "../models/recipe_picture";
 
 @Injectable()
 export class FriendlyApiService {
@@ -64,7 +65,16 @@ export class FriendlyApiService {
   }
 
 
+  //experimental pic upload
+  uploadPicture(picture: RecipePicture){
 
+    return this.http.post(this.baseUrl+'/recipe_pictures',JSON.stringify(picture), {headers: this.refreshHeaders()}).toPromise().then((res) => res.json() as RecipePicture);
+  }
+  deletePicture(picture: RecipePicture){
+    let url = this.baseUrl + '/recipe_pictures/' + picture.id;
+    console.log(url);
+    return this.http.delete(url,{headers: this.refreshHeaders(), body: ''}).toPromise();
+  }
 
   //GET STATIC VARIABLES FROM API
   getDurations() {

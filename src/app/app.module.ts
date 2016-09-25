@@ -29,6 +29,7 @@ import { Login } from "./authentication/login";
 import { Logout } from "./authentication/logout";
 import {TagList} from "./tag-list/tag-list.component";
 import {IngredientList} from "./ingredient-list/ingredient-list.component";
+import {Pictures} from "./recipe/pictures/pictures.component";
 
 import {enableProdMode} from "@angular/core";
 enableProdMode();
@@ -46,6 +47,7 @@ enableProdMode();
     Notes,
     ListIngredients,
     AddIngredients,
+    Pictures,
     TinyEditor,
     Login,
     Logout,
