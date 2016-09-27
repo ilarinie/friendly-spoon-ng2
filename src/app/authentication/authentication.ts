@@ -2,14 +2,15 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Headers, Http, Response } from "@angular/http";
 import { Router, CanActivate } from "@angular/router";
+import {Global} from "../globals";
 
 
 
 @Injectable()
 export class Authentication implements CanActivate {
-  private locationWatcher = new EventEmitter();
 
-  private apiUrl = "https://api.friendlyspoon.me"; //prod api
+
+  private apiUrl = Global.apiUrl; //"https://api.friendlyspoon.me"; //prod api
   //private apiUrl = 'http://friendly-spoon-api.herokuapp.com'; //dev api
   //private apiUrl = "http://localhost:3000";
 

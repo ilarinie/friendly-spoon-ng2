@@ -20,11 +20,11 @@
     <div class="row">
       <div class="col-md-2 img-div hidden-xs hidden-sm">
         <div *ngIf="!recipe.recipe_pictures[0]"><img class="recipe-img" src="assets/baking.png"> </div>
+        <div *ngIf="recipe.recipe_pictures[0]"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.thumb.url}}"></div>
         <div *ngIf="!recipe.recipe_pictures[1]"><img class=" recipe-img" src="assets/muffins.png"></div>
+        <div *ngIf="recipe.recipe_pictures[1]"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[1].picture.thumb.url}}"></div>
         <div *ngIf="!recipe.recipe_pictures[2]"><img class="recipe-img-last" src="assets/pumpkin.png"></div>
-        <div *ngIf="recipe.recipe_pictures[0]"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.url}}"></div>
-        <div *ngIf="recipe.recipe_pictures[1]"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[1].picture.url}}"></div>
-        <div *ngIf="recipe.recipe_pictures[2]"><img class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.url}}"></div>
+        <div *ngIf="recipe.recipe_pictures[2]"><img class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.thumb.url}}"></div>
 
           </div>
       <!-- muuttuva näkymä aineosat, muut tiedot <-> notesit -->

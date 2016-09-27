@@ -27,6 +27,7 @@
     "@angular2-material/grid-list": "*",
     "@angular2-material/input": "*",
     "@angular2-material/list": "*",
+    "@angular2-material/radio": "^2.0.0-alpha.8-2",
     "@types/hammerjs": "^2.0.32",
     "angular2-bootstrap-confirm": "^0.10.0",
     "angular2-modal": "^2.0.0-beta.12",

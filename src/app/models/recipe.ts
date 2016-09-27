@@ -26,5 +26,9 @@ export class Recipe {
   recipe_ingredient_groups: RecipeIngredientGroup[];
   introduction: string;
   recipe_pictures: RecipePicture[];
+  cover_picture_id: number;
+  coverpicture: RecipePicture;
+
+
 
 }

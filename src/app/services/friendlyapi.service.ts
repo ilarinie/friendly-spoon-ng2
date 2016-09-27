@@ -15,11 +15,12 @@ import {Tag} from '../models/tag';
 
 import 'rxjs/add/operator/toPromise';
 import {RecipePicture} from "../models/recipe_picture";
+import {Global} from "../globals";
 
 @Injectable()
 export class FriendlyApiService {
 
-  private baseUrl = 'https://api.friendlyspoon.me'; //prod api
+  private baseUrl = Global.apiUrl;//'https://api.friendlyspoon.me'; //prod api
   //private baseUrl = 'http://friendly-spoon-api.herokuapp.com' //dev api
   //private baseUrl = 'http://localhost:3000';
 

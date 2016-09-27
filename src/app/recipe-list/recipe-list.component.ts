@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Recipe } from "../models/recipe";
 import { Tag } from "../models/tag";
 import { FriendlyApiService } from "../services/friendlyapi.service";
+import {Global} from "../globals";
 
 
 @Component({
@@ -19,8 +20,8 @@ export class RecipeListComponent implements OnInit {
   searchTag: string;
   zeroRating = 0;
 
-  //baseUrl: string = "http://localhost:3000/";
-  baseUrl: string = "https://api.friendlyspoon.me/";
+
+  baseUrl: string = Global.apiUrl;
 
   loading: boolean;
 

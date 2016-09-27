@@ -14,6 +14,7 @@ import { ListIngredients } from "./list-ingredients/list-ingredients.component";
 import { Tags } from "./tags/tags.component";
 import { Notes } from "./notes/notes.component";
 import {RecipePicture} from "../models/recipe_picture";
+import {Global} from "../globals";
 
 @Component({
   selector: "recipeshow",
@@ -35,8 +36,8 @@ export class RecipeComponent implements OnInit {
   duration_array;
   checked = [];
   image: any;
-  //baseUrl: string = "http://localhost:3000/";
-  baseUrl: string = "https://api.friendlyspoon.me/";
+
+  baseUrl: string = Global.apiUrl;
 
   deleting: boolean = false;
   addrecipe: boolean = false;

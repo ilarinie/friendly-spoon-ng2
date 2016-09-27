@@ -4,6 +4,7 @@ import {Recipe} from "../../models/recipe";
 import {RecipePicture} from "../../models/recipe_picture";
 import {FriendlyApiService} from "../../services/friendlyapi.service";
 import {DragulaService} from "ng2-dragula/components/dragula.provider";
+import {Global} from "../../globals";
 /**
  * Created by ile on 9/25/16.
  */
@@ -24,7 +25,7 @@ export class Pictures implements OnInit{
   uploaded: any;
 
   //baseUrl: string = "http://localhost:3000/";
-  baseUrl: string = "https://api.friendlyspoon.me/";
+  baseUrl: string = Global.apiUrl;
 
   constructor(private friendlyApiService: FriendlyApiService, private dragulaService: DragulaService){}
 
@@ -45,16 +46,38 @@ export class Pictures implements OnInit{
     myReader.readAsDataURL(file);
   }
 
+  changeCoverPicture(picture_id){
+    this.recipe.cover_picture_id = picture_id;
+    let savedRecipe = new Recipe();
+    savedRecipe.id = this.recipe.id;
+    savedRecipe.cover_picture_id = picture_id;
+    this.friendlyApiService.save(savedRecipe);
+  }
+
   uploadPic(){
     let pic: RecipePicture = new RecipePicture();
     pic.recipe_id = this.recipe.id;
     pic.picture = this.uploaded;
-    this.friendlyApiService.uploadPicture(pic).then(pic => this.pictures.push(pic));
+    this.friendlyApiService.uploadPicture(pic).then(pic => {
+      if (this.pictures.length == 0){
+        this.changeCoverPicture(pic.id);
+      }
+      this.pictures.push(pic);
+
+    });
   }
   deletePic(picture: RecipePicture){
     let index = this.pictures.indexOf(picture);
     if ( index > -1){
       this.pictures.splice(index,1);
+    }
+    if (picture.id == this.recipe.cover_picture_id){
+      if  (this.pictures.length == 0){
+        this.changeCoverPicture(null);
+      }else {
+        this.changeCoverPicture(this.pictures[0].id);
+      }
+
     }
     this.friendlyApiService.deletePicture(picture);
   }

@@ -1,8 +1,16 @@
-<h3>Pictures</h3>
-<div *ngFor="let picture of pictures">
-  <img src="{{baseUrl}}{{picture.picture.url}}">
-  <button md-raised-button (click)="deletePic(picture)">Delete</button>
+<h3>Pictures {{pictures.length}}/3</h3>
+  <div class="row" *ngFor="let picture of pictures">
+    <img style="float:left;" src="{{baseUrl}}{{picture.picture.thumb.url}}">
+    <button md-raised-button (click)="deletePic(picture)">Delete</button>
+    <div *ngIf="recipe.cover_picture_id != picture.id">
+      <button md-raised-button (click)="changeCoverPicture(picture.id)">Cover picture</button>
+    </div>
+    <div style="padding-left:20px;color:green;" *ngIf="recipe.cover_picture_id == picture.id">
+      Current cover pic
+    </div>
+  </div>
+<div *ngIf="recipe.recipe_pictures.length < 3">
+  <h3>Upload a new picture</h3>
+  <input type="file" accept="image/*" (change)="changeListener($event)">
+  <button md-raised-button (click)="uploadPic()">Save</button>
 </div>
-<h3>Upload a new picture</h3>
-<input type="file" accept="image/*" (change)="changeListener($event)">
-<button md-raised-button (click)="uploadPic()">Save</button>

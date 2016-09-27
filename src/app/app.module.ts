@@ -15,6 +15,7 @@ import {MdCardModule} from '@angular2-material/card';
 import {MdListModule} from '@angular2-material/list';
 import {MdInputModule} from '@angular2-material/input';
 import { MdCheckboxModule } from '@angular2-material/checkbox';
+import { MdRadioModule } from '@angular2-material/radio';
 import { DragulaModule} from "ng2-dragula/ng2-dragula";
 
 
@@ -66,7 +67,8 @@ enableProdMode();
     MdListModule,
     DragulaModule,
     MdInputModule,
-    MdCheckboxModule
+    MdCheckboxModule,
+    MdRadioModule
   ],
   providers: [Authentication, FriendlyApiService],
   entryComponents: [AppComponent],
