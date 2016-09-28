@@ -13,7 +13,7 @@ import {Global} from "../../globals";
 @Component({
   selector: 'recipe-pictures',
   templateUrl: 'pictures.component.html',
-  styleUrls: ['../add-ingredients/dragula.min.css'],
+  styleUrls: ['pictures.component.css'],
   viewProviders: [DragulaService]
 })
 export class Pictures implements OnInit{
@@ -23,6 +23,9 @@ export class Pictures implements OnInit{
   pictures: RecipePicture[];
 
   uploaded: any;
+
+  loading: boolean = false;
+  fileName: string = "";
 
   //baseUrl: string = "http://localhost:3000/";
   baseUrl: string = Global.apiUrl;
@@ -39,9 +42,13 @@ export class Pictures implements OnInit{
   readThis(inputValue: any){
     var file:File = inputValue.files[0];
     var myReader:FileReader = new FileReader();
+    this.loading = true;
+    this.fileName = file.name;
+
 
     myReader.onloadend = (e) => {
       this.uploaded = myReader.result;
+      this.loading = false;
     }
     myReader.readAsDataURL(file);
   }

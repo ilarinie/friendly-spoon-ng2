@@ -24,6 +24,8 @@ export class RecipeListComponent implements OnInit {
   baseUrl: string = Global.apiUrl;
 
   loading: boolean;
+  private randomRecipe: Recipe;
+  private rolling:boolean = false;
 
   constructor(
     private friendlyApiService: FriendlyApiService
@@ -53,7 +55,19 @@ export class RecipeListComponent implements OnInit {
     this.refreshRecipes();
   }
   random() {
-    this.listfilter = this.shownRecipes[Math.floor((Math.random() * this.shownRecipes.length))].name
+    //this.listfilter = this.shownRecipes[Math.floor((Math.random() * this.shownRecipes.length))].name
+    this.randomRecipe = this.shownRecipes[Math.floor((Math.random() * this.shownRecipes.length))]
+  }
+
+  reRoll(){
+    this.rolling = true;
+    console.log(1);
+    this.randomRecipe = this.shownRecipes[Math.floor((Math.random() * this.shownRecipes.length))];
+    let timeoutID = window.setTimeout(this.setRolling(), 2000);
+  }
+  setRolling(){
+    console.log(2)
+    this.rolling = !this.rolling;
   }
   clearSearch(){
     this.listfilter = "";

@@ -64,3 +64,12 @@ md-card {
   height: 225px;
 
 }
+.random-recipe {
+  width: 502px;
+}
+.random-image {
+  margin-left: -15px
+}
+.modal-footer {
+  margin-top: -15px;
+}

@@ -28,6 +28,7 @@ export class Recipe {
   recipe_pictures: RecipePicture[];
   cover_picture_id: number;
   coverpicture: RecipePicture;
+  ratingcount: number;
 
 
 
