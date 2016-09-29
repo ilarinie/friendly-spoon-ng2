@@ -27,9 +27,11 @@ export class Pictures implements OnInit{
   loading: boolean = false;
   fileName: string = "";
 
+  author:string = localStorage.getItem('username');
+
   //baseUrl: string = "http://localhost:3000/";
   baseUrl: string = Global.apiUrl;
-
+  file_src: string = "";
   constructor(private friendlyApiService: FriendlyApiService, private dragulaService: DragulaService){}
 
   ngOnInit(){
@@ -42,6 +44,8 @@ export class Pictures implements OnInit{
   readThis(inputValue: any){
     var file:File = inputValue.files[0];
     var myReader:FileReader = new FileReader();
+    this.file_src = window.URL.createObjectURL(inputValue.files[0]);
+
     this.loading = true;
     this.fileName = file.name;
 
@@ -49,6 +53,7 @@ export class Pictures implements OnInit{
     myReader.onloadend = (e) => {
       this.uploaded = myReader.result;
       this.loading = false;
+      this.file_src = e.target.result;
     }
     myReader.readAsDataURL(file);
   }
@@ -65,6 +70,7 @@ export class Pictures implements OnInit{
     let pic: RecipePicture = new RecipePicture();
     pic.recipe_id = this.recipe.id;
     pic.picture = this.uploaded;
+    pic.author = this.author;
     this.friendlyApiService.uploadPicture(pic).then(pic => {
       if (this.pictures.length == 0){
         this.changeCoverPicture(pic.id);

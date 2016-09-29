@@ -9,8 +9,11 @@
                 <h3 class="main-heading" ><input  class="heading-input" [(ngModel)]="recipe.name" value="{{recipe.name}}" placeholder="Recipe name"></h3>
             </span> </div>
       <div class="col-sm-6 col-md-6  heading-div button-group"> <a class="btn header-btn" (click)="divide()"  [ngClass]="{ disabled: editheading}"> {{divideButton}}</a> <a class="btn header-btn" (click)="double()"  [ngClass]="{ disabled: editheading}">{{doubleButton}}</a> <a class="btn header-btn" (click)="noteSwitch()" [ngClass]="{ disabled: editheading}">{{noteSwitchButton}}</a> <span>
+        <div *ngIf="user_id == recipe_user_id">
           <a class="btn header-btn" (click)="editheadings()" [ngClass]="{ disabled: addrecipe}">
-            <span *ngIf="editheading"  >Back</span> <span *ngIf="!editheading && user_id== recipe_user_id">Edit</span> </a>
+            <span *ngIf="editheading"  >Back</span> <span *ngIf="!editheading && user_id== recipe_user_id">Edit</span>
+          </a>
+          </div>
         </span>
       </div>
     </div>
@@ -20,11 +23,11 @@
     <div class="row">
       <div class="col-md-2 img-div hidden-xs hidden-sm">
         <div *ngIf="!recipe.recipe_pictures[0]"><img class="recipe-img" src="assets/baking.png"> </div>
-        <div *ngIf="recipe.recipe_pictures[0]"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.thumb.url}}"></div>
+        <div *ngIf="recipe.recipe_pictures[0]"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.thumb.url}}"><span><i>&copy; {{recipe.recipe_pictures[0].author}}</i></span><br></div>
         <div *ngIf="!recipe.recipe_pictures[1]"><img class=" recipe-img" src="assets/muffins.png"></div>
-        <div *ngIf="recipe.recipe_pictures[1]"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[1].picture.thumb.url}}"></div>
+        <div *ngIf="recipe.recipe_pictures[1]"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[1].picture.thumb.url}}"><span><i>&copy; {{recipe.recipe_pictures[1].author}}</i></span><br></div>
         <div *ngIf="!recipe.recipe_pictures[2]"><img class="recipe-img-last" src="assets/pumpkin.png"></div>
-        <div *ngIf="recipe.recipe_pictures[2]"><img class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.thumb.url}}"></div>
+        <div *ngIf="recipe.recipe_pictures[2]"><img class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.thumb.url}}"><span><i>&copy; {{recipe.recipe_pictures[2].author}}</i></span><br></div>
 
           </div>
       <!-- muuttuva näkymä aineosat, muut tiedot <-> notesit -->

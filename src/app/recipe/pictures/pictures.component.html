@@ -1,6 +1,7 @@
 <h3>Pictures {{pictures.length}}/3</h3>
   <div class="picture-container col-md-3" *ngFor="let picture of pictures">
     <img style="float:left;" src="{{baseUrl}}{{picture.picture.thumb.url}}">
+    <span><i>&copy; {{picture.author}}</i></span><br>
     <button md-raised-button class="picture-button" color="accent" (click)="deletePic(picture)">Delete</button>
     <div *ngIf="recipe.cover_picture_id != picture.id">
       <button md-raised-button class="picture-button" color="primary" (click)="changeCoverPicture(picture.id)">Select</button>
@@ -9,13 +10,22 @@
       <button md-raised-button class="picture-button" color="primary" disabled>Cover Picture</button>
     </div>
   </div>
-<div class="col-md-10" *ngIf="recipe.recipe_pictures.length < 3">
-  <h3>Upload a new picture</h3>
+<div class="picture-container col-md-3" *ngIf="recipe.recipe_pictures.length < 3">
+
   <div *ngIf="!loading">
-  <label class="btn btn-default btn-file">
-  Browse <input type="file" style="float:left; display:none;" accept="image/*" (change)="changeListener($event)">
-  </label>
+    <div *ngIf="file_src != ''">
+      <img src='{{ file_src }}' alt=""/>
+    </div>
+    <div *ngIf="file_src == ''">
+    <h3>Upload a new picture</h3>
+    </div>
+    <label class="btn btn-default btn-file">
+  Browse <input type="file" style="display:none;" accept="image/*" (change)="changeListener($event)">
+  </label><br>
   <span>File: {{fileName}}</span>
+    <md-input [(ngModel)]="author">
+      <span md-prefix>&copy;</span>
+    </md-input>
   <button  md-raised-button (click)="uploadPic()">Save</button>
   </div>
   <div *ngIf="loading">

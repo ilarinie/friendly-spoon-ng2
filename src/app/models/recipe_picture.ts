@@ -6,5 +6,6 @@ export class RecipePicture {
   recipe_id:number;
   id: number;
   index: number;
+  author: string;
 
 }

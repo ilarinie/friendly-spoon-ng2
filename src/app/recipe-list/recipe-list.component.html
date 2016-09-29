@@ -98,14 +98,16 @@
           <p><b>{{randomRecipe.duration.range}}</b></p>
            <p><i>{{randomRecipe.introduction}}</i></p>
           <p><a routerLink="/recipes/{{randomRecipe.id}}" data-dismiss="modal">Go to recipe <span class="glyphicon glyphicon-menu-right"></span><span class="glyphicon glyphicon-menu-right"></span></a></p>
-          <img class="random-image" src="http://hk.blouinartinfo.com/sites/default/files/1349378871-56591.jpg" >
+          <span *ngIf="randomRecipe.coverpicture"><img class="random-image" src="{{baseUrl}}{{randomRecipe.coverpicture.picture.medium.url}}" ></span>
+          <span *ngIf="!randomRecipe.coverpicture"><img class="random-image" src="assets/cookie.jpg"></span>
           <!--
           <div style="float:right;" *ngIf="!randomRecipe.coverpicture"><img  src="assets/baking.png" alt="nice pic yo"></div>
           <div style="float:right;" *ngIf="randomRecipe.coverpicture"><img  class="img-responsive" src="{{baseUrl}}{{recipe.coverpicture.picture.thumb.url}}"></div>
           -->
         </div>
         <div class="modal-footer">
-          <p style="float:left;">Random Recipe</p>
+          <p style="float:left;">Random Recipe</p><br><br>
+          <span style="float:left;" *ngIf="randomRecipe.coverpicture"><p >Picture &copy; {{randomRecipe.coverpicture.author}}</p></span>
           <button type="button" class="btn btn-default" (click)="reRoll()">Reroll</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>

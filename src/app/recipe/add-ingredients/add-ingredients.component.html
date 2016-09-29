@@ -49,7 +49,7 @@
 <div *ngIf="addingRecInc"> </div>
 <md-card>
   <md-card-title>Add Ingredients</md-card-title>
-  <md-input class="ingredient-create-field" #listFilter [(ngModel)]="ingredient.name" placeholder="Ingredient name"> </md-input> <a class="btn btn-success ingredient-create-button" (click)="saveIngredient()">Create</a>
+  <md-input maxlength="30" class="ingredient-create-field" #listFilter [(ngModel)]="ingredient.name" placeholder="Ingredient name"></md-input> <a class="btn btn-success ingredient-create-button" (click)="saveIngredient()">Create</a>
   <div *ngIf="!addingRecInc">
     <div class="ingredient-add-box" *ngFor="let listingredient of ingredients | reverseFilter:listFilter.value">
       <h4 class="ingredient-header">{{listingredient.name}}</h4>
@@ -71,4 +71,4 @@
 <md-card>
   <md-card-title>New ingredient group</md-card-title>
   <md-card-subtitle>eg. "Frosting"</md-card-subtitle>
-  <md-input class="ingredient-create-field" [(ngModel)]="recipe_ingredient_group.name" placeholder="New Group"> </md-input> <span *ngIf="!addingGroup"><a class="btn btn-success ingredient-create-button" (click)="saveGroup()">Create</a></span> <span *ngIf="addingGroup"><a class="btn btn-warning ingredient-create-button" disabled="disabled">Adding</a></span> </md-card>
+  <md-input maxlength="25" class="ingredient-create-field" [(ngModel)]="recipe_ingredient_group.name" placeholder="New Group"> </md-input> <span *ngIf="!addingGroup"><a class="btn btn-success ingredient-create-button" (click)="saveGroup()">Create</a></span> <span *ngIf="addingGroup"><a class="btn btn-warning ingredient-create-button" disabled="disabled">Adding</a></span> </md-card>
