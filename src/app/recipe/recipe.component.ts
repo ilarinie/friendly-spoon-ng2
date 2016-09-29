@@ -50,6 +50,8 @@ export class RecipeComponent implements OnInit {
   levels: Level[];
   durations: Duration[];
 
+  shownPic: RecipePicture;
+
   constructor(
     private router: Router,
     private friendlyApiService: FriendlyApiService,
@@ -59,7 +61,22 @@ export class RecipeComponent implements OnInit {
 
   }
 
-
+  showPic(pic: RecipePicture){
+    this.shownPic = pic;
+  }
+  nextPic(){
+    let index = this.shownIndex();
+    if ( index > -1){
+      if (this.recipe.recipe_pictures.length-1 > index){
+        this.shownPic = this.recipe.recipe_pictures[index+1];
+      } else {
+        this.shownPic = this.recipe.recipe_pictures[0];
+      }
+    }
+  }
+  shownIndex(): number {
+    return this.recipe.recipe_pictures.indexOf(this.shownPic);
+  }
 
 
   getRecipe() {
