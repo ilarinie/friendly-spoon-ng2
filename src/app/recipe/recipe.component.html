@@ -25,9 +25,9 @@
         <div *ngIf="!recipe.recipe_pictures[0]"><img class="recipe-img" src="assets/baking.png"> </div>
         <div *ngIf="recipe.recipe_pictures[0]"><a (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.thumb.url}}"></a><span><i>&copy; {{recipe.recipe_pictures[0].author}}</i></span><br></div>
         <div *ngIf="!recipe.recipe_pictures[1]"><img class=" recipe-img" src="assets/muffins.png"></div>
-        <div *ngIf="recipe.recipe_pictures[1]"><a (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[1].picture.thumb.url}}"></a><span><i>&copy; {{recipe.recipe_pictures[1].author}}</i></span><br></div>
+        <div *ngIf="recipe.recipe_pictures[1]"><a (click)="showPic(recipe.recipe_pictures[1])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[1].picture.thumb.url}}"></a><span><i>&copy; {{recipe.recipe_pictures[1].author}}</i></span><br></div>
         <div *ngIf="!recipe.recipe_pictures[2]"><img class="recipe-img-last" src="assets/pumpkin.png"></div>
-        <div *ngIf="recipe.recipe_pictures[2]"><a (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal"><img class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.thumb.url}}"></a><span><i>&copy; {{recipe.recipe_pictures[2].author}}</i></span><br></div>
+        <div *ngIf="recipe.recipe_pictures[2]"><a (click)="showPic(recipe.recipe_pictures[2])" data-toggle="modal" data-target="#myModal"><img class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.thumb.url}}"></a><span><i>&copy; {{recipe.recipe_pictures[2].author}}</i></span><br></div>
 
           </div>
       <!-- muuttuva näkymä aineosat, muut tiedot <-> notesit -->
