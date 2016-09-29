@@ -12,13 +12,9 @@
   </div>
 <div class="picture-container col-md-3" *ngIf="recipe.recipe_pictures.length < 3">
 
-  <div *ngIf="!loading">
-    <div *ngIf="file_src != ''">
-      <img class="img-responsive" src='{{ file_src }}' alt=""/>
-    </div>
-    <div *ngIf="file_src == ''">
+  <div *ngIf="!saving">
+
     <h3>Upload a new picture</h3>
-    </div>
     <label class="btn btn-default btn-file">
   Browse <input type="file" style="display:none;" accept="image/*" (change)="changeListener($event)">
   </label><br>
@@ -27,6 +23,13 @@
       <span md-prefix>&copy;</span>
     </md-input>
   <button  md-raised-button (click)="uploadPic()">Save</button>
+  </div>
+  <div *ngIf="saving">
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="ticks" [attr.aria-valuemin]="0" [attr.aria-valuemax]="100" [style.width]="(ticks/100)*100 + '%'">{{ticks}} %</div>
+    </div>
+    <p><i>Uploading..</i></p>
+    <!--<md-progress-bar mode="determinate" [value]="ticks"></md-progress-bar>-->
   </div>
   <div *ngIf="loading">
     <img src="assets/gears.svg">

@@ -17,7 +17,7 @@ import {MdInputModule} from '@angular2-material/input';
 import { MdCheckboxModule } from '@angular2-material/checkbox';
 import { MdRadioModule } from '@angular2-material/radio';
 import { DragulaModule} from "ng2-dragula/ng2-dragula";
-
+import {MdProgressBarModule} from "@angular2-material/progress-bar";
 
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {RecipeComponent} from "./recipe/recipe.component";
@@ -33,6 +33,7 @@ import {IngredientList} from "./ingredient-list/ingredient-list.component";
 import {Pictures} from "./recipe/pictures/pictures.component";
 
 import {enableProdMode} from "@angular/core";
+
 enableProdMode();
 
 @NgModule({
@@ -68,7 +69,8 @@ enableProdMode();
     DragulaModule,
     MdInputModule,
     MdCheckboxModule,
-    MdRadioModule
+    MdRadioModule,
+    MdProgressBarModule
   ],
   providers: [Authentication, FriendlyApiService],
   entryComponents: [AppComponent],

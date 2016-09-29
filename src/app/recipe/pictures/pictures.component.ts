@@ -5,6 +5,7 @@ import {RecipePicture} from "../../models/recipe_picture";
 import {FriendlyApiService} from "../../services/friendlyapi.service";
 import {DragulaService} from "ng2-dragula/components/dragula.provider";
 import {Global} from "../../globals";
+import {Observable} from "rxjs";
 /**
  * Created by ile on 9/25/16.
  */
@@ -29,9 +30,14 @@ export class Pictures implements OnInit{
 
   author:string = localStorage.getItem('username');
 
+  input: any;
+
   //baseUrl: string = "http://localhost:3000/";
   baseUrl: string = Global.apiUrl;
   file_src: string = "";
+  private saving: boolean = false;
+  private tickDuration;
+  private ticks;
   constructor(private friendlyApiService: FriendlyApiService, private dragulaService: DragulaService){}
 
   ngOnInit(){
@@ -42,18 +48,18 @@ export class Pictures implements OnInit{
     this.readThis($event.target);
   }
   readThis(inputValue: any){
+    this.input = inputValue;
     var file:File = inputValue.files[0];
     var myReader:FileReader = new FileReader();
-    this.file_src = window.URL.createObjectURL(inputValue.files[0]);
-
     this.loading = true;
     this.fileName = file.name;
 
 
     myReader.onloadend = (e) => {
+      console.log(file.size + " size")
+      this.tickDuration = (file.size/180000)/100;
       this.uploaded = myReader.result;
       this.loading = false;
-      this.file_src = e.target.result;
     }
     myReader.readAsDataURL(file);
   }
@@ -67,6 +73,12 @@ export class Pictures implements OnInit{
   }
 
   uploadPic(){
+    this.saving = true;
+    this.ticks = 0;
+    let timer = Observable.timer(0, this.tickDuration*1000);
+    timer.subscribe(t => {this.ticks= t;});
+
+
     let pic: RecipePicture = new RecipePicture();
     pic.recipe_id = this.recipe.id;
     pic.picture = this.uploaded;
@@ -74,9 +86,12 @@ export class Pictures implements OnInit{
     this.friendlyApiService.uploadPicture(pic).then(pic => {
       if (this.pictures.length == 0){
         this.changeCoverPicture(pic.id);
+
       }
       this.pictures.push(pic);
-
+      this.ticks = 100;
+      this.saving = false;
+      this.input.files = null;
     });
   }
   deletePic(picture: RecipePicture){
