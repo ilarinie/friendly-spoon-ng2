@@ -1,5 +1,5 @@
 <!-- main recipe container -->
-<div *ngIf="recipe" class="container-fluid">
+<div *ngIf="recipe" class="container-fluid"  [@fadeIn]="on">
   <div class="col-sm-13 col-md-13 maindiv col-centered">
     <!-- Yläotsikkorivi -->
     <div class="row">
@@ -32,13 +32,13 @@
           </div>
       <!-- muuttuva näkymä aineosat, muut tiedot <-> notesit -->
       <div [ngSwitch]="noteSwitchButton" class="animate-switch-container">
-        <div class="animate-switch" *ngSwitchCase="'Notes'">
+        <div class="animate-switch" *ngSwitchCase="'Notes'" [@fadeIn]="on">
           <!-- ainesosanäkymä -->
           <div *ngIf="recipe.id">
-            <div class="col-sm-5 col-md-5 " *ngIf="!editheading">
+            <div class="col-sm-5 col-md-5 " *ngIf="!editheading" [@fadeIn]="on">
               <list-ingredients [recipe]="recipe" [amount_shown]="amount_shown"></list-ingredients>
             </div>
-            <div class="col-sm-5 col-md-5 " *ngIf="editheading">
+            <div class="col-sm-5 col-md-5 " *ngIf="editheading" [@fadeIn]="on">
               <add-ingredients [recipe]="recipe"></add-ingredients>
             </div>
           </div>
@@ -46,22 +46,22 @@
             <h4 style="color:green;">Save recipe to add ingredients!</h4> </div>
           <!-- muut tiedot -näkymä -->
           <div class="col-sm-5 col-md-5 ">
-            <div *ngIf="!editheading">
+            <div *ngIf="!editheading" [@fadeIn]="on">
               <h4 class="sub-heading">Average Rating:</h4>
               <rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>
             </div>
             <h4 class="headings sub-heading">Difficulty</h4>
-            <div *ngIf="!editheading">
+            <div *ngIf="!editheading" [@fadeIn]="on">
               <div [ngSwitch]="recipe.level.id"> <span *ngSwitchCase="3" class="label label-danger">Difficult</span> <span *ngSwitchCase="1" class="label label-success">Easy</span> <span *ngSwitchCase="2" class="label label-warning">Medium</span> </div>
             </div>
-            <div *ngIf="editheading">
+            <div *ngIf="editheading" [@fadeIn]="on">
               <select class="form-control" [(ngModel)]="recipe.level.id">
                 <option *ngFor="let level of levels" value="{{level.id}}">{{level.level}}</option>
               </select>
             </div>
             <h4 class="headings sub-heading">Preparation time</h4>
-            <div *ngIf="!editheading"><span *ngFor="let i of duration_array.slice(0,recipe.duration.id)" class="glyphicon glyphicon-time timespan"></span></div>
-            <div *ngIf="editheading">
+            <div *ngIf="!editheading" [@fadeIn]="on"><span *ngFor="let i of duration_array.slice(0,recipe.duration.id)" class="glyphicon glyphicon-time timespan"></span></div>
+            <div *ngIf="editheading" [@fadeIn]="on">
               <select class="form-control" [(ngModel)]="recipe.duration.id">
                 <option *ngFor="let duration of durations" value="{{duration.id}}">{{duration.range}}</option>
               </select>
@@ -74,9 +74,9 @@
                 <div *ngIf="!recipe.id">
                   <h4 style="color:green;">Save recipe to add Tags!</h4> </div>
                 <div *ngIf="recipe.id">
-                  <add-tags [recipe]="recipe" [editheading]="editheading"></add-tags>
+                  <add-tags [recipe]="recipe" [editheading]="editheading" [@fadeIn]="on"></add-tags>
                 </div>
-                <md-card class="savetools" *ngIf="editheading">
+                <md-card class="savetools" *ngIf="editheading" [@fadeIn]="on">
                   <md-card-title>Add an introduction</md-card-title>
                   <textarea class="form-control" [(ngModel)]="recipe.introduction"></textarea>
                 </md-card>
@@ -104,7 +104,7 @@
         </div>
         <!-- END Alempi rivi -->
         <!-- alarivi, jossa valmistusohje -->
-        <div [hidden]="noteSwitchButton != 'Notes'" class="row">
+        <div [hidden]="noteSwitchButton != 'Notes'" class="row" [@fadeIn]="on">
           <!-- tyhjä div desktop-näkymää varten, ei näy pienessä tai mobiilissa -->
           <div class="col-md-2 hidden-sm hidden-xs empty-div">
             <hr class="subline" /> </div>

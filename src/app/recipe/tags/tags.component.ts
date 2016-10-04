@@ -4,12 +4,16 @@ import { Tag } from "../../models/tag";
 import { RecipeTag } from "../../models/recipe_tag";
 
 import { FriendlyApiService } from "../../services/friendlyapi.service";
+import {fadeIn} from "../../animations";
 
 
 @Component({
   templateUrl: 'tags.component.html',
   styleUrls: ['tags.component.css'],
-  selector: 'add-tags'
+  selector: 'add-tags',
+  animations: [
+    fadeIn
+  ]
 })
 export class Tags {
   @Input()

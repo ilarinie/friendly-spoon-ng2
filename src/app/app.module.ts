@@ -34,6 +34,8 @@ import {Pictures} from "./recipe/pictures/pictures.component";
 
 import {enableProdMode} from "@angular/core";
 import {Ng2PaginationModule} from "ng2-pagination";
+import {InfiniteScrollModule} from "angular2-infinite-scroll";
+import {fadeIn} from "./animations";
 
 enableProdMode();
 
@@ -72,7 +74,8 @@ enableProdMode();
     MdCheckboxModule,
     MdRadioModule,
     MdProgressBarModule,
-    Ng2PaginationModule
+    Ng2PaginationModule,
+    InfiniteScrollModule
   ],
   providers: [Authentication, FriendlyApiService],
   entryComponents: [AppComponent],

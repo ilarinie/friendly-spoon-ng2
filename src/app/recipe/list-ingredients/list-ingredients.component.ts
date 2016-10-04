@@ -2,12 +2,14 @@ import { Component, Input } from "@angular/core";
 
 import { Recipe } from "../../models/recipe";
 import { RecipeIngredient } from "../../models/recipe_ingredient";
+import {fadeIn} from "../../animations";
 
 
 @Component({
   selector: 'list-ingredients',
   templateUrl: 'list-ingredients.component.html',
   styleUrls: ['list-ingredients.component.css'],
+  animations: [fadeIn]
 })
 export class ListIngredients {
   @Input()

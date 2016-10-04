@@ -2,12 +2,14 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Authentication} from './authentication';
 import { FriendlyApiService } from "../services/friendlyapi.service";
+import {fadeIn} from "../animations";
 
 
 @Component({
   selector: 'login',
   templateUrl: 'login.html',
-  styleUrls: ['signin.css']
+  styleUrls: ['signin.css'],
+  animations: [ fadeIn ]
 
 })
 

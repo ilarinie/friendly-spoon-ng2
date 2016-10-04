@@ -15,6 +15,7 @@ import { Tags } from "./tags/tags.component";
 import { Notes } from "./notes/notes.component";
 import {RecipePicture} from "../models/recipe_picture";
 import {Global} from "../globals";
+import {fadeIn} from "../animations";
 
 @Component({
   selector: "recipeshow",
@@ -22,6 +23,8 @@ import {Global} from "../globals";
   styleUrls: ["recipe.component.css"],
   viewProviders: [
     DragulaService
+  ],  animations: [
+    fadeIn
   ]
 })
 

@@ -1,11 +1,13 @@
 import {Component, OnInit} from "@angular/core";
 import { Tag } from "../models/tag";
 import {FriendlyApiService} from "../services/friendlyapi.service";
+import {fadeIn} from "../animations";
 
 
 @Component({
   selector: 'tag-list',
   templateUrl: 'tag-list.component.html',
+  animations: [ fadeIn ]
 })
 export class TagList implements OnInit {
 

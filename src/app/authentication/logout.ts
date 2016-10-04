@@ -1,10 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Authentication} from './authentication';
+import {fadeIn} from "../animations";
 
 @Component({
   selector: 'logout',
-  templateUrl: 'logout.html'
+  templateUrl: 'logout.html',
+  styleUrls: [ 'signin.css'],
+  animations: [ fadeIn ]
 })
 
 export class Logout implements OnInit {

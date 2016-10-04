@@ -1,10 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import { Ingredient } from "../models/ingredient";
 import {FriendlyApiService} from "../services/friendlyapi.service";
+import {fadeIn} from "../animations";
 
 @Component({
   selector: 'ingredient-list',
-  templateUrl: 'ingredient-list.component.html'
+  templateUrl: 'ingredient-list.component.html',
+  animations: [ fadeIn ],
 })
 export class IngredientList implements OnInit {
   ingredients: Ingredient[] = [];

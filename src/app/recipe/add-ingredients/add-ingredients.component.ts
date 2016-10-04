@@ -6,6 +6,7 @@ import { Unit } from '../../models/unit';
 import { FriendlyApiService} from '../../services/friendlyapi.service';
 import { Ingredient } from '../../models/ingredient';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
+import {fadeIn} from "../../animations";
 
 
 
@@ -17,7 +18,8 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   styleUrls: ['add-ingredients.component.css', 'dragula.min.css'],
   viewProviders: [
     DragulaService
-  ]
+  ],
+  animations: [ fadeIn ]
 })
 export class AddIngredients implements OnInit {
   @Input()
