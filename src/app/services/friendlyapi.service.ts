@@ -224,10 +224,12 @@ export class FriendlyApiService {
   }
   //RECIPES
   getRecipe(id: any) {
-    return this.http.get(this.recipesUrl + '/' + id + '.json', { headers: this.refreshHeaders(), body: '' })
-      .toPromise()
-      .then(response => response.json() as Recipe)
-      .catch(this.handleError);
+
+      return this.http.get(this.recipesUrl + '/' + id + '.json', {headers: this.refreshHeaders(), body: ''})
+        .toPromise()
+        .then(response => response.json() as Recipe)
+        .catch(this.handleError);
+
   }
   updateRecipeToList(recipe: Recipe) {
     return this.getRecipe(recipe.id).then(recipe => {

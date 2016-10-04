@@ -33,6 +33,7 @@ import {IngredientList} from "./ingredient-list/ingredient-list.component";
 import {Pictures} from "./recipe/pictures/pictures.component";
 
 import {enableProdMode} from "@angular/core";
+import {Ng2PaginationModule} from "ng2-pagination";
 
 enableProdMode();
 
@@ -70,7 +71,8 @@ enableProdMode();
     MdInputModule,
     MdCheckboxModule,
     MdRadioModule,
-    MdProgressBarModule
+    MdProgressBarModule,
+    Ng2PaginationModule
   ],
   providers: [Authentication, FriendlyApiService],
   entryComponents: [AppComponent],

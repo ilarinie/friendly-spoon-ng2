@@ -17,6 +17,7 @@
 .recipe-img-last {
 	margin-top: 10px;
 	border-radius: 25px;
+  width: 100%;
 }
 /* Listan tyylit, ei palloja eikä jäätävää sisennystä */
 ul {

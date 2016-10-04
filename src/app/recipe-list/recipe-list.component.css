@@ -27,11 +27,20 @@ a:active {
 }
 
 .recipe-search {
-  width: 85%;
+  width: 100%;
   float:left;
 }
 .clearbutton {
-  width: 15%;
+  float:right;
+  cursor: pointer;
+}
+.backtop-div {
+  width:100%;
+  text-align:center;
+  padding-top: 20px;
+}
+.backtop-link {
+  cursor: pointer;
 }
 
 .buttons-row {
@@ -72,4 +81,7 @@ md-card {
 }
 .modal-footer {
   margin-top: -15px;
+}
+.pagination-control {
+  margin-top: 20px;
 }

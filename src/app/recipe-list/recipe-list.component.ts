@@ -120,4 +120,7 @@ export class RecipeListComponent implements OnInit {
       this.order = "time";
     }
   }
+  scrollToTop() {
+    window.scrollTo(0,0);
+  }
 }

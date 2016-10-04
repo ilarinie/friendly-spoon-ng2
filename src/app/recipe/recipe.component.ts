@@ -84,28 +84,34 @@ export class RecipeComponent implements OnInit {
       this.recipe = new Recipe();
       this.recipe.level = new Level();
       this.recipe.duration = new Duration();
+      this.recipe.recipe_pictures = [];
       this.editheading = true;
       this.addrecipe = true;
+      console.log("jep juu addrecipe")
     } else {
       this.sub = this.route.params.subscribe(params => {
+        console.log("ei addrecipee")
         let id = +params['id'];
-        /*  NOTE: this can be used to load recipe from the preloaded list rather than from the api
-          let recipes: Recipe[] = JSON.parse(localStorage.getItem("recipes"))
 
-        if (recipes != null) {
-          let notfound = true;
-          for (let i = 0; i < recipes.length; i++) {
-            if (recipes[i].id == id) {
-              this.recipe = recipes[i];
-              notfound = false;
-              break;
-            }
-          }
-          if (notfound) {
-            this.friendlyApiService.getRecipe(id)
-              .then(recipe => this.recipe = recipe);
-          }
-        } else { */
+        /*  NOTE: this can be used to load recipe from the preloaded list rather than from the api
+         let recipes: Recipe[] = JSON.parse(localStorage.getItem("recipes"))
+
+         if (recipes != null) {
+         let notfound = true;
+         for (let i = 0; i < recipes.length; i++) {
+         if (recipes[i].id == id) {
+         this.recipe = recipes[i];
+         notfound = false;
+         break;
+         }
+         }
+         if (notfound) {
+         this.friendlyApiService.getRecipe(id)
+         .then(recipe => this.recipe = recipe);
+         }
+         } else { */
+        if (!isNaN(id)) {
+        console.log("vieläkin joo "+id);
         this.friendlyApiService.getRecipe(id)
           .then(recipe => {
             this.recipe = recipe;
@@ -113,6 +119,7 @@ export class RecipeComponent implements OnInit {
             console.log(this.recipe_user_id + " recipe user");
           });
         //  }
+        }
 
       });
       if (this.router.url.includes('edit')) {
