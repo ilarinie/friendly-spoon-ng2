@@ -7,8 +7,8 @@
       <div style="min-height: 20px;" *ngIf="!recipe.recipe_ingredients.length">
 
       </div>
-      <div *ngFor="let inc of recipe.recipe_ingredients">
-        <md-list-item>
+      <div *ngFor="let inc of recipe.recipe_ingredients" [@fadeIn]="on">
+        <md-list-item >
           <p md-line> <b>
     {{inc.ramount.integer}} <span *ngIf="inc.ramount.numerator"><sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub></span> {{inc.unit?.name}}
      {{inc.ingredient.name}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
@@ -19,8 +19,8 @@
     </div>
   </md-list>
 </md-card>
-<div [dragula]='"bag-two"' [dragulaModel]="recipe.recipe_ingredient_groups">
-  <div *ngFor="let group of recipe.recipe_ingredient_groups">
+<div [dragula]='"bag-two"' [dragulaModel]="recipe.recipe_ingredient_groups" >
+  <div *ngFor="let group of recipe.recipe_ingredient_groups" [@fadeIn]="on">
 
     <md-card>
       <md-card-title>{{group.name}} <span (click)="editGroup(group)" class="glyphicon glyphicon-pencil"></span></md-card-title>
@@ -30,7 +30,7 @@
 
           </div>
           <div *ngFor="let inc of group.recipe_ingredients" >
-            <md-list-item>
+            <md-list-item [@fadeIn]="on">
               <p md-line><b>
     {{inc.ramount.integer}} <span *ngIf="inc.ramount.numerator"><sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub></span> {{inc.unit?.name}}
      {{inc.ingredient.name}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
@@ -50,9 +50,11 @@
 <div *ngIf="addingRecInc"> </div>
 <md-card>
   <md-card-title>Add Ingredients</md-card-title>
-  <md-input maxlength="30" class="ingredient-create-field" #listFilter [(ngModel)]="ingredient.name" placeholder="Ingredient name"></md-input> <a class="btn btn-success ingredient-create-button" (click)="saveIngredient()">Create</a>
+  <md-input maxlength="30" class="ingredient-create-field" #listFilter [(ngModel)]="ingredient.name" placeholder="Ingredient name">
+
+  </md-input><button class="create-button btn btn-success" (click)="saveIngredient()">Create</button>
   <div *ngIf="!addingRecInc">
-    <div class="ingredient-add-box" *ngFor="let listingredient of ingredients | reverseFilter:listFilter.value">
+    <div class="ingredient-add-box" *ngFor="let listingredient of ingredients | reverseFilter:listFilter.value" [@fadeIn]="on">
       <h4 class="ingredient-header">{{listingredient.name}}</h4>
       <input class="form-control ingredient-amount-field" type="text" placeholder="Amount" [(ngModel)]="recipe_ingredient.amount">
       <select class="form-control info ingredient-unit-select" [(ngModel)]="recipe_ingredient.unit_id">

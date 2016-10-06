@@ -6,11 +6,15 @@ import { FriendlyApiService } from "../../services/friendlyapi.service";
 
 import { Recipe } from "../../models/recipe";
 import { Note } from "../../models/note";
+import {fadeIn} from "../../animations";
 
 @Component({
   templateUrl: 'notes.component.html',
   styleUrls: ['notes.component.css'],
-  selector: 'notes'
+  selector: 'notes',
+  animations: [
+    fadeIn
+  ]
 })
 export class Notes {
   @Input()

@@ -1,0 +1,31 @@
+<div class="container container-fluid" >
+  <div *ngIf="user" class="col-xs-13 col-sm-13 col-md-13 col-lg-13" [@fadeIn]="on" >
+    <h2>{{user.name}}</h2>
+    <button md-raised-button (click)="editPass()" class="user-button">Edit password</button>
+    <button md-raised-button (click)="editInfo()" class="user-button">Edit information</button>
+    <div *ngIf="changePas" class="password-inputs" [@fadeIn]="on">
+      <h4>Change Password</h4>
+      <md-input [(ngModel)]="user.password" placeholder="Password" type="password"></md-input><br>
+      <div *ngIf="passwordAlert" class="alert alert-danger" [@fadeIn]="on">
+        {{passwordAlert}}
+      </div>
+      <md-input  [(ngModel)]="user.password_confirmation" placeholder="Confirm password" type="password"></md-input><br>
+      <div *ngIf="confirmationAlert" class="alert alert-danger" [@fadeIn]="on">
+        {{confirmationAlert}}
+      </div>
+      <button md-raised-button (click)="changePassword()">Change</button>
+    </div>
+    <div *ngIf="editInfoToggle" class="info-inputs" [@fadeIn]="on">
+      <h4>Edit Information</h4>
+      <md-input [(ngModel)]="user.name" placeholder="Display Name"></md-input><br>
+      <button md-raised-button color="primary" (click)="saveUser()"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+    </div>
+    <div *ngIf="message" class="alert alert-success alert-dismissible" role="alert" [@fadeIn]="on">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{message}}
+    </div>
+
+  </div>
+</div>

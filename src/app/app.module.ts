@@ -6,7 +6,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
 import { routing } from './app.routes';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from "@angular/forms";
+import {FormsModule, NgSelectOption} from "@angular/forms";
 import { Authentication } from './authentication/authentication';
 import {ConfirmModule} from 'angular2-bootstrap-confirm';
 import { MdButtonModule } from '@angular2-material/button';
@@ -36,6 +36,8 @@ import {enableProdMode} from "@angular/core";
 import {Ng2PaginationModule} from "ng2-pagination";
 import {InfiniteScrollModule} from "angular2-infinite-scroll";
 import {fadeIn} from "./animations";
+import { SelectModule } from 'ng2-select/ng2-select';
+import {UserComponent} from "./user/user.component";
 
 enableProdMode();
 
@@ -57,7 +59,8 @@ enableProdMode();
     Login,
     Logout,
     TagList,
-    IngredientList
+    IngredientList,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ enableProdMode();
     MdRadioModule,
     MdProgressBarModule,
     Ng2PaginationModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    SelectModule
   ],
   providers: [Authentication, FriendlyApiService],
   entryComponents: [AppComponent],

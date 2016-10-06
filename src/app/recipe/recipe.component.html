@@ -1,5 +1,5 @@
 <!-- main recipe container -->
-<div *ngIf="recipe" class="container-fluid"  [@fadeIn]="on">
+<div *ngIf="recipe" class="maincont container-fluid"  [@fadeIn]="on">
   <div class="col-sm-13 col-md-13 maindiv col-centered">
     <!-- Yläotsikkorivi -->
     <div class="row">
@@ -83,11 +83,12 @@
                 <md-card [hidden]="true" class="savetools" *ngIf="editheading">
                   <input type="file" class="form-control" (change)="onChange($event)">
                 </md-card>
-                <md-card class="savetools" *ngIf="editheading"><a class="btn btn-success" (click)="save()">Save changes to Recipe</a>
-                  <div class="dangerzone" *ngIf="!router.url.includes('addrecipe')">
-                    <div *ngIf="!deleting">
-                      <h4>Danger Zone</h4> <a class="btn btn-danger " (click)="delete()">Delete Recipe</a> </div>
-                  </div>
+                <md-card class="savetools" *ngIf="editheading">
+                  <md-card-title>Recipe controls</md-card-title>
+                  <md-card-actions>
+                    <button md-raised-button color="primary" (click)="save()"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+                    <button md-raised-button color="accent"  (click)="delete()"><span class="glyphicon glyphicon-floppy-remove"></span> Delete</button>
+                  </md-card-actions>
                   <div *ngIf="deleting"> <img src="assets/ellipsis.svg"> Recipe is kill </div>
                 </md-card>
               </div>
@@ -134,7 +135,7 @@
         <!-- END alin rivi -->
       </div>
       <!-- END mainDiv -->
-    </div>
+</div>
     <!-- END main container -->
 <div *ngIf="!recipe" class="loading-recipe">
   <div class="loading-container">
@@ -142,6 +143,7 @@
     <p>Fetching recipe :E</p>
   </div>
 </div>
+
 
 <!-- Full-size picture Modal -->
 <div class="modal fade" id="myModal" role="dialog">

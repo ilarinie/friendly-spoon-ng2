@@ -11,10 +11,12 @@
   <div class="row main-row">
     <div class="col-xs-13 col-sm-13 col-md-13 col-lg-13">
       <label>Filter by tags</label>
+      <!--
       <select class="form-control" #searchTagger (change)="tagChange($event.target.value)">
         <option></option>
         <option *ngFor="let tag of tags" value="{{tag.title}}">{{tag.title}}</option>
-      </select>
+      </select> -->
+      <ng-select [allowClear]="true" [items]="tags" (selected)="tagChange($event.target.value)"></ng-select>
     </div>
   </div>
   <div class="row main-row">

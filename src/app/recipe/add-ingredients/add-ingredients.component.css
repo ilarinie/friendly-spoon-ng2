@@ -1,7 +1,5 @@
 
-.ingredient-create-button  {
-  border-radius: 0px !important;
-}
+
 .ingredient-add-box {
   border: 0.5px solid grey;
   border-radius: 5px;
@@ -31,6 +29,9 @@
 }
 .ingredient-create-field {
   width: 75%;
+}
+.create-button {
+ margin-left: 5px;
 }
 select :first-child{
   color:green !important;

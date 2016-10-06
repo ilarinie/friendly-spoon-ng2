@@ -16,6 +16,7 @@ import {Tag} from '../models/tag';
 import 'rxjs/add/operator/toPromise';
 import {RecipePicture} from "../models/recipe_picture";
 import {Global} from "../globals";
+import {User} from "../models/user";
 
 @Injectable()
 export class FriendlyApiService {
@@ -25,6 +26,8 @@ export class FriendlyApiService {
   //private baseUrl = 'http://localhost:3000';
 
   private recipesUrl = this.baseUrl + '/recipes';
+
+
   private unitsUrl = this.baseUrl + '/get';
   private ingredientsUrl = this.baseUrl + '/ingredients';
   private recipeIngredientsUrl = this.baseUrl + '/recipe_ingredients';
@@ -32,14 +35,15 @@ export class FriendlyApiService {
   private tagsUrl = this.baseUrl + '/tags';
   private recipeTagsUrl = this.baseUrl + '/recipe_tags';
   private notesUrl = this.baseUrl + '/notes';
+  private usersUrl = this.baseUrl + '/users';
 
   token: string;
   client: string;
   uid: string;
   tokentype: string;
   expiry: string;
-
   headers: Headers;
+
 
 
   constructor(private http: Http) {
@@ -53,6 +57,7 @@ export class FriendlyApiService {
     this.headers.append('Access-Token', this.token);
     this.headers.append('Client', this.client);
     this.headers.append('Uid', this.uid);
+
   }
 
   //TODO: REFACTOR TO SEPARATE SERVICES
@@ -373,6 +378,50 @@ export class FriendlyApiService {
       .delete(url, { headers: this.refreshHeaders(), body: '' })
       .toPromise()
   }
+
+
+  //USER
+
+  getUser(id: number){
+    return this.http
+      .get(this.usersUrl+'/'+ id, { headers: this.refreshHeaders()})
+      .toPromise()
+      .then((res) => res.json() as User)
+      .catch(this.handleError)
+  }
+  saveUser(user: User){
+    if (user.id){
+      return this.putUser(user);
+    }
+      return this.postUser(user);
+  }
+  private putUser(user: User){
+    let url = `${this.usersUrl}/${user.id}`;
+    return this.http
+      .put(url,JSON.stringify(user),  { headers: this.refreshHeaders() })
+      .toPromise()
+      .then((res) => res.json() as User)
+      .catch(this.handleError)
+  }
+  private postUser(user: User){
+    return this.http
+      .post(this.tagsUrl, JSON.stringify(user), { headers: this.refreshHeaders() })
+      .toPromise()
+      .then(res => res.json() as Tag)
+      .catch(this.handleError)
+  }
+  deleteUser(user: User){
+    let url = `${this.usersUrl}/${user.id}`;
+  }
+  changePassword(user:User, password: string, confirmation: string) {
+    let url = `${this.baseUrl}/auth/password`;
+    let data = { "email": user.email, "password": password, "password_confirmation": confirmation };
+    return this.http
+      .put(url, JSON.stringify(data), {headers: this.refreshHeaders() })
+      .toPromise()
+      .then((res) => res.json());
+    }
+
 
 
 

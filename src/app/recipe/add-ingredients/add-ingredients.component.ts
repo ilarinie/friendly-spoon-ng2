@@ -143,6 +143,7 @@ export class AddIngredients implements OnInit {
     this.recipe_ingredient_group.recipe_id = this.recipe.id;
     this.friendlyApiService.saveRecipeIngredientGroup(this.recipe_ingredient_group).then(res => {
       this.friendlyApiService.updateRecipeToList(this.recipe).then(recipe => { this.recipe = recipe; this.addingGroup = false; });
+      res.recipe_ingredients = [];
       this.recipe.recipe_ingredient_groups.push(res);
       this.recipe_ingredient_group = new RecipeIngredientGroup;
     })
