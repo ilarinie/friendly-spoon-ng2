@@ -3,6 +3,7 @@ import {User} from "../models/user";
 import {FriendlyApiService} from "../services/friendlyapi.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {fadeIn} from "../animations";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 /**
  * Created by ile on 10/6/16.
  */
@@ -15,6 +16,9 @@ import {fadeIn} from "../animations";
   animations: [fadeIn]
 })
 export class UserComponent {
+
+  form: FormGroup;
+
   user: User;
   sub: any;
   changePas: boolean = false;
@@ -24,10 +28,15 @@ export class UserComponent {
   private editInfoToggle: boolean = false;
 
   constructor(private router: Router, private friendlyApiService: FriendlyApiService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, fb: FormBuilder) {
     if (this.router.url.includes('mypage')) {
       console.log("dipadaa");
-        friendlyApiService.getUser( parseInt(localStorage.getItem("user_id")) ).then(user => this.user = user);
+        friendlyApiService.getUser( parseInt(localStorage.getItem("user_id")) ).then(user => {
+          this.user = user;
+          this.form = fb.group({
+            'name' : [this.user.name, Validators.required]
+          })
+        });
     } else {
 
       this.sub = this.route.params.subscribe(params => {
@@ -35,8 +44,15 @@ export class UserComponent {
         friendlyApiService.getUser(id).then(user => this.user = user);
       });
     }
-  }
 
+
+  }
+  hasEdited(){
+    console.log(this.form.dirty);
+  }
+  submitForm(value: any){
+    console.log(value);
+  }
   closePopup(){
     this.message = null;
   }
@@ -74,6 +90,10 @@ export class UserComponent {
         this.passwordAlert = 'Password ' + body.errors.password;
       }
     })
+  }
+
+  hasChanges(){
+    console.log(this.user)
   }
 
   saveUser(){

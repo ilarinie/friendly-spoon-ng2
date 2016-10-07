@@ -6,7 +6,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
 import { routing } from './app.routes';
 import { HttpModule } from '@angular/http';
-import {FormsModule, NgSelectOption} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { Authentication } from './authentication/authentication';
 import {ConfirmModule} from 'angular2-bootstrap-confirm';
 import { MdButtonModule } from '@angular2-material/button';
@@ -68,6 +68,7 @@ enableProdMode();
     HttpModule,
     ConfirmModule,
     FormsModule,
+    ReactiveFormsModule,
     MdButtonModule,
     MdGridListModule,
     MdCardModule,

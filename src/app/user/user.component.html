@@ -3,6 +3,7 @@
     <h2>{{user.name}}</h2>
     <button md-raised-button (click)="editPass()" class="user-button">Edit password</button>
     <button md-raised-button (click)="editInfo()" class="user-button">Edit information</button>
+    <button md-raised-button (click)="hasEdited()" class="user-button">asd asd</button>
     <div *ngIf="changePas" class="password-inputs" [@fadeIn]="on">
       <h4>Change Password</h4>
       <md-input [(ngModel)]="user.password" placeholder="Password" type="password"></md-input><br>
@@ -17,8 +18,10 @@
     </div>
     <div *ngIf="editInfoToggle" class="info-inputs" [@fadeIn]="on">
       <h4>Edit Information</h4>
-      <md-input [(ngModel)]="user.name" placeholder="Display Name"></md-input><br>
-      <button md-raised-button color="primary" (click)="saveUser()"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+      <form [formGroup]="form" (ngSubmit)="submitForm(complexForm.value)">
+      <md-input [formControl]="form.controls['name']"  placeholder="Display Name"></md-input><br>
+      <button type="submit" md-raised-button color="primary" ><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+      </form>
     </div>
     <div *ngIf="message" class="alert alert-success alert-dismissible" role="alert" [@fadeIn]="on">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
