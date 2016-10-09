@@ -47,8 +47,8 @@ export class UserComponent {
 
 
   }
-  hasEdited(){
-    console.log(this.form.dirty);
+  hasChanges(){
+    return this.form.dirty;
   }
   submitForm(value: any){
     console.log(value);
@@ -92,15 +92,14 @@ export class UserComponent {
     })
   }
 
-  hasChanges(){
-    console.log(this.user)
-  }
 
-  saveUser(){
+  saveUser(value: any){
+    this.user.name = value.name;
     this.friendlyApiService.saveUser(this.user).then(user => {
       this.user = user;
       this.editInfoToggle = false;
-      this.message = "Information edited succesfully"
+      this.message = "Information edited succesfully";
+      this.form.markAsPristine();
       localStorage.setItem("username", this.user.name);
       this.router.navigate(['mypage']);
     }).catch(res => {
