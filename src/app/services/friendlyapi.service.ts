@@ -72,14 +72,14 @@ export class FriendlyApiService {
 
 
   //experimental pic upload
-  uploadPicture(picture: RecipePicture){
+  uploadPicture(picture: RecipePicture) {
 
-    return this.http.post(this.baseUrl+'/recipe_pictures',JSON.stringify(picture), {headers: this.refreshHeaders()}).toPromise().then((res) => res.json() as RecipePicture);
+    return this.http.post(this.baseUrl + '/recipe_pictures', JSON.stringify(picture), { headers: this.refreshHeaders() }).toPromise().then((res) => res.json() as RecipePicture);
   }
-  deletePicture(picture: RecipePicture){
+  deletePicture(picture: RecipePicture) {
     let url = this.baseUrl + '/recipe_pictures/' + picture.id;
     console.log(url);
-    return this.http.delete(url,{headers: this.refreshHeaders(), body: ''}).toPromise();
+    return this.http.delete(url, { headers: this.refreshHeaders(), body: '' }).toPromise();
   }
 
   //GET STATIC VARIABLES FROM API
@@ -230,10 +230,10 @@ export class FriendlyApiService {
   //RECIPES
   getRecipe(id: any) {
 
-      return this.http.get(this.recipesUrl + '/' + id + '.json', {headers: this.refreshHeaders(), body: ''})
-        .toPromise()
-        .then(response => response.json() as Recipe)
-        .catch(this.handleError);
+    return this.http.get(this.recipesUrl + '/' + id + '.json', { headers: this.refreshHeaders(), body: '' })
+      .toPromise()
+      .then(response => response.json() as Recipe)
+      .catch(this.handleError);
 
   }
   updateRecipeToList(recipe: Recipe) {
@@ -382,45 +382,45 @@ export class FriendlyApiService {
 
   //USER
 
-  getUser(id: number){
+  getUser(id: number) {
     return this.http
-      .get(this.usersUrl+'/'+ id, { headers: this.refreshHeaders()})
+      .get(this.usersUrl + '/' + id, { headers: this.refreshHeaders() })
       .toPromise()
       .then((res) => res.json() as User)
       .catch(this.handleError)
   }
-  saveUser(user: User){
-    if (user.id){
+  saveUser(user: User): Promise<User> {
+    if (user.id) {
       return this.putUser(user);
     }
-      return this.postUser(user);
+    return this.postUser(user);
   }
-  private putUser(user: User){
+  private putUser(user: User) {
     let url = `${this.usersUrl}/${user.id}`;
     return this.http
-      .put(url,JSON.stringify(user),  { headers: this.refreshHeaders() })
+      .put(url, JSON.stringify(user), { headers: this.refreshHeaders() })
       .toPromise()
       .then((res) => res.json() as User)
       .catch(this.handleError)
   }
-  private postUser(user: User){
+  private postUser(user: User) {
     return this.http
       .post(this.tagsUrl, JSON.stringify(user), { headers: this.refreshHeaders() })
       .toPromise()
-      .then(res => res.json() as Tag)
+      .then(res => res.json() as User)
       .catch(this.handleError)
   }
-  deleteUser(user: User){
+  deleteUser(user: User) {
     let url = `${this.usersUrl}/${user.id}`;
   }
-  changePassword(user:User, password: string, confirmation: string) {
+  changePassword(user: User, password: string, confirmation: string) {
     let url = `${this.baseUrl}/auth/password`;
     let data = { "email": user.email, "password": password, "password_confirmation": confirmation };
     return this.http
-      .put(url, JSON.stringify(data), {headers: this.refreshHeaders() })
+      .put(url, JSON.stringify(data), { headers: this.refreshHeaders() })
       .toPromise()
       .then((res) => res.json());
-    }
+  }
 
 
 

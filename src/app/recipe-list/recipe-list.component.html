@@ -35,9 +35,7 @@
     <div class="col-xs-13 col-sm-13 col-md-13 col-lg-13">
       <div *ngIf="!loading">
 
-        <div class="col-xs-13 col-sm-13 col-md-6 col-lg-6" infinite-scroll  [infiniteScrollDistance]="2"
-             [infiniteScrollThrottle]="500"
-             (scrolled)="onScroll()" *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order">
+        <div class="col-xs-13 col-sm-13 col-md-6 col-lg-6" *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order | paginate: { itemsPerPage: 10, currentPage: p }">
           <md-card [@recipeFade]="off">
             <md-card-title-group>
               <div *ngIf="!recipe.coverpicture"><img md-card-sm-img src="assets/baking.png" alt="nice pic yo"></div>

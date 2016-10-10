@@ -9,7 +9,7 @@ import {fadeIn} from "../animations";
   selector: 'login',
   templateUrl: 'login.html',
   styleUrls: ['signin.css'],
-  animations: [ fadeIn ]
+  animations: [fadeIn]
 
 })
 
@@ -42,7 +42,7 @@ export class Login {
     this.auth.login(this.email, this.password)
       .then(
       res => {
-        if (res == "failed to log in") {
+        if (res === "failed to log in") {
           this.loggingIn = false;
           this.loginFailed = true;
         } else {

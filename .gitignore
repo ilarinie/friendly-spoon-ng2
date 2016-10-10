@@ -4,14 +4,13 @@
 /dist
 /tmp
 
-/src/app/globals.ts
-
 # dependencies
 /node_modules
 /bower_components
 
 # IDEs and editors
 /.idea
+/.vscode
 .project
 .classpath
 *.launch
