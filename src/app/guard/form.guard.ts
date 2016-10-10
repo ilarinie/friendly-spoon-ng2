@@ -3,24 +3,24 @@
  */
 import { CanDeactivate } from '@angular/router';
 import {UserComponent} from "../user/user.component";
-import {RecipeComponent} from "../recipe/recipe.component";
+import {RecipeFormComponent} from "../recipe-form/recipe-form.component";
 
 
 export class UserFormLeaveConfirmation implements CanDeactivate<UserComponent> {
 
   canDeactivate(target: UserComponent) {
-    if(target.hasChanges()){
+    if (target.hasChanges()) {
       return window.confirm('You have unsaved changes, really leave?');
     }
     return true;
   }
 }
 
-export class RecipeFormLeaveConfirmation implements CanDeactivate<RecipeComponent> {
+export class RecipeFormLeaveConfirmation implements CanDeactivate<RecipeFormComponent> {
 
-  canDeactivate(target: RecipeComponent) {
-    if(target.hasChanges()){
-      return window.confirm('Do you really want to leave?');
+  canDeactivate(target: RecipeFormComponent) {
+    if (target.hasChanges()) {
+      return window.confirm('The recipe has unsaved changes, really leave?');
     }
     return true;
   }

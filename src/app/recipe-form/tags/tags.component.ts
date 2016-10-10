@@ -18,8 +18,6 @@ import {fadeIn} from "../../animations";
 export class Tags {
   @Input()
   recipe: Recipe;
-  @Input("editheading")
-  editheading: boolean;
 
   tag: Tag = new Tag();
   addingTag: boolean = false;

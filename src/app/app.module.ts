@@ -22,16 +22,17 @@ import {MdTabsModule} from "@angular2-material/tabs";
 
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {RecipeComponent} from "./recipe/recipe.component";
-import {Tags} from "./recipe/tags/tags.component";
+import {RecipeFormComponent} from "./recipe-form/recipe-form.component";
+import {Tags} from "./recipe-form/tags/tags.component";
 import {Notes} from "./recipe/notes/notes.component";
 import { ListIngredients} from "./recipe/list-ingredients/list-ingredients.component";
-import {AddIngredients} from "./recipe/add-ingredients/add-ingredients.component";
+import {AddIngredients} from "./recipe-form/add-ingredients/add-ingredients.component";
 import {TinyEditor} from "./directives/tinymce.directive";
 import { Login } from "./authentication/login";
 import { Logout } from "./authentication/logout";
 import {TagList} from "./tag-list/tag-list.component";
 import {IngredientList} from "./ingredient-list/ingredient-list.component";
-import {Pictures} from "./recipe/pictures/pictures.component";
+import {Pictures} from "./recipe-form/pictures/pictures.component";
 
 import {enableProdMode} from "@angular/core";
 import {Ng2PaginationModule} from "ng2-pagination";
@@ -52,6 +53,7 @@ enableProdMode();
     AppComponent,
     RecipeListComponent,
     RecipeComponent,
+    RecipeFormComponent,
     Tags,
     Notes,
     ListIngredients,

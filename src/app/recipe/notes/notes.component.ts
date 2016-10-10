@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { FriendlyApiService } from "../../services/friendlyapi.service";
+import { Rating } from "ng2-rating";
 
 
 

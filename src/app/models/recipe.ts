@@ -20,6 +20,7 @@ export class Recipe {
   recipe_ingredients: RecipeIngredient[];
   ingredients: Ingredient[];
   keyword: string;
+  public: boolean;
   recipe_tags: RecipeTag[];
   allTags: any[];
   notes: any[];
@@ -30,11 +31,5 @@ export class Recipe {
   coverpicture: RecipePicture;
   ratingcount: number;
 
-
-
-  hasEqualAttributes(other: Recipe){
-    return this.name == other.name && this.level_id == other.level_id && this.duration_id == other.duration_id &&
-        this.instruction == other.instruction && this.keyword == other.keyword && this.introduction == other.introduction;
-  }
 
 }

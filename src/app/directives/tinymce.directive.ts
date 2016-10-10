@@ -38,7 +38,6 @@ export class TinyEditor {
           editor.on('keyup change', () => {
             this.zone.run(() => {
               let value = editor.getContent();
-              console.log(value);
               this.text = value;
               this.textfield.emit({
                 value: value

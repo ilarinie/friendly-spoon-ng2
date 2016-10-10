@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild  } from "@angular/core";
 import { Router }  from "@angular/router";
 
 import { Recipe } from "./models/recipe";
@@ -15,6 +15,8 @@ import { FriendlyApiService } from "./services/friendlyapi.service";
 
 
 export class AppComponent {
+  @ViewChild('navbarToggle') input;
+
   title = "Friendly Spoon";
   recipe: Recipe;
   username: string;
@@ -24,7 +26,7 @@ export class AppComponent {
   }
 
   closeNav() {
-    $('.navbar-toggle').click()
+    //  this.input.click()
   }
 
 }

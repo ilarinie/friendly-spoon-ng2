@@ -34,8 +34,8 @@ export class Authentication implements CanActivate {
 
   }
 
-  login(email: String, password: String): Promise<string> {
-    this.http.post(this.apiUrl + '/auth/sign_in', JSON.stringify({
+  login(email: String, password: String) {
+    return this.http.post(this.apiUrl + '/auth/sign_in', JSON.stringify({
       email: email,
       password: password
     }), {
@@ -60,12 +60,8 @@ export class Authentication implements CanActivate {
         localStorage.setItem('expiry', this.expiry);
         localStorage.setItem('username', this.username);
         localStorage.setItem('user_id', this.user_id);
-        return "success";
-      }).catch((error: any) => {
-        console.log(error + " eerrro")
-        return "failed to log in";
       })
-    return Promise.resolve("bleab");
+
   }
 
   logout() {

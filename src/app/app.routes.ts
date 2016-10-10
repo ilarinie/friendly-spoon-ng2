@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { RecipeListComponent } from "./recipe-list/recipe-list.component";
 import { RecipeComponent } from "./recipe/recipe.component";
+import { RecipeFormComponent } from "./recipe-form/recipe-form.component";
 import { Login } from "./authentication/login";
 import { Logout } from "./authentication/logout"
 import {TagList} from "./tag-list/tag-list.component";
@@ -19,8 +20,9 @@ const appRoutes: Routes = [
   },
   {
     path: "addrecipe",
-    component: RecipeComponent,
-    canActivate: [Authentication]
+    component: RecipeFormComponent,
+    canActivate: [Authentication],
+    canDeactivate: [RecipeFormLeaveConfirmation]
   },
   {
     path: "login",
@@ -37,8 +39,9 @@ const appRoutes: Routes = [
   },
   {
     path: "recipes/:id/edit",
-    component: RecipeComponent,
-    canActivate: [Authentication]
+    component: RecipeFormComponent,
+    canActivate: [Authentication],
+    canDeactivate: [RecipeFormLeaveConfirmation]
   },
   {
     path: "tags",

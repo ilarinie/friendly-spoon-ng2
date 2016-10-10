@@ -1,0 +1,129 @@
+<!-- main recipe container -->
+<div *ngIf="recipe" class="maincont container-fluid" [@fadeIn]="on">
+  <form [formGroup]="form">
+    <div class="col-sm-13 col-md-13 maindiv col-centered">
+      <!-- Yläotsikkorivi -->
+      <div class="row">
+        <div class="col-sm-3 col-md-3 heading-div">
+          <h3 class="main-heading">
+            <input class="heading-input" formControlName="name" placeholder="Recipe name">
+          </h3>
+          <p *ngIf="form.controls.name.errors && form.controls.name.touched">This field is required!</p>
+        </div>
+        <div class="col-sm-6 col-md-6  heading-div button-group">
+          <button class="btn header-btn" [disabled]="!form.valid" (click)="save(form.value)">Save</button>
+          <a class="btn header-btn" routerLink="/recipes/{{recipe.id}}" [ngClass]="{ disabled: addrecipe}">Back</a>
+        </div>
+      </div>
+      <!-- END yläotsikkorivi -->
+      <hr class="hline" />
+      <!-- Alempi rivi, kuvat, aineosat, muut tiedot -->
+      <div class="row">
+        <div class="col-md-2 img-div hidden-xs hidden-sm">
+          <div *ngIf="!recipe.recipe_pictures[0]"><img class="recipe-img" src="assets/baking.png"></div>
+          <div *ngIf="recipe.recipe_pictures[0]">
+            <a (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.thumb.url}}"></a><span><i>&copy;
+            {{recipe.recipe_pictures[0].author}}</i></span><br></div>
+          <div *ngIf="!recipe.recipe_pictures[1]"><img class=" recipe-img" src="assets/muffins.png"></div>
+          <div *ngIf="recipe.recipe_pictures[1]">
+            <a (click)="showPic(recipe.recipe_pictures[1])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[1].picture.thumb.url}}"></a><span><i>&copy;
+            {{recipe.recipe_pictures[1].author}}</i></span><br></div>
+          <div *ngIf="!recipe.recipe_pictures[2]"><img class="recipe-img-last" src="assets/pumpkin.png"></div>
+          <div *ngIf="recipe.recipe_pictures[2]">
+            <a (click)="showPic(recipe.recipe_pictures[2])" data-toggle="modal" data-target="#myModal"><img class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.thumb.url}}"></a><span><i>&copy;
+            {{recipe.recipe_pictures[2].author}}</i></span><br></div>
+        </div>
+        <!-- muuttuva näkymä aineosat, muut tiedot <-> notesit -->
+        <div [@fadeIn]="on">
+          <!-- ainesosanäkymä -->
+          <div class="col-sm-5 col-md-5 " *ngIf="recipe.id" [@fadeIn]="on">
+            <add-ingredients [recipe]="recipe"></add-ingredients>
+          </div>
+          <div *ngIf="!recipe.id" class="col-sm-5 col-md-5 ">
+            <h4 style="color:green;">Save recipe to add ingredients!</h4></div>
+          <!-- muut tiedot -näkymä -->
+          <div class="col-sm-5 col-md-5 ">
+            <h4 class="headings sub-heading">Difficulty</h4>
+            <div [@fadeIn]="on"> <select class="form-control" name="level_id" [formControl]="form.controls['level_id']">
+                  <option *ngFor="let level of levels" [value]="level.id" [selected]="level.id == recipe.level.id">{{level.level}}</option>
+                </select>
+                <p *ngIf="form.controls.level_id.errors">This field is required!</p>
+              </div>
+            <h4 class="headings sub-heading">Preparation time</h4>
+            <div [@fadeIn]="on"> <select class="form-control" name="duration_id" [formControl]="form.controls['duration_id']">
+                  <option *ngFor="let duration of durations" [value]="duration.id" [selected]="duration.id == recipe.duration.id">{{duration.range}}</option>
+                </select>
+                <p *ngIf="form.controls.duration_id.errors">This field is required!</p>
+               </div>
+            <div class="keywords-public">
+              <md-checkbox name="public" [formControl]="form.controls['public']">Make recipe visible to anyone</md-checkbox> <br/>
+              <md-input class="keyword-input" name="keyword" [formControl]="form.controls['keyword']" placeholder="Search keywords"></md-input>
+              <p *ngIf="form.controls.keyword.errors">This field is required!</p>
+            </div>
+            <div *ngIf="!recipe.id">
+              <h4 style="color:green;">Save recipe to add Tags!</h4></div>
+            <div *ngIf="recipe.id">
+              <add-tags [recipe]="recipe" [@fadeIn]="on"></add-tags>
+            </div>
+            <md-card class="savetools" [@fadeIn]="on">
+              <md-card-title>Add an introduction</md-card-title> <textarea class="form-control" name="introduction" [formControl]="form.controls['introduction']"></textarea>
+              <p *ngIf="form.controls.introduction.errors">This field is required!</p>
+             </md-card>
+            <md-card class="savetools">
+              <md-card-title>Recipe controls</md-card-title>
+              <md-card-actions>
+                <button md-raised-button color="primary" (click)="save(form.value)" [disabled]="!form.valid" type="submit"><span
+                    class="glyphicon glyphicon-floppy-save"></span> Save
+                  </button> <button [disabled]="addrecipe" md-raised-button color="accent" (click)="delete()"><span
+                    class="glyphicon glyphicon-floppy-remove"></span> Delete
+                  </button> </md-card-actions>
+              <div *ngIf="deleting"><img src="assets/ellipsis.svg"> Recipe is kill</div>
+            </md-card>
+          </div>
+          <!-- END muut tiedot -näkymä -->
+        </div>
+        <!-- END muuttuva näkymä-containeri -->
+      </div>
+      <!-- END Alempi rivi -->
+      <!-- alarivi, jossa valmistusohje -->
+      <div class="row" [@fadeIn]="on">
+        <!-- tyhjä div desktop-näkymää varten, ei näy pienessä tai mobiilissa -->
+        <div class="col-md-2 hidden-sm hidden-xs empty-div">
+          <hr class="subline" /> </div>
+        <!-- END Tyhjä desktop div -->
+        <!-- valmistusohjenäkymä -->
+          <div class="col-sm-10 col-md-10">
+            <h4 class="sub-heading">Edit instructions</h4>
+            <!--Instruction editori --><input [tinyMce]="" (textfield)="textfieldChange($event)" [formControl]="form.controls['instruction']" name="instruction">
+            <p *ngIf="form.controls.instruction.errors">This field is required!</p>
+            <recipe-pictures [recipe]="recipe"></recipe-pictures>
+            <!--<textarea id="editinst" [(ngModel)]="recipe.instruction" class="instruction"></textarea>--></div>
+        <!-- END valmistusohjenäkymä -->
+      </div>
+      <!-- END alin rivi -->
+    </div>
+    <!-- END mainDiv -->
+  </form>
+</div>
+<!-- END main container -->
+<div *ngIf="!recipe" class="loading-recipe">
+  <div class="loading-container"> <img src="assets/ellipsis.svg">
+    <p>Fetching recipe :E</p>
+  </div>
+</div>
+<!-- Full-size picture Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content  random-recipe" *ngIf="shownPic">
+      <div class="modal-header" style="background-color:#022f32;"> <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button> </div>
+      <div class="modal-body"> <img class="random-image img-responsive" src="{{baseUrl}}{{shownPic.picture.url}}">
+        <!--
+        <div style="float:right;" *ngIf="!randomRecipe.coverpicture"><img  src="assets/baking.png" alt="nice pic yo"></div>
+        <div style="float:right;" *ngIf="randomRecipe.coverpicture"><img  class="img-responsive" src="{{baseUrl}}{{recipe.coverpicture.picture.thumb.url}}"></div>
+        --></div>
+      <div class="modal-footer">
+        <p>Photo {{(shownIndex()+1)}} / {{this.recipe.recipe_pictures.length}}</p> <button type="button" class="btn btn-default" (click)="nextPic()">Next</button> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> </div>
+    </div>
+  </div>
+</div>

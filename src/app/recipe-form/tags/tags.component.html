@@ -1,10 +1,3 @@
-<div *ngIf="!editheading">
-  <h4>Tags</h4>
-  <md-grid-list cols="4" rowHeight="30px" gutterSize="4px">
-    <md-grid-tile *ngFor="let recipetag of recipe.recipe_tags" class="tag-label tag-display">{{recipetag.tag.title}}</md-grid-tile>
-  </md-grid-list>
-</div>
-<div *ngIf="editheading">
   <md-card>
     <md-card-title>Current tags</md-card-title>
     <md-card-subtitle>click to remove</md-card-subtitle>
@@ -27,4 +20,3 @@
     <md-input [(ngModel)]="tag.title" placeholder="Tag title" class="tag-add-field"></md-input>
     <button class="btn btn-success tag-add-button" (click)="saveTag()">Create</button>
   </md-card>
-</div>

@@ -1,7 +1,7 @@
 <nav *ngIf=" !router.url.includes('login') && !router.url.includes('logout')" class="navbar navbar-default navbar-fixed-top navi">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" routerLink="/">Friendly Spoon</a> </div>
+            <button type="button" class="navbar-toggle" #navbarToggle data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" routerLink="/">Friendly Spoon</a> </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a routerLink="addrecipe" (click)="closeNav()">Add Recipe</a></li>

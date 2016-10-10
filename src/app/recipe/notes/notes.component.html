@@ -21,7 +21,7 @@
 
   <md-card class="notebox" *ngFor="let note of recipe.notes">
     <h5 class="note"><i>{{note.note}}</i></h5>
-    <h5 class="rating"><b>Rating: </b><rating [(ngModel)]="note.rating" [readonly]="true"></rating></h5>
+    <h5 class="rating"><b>Rating: </b><rating [(ngModel)]="note.rating" [float]="true" [readonly]="true"></rating></h5>
 
     <span *ngIf="note.user_id == user_id" class="glyphicon glyphicon-remove remove-note" (click)="deleteNote(note)"></span>
     <h5 class="timestamp"><b>At: </b>{{note.created_at | date:'short'}} <b>By: </b>{{note.username}}</h5>
