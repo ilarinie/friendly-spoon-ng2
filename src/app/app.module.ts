@@ -18,6 +18,7 @@ import { MdCheckboxModule } from '@angular2-material/checkbox';
 import { MdRadioModule } from '@angular2-material/radio';
 import { DragulaModule} from "ng2-dragula/ng2-dragula";
 import {MdProgressBarModule} from "@angular2-material/progress-bar";
+import {MdTabsModule} from "@angular2-material/tabs";
 
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {RecipeComponent} from "./recipe/recipe.component";
@@ -79,11 +80,12 @@ enableProdMode();
     MdCheckboxModule,
     MdRadioModule,
     MdProgressBarModule,
+    MdTabsModule,
     Ng2PaginationModule,
     InfiniteScrollModule,
     SelectModule
   ],
-  providers: [Authentication, FriendlyApiService,UserFormLeaveConfirmation, RecipeFormLeaveConfirmation],
+  providers: [Authentication, FriendlyApiService, UserFormLeaveConfirmation, RecipeFormLeaveConfirmation],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent],
 
