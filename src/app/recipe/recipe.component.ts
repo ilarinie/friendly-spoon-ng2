@@ -54,6 +54,7 @@ export class RecipeComponent implements OnInit {
   durations: Duration[];
 
   shownPic: RecipePicture;
+  private initialRecipe: Recipe;
 
   constructor(
     private router: Router,
@@ -62,6 +63,12 @@ export class RecipeComponent implements OnInit {
   ) {
     this.duration_array = Array(5).fill(4);
 
+  }
+
+  hasChanges(){
+
+   /* return !this.recipe.hasEqualAttributes(this.initialRecipe); */
+    return (this.recipe.name != this.initialRecipe.name || this.recipe.level_id != this.initialRecipe.level_id || this.recipe.duration_id != this.initialRecipe.duration_id || this.recipe.instruction != this.initialRecipe.instruction || this.recipe.keyword != this.initialRecipe.keyword || this.recipe.introduction != this.initialRecipe.introduction);
   }
 
   showPic(pic: RecipePicture){
@@ -118,6 +125,7 @@ export class RecipeComponent implements OnInit {
         this.friendlyApiService.getRecipe(id)
           .then(recipe => {
             this.recipe = recipe;
+            this.initialRecipe = recipe;
             this.recipe_user_id = recipe.user_id;
             console.log(this.recipe_user_id + " recipe user");
           });
@@ -149,7 +157,7 @@ export class RecipeComponent implements OnInit {
       .save(this.recipe)
       .then(recipe => {
         this.recipe = recipe;
-
+        this.initialRecipe = recipe;
         //load updated recipe list to cache
         this.friendlyApiService.updateRecipeToList(this.recipe);
         if (this.router.url.includes('addrecipe')) {

@@ -9,6 +9,7 @@ import {IngredientList} from "./ingredient-list/ingredient-list.component";
 
 import {Authentication } from "./authentication/authentication";
 import {UserComponent} from "./user/user.component";
+import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from "./guard/form.guard";
 
 const appRoutes: Routes = [
   {
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
   {
     path: 'mypage',
     component: UserComponent,
-    canActivate: [Authentication]
+    canActivate: [Authentication],
+    canDeactivate: [UserFormLeaveConfirmation]
   }
 ];
 

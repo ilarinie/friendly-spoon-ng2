@@ -38,6 +38,7 @@ import {InfiniteScrollModule} from "angular2-infinite-scroll";
 import {fadeIn} from "./animations";
 import { SelectModule } from 'ng2-select/ng2-select';
 import {UserComponent} from "./user/user.component";
+import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from "./guard/form.guard";
 
 enableProdMode();
 
@@ -82,7 +83,7 @@ enableProdMode();
     InfiniteScrollModule,
     SelectModule
   ],
-  providers: [Authentication, FriendlyApiService],
+  providers: [Authentication, FriendlyApiService,UserFormLeaveConfirmation, RecipeFormLeaveConfirmation],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent],
 
