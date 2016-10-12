@@ -1,9 +1,9 @@
 <div [@fadeIn]="on">
-<h4 class="sub-heading">Ingredients I need </h4>
+<h4 class="sub-heading">Ingredients I need <span class="glyphicon glyphicon-shopping-cart" (click)="shoppingCart()"></h4>
 <hr class="hline" />
 <div>
 <md-list dense>
-  <md-list-item *ngFor="let inc of recipe.recipe_ingredients| orderBy: 'index'">
+  <md-list-item *ngFor="let inc of recipe.recipe_ingredients | orderBy: 'indexinmukaan'">
     <md-checkbox type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
           <span [hidden]="!inc.ramount.numerator">
             <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
@@ -17,10 +17,10 @@
   </md-list-item>
 </md-list>
 </div>
-<div *ngFor="let group of recipe.recipe_ingredient_groups | orderBy: 'index'">
+<div *ngFor="let group of recipe.recipe_ingredient_groups | orderBy: 'indexinmukaan'">
   <h4>{{group.name}}</h4>
   <md-list dense>
-    <md-list-item *ngFor="let inc of group.recipe_ingredients | orderBy: 'index'">
+    <md-list-item *ngFor="let inc of group.recipe_ingredients | orderBy: 'indexinmukaan'">
       <md-checkbox type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
             <span [hidden]="!inc.ramount.numerator">
               <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>

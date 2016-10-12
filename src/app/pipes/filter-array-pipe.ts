@@ -90,7 +90,7 @@ export class OrderBy implements PipeTransform {
       case "timereverse":
         items.sort(this.byTime);
         return items.reverse();
-      case "index":
+      case "indexinmukaan":
         items.sort(this.byIndex);
         return items;
       default:

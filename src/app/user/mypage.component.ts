@@ -15,7 +15,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
   styleUrls: ['user.component.css'],
   animations: [fadeIn]
 })
-export class UserComponent {
+export class MypageComponent {
 
   form: FormGroup;
 
@@ -30,7 +30,6 @@ export class UserComponent {
   constructor(private router: Router, private friendlyApiService: FriendlyApiService,
               private route: ActivatedRoute, fb: FormBuilder) {
     if (this.router.url.includes('mypage')) {
-      console.log("dipadaa");
         friendlyApiService.getUser( parseInt(localStorage.getItem("user_id")) ).then(user => {
           this.user = user;
           this.form = fb.group({

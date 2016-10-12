@@ -8,7 +8,6 @@ import { Duration } from "../models/duration";
 import { FriendlyApiService } from "../services/friendlyapi.service";
 
 //Recipe directives
-import { ListIngredients } from "./list-ingredients/list-ingredients.component";
 import { Notes } from "./notes/notes.component";
 import {RecipePicture} from "../models/recipe_picture";
 import {Global} from "../globals";
@@ -33,6 +32,8 @@ export class RecipeComponent implements OnInit {
   sub;
   duration_array;
   checked = [];
+
+  baseUrl = Global.apiUrl;
 
 
   user_id: number = parseInt(localStorage.getItem('user_id'));

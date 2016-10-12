@@ -6,7 +6,13 @@
       <md-tab>
         <template md-tab-label>General</template>
         <template md-tab-content>
-          <h4>General information bleebloo</h4>
+          <h4>General information</h4>
+          <p>
+            <strong>Number of recipes: </strong> {{user.recipecount}}
+          </p>
+          <p>
+            <strong>Average Rating: </strong> <rating [(ngModel)]="user.averagerating" [readonly]="true"></rating> ( {{user.ratingcount}} ratings )
+          </p>
         </template>
       </md-tab>
       <md-tab>

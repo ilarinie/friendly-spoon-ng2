@@ -39,11 +39,13 @@ export class AddIngredients implements OnInit {
   addingGroup: boolean;
   addingRecInc: boolean;
   addingInc: boolean;
+  movedInc: boolean = false;
 
 
   AMOUNT_MIXED_REGEX = /^\d{0,2}\d(\s[1-9]\/[1-9])$/i;
   AMOUNT_DECIMAL_REGEX = /^[0-9]{1,4}[,.]{0,1}[0-9]{0,3}$/;
   AMOUNT_FRACTION_REGEX = /^[1-9]\/[1-9]$/;
+  private amountError: string;
 
   constructor(private friendlyApiService: FriendlyApiService, private dragulaService: DragulaService) {
     dragulaService.setOptions('bag-two', {
@@ -54,6 +56,14 @@ export class AddIngredients implements OnInit {
     dragulaService.setOptions('bag-one', {
       revertOnSpill: true
     });
+    dragulaService.drop.subscribe((value) => {
+      console.log(`drop: ${value[0]}`);
+      this.toggleMoved();
+    });
+
+
+
+
   }
   sortByIndex(a, b) {
     if (a.index == null) {
@@ -66,7 +76,9 @@ export class AddIngredients implements OnInit {
   }
 
 
-
+  toggleMoved(){
+    this.recipe.incsMoved = true;
+  }
   ngOnInit() {
 
     this.recipe.recipe_ingredients.sort(this.sortByIndex);
@@ -90,16 +102,21 @@ export class AddIngredients implements OnInit {
     this.addingRecInc = true;
     if (this.recipe_ingredient.amount == undefined) {
     } else {
-      this.recipe_ingredient.amount = this.parseAmount(this.recipe_ingredient.amount);
-      if (this.recipe_ingredient.amount == undefined) {
+      let amount = this.parseAmount(this.recipe_ingredient.amount);
+
+      if (amount == undefined) {
+        this.amountError = "Incorrect amount \""+ this.recipe_ingredient.amount + "\", please use the format: \"2\" or \"2 1/2\""
+        this.addingRecInc = false;
         return;
       }
+      this.recipe_ingredient.amount =  amount;
     }
     console.log(this.recipe_ingredient.recipe_ingredient_group_id + " = group id");
     if (this.recipe_ingredient.recipe_ingredient_group_id) {
 
       this.friendlyApiService.saveRecipeIngredient(this.recipe_ingredient).then(recipe_ingredient => {
         this.addingRecInc = false;
+        this.amountError = null;
         let index = this.findGroupIndex(recipe_ingredient.recipe_ingredient_group_id);
         if (index > -1) {
           this.recipe.recipe_ingredient_groups[index].recipe_ingredients.push(recipe_ingredient);
@@ -110,6 +127,7 @@ export class AddIngredients implements OnInit {
       this.recipe_ingredient.recipe_id = this.recipe.id;
       this.friendlyApiService.saveRecipeIngredient(this.recipe_ingredient).then(recipe_ingredient => {
         this.addingRecInc = false;
+        this.amountError = null;
         this.recipe.recipe_ingredients.push(recipe_ingredient);
       });
     }

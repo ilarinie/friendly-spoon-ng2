@@ -42,3 +42,8 @@ select :first-child{
 md-card {
   margin-top: 10px;
 }
+.amountError {
+  color:red;
+  margin-left: 5px;
+  font-style: italic;
+}

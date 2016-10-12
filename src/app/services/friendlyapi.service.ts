@@ -17,6 +17,7 @@ import 'rxjs/add/operator/toPromise';
 import {RecipePicture} from "../models/recipe_picture";
 import {Global} from "../globals";
 import {User} from "../models/user";
+import {ShoppingCartItem} from "../models/shopping_cart_item";
 
 @Injectable()
 export class FriendlyApiService {
@@ -36,6 +37,7 @@ export class FriendlyApiService {
   private recipeTagsUrl = this.baseUrl + '/recipe_tags';
   private notesUrl = this.baseUrl + '/notes';
   private usersUrl = this.baseUrl + '/users';
+  private cartItemsUrl = this.baseUrl + '/shopping_cart_items';
 
   token: string;
   client: string;
@@ -420,6 +422,35 @@ export class FriendlyApiService {
       .put(url, JSON.stringify(data), { headers: this.refreshHeaders() })
       .toPromise()
       .then((res) => res.json());
+  }
+
+
+  //SHOPPING CART ITEMS
+  saveCartItem(item: ShoppingCartItem){
+    if (item.id){
+      return this.putCartItem(item);
+    }
+    return this.postCartItem(item);
+  }
+  putCartItem(item: ShoppingCartItem){
+    let url = this.cartItemsUrl + "/" + item.id;
+    return this.http
+      .put(url, JSON.stringify(item), { headers: this.refreshHeaders()})
+      .toPromise()
+      .then((res) => res.json() as ShoppingCartItem)
+  }
+  postCartItem(item: ShoppingCartItem){
+    return this.http
+      .post(this.cartItemsUrl, JSON.stringify(item), { headers: this.refreshHeaders()})
+      .toPromise()
+      .then((res) => res.json() as ShoppingCartItem)
+  }
+  deleteCartItem(item: ShoppingCartItem) {
+    let url = this.cartItemsUrl + "/" + item.id;
+    return this.http
+      .delete(url, { headers: this.refreshHeaders(), body: ''})
+      .toPromise()
+      .then((res) => res.json())
   }
 
 

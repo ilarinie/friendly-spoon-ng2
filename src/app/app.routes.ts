@@ -9,7 +9,7 @@ import {TagList} from "./tag-list/tag-list.component";
 import {IngredientList} from "./ingredient-list/ingredient-list.component";
 
 import {Authentication } from "./authentication/authentication";
-import {UserComponent} from "./user/user.component";
+import { MypageComponent} from "./user/mypage.component";
 import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from "./guard/form.guard";
 
 const appRoutes: Routes = [
@@ -55,7 +55,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'mypage',
-    component: UserComponent,
+    component: MypageComponent,
     canActivate: [Authentication],
     canDeactivate: [UserFormLeaveConfirmation]
   }

@@ -8,4 +8,6 @@ export class RecipeIngredient {
   recipe_id: number;
   recipe_ingredient_group_id: number;
   index: number;
+  instruction: string;
+  unit_id: number;
 }

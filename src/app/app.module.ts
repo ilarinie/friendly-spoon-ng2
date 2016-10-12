@@ -39,8 +39,9 @@ import {Ng2PaginationModule} from "ng2-pagination";
 import {InfiniteScrollModule} from "angular2-infinite-scroll";
 import {fadeIn} from "./animations";
 import { SelectModule } from 'ng2-select/ng2-select';
-import {UserComponent} from "./user/user.component";
+import {MypageComponent} from "./user/mypage.component";
 import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from "./guard/form.guard";
+import {CookieService} from "angular2-cookie/services/cookies.service";
 
 enableProdMode();
 
@@ -64,7 +65,7 @@ enableProdMode();
     Logout,
     TagList,
     IngredientList,
-    UserComponent
+    MypageComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +88,14 @@ enableProdMode();
     InfiniteScrollModule,
     SelectModule
   ],
-  providers: [Authentication, FriendlyApiService, UserFormLeaveConfirmation, RecipeFormLeaveConfirmation],
+  providers: [
+    Authentication,
+    FriendlyApiService,
+    UserFormLeaveConfirmation,
+    RecipeFormLeaveConfirmation,
+    CookieService
+
+  ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent],
 

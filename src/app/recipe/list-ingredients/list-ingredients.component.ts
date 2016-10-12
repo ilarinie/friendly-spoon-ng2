@@ -68,4 +68,8 @@ export class ListIngredients {
     return -1;
   }
 
+  shoppingCart(){
+    
+  }
+
 }

@@ -16,7 +16,10 @@
         <option></option>
         <option *ngFor="let tag of tags" value="{{tag.title}}">{{tag.title}}</option>
       </select> -->
-      <ng-select [allowClear]="true" [items]="tags" (selected)="tagChange($event.target.value)"></ng-select>
+      <select class="form-control" (change)="tagChange($event.target.value)">
+        <option value=""></option>
+        <option *ngFor="let tag of tags" value="{{tag.title}}">{{tag.title}}</option>
+      </select>
     </div>
   </div>
   <div class="row main-row">

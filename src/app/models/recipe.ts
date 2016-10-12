@@ -31,5 +31,7 @@ export class Recipe {
   coverpicture: RecipePicture;
   ratingcount: number;
 
+  incsMoved: boolean;
+
 
 }

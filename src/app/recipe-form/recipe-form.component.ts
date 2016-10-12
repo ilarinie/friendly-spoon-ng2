@@ -68,6 +68,9 @@ export class RecipeFormComponent implements OnInit {
   hasChanges() {
     return this.form.dirty;
   }
+  incsMoved() {
+    return this.recipe.incsMoved;
+  }
 
   //pictureModal
   showPic(pic: RecipePicture) {
@@ -120,7 +123,7 @@ export class RecipeFormComponent implements OnInit {
           this.friendlyApiService.getRecipe(id)
             .then(recipe => {
               this.recipe = recipe;
-              this.initialRecipe = recipe;
+              this.recipe.incsMoved = false;
               this.recipe_user_id = recipe.user_id;
               this.form = this.fb.group({
                 'name': [this.recipe.name, Validators.required],
@@ -193,6 +196,7 @@ export class RecipeFormComponent implements OnInit {
         this.friendlyApiService.saveRecipeIngredientGroup(this.recipe.recipe_ingredient_groups[i]).then();
       }
     }
+    this.recipe.incsMoved = false;
   }
   textfieldChange(event) {
     this.recipe.instruction = event.value;

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Headers, Http, Response } from "@angular/http";
 import { Router, CanActivate } from "@angular/router";
 import {Global} from "../globals";
+import {CookieService} from "angular2-cookie/services/cookies.service";
 
 
 
@@ -23,7 +24,10 @@ export class Authentication implements CanActivate {
   username: string;
   user_id: string;
 
-  constructor(private http: Http, private router: Router) {
+  constructor(
+    private http: Http,
+    private router: Router
+  ) {
     this.token = localStorage.getItem('token');
     this.client = localStorage.getItem('client');
     this.uid = localStorage.getItem('uid');
@@ -45,13 +49,15 @@ export class Authentication implements CanActivate {
       })
       .toPromise()
       .then((res: any) => {
-        this.token = res.headers.get('Access-Token');
+
+      this.token = res.headers.get('Access-Token');
         this.client = res.headers.get('Client');
         this.uid = res.headers.get('Uid');
         this.tokentype = res.headers.get('Token-Type');
         this.expiry = res.headers.get('Expiry');
         this.username = res.json().data.name;
         this.user_id = res.json().data.id;
+
 
         localStorage.setItem('token', this.token);
         localStorage.setItem('client', this.client);

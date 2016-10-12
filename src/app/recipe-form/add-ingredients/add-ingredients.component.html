@@ -62,6 +62,9 @@
         <option *ngFor="let unit of units" value="{{unit.id}}">{{unit.name}}</option>
       </select>
       <button class="btn btn-success ingredient-add-button" (click)="saveRecipeIngredient(listingredient.id)" [disabled]="addingRecInc">Add to Recipe</button>
+      <p [@fadeIn]="on" class="amountError" *ngIf="amountError">
+        {{amountError}}
+      </p>
       <input class="form-control ingredient-instruction-field" type="text" placeholder="Instruction - optional" [(ngModel)]="recipe_ingredient.instruction" />
       <select class="form-control info ingredient-instruction-field" [(ngModel)]="recipe_ingredient.recipe_ingredient_group_id">
         <option class="info" value="" [selected]="!recipe_ingredient.recipe_ingredient_group_id">Group</option>
@@ -69,7 +72,8 @@
       </select>
     </div>
   </div>
-  <div class="ingredient-add-box" *ngIf="addingRecInc"> <img src="assets/gears.svg"> Adding.. </div>
+  <div class="ingredient-add-box" *ngIf="addingRecInc">
+    <img src="assets/gears.svg"> Adding.. </div>
 </md-card>
 <md-card>
   <md-card-title>New ingredient group</md-card-title>
