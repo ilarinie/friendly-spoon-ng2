@@ -1,10 +1,10 @@
 <div [@fadeIn]="on">
-<h4 class="sub-heading">Ingredients I need <span class="glyphicon glyphicon-shopping-cart" (click)="shoppingCart()"></h4>
-<hr class="hline" />
-<div>
-<md-list dense>
-  <md-list-item *ngFor="let inc of recipe.recipe_ingredients | orderBy: 'indexinmukaan'">
-    <md-checkbox type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
+  <h4 class="sub-heading">Ingredients I need <a data-toggle="modal" data-target="#cartModal"  (click)="shoppingCart()"> <span class="glyphicon glyphicon-shopping-cart" ></span></a></h4>
+  <hr class="hline" />
+  <div>
+    <md-list dense>
+      <md-list-item *ngFor="let inc of recipe.recipe_ingredients | orderBy: 'indexinmukaan'">
+        <md-checkbox type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
           <span [hidden]="!inc.ramount.numerator">
             <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
           </span> </span> <span [hidden]="amount_shown!=2">{{inc.double.integer}}
@@ -14,14 +14,14 @@
           <span [hidden]="!inc.half.numerator">
             <sup>{{inc.half.numerator}}</sup>&frasl;<sub>{{inc.half.denominator}}</sub>
         </span> </span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}}</md-checkbox>
-  </md-list-item>
-</md-list>
-</div>
-<div *ngFor="let group of recipe.recipe_ingredient_groups | orderBy: 'indexinmukaan'">
-  <h4>{{group.name}}</h4>
-  <md-list dense>
-    <md-list-item *ngFor="let inc of group.recipe_ingredients | orderBy: 'indexinmukaan'">
-      <md-checkbox type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
+      </md-list-item>
+    </md-list>
+  </div>
+  <div *ngFor="let group of recipe.recipe_ingredient_groups | orderBy: 'indexinmukaan'">
+    <h4>{{group.name}}</h4>
+    <md-list dense>
+      <md-list-item *ngFor="let inc of group.recipe_ingredients | orderBy: 'indexinmukaan'">
+        <md-checkbox type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
             <span [hidden]="!inc.ramount.numerator">
               <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
             </span> </span> <span [hidden]="amount_shown!=2">{{inc.double.integer}}
@@ -32,31 +32,42 @@
               <sup>{{inc.half.numerator}}</sup>&frasl;<sub>{{inc.half.denominator}}</sub>
           </span> </span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}}</md-checkbox>
       </md-list-item>
-  </md-list>
-</div>
-<h4 class="sub-heading">Ingredients I have</h4>
-<hr class="hline" />
-<md-list dense>
-  <md-list-item *ngFor="let inc of checked">
-    <md-checkbox type="checkbox" (click)="unToggleInc(inc)" checked="true">&#09;
-<span *ngIf="amount_shown==1">{{inc.ramount.integer}}
+    </md-list>
+  </div>
+  <h4 class="sub-heading">Ingredients I have</h4>
+  <hr class="hline" />
+  <md-list dense>
+    <md-list-item *ngFor="let inc of checked">
+      <md-checkbox type="checkbox" (click)="unToggleInc(inc)" checked="true">&#09; <span *ngIf="amount_shown==1">{{inc.ramount.integer}}
 <span *ngIf="inc.ramount.numerator">
 <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
-</span>
-</span>
-<span *ngIf="amount_shown==2">{{inc.double.integer}}
+</span> </span> <span *ngIf="amount_shown==2">{{inc.double.integer}}
 <span *ngIf="inc.ramount.numerator">
 <sup>{{inc.double.numerator}}</sup>&frasl;<sub>{{inc.double.denominator}}</sub>
-</span>
-</span>
-<span *ngIf="amount_shown==-1">{{inc.half.integer}}
+</span> </span> <span *ngIf="amount_shown==-1">{{inc.half.integer}}
 <span *ngIf="inc.ramount.numerator">
 <sup>{{inc.half.numerator}}</sup>&frasl;<sub>{{inc.half.denominator}}</sub>
-</span>
-</span>
-{{inc.unit?.name}}
-{{inc.ingredient.name}}</md-checkbox>
-    <br/>
-  </md-list-item>
-</md-list>
+</span> </span> {{inc.unit?.name}} {{inc.ingredient.name}}</md-checkbox> <br/> </md-list-item>
+  </md-list>
+</div>
+
+
+<div class="modal fade" id="cartModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content" *ngIf="allIngredients">
+      <div class="modal-header" style="background-color:#022f32;color:white;"><h4 style="float:left;">Add to shopping cart</h4> <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button> </div>
+      <div class="modal-body">
+        <p *ngFor="let inc of allIngredients">
+          <strong>{{inc.ingredient.name}}</strong>
+        </p>
+        <p *ngIf="allIngredients.length == 0">
+          The recipe has no ingredients :((())) <span class="glyphicon glyphicon-grain"></span>
+        </p>
+
+       </div>
+      <div class="modal-footer">
+     </div>
+    </div>
+  </div>
 </div>

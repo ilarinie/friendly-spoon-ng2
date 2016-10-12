@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Authentication} from './authentication';
 import { FriendlyApiService } from "../services/friendlyapi.service";
 import {fadeIn} from "../animations";
+
 
 
 @Component({
@@ -21,9 +23,18 @@ export class Login {
 
   email: string;
   password: string;
+  form: FormGroup;
 
-  constructor(public auth: Authentication, public router: Router, private friendlyApiService: FriendlyApiService) {
-
+  constructor(
+    public auth: Authentication,
+    public router: Router,
+    private friendlyApiService: FriendlyApiService,
+    private fb: FormBuilder
+  ) {
+    this.form = fb.group({
+      'email': [],
+      'password': []
+    })
 
 
   }
@@ -37,9 +48,9 @@ export class Login {
   }
 
 
-  submit() {
+  submit(value: any, valid: boolean) {
     this.loggingIn = true;
-    this.auth.login(this.email, this.password)
+    this.auth.login(value.email, value.password)
       .then(
       res => {
         this.router.navigate(['/']);

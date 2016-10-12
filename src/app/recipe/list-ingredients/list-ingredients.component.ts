@@ -18,6 +18,8 @@ export class ListIngredients {
 
   checked: RecipeIngredient[] = [];
 
+  allIngredients: RecipeIngredient[];
+
   toggleInc(inc) {
     let group_index = this.findRecipeGroupIndex(inc);
 
@@ -68,8 +70,15 @@ export class ListIngredients {
     return -1;
   }
 
-  shoppingCart(){
-    
+  shoppingCart() {
+    this.allIngredients = [];
+    this.allIngredients = this.allIngredients.concat(this.recipe.recipe_ingredients);
+    for (let i = 0; i < this.recipe.recipe_ingredient_groups.length; i++) {
+      this.allIngredients = this.allIngredients.concat(this.recipe.recipe_ingredient_groups[i].recipe_ingredients)
+    }
+    console.log(this.allIngredients.length);
+
+
   }
 
 }
