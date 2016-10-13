@@ -450,7 +450,6 @@ export class FriendlyApiService {
     return this.http
       .delete(url, { headers: this.refreshHeaders(), body: ''})
       .toPromise()
-      .then((res) => res.json())
   }
 
 

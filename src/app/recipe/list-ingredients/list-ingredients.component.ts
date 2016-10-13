@@ -1,8 +1,12 @@
-import { Component, Input } from "@angular/core";
+import {Component, Input, OnDestroy} from "@angular/core";
 
-import { Recipe } from "../../models/recipe";
-import { RecipeIngredient } from "../../models/recipe_ingredient";
+import {Recipe} from "../../models/recipe";
+import {RecipeIngredient} from "../../models/recipe_ingredient";
 import {fadeIn} from "../../animations";
+import {ShoppingCartItem} from "../../models/shopping_cart_item";
+import {FriendlyApiService} from "../../services/friendlyapi.service";
+import {SessionService} from "../../services/session.service";
+import {User} from "../../models/user";
 
 
 @Component({
@@ -11,18 +15,26 @@ import {fadeIn} from "../../animations";
   styleUrls: ['list-ingredients.component.css'],
   animations: [fadeIn]
 })
-export class ListIngredients {
+export class ListIngredients implements OnDestroy {
   @Input()
   recipe: Recipe;
-  @Input('amount_shown') amount_shown: number;
+  @Input('multiplier') multiplier: number;
 
   checked: RecipeIngredient[] = [];
 
   allIngredients: RecipeIngredient[];
 
+  user: User;
+  sub: any;
+
+  constructor(private friendlyApiService: FriendlyApiService, private sessionService: SessionService) {
+    this.user = sessionService.user;
+    this.sub = sessionService.userChange.subscribe((user) => this.user = user);
+  }
+
   toggleInc(inc) {
     let group_index = this.findRecipeGroupIndex(inc);
-
+    console.log(this.multiplier)
 
     if (group_index == -1) {
       let index = this.recipe.recipe_ingredients.indexOf(inc);
@@ -37,7 +49,10 @@ export class ListIngredients {
         this.recipe.recipe_ingredient_groups[group_index].recipe_ingredients.splice(index, 1);
       }
     }
+
+
   }
+
   unToggleInc(inc) {
     let group_index = this.findRecipeGroupIndex(inc);
     if (group_index == -1) {
@@ -76,9 +91,44 @@ export class ListIngredients {
     for (let i = 0; i < this.recipe.recipe_ingredient_groups.length; i++) {
       this.allIngredients = this.allIngredients.concat(this.recipe.recipe_ingredient_groups[i].recipe_ingredients)
     }
-    console.log(this.allIngredients.length);
 
+    for (let i = 0; i < this.user.shopping_cart_items.length; i++) {
+      for (let j = 0; j < this.allIngredients.length; j++) {
+        if (this.allIngredients[j].id == this.user.shopping_cart_items[i].recipe_ingredient_id) {
+          let index = this.allIngredients.indexOf(this.allIngredients[j]);
+          if (index > -1) {
+            this.allIngredients.splice(index, 1);
+          }
 
+        }
+      }
+    }
+  }
+
+  addToCart(inc: RecipeIngredient) {
+
+    let user_id = localStorage.getItem("user_id");
+    let item: ShoppingCartItem = new ShoppingCartItem();
+    item.recipe_ingredient_id = inc.id;
+    item.user_id = parseInt(user_id);
+    this.friendlyApiService.saveCartItem(item).then((res) => {
+      let index = this.allIngredients.indexOf(inc);
+      if (index > -1) {
+        this.allIngredients.splice(index, 1);
+      }
+      this.sessionService.addToCart(res);
+      let count: number = parseInt(localStorage.getItem('shopping-cart-size'));
+      if (isNaN(count)) {
+        count = -1;
+      }
+      count++;
+      localStorage.setItem('shopping-cart-size', count.toString());
+    })
+
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

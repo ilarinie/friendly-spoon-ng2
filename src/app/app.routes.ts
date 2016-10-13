@@ -11,6 +11,7 @@ import {IngredientList} from "./ingredient-list/ingredient-list.component";
 import {Authentication } from "./authentication/authentication";
 import { MypageComponent} from "./user/mypage.component";
 import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from "./guard/form.guard";
+import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 
 const appRoutes: Routes = [
   {
@@ -58,6 +59,11 @@ const appRoutes: Routes = [
     component: MypageComponent,
     canActivate: [Authentication],
     canDeactivate: [UserFormLeaveConfirmation]
+  },
+  {
+    path: 'shoppingcart',
+    component: ShoppingCartComponent,
+    canActivate: [Authentication]
   }
 ];
 

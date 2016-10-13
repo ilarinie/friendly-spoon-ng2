@@ -4,6 +4,8 @@ import {FriendlyApiService} from "../services/friendlyapi.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {fadeIn} from "../animations";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
+import {SessionService} from "../services/session.service";
+import {OnInit} from "@angular/core";
 /**
  * Created by ile on 10/6/16.
  */
@@ -15,11 +17,11 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
   styleUrls: ['user.component.css'],
   animations: [fadeIn]
 })
-export class MypageComponent {
+export class MypageComponent implements OnInit {
 
   form: FormGroup;
 
-  user: User;
+  user: User = new User();
   sub: any;
   changePas: boolean = false;
   private message;
@@ -28,45 +30,53 @@ export class MypageComponent {
   private editInfoToggle: boolean = false;
 
   constructor(private router: Router, private friendlyApiService: FriendlyApiService,
-              private route: ActivatedRoute, fb: FormBuilder) {
-    if (this.router.url.includes('mypage')) {
-        friendlyApiService.getUser( parseInt(localStorage.getItem("user_id")) ).then(user => {
-          this.user = user;
-          this.form = fb.group({
-            'name' : [this.user.name, Validators.required]
-          })
-        });
-    } else {
+              private route: ActivatedRoute, private fb: FormBuilder, private sessionService: SessionService) {
 
-      this.sub = this.route.params.subscribe(params => {
-        let id = +params['id'];
-        friendlyApiService.getUser(id).then(user => this.user = user);
-      });
-    }
+    this.form = fb.group({
+      'name': ['', Validators.required]
+    })
+
+
 
 
   }
-  hasChanges(){
+
+  ngOnInit(){
+    this.user = this.sessionService.user;
+    this.sub = this.sessionService.userChange.subscribe((user) => {
+      this.user = user;
+      this.form = this.fb.group({
+        'name': [this.user.name, Validators.required]
+      })
+    })
+  }
+
+  hasChanges() {
     return this.form.dirty;
   }
-  submitForm(value: any){
+
+  submitForm(value: any) {
     console.log(value);
   }
-  closePopup(){
+
+  closePopup() {
     this.message = null;
   }
+
   editPass() {
-    if (this.editInfoToggle){
+    if (this.editInfoToggle) {
       this.editInfo();
     }
     this.changePas = !this.changePas;
   }
-  editInfo(){
-    if (this.changePas){
+
+  editInfo() {
+    if (this.changePas) {
       this.editPass();
     }
     this.editInfoToggle = !this.editInfoToggle;
   }
+
   changePassword() {
     this.passwordAlert = null;
     this.confirmationAlert = null;
@@ -82,25 +92,24 @@ export class MypageComponent {
       console.log(res._body);
       let body;
       body = JSON.parse(res._body)
-      if (body.errors.password_confirmation){
+      if (body.errors.password_confirmation) {
         this.confirmationAlert = 'Password confirmation ' + body.errors.password_confirmation;
       }
-      if (body.errors.password){
+      if (body.errors.password) {
         this.passwordAlert = 'Password ' + body.errors.password;
       }
     })
   }
 
 
-  saveUser(value: any){
+  saveUser(value: any) {
     this.user.name = value.name;
     this.friendlyApiService.saveUser(this.user).then(user => {
       this.user = user;
       this.editInfoToggle = false;
       this.message = "Information edited succesfully";
       this.form.markAsPristine();
-      localStorage.setItem("username", this.user.name);
-      this.router.navigate(['mypage']);
+      this.sessionService.changeUser(user);
     }).catch(res => {
       let body = JSON.parse(res._body);
       console.log(body);

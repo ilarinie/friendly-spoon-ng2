@@ -1,3 +1,11 @@
-<div *ngFor="let item of items">
-  {{item.recipe_ingredient.ingredient.name}}
+<div *ngIf="items.length == 0">
+  No items
+</div>
+<div *ngIf="items.length != 0">
+  <div [@fadeIn]="on" *ngFor="let item of items">
+    <md-card>
+      {{item.ingredient.name}} <span [innerHTML]="item.amount | fractioner:1"></span> {{item.unit?.name}}
+      <button style="float:right;" md-raised-button (click)="removeFromCart(item)">Remove</button>
+    </md-card>
+  </div>
 </div>

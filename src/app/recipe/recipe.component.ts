@@ -12,6 +12,7 @@ import { Notes } from "./notes/notes.component";
 import {RecipePicture} from "../models/recipe_picture";
 import {Global} from "../globals";
 import {fadeIn} from "../animations";
+import {RecipeIngredient} from "../models/recipe_ingredient";
 
 @Component({
   selector: "recipeshow",
@@ -28,10 +29,11 @@ export class RecipeComponent implements OnInit {
   divideButton = "Divide";
   doubleButton = "Double";
   noteSwitchButton = "Notes";
-  amount_shown = 1;
+  multiplier = 1;
   sub;
   duration_array;
   checked = [];
+  allIncs: RecipeIngredient[];
 
   baseUrl = Global.apiUrl;
 
@@ -93,6 +95,8 @@ export class RecipeComponent implements OnInit {
         this.friendlyApiService.getRecipe(id)
           .then(recipe => {
             this.recipe = recipe;
+
+
             this.recipe_user_id = recipe.user_id;
           });
         //  }
@@ -113,25 +117,45 @@ export class RecipeComponent implements OnInit {
     }
   }
   double() {
-    if (this.amount_shown === 2) {
-      this.amount_shown = 1;
+    if (this.multiplier === 2) {
+      this.multiplier = 1;
       this.doubleButton = "Double";
     } else {
-      this.amount_shown = 2;
+      this.multiplier = 2;
       this.doubleButton = "Reset";
       this.divideButton = "Divide";
     }
+    //this.multiplyAmounts();
   }
   divide() {
-    if (this.amount_shown === -1) {
-      this.amount_shown = 1;
+    if (this.multiplier === 0.5) {
+      this.multiplier = 1;
       this.divideButton = "Divide";
     } else {
-      this.amount_shown = -1;
+      this.multiplier = 0.5;
       this.divideButton = "Reset";
       this.doubleButton = "Double";
     }
+    //this.multiplyAmounts();
   }
+
+  multiplyAmounts(){
+
+  console.log(this.multiplier);
+    for (let i = 0; i< this.recipe.recipe_ingredients.length; i++){
+      this.recipe.recipe_ingredients[i].amount = this.recipe.recipe_ingredients[i].amount*this.multiplier;
+    }
+    for (let i = 0; i < this.recipe.recipe_ingredient_groups.length; i++){
+      for (let j= 0; j < this.recipe.recipe_ingredient_groups[i].recipe_ingredients.length; j++){
+        this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].amount = this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].amount*this.multiplier;
+      }
+    }
+    for (let i = 0; i < this.checked.length ; i++){
+      this.checked[i].amount = this.checked[i].amout*this.multiplier;
+    }
+  }
+
+
 
   recipeshow() {
     alert(this.recipe.name + "," + this.recipe.recipe_ingredients + ", " + this.recipe.level.level);

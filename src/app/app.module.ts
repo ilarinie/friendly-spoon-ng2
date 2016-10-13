@@ -1,4 +1,4 @@
-import {FilterArrayPipe, ReverseArrayPipe, OrderBy} from "./pipes/filter-array-pipe";
+import {FilterArrayPipe, ReverseArrayPipe, OrderBy, Fractioner} from "./pipes/filter-array-pipe";
 import {FriendlyApiService} from "./services/friendlyapi.service";
 import { Rating } from "ng2-rating";
 import { NgModule }       from '@angular/core';
@@ -19,7 +19,6 @@ import { MdRadioModule } from '@angular2-material/radio';
 import { DragulaModule} from "ng2-dragula/ng2-dragula";
 import {MdProgressBarModule} from "@angular2-material/progress-bar";
 import {MdTabsModule} from "@angular2-material/tabs";
-
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {RecipeComponent} from "./recipe/recipe.component";
 import {RecipeFormComponent} from "./recipe-form/recipe-form.component";
@@ -33,7 +32,6 @@ import { Logout } from "./authentication/logout";
 import {TagList} from "./tag-list/tag-list.component";
 import {IngredientList} from "./ingredient-list/ingredient-list.component";
 import {Pictures} from "./recipe-form/pictures/pictures.component";
-
 import {enableProdMode} from "@angular/core";
 import {Ng2PaginationModule} from "ng2-pagination";
 import {InfiniteScrollModule} from "angular2-infinite-scroll";
@@ -42,6 +40,8 @@ import { SelectModule } from 'ng2-select/ng2-select';
 import {MypageComponent} from "./user/mypage.component";
 import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from "./guard/form.guard";
 import {CookieService} from "angular2-cookie/services/cookies.service";
+import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
+import {SessionService} from "./services/session.service";
 
 enableProdMode();
 
@@ -50,6 +50,7 @@ enableProdMode();
     FilterArrayPipe,
     ReverseArrayPipe,
     OrderBy,
+    Fractioner,
     Rating,
     AppComponent,
     RecipeListComponent,
@@ -61,6 +62,7 @@ enableProdMode();
     AddIngredients,
     Pictures,
     TinyEditor,
+    ShoppingCartComponent,
     Login,
     Logout,
     TagList,
@@ -93,7 +95,8 @@ enableProdMode();
     FriendlyApiService,
     UserFormLeaveConfirmation,
     RecipeFormLeaveConfirmation,
-    CookieService
+    CookieService,
+    SessionService
 
   ],
   entryComponents: [AppComponent],

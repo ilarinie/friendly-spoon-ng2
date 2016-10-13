@@ -1,9 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { Headers, Http, Response } from "@angular/http";
 import { Router, CanActivate } from "@angular/router";
 import {Global} from "../globals";
-import {CookieService} from "angular2-cookie/services/cookies.service";
+import {SessionService} from "../services/session.service";
 
 
 
@@ -26,7 +25,8 @@ export class Authentication implements CanActivate {
 
   constructor(
     private http: Http,
-    private router: Router
+    private router: Router,
+    private sessionService: SessionService
   ) {
     this.token = localStorage.getItem('token');
     this.client = localStorage.getItem('client');
@@ -50,7 +50,7 @@ export class Authentication implements CanActivate {
       .toPromise()
       .then((res: any) => {
 
-      this.token = res.headers.get('Access-Token');
+        this.token = res.headers.get('Access-Token');
         this.client = res.headers.get('Client');
         this.uid = res.headers.get('Uid');
         this.tokentype = res.headers.get('Token-Type');
@@ -66,6 +66,9 @@ export class Authentication implements CanActivate {
         localStorage.setItem('expiry', this.expiry);
         localStorage.setItem('username', this.username);
         localStorage.setItem('user_id', this.user_id);
+
+
+        this.sessionService.getUser();
       })
 
   }

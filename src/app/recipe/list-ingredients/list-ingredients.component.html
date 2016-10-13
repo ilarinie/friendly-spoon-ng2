@@ -4,16 +4,10 @@
   <div>
     <md-list dense>
       <md-list-item *ngFor="let inc of recipe.recipe_ingredients | orderBy: 'indexinmukaan'">
-        <md-checkbox type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
-          <span [hidden]="!inc.ramount.numerator">
-            <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
-          </span> </span> <span [hidden]="amount_shown!=2">{{inc.double.integer}}
-          <span [hidden]="!inc.double.numerator">
-            <sup>{{inc.double.numerator}}</sup>&frasl;<sub>{{inc.double.denominator}}</sub>
-          </span> </span> <span [hidden]="amount_shown!==-1">{{inc.half.integer}}
-          <span [hidden]="!inc.half.numerator">
-            <sup>{{inc.half.numerator}}</sup>&frasl;<sub>{{inc.half.denominator}}</sub>
-        </span> </span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}}</md-checkbox>
+        <md-checkbox type="checkbox" (click)="toggleInc(inc)">
+
+          <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractioner: multiplier"></span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}}
+        </md-checkbox>
       </md-list-item>
     </md-list>
   </div>
@@ -21,16 +15,9 @@
     <h4>{{group.name}}</h4>
     <md-list dense>
       <md-list-item *ngFor="let inc of group.recipe_ingredients | orderBy: 'indexinmukaan'">
-        <md-checkbox type="checkbox" (click)="toggleInc(inc)">&#09; <span [hidden]="amount_shown!=1">{{inc.ramount.integer}}
-            <span [hidden]="!inc.ramount.numerator">
-              <sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
-            </span> </span> <span [hidden]="amount_shown!=2">{{inc.double.integer}}
-            <span [hidden]="!inc.double.numerator">
-              <sup>{{inc.double.numerator}}</sup>&frasl;<sub>{{inc.double.denominator}}</sub>
-            </span> </span> <span [hidden]="amount_shown!==-1">{{inc.half.integer}}
-            <span [hidden]="!inc.half.numerator">
-              <sup>{{inc.half.numerator}}</sup>&frasl;<sub>{{inc.half.denominator}}</sub>
-          </span> </span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}}</md-checkbox>
+        <md-checkbox type="checkbox" (click)="toggleInc(inc)">
+          <span *ngIf="inc.amount"><span *ngIf="inc.amount" [innerHTML]="inc.amount | fractioner: multiplier"></span></span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}}
+        </md-checkbox>
       </md-list-item>
     </md-list>
   </div>
@@ -38,16 +25,9 @@
   <hr class="hline" />
   <md-list dense>
     <md-list-item *ngFor="let inc of checked">
-      <md-checkbox type="checkbox" (click)="unToggleInc(inc)" checked="true">&#09; <span *ngIf="amount_shown==1">{{inc.ramount.integer}}
-<span *ngIf="inc.ramount.numerator">
-<sup>{{inc.ramount.numerator}}</sup>&frasl;<sub>{{inc.ramount.denominator}}</sub>
-</span> </span> <span *ngIf="amount_shown==2">{{inc.double.integer}}
-<span *ngIf="inc.ramount.numerator">
-<sup>{{inc.double.numerator}}</sup>&frasl;<sub>{{inc.double.denominator}}</sub>
-</span> </span> <span *ngIf="amount_shown==-1">{{inc.half.integer}}
-<span *ngIf="inc.ramount.numerator">
-<sup>{{inc.half.numerator}}</sup>&frasl;<sub>{{inc.half.denominator}}</sub>
-</span> </span> {{inc.unit?.name}} {{inc.ingredient.name}}</md-checkbox> <br/> </md-list-item>
+      <md-checkbox type="checkbox" (click)="unToggleInc(inc)">
+        <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractioner:multiplier"></span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}}
+      </md-checkbox> <br/> </md-list-item>
   </md-list>
 </div>
 
@@ -58,11 +38,11 @@
     <div class="modal-content" *ngIf="allIngredients">
       <div class="modal-header" style="background-color:#022f32;color:white;"><h4 style="float:left;">Add to shopping cart</h4> <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button> </div>
       <div class="modal-body">
-        <p *ngFor="let inc of allIngredients">
-          <strong>{{inc.ingredient.name}}</strong>
+        <p *ngFor="let inc of allIngredients" [@fadeIn]="on">
+          <span [innerHTML]="inc.amount | fractioner:multiplier"></span> <strong>{{inc.unit?.name}} {{inc.ingredient.name}}</strong> <span (click)="addToCart(inc)" class="glyphicon glyphicon-plus"></span>
         </p>
         <p *ngIf="allIngredients.length == 0">
-          The recipe has no ingredients :((())) <span class="glyphicon glyphicon-grain"></span>
+          No ingredients to be added :((())) <span class="glyphicon glyphicon-grain"></span>
         </p>
 
        </div>

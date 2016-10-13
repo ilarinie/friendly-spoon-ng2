@@ -34,7 +34,7 @@
           <div class="animate-switch" *ngSwitchCase="'Notes'" [@fadeIn]="on">
             <!-- ainesosanäkymä -->
             <div class="col-sm-5 col-md-5 " [@fadeIn]="on">
-              <list-ingredients [recipe]="recipe" [amount_shown]="amount_shown"></list-ingredients>
+              <list-ingredients [recipe]="recipe" [multiplier]="multiplier"></list-ingredients>
             </div>
             <!-- muut tiedot -näkymä -->
             <div class="col-sm-5 col-md-5 " [@fadeIn]="on">

@@ -9,6 +9,7 @@
                 <li><a routerLink="ingredients" (click)="closeNav()">Edit Ingredients</a></li>
                 <li ><a routerLink="/logout" (click)="closeNav()">Log out</a></li>
                 <li><a class="username" routerLink="mypage" (click)="closeNav()">Hello there <span class="username2">{{username}}</span></a></li>
+                <li><a routerLink="shoppingcart"><span style="font-size:20px;" class="glyphicon glyphicon-shopping-cart"></span><span *ngIf="count != 0" class="badge">{{count}}</span></a></li>
              </ul>
         </div>
     </div>

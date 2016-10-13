@@ -28,6 +28,9 @@
             {{confirmationAlert}}
           </div>
           <button md-raised-button color="primary" (click)="changePassword()">Change</button>
+          <div *ngIf="message" class="alert alert-success">
+            {{message}}
+          </div>
         </template>
       </md-tab>
       <md-tab>
