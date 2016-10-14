@@ -191,7 +191,7 @@ export class Fractioner implements PipeTransform {
     var t = this.HCF(decimal, num);
 
   //return the fraction after simplifying it
-    if (decimal == 0){
+    if (decimal == 0 || isNaN(decimal)){
       return whole;
     }
     else if (whole=="0"){

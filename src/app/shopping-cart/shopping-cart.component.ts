@@ -39,10 +39,11 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.sessionService.user;
+    this.items = this.sessionService.user.shopping_cart_items;
     this.sub = this.sessionService.userChange.subscribe((user) => {
       this.user = user;
       this.items = user.shopping_cart_items;
-      this.summarizeItems();
+     // this.summarizeItems();
     })
   }
 

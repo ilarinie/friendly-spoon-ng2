@@ -1,4 +1,4 @@
-import { Component, ViewChild  } from "@angular/core";
+import {Component, ViewChild, OnDestroy} from "@angular/core";
 import { Router }  from "@angular/router";
 
 import { Recipe } from "./models/recipe";
@@ -15,7 +15,7 @@ import {SessionService} from "./services/session.service";
 })
 
 
-export class AppComponent {
+export class AppComponent implements OnDestroy{
   @ViewChild('navbarToggle') input;
 
   title = "Friendly Spoon";
@@ -27,13 +27,17 @@ export class AppComponent {
     /*router.events.subscribe((event) => {
       this.username = localStorage.getItem('username');
     });*/
-    this.count = sessionService.shoppingCartItems;
-    this.username = "";
+    this.count = sessionService.user.shopping_cart_items.length;
+    this.username = sessionService.user.name;
     this.sub = sessionService.userChange.subscribe((user) => {
       this.count = user.shopping_cart_items.length;
       this.username = user.name;
     })
 
+  }
+
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 
   closeNav() {

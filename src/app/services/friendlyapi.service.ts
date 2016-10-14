@@ -443,7 +443,12 @@ export class FriendlyApiService {
     return this.http
       .post(this.cartItemsUrl, JSON.stringify(item), { headers: this.refreshHeaders()})
       .toPromise()
-      .then((res) => res.json() as ShoppingCartItem)
+      .then((res) => {
+        console.log("ressu")
+        console.log(res);
+        return res.json() as ShoppingCartItem;
+
+      })
   }
   deleteCartItem(item: ShoppingCartItem) {
     let url = this.cartItemsUrl + "/" + item.id;
