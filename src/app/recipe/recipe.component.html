@@ -5,10 +5,20 @@
       <div class="row">
         <div class="col-sm-3 col-md-3  heading-div">
           <h3 class="main-heading">{{recipe.name}}</h3> </div>
-        <div class="col-sm-6 col-md-6  heading-div button-group"><a class="btn header-btn" (click)="divide()">{{divideButton}}</a> <a class="btn header-btn" (click)="double()">{{doubleButton}}</a> <a class="btn header-btn" (click)="noteSwitch()">{{noteSwitchButton}}</a>
-          <div *ngIf="user_id == recipe_user_id">
-          <a class="btn header-btn" routerLink="/recipes/{{recipe.id}}/edit">
-            Edit</a> </div>
+        <!-- RECIPE ACTION BUTTONS FOR DESKTOP -->
+        <div *showItBootstrap="['md','lg']" class="col-sm-6 col-md-6  heading-div button-group">
+          <a class="btn header-btn" (click)="divide()">{{divideButton}}</a>
+          <a class="btn header-btn" (click)="double()">{{doubleButton}}</a>
+          <a class="btn header-btn" (click)="noteSwitch()">{{noteSwitchButton}}</a>
+          <a *ngIf="user_id == recipe_user_id" class="btn header-btn" routerLink="/recipes/{{recipe.id}}/edit">Edit</a>
+        </div>
+        <!-- RECIPE ACTION BUTTONS FOR MOBILE -->
+        <div *showItBootstrap="['sm', 'xs']" class="col-sm-12">
+          <hr>
+          <button class="mobile-button" (click)="divide()">{{divideButton}}</button>
+          <button class="mobile-button" (click)="double()">{{doubleButton}}</button>
+          <button class="mobile-button" (click)="noteSwitch()">{{noteSwitchButton}}</button>
+          <button class="mobile-button" *ngIf="user_id == recipe_user_id" routerLink="/recipes/{{recipe.id}}/edit">Edit</button>
         </div>
       </div>
       <!-- END yläotsikkorivi -->

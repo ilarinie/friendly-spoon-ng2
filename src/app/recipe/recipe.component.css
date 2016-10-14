@@ -137,3 +137,15 @@ li {
 .tag-display {
   border-radius: 25px;
 }
+
+.mobile-button {
+  width: 20vw;
+  margin-bottom: 0px;
+  color: white;
+  background-color: #dddddd;
+  border-radius: 10px 10px 0px 0px;
+  border-style: outset;
+}
+.mobile-button:active {
+  border-style: outset;
+}

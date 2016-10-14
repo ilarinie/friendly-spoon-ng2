@@ -42,6 +42,7 @@ import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from "./guard/fo
 import {CookieService} from "angular2-cookie/services/cookies.service";
 import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {SessionService} from "./services/session.service";
+import { ResponsiveModule } from 'ng2-responsive';
 
 enableProdMode();
 
@@ -88,7 +89,8 @@ enableProdMode();
     MdTabsModule,
     Ng2PaginationModule,
     InfiniteScrollModule,
-    SelectModule
+    SelectModule,
+    ResponsiveModule
   ],
   providers: [
     Authentication,

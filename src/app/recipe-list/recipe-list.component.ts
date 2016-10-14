@@ -17,7 +17,7 @@ import {fadeIn, recipeFade} from "../animations";
   templateUrl: "recipe-list.component.html",
   styleUrls: ["recipe-list.component.css"],
   animations: [
-  fadeIn, recipeFade
+    fadeIn, recipeFade
   ]
 })
 
@@ -41,7 +41,7 @@ export class RecipeListComponent implements OnInit {
   constructor(private friendlyApiService: FriendlyApiService) {
   }
 
-  onScroll(){
+  onScroll() {
 
   }
 
@@ -103,7 +103,6 @@ export class RecipeListComponent implements OnInit {
   }
 
   tagChange(value) {
-    console.log(value);
     this.shownRecipes = [];
     if (value == "") {
       this.shownRecipes = this.recipes;

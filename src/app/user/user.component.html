@@ -1,6 +1,8 @@
 <div class="container container-fluid" >
   <div *ngIf="user" class="col-xs-13 col-sm-13 col-md-13 col-lg-13" [@fadeIn]="on" >
     <h1>{{user.name}}'s page</h1>
+
+    <div *showItBootstrap="['md','lg']">
     <md-tab-group>
 
       <md-tab>
@@ -46,13 +48,10 @@
 
     </md-tab-group>
 
-
-
-
-<!-- Old user page template
+  </div>
+  <div *showItBootstrap="['sm', 'xs']">
     <button md-raised-button (click)="editPass()" class="user-button">Edit password</button>
     <button md-raised-button (click)="editInfo()" class="user-button">Edit information</button>
-    <button md-raised-button (click)="hasChanges()" class="user-button">asd asd</button>
     <div *ngIf="changePas" class="password-inputs" [@fadeIn]="on">
       <h4>Change Password</h4>
       <md-input [(ngModel)]="user.password" placeholder="Password" type="password"></md-input><br>
@@ -78,6 +77,10 @@
       </button>
       {{message}}
     </div>
+  </div>
+
+<!-- Old user page template
+
 -->
   </div>
 </div>
