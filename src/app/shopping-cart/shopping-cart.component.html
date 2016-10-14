@@ -4,7 +4,7 @@
 <div *ngIf="items.length != 0">
   <div [@fadeIn]="on" *ngFor="let item of items">
     <md-card>
-      {{item.ingredient.name}} <span [innerHTML]="item.amount | fractioner:1"></span> {{item.unit?.name}}
+     <span [innerHTML]="item.recipe_ingredient.amount | fractioner:1"></span> {{item.recipe_ingredient.unit?.name}}  {{item.recipe_ingredient.ingredient.name}}
       <button style="float:right;" md-raised-button (click)="removeFromCart(item)">Remove</button>
     </md-card>
   </div>
