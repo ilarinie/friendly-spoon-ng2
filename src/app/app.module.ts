@@ -43,6 +43,8 @@ import {CookieService} from "angular2-cookie/services/cookies.service";
 import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {SessionService} from "./services/session.service";
 import { ResponsiveModule } from 'ng2-responsive';
+import { TypeaheadModule} from "ng2-bootstrap";
+
 
 enableProdMode();
 
@@ -68,7 +70,7 @@ enableProdMode();
     Logout,
     TagList,
     IngredientList,
-    MypageComponent
+    MypageComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,7 +92,8 @@ enableProdMode();
     Ng2PaginationModule,
     InfiniteScrollModule,
     SelectModule,
-    ResponsiveModule
+    ResponsiveModule,
+    TypeaheadModule
   ],
   providers: [
     Authentication,

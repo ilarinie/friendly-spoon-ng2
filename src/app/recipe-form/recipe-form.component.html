@@ -78,7 +78,7 @@
             </div>
             <md-card class="savetools" [@fadeIn]="on">
               <md-card-title>Add an introduction</md-card-title>
-              <textarea class="form-control" name="introduction"
+              <textarea class="form-control" name="introduction" maxlength="140" #introduction
                         [formControl]="form.controls['introduction']"></textarea>
               <p *ngIf="form.controls.introduction.errors">This field is required!</p>
             </md-card>

@@ -25,7 +25,7 @@
   <hr class="hline" />
   <md-list dense>
     <md-list-item *ngFor="let inc of checked">
-      <md-checkbox type="checkbox" (click)="unToggleInc(inc)">
+      <md-checkbox type="checkbox" (click)="unToggleInc(inc)" [checked]="true">
         <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractioner:multiplier"></span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}}
       </md-checkbox> <br/> </md-list-item>
   </md-list>

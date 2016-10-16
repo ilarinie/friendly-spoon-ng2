@@ -10,8 +10,8 @@
         <div *ngFor="let inc of recipe.recipe_ingredients" [@fadeIn]="on">
           <md-list-item>
             <p md-line><b>
-              <span *ngIf="inc.amount" [outerHTML]="inc.amount | fractioner:1"></span> {{inc.unit?.name}}
-              {{inc.ingredient.name}} {{inc.ingredient.name}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
+              <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractioner:1"></span> {{inc.unit?.name}}
+               {{inc.ingredient.name}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
             </b></p>
             <p md-line> {{inc.instruction}} </p>
           </md-list-item>
@@ -33,8 +33,8 @@
             <div *ngFor="let inc of group.recipe_ingredients">
               <md-list-item [@fadeIn]="on">
                 <p md-line><b>
-                  <span *ngIf="inc.amount" [outerHTML]="inc.amount | fractioner:1"></span> {{inc.unit?.name}}
-                  {{inc.ingredient.name}} {{inc.ingredient.name}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
+                  <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractioner:1"></span> {{inc.unit?.name}}
+                  {{inc.ingredient.name}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
                 </b></p>
                 <p md-line> {{inc.instruction}} </p>
               </md-list-item>
@@ -51,9 +51,9 @@
   <div *ngIf="addingRecInc"></div>
   <md-card>
     <md-card-title>Add Ingredients</md-card-title>
-    <md-input maxlength="30" class="ingredient-create-field" #listFilter [(ngModel)]="ingredient.name"
+    <md-input maxlength="30" class="ingredient-create-field" #listFilter [(ngModel)]="ingredient.name" [typeahead]="ingredients" [typeaheadOptionField]="'name'"
               placeholder="Ingredient name">
-
+      <md-hint >{{listFilter.characterCount}} / 30</md-hint>
     </md-input>
     <button class="create-button btn btn-success" (click)="saveIngredient()">Create</button>
     <div *ngIf="!addingRecInc">
