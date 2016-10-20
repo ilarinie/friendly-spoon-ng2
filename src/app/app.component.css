@@ -4,3 +4,14 @@
 main {
   background-color: #f4f4f0;
 }
+.copyright {
+  float:none;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  font-family: 'Handlee', cursive;
+  width: 20%;
+  background-color: rgba(0,0,0,0.5);
+  margin-top: -40px;
+  box-shadow: 1px 1px 1px #888888;
+}

@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=The+Girl+Next+Door|Loved+by+the+King|Handlee|Amatic+SC|Clicker+Script|Homemade+Apple);
 body {
   background-image: url(/assets/mainbg.png);
+  min-height: 100vh;
 }
 main {
   background-color: #f4f4f0;
