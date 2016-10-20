@@ -1,12 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=The+Girl+Next+Door|Loved+by+the+King|Handlee|Amatic+SC|Clicker+Script|Homemade+Apple);
 body {
-  background-color: #f4f4f0;
+  background-image: url(/assets/mainbg.png);
 }
 main {
   background-color: #f4f4f0;
   padding-bottom: 80px;
   width: 100%;
   margin-top: 52px;
+  margin-bottom: 50px;
+  border-radius: 0px 0px 15px 15px;
+  border: 1px solid grey;
 }
 .navbar-default {
   background-color: #022f32 !important;

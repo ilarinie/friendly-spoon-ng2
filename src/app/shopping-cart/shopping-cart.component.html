@@ -1,5 +1,5 @@
-<div *ngIf="items.length == 0">
-  No items
+<div *ngIf="items.length == 0" style="text-align:center">
+  <h4>Your shopping cart is empty</h4>
 </div>
 <div *ngIf="items.length != 0">
   <div [@fadeIn]="on" *ngFor="let item of items">

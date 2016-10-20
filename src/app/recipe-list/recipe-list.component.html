@@ -41,7 +41,7 @@
   </div>
   <div class="row main-row">
     <div class="col-xs-12 col-sm-12 col-md-13 col-lg-13">
-      <div *showItBootstrap="['md','lg']">
+      <div *showItBootstrap="['md','lg','xl']">
         <div *ngIf="!loading">
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"
                *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order | paginate: { itemsPerPage: 10, currentPage: p }">
