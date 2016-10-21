@@ -14,7 +14,7 @@ import {fadeIn} from "../animations";
 @Component({
   selector: 'shopping-cart',
   templateUrl: 'shopping-cart.component.html',
-  styleUrls: ['shopping-cart.component.css'],
+  styleUrls: ['shopping-cart.component.scss'],
   animations: [fadeIn]
 })
 export class ShoppingCartComponent implements OnInit {
@@ -23,13 +23,13 @@ export class ShoppingCartComponent implements OnInit {
   user: User;
   sub: any;
 
-  constructor(private sessionService: SessionService, private friendlyApiService:FriendlyApiService) {
+  constructor(private sessionService: SessionService, private friendlyApiService: FriendlyApiService) {
   }
 
-  removeFromCart(item: ShoppingCartItem){
+  removeFromCart(item: ShoppingCartItem) {
     this.friendlyApiService.deleteCartItem(item).then(res => {
       let index = this.items.indexOf(item);
-      if (index > -1){
+      if (index > -1) {
         this.items.splice(index, 1)
       }
       this.sessionService.getUser();
@@ -43,12 +43,12 @@ export class ShoppingCartComponent implements OnInit {
     this.sub = this.sessionService.userChange.subscribe((user) => {
       this.user = user;
       this.items = user.shopping_cart_items;
-     // this.summarizeItems();
+      // this.summarizeItems();
     })
   }
 
-  summarizeItems(){
-    if(this.items == []){
+  summarizeItems() {
+    if (this.items == []) {
       return;
     }
 

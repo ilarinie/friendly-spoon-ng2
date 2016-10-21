@@ -6,19 +6,19 @@ import { FriendlyApiService } from "./services/friendlyapi.service";
 import {SessionService} from "./services/session.service";
 
 
-
 @Component({
   selector: "friendly-app",
   templateUrl: "app.component.html",
   providers: [FriendlyApiService],
-  styleUrls: ['styles.css', 'app.component.css']
+  styleUrls: ['app.component.scss']
 })
 
 
 export class AppComponent implements OnDestroy {
-  @ViewChild('navbarToggle') input: ElementRef;
+  @ViewChild('toggleri') input: ElementRef;
 
   title = "Friendly Spoon - here for you!";
+  isCollapsed = true;
 
 
   username: string;
@@ -30,9 +30,10 @@ export class AppComponent implements OnDestroy {
     private sessionService: SessionService,
     private render: Renderer
   ) {
-    /*router.events.subscribe((event) => {
-      this.username = localStorage.getItem('username');
-    });*/
+    this.isCollapsed = true;
+    router.events.subscribe((event) => {
+
+    });
     this.count = sessionService.user.shopping_cart_items.length;
     this.username = sessionService.user.name;
     this.sub = sessionService.userChange.subscribe((user) => {

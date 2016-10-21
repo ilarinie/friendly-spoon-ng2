@@ -17,7 +17,7 @@ import {RecipeIngredient} from "../models/recipe_ingredient";
 @Component({
   selector: "recipeshow",
   templateUrl: "recipe.component.html",
-  styleUrls: ["recipe.component.css"],
+  styleUrls: ["recipe.component.scss"],
   animations: [
     fadeIn
   ]
@@ -139,19 +139,19 @@ export class RecipeComponent implements OnInit {
     //this.multiplyAmounts();
   }
 
-  multiplyAmounts(){
+  multiplyAmounts() {
 
-  console.log(this.multiplier);
-    for (let i = 0; i< this.recipe.recipe_ingredients.length; i++){
-      this.recipe.recipe_ingredients[i].amount = this.recipe.recipe_ingredients[i].amount*this.multiplier;
+    console.log(this.multiplier);
+    for (let i = 0; i < this.recipe.recipe_ingredients.length; i++) {
+      this.recipe.recipe_ingredients[i].amount = this.recipe.recipe_ingredients[i].amount * this.multiplier;
     }
-    for (let i = 0; i < this.recipe.recipe_ingredient_groups.length; i++){
-      for (let j= 0; j < this.recipe.recipe_ingredient_groups[i].recipe_ingredients.length; j++){
-        this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].amount = this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].amount*this.multiplier;
+    for (let i = 0; i < this.recipe.recipe_ingredient_groups.length; i++) {
+      for (let j = 0; j < this.recipe.recipe_ingredient_groups[i].recipe_ingredients.length; j++) {
+        this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].amount = this.recipe.recipe_ingredient_groups[i].recipe_ingredients[j].amount * this.multiplier;
       }
     }
-    for (let i = 0; i < this.checked.length ; i++){
-      this.checked[i].amount = this.checked[i].amout*this.multiplier;
+    for (let i = 0; i < this.checked.length; i++) {
+      this.checked[i].amount = this.checked[i].amout * this.multiplier;
     }
   }
 

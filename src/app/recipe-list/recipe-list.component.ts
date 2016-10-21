@@ -15,7 +15,7 @@ import {fadeIn, recipeFade} from "../animations";
 @Component({
   selector: "recipe-list",
   templateUrl: "recipe-list.component.html",
-  styleUrls: ["recipe-list.component.css"],
+  styleUrls: ["recipe-list.component.scss"],
   animations: [
     fadeIn, recipeFade
   ]

@@ -9,7 +9,7 @@ import {fadeIn} from "../../animations";
 
 @Component({
   templateUrl: 'tags.component.html',
-  styleUrls: ['tags.component.css'],
+  styleUrls: ['tags.component.scss'],
   selector: 'add-tags',
   animations: [
     fadeIn
@@ -33,7 +33,10 @@ export class Tags {
     recipeTag.tag_id = tag.id;
 
     this.friendlyApiService.saveRecipeTag(recipeTag).then(recipeTag => {
-      this.recipe.recipe_tags.push(recipeTag); this.friendlyApiService.updateRecipeToList(this.recipe); this.addingTag = false; let index = this.recipe.allTags.indexOf(tag);
+      this.recipe.recipe_tags.push(recipeTag);
+      this.friendlyApiService.updateRecipeToList(this.recipe);
+      this.addingTag = false;
+      let index = this.recipe.allTags.indexOf(tag);
       if (index > -1) {
         this.recipe.allTags.splice(index, 1);
       }

@@ -11,7 +11,7 @@ import {fadeIn} from "../../animations";
 
 @Component({
   templateUrl: 'notes.component.html',
-  styleUrls: ['notes.component.css'],
+  styleUrls: ['notes.component.scss'],
   selector: 'notes',
   animations: [
     fadeIn

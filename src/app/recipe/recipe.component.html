@@ -6,11 +6,11 @@
         <div class="col-sm-3 col-md-3  heading-div">
           <h3 class="main-heading">{{recipe.name}}</h3> </div>
         <!-- RECIPE ACTION BUTTONS FOR DESKTOP -->
-        <div *showItBootstrap="['md','lg']" class="col-sm-6 col-md-6  heading-div button-group">
-          <a class="btn header-btn" (click)="divide()">{{divideButton}}</a>
-          <a class="btn header-btn" (click)="double()">{{doubleButton}}</a>
-          <a class="btn header-btn" (click)="noteSwitch()">{{noteSwitchButton}}</a>
-          <a *ngIf="user_id == recipe_user_id" class="btn header-btn" routerLink="/recipes/{{recipe.id}}/edit">Edit</a>
+        <div *showItBootstrap="['md','lg']" class="col-sm-6 col-md-6 heading-div button-group">
+          <button class="btn header-btn" (click)="divide()">{{divideButton}}</button>
+          <button class="btn header-btn" (click)="double()">{{doubleButton}}</button>
+          <button class="btn header-btn" (click)="noteSwitch()">{{noteSwitchButton}}</button>
+          <button *ngIf="user_id == recipe_user_id" class="btn header-btn" routerLink="/recipes/{{recipe.id}}/edit">Edit</button>
         </div>
         <!-- RECIPE ACTION BUTTONS FOR MOBILE -->
         <div *showItBootstrap="['sm', 'xs']" class="col-sm-12">
@@ -25,7 +25,7 @@
       <hr class="hline" />
       <!-- Alempi rivi, kuvat, aineosat, muut tiedot -->
       <div class="row">
-        <div class="col-md-2 img-div hidden-xs hidden-sm">
+        <div class="col-md-2 img-div hidden-md-down">
           <div *ngIf="!recipe.recipe_pictures[0]"><img class="recipe-img" src="assets/baking.png"></div>
           <div *ngIf="recipe.recipe_pictures[0]">
             <a (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.thumb.url}}"></a><span><i>&copy;
@@ -51,7 +51,7 @@
               <h4 class="sub-heading">Average Rating:</h4>
               <rating name="ratingaverage" [ngModel]="recipe.ratingaverage" [readonly]="true"></rating>
               <h4 class="headings sub-heading">Difficulty</h4>
-              <div [ngSwitch]="recipe.level.id"><span *ngSwitchCase="3" class="label label-danger">Difficult</span> <span *ngSwitchCase="1" class="label label-success">Easy</span> <span *ngSwitchCase="2" class="label label-warning">Medium</span> </div>
+              <div [ngSwitch]="recipe.level.id"><span *ngSwitchCase="3" class="tag tag-danger">Difficult</span> <span *ngSwitchCase="1" class="tag tag-success">Easy</span> <span *ngSwitchCase="2" class="tag tag-warning">Medium</span> </div>
               <h4 class="headings sub-heading">Preparation time</h4> <span *ngFor="let i of duration_array.slice(0,recipe.duration.id)" class="glyphicon glyphicon-time timespan"></span>
               <h4 class="headings sub-heading">Tags</h4>
               <md-grid-list cols="4" rowHeight="30px" gutterSize="4px">
@@ -73,7 +73,7 @@
       <!-- alarivi, jossa valmistusohje -->
       <div [hidden]="noteSwitchButton != 'Notes'" class="row" [@fadeIn]="on">
         <!-- tyhjä div desktop-näkymää varten, ei näy pienessä tai mobiilissa -->
-        <div class="col-md-2 hidden-sm hidden-xs empty-div">
+        <div class="col-md-2 hidden-sm-down empty-div">
           <hr class="subline" /> </div>
         <!-- END Tyhjä desktop div -->
         <!-- valmistusohjenäkymä -->
@@ -90,7 +90,8 @@
 </div>
 <!-- END main container -->
 <div *ngIf="!recipe" class="loading-recipe">
-  <div class="loading-container"> <img src="assets/ellipsis.svg">
+  <div class="loading-container">
+    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
     <p>Fetching recipe :E</p>
   </div>
 </div>

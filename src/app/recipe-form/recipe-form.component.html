@@ -19,7 +19,7 @@
       <hr class="hline"/>
       <!-- Alempi rivi, kuvat, aineosat, muut tiedot -->
       <div class="row">
-        <div class="col-md-2 img-div hidden-xs hidden-sm">
+        <div class="col-md-2 img-div hidden-md-down">
           <div *ngIf="!recipe.recipe_pictures[0]"><img class="recipe-img" src="assets/baking.png"></div>
           <div *ngIf="recipe.recipe_pictures[0]">
             <a (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal"><img
@@ -93,7 +93,7 @@
                   class="glyphicon glyphicon-floppy-remove"></span> Delete
                 </button>
               </md-card-actions>
-              <div *ngIf="deleting"><img src="assets/ellipsis.svg"> Recipe is kill</div>
+              <div *ngIf="deleting"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Recipe is kill</div>
             </md-card>
           </div>
           <!-- END muut tiedot -näkymä -->
@@ -125,7 +125,8 @@
 </div>
 <!-- END main container -->
 <div *ngIf="!recipe" class="loading-recipe">
-  <div class="loading-container"><img src="assets/ellipsis.svg">
+  <div class="loading-container">
+    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
     <p>Fetching recipe :E</p>
   </div>
 </div>

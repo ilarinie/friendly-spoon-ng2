@@ -1,3 +1,5 @@
+@import '../styles/_variables.scss';
+
 /* vaakasuora viiva pääotsikon ja aliotsikoiden alla */
 .hline {
   margin-top: 0px;
@@ -36,20 +38,20 @@ li {
 .main-heading {
   margin-top: 25px;
   margin-bottom: 0px;
-  color: #cc6699;
+  color: $header-pink;
 
 }
 
 /* pääotsikkorivin nappuloiden tyylit */
 .header-btn {
-  margin-top: 32px;
+  margin-top: 37px;
   margin-bottom: 0px;
   margin-left: 5px;
   padding-top: 1px;
   padding-bottom: 1px;
   width: 75px;
   color: white;
-  background-color: #dddddd;
+  background-color: $button-grey;
   border-radius: 10px 10px 0px 0px;
   float: right;
 }
@@ -83,15 +85,6 @@ li {
 }
 
 /*sarakkeet note-näkymässä */
-.dangerzone {
-  background: repeating-linear-gradient(
-    45deg,
-    #eee,
-    #eee 10px,
-    red 10px,
-    red 20px
-  );
-}
 
 .savetools {
   margin-top: 10px;
@@ -112,40 +105,4 @@ li {
 .maincont {
   position: relative;
   min-height: 100%;
-}
-
-.maindiv {
-
-  margin-bottom: 60px;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-color: #f5f5f5;
-}
-.tag-label {
-  background-color: #cc6699;
-  margin-right: 5px;
-  font-family: 'Handlee', cursive;
-  color: white;
-  font-size: 100%;
-}
-.tag-display {
-  border-radius: 25px;
-}
-
-.mobile-button {
-  width: 20vw;
-  margin-bottom: 0px;
-  color: white;
-  background-color: #dddddd;
-  border-radius: 10px 10px 0px 0px;
-  border-style: outset;
-}
-.mobile-button:active {
-  border-style: outset;
 }

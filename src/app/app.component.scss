@@ -1,8 +1,10 @@
+@import 'styles/_variables.scss';
+
 .username2 {
-  font-family: 'Handlee', cursive;
+  font-family: $cursive-font;
 }
 main {
-  background-color: #f4f4f0;
+  background-color: $mainWhite;
 }
 .copyright {
   float:none;
@@ -10,7 +12,6 @@ main {
   text-align: center;
   color: white;
   font-family: 'Handlee', cursive;
-  width: 20%;
   background-color: rgba(0,0,0,0.5);
   margin-top: -40px;
   box-shadow: 1px 1px 1px #888888;

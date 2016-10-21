@@ -15,11 +15,11 @@ import {fadeIn} from "../../animations";
 @Component({
   selector: 'add-ingredients',
   templateUrl: 'add-ingredients.component.html',
-  styleUrls: ['add-ingredients.component.css', 'dragula.min.css'],
+  styleUrls: ['add-ingredients.component.scss', 'dragula.min.css'],
   viewProviders: [
     DragulaService
   ],
-  animations: [ fadeIn ]
+  animations: [fadeIn]
 })
 export class AddIngredients implements OnInit {
   @Input()
@@ -76,7 +76,7 @@ export class AddIngredients implements OnInit {
   }
 
 
-  toggleMoved(){
+  toggleMoved() {
     this.recipe.incsMoved = true;
   }
   ngOnInit() {
@@ -105,11 +105,11 @@ export class AddIngredients implements OnInit {
       let amount = this.parseAmount(this.recipe_ingredient.amount);
 
       if (amount == undefined) {
-        this.amountError = "Incorrect amount \""+ this.recipe_ingredient.amount + "\", please use the format: \"2\" or \"2 1/2\""
+        this.amountError = "Incorrect amount \"" + this.recipe_ingredient.amount + "\", please use the format: \"2\" or \"2 1/2\""
         this.addingRecInc = false;
         return;
       }
-      this.recipe_ingredient.amount =  amount;
+      this.recipe_ingredient.amount = amount;
     }
     console.log(this.recipe_ingredient.recipe_ingredient_group_id + " = group id");
     if (this.recipe_ingredient.recipe_ingredient_group_id) {

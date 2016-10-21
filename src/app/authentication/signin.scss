@@ -1,18 +1,13 @@
+@import '../styles/_variables.scss';
+
 
 .col-centered {
   float: none;
   margin: 0 auto;
 }
 .sign-in-container {
-
-
-/*  font-family: 'The Girl Next Door', cursive;
-  font-family: 'Loved by the King', cursive;
-  font-family: 'Amatic SC', cursive;
-  font-family: 'Clicker Script', cursive;
-  font-family: 'Homemade Apple', cursive;*/
   color: white;
-  background: #022f32 url("/assets/signinBG.png") no-repeat center top;
+  background: $darkGreen url("/assets/signinBG.png") no-repeat center top;
   position: absolute;
   top:0;
   left:0;
@@ -27,7 +22,7 @@
   text-align: center;
   }
 .signin-header{
-    font-family: 'Handlee', cursive;
+    font-family: $cursive-font;
   text-align: center;
 }
 .signin-field-container {

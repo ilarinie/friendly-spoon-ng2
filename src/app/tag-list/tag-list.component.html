@@ -18,7 +18,7 @@
       <md-input [(ngModel)]="newTag.title"></md-input> <a class="btn btn-success" (click)="saveTag(newTag)">Save</a>
   </md-card>
   <md-card *ngIf="savingTag">
-    <img src="assets/ellipsis.svg">
+    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
     Saving tag..
   </md-card>
      </div>

@@ -12,7 +12,7 @@ import {User} from "../../models/user";
 @Component({
   selector: 'list-ingredients',
   templateUrl: 'list-ingredients.component.html',
-  styleUrls: ['list-ingredients.component.css'],
+  styleUrls: ['list-ingredients.component.scss'],
   animations: [fadeIn]
 })
 export class ListIngredients implements OnDestroy {

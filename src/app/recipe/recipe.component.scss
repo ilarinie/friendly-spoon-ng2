@@ -1,3 +1,5 @@
+@import '../styles/_variables.scss';
+
 /* vaakasuora viiva pääotsikon ja aliotsikoiden alla */
 .hline {
   margin-top: 0px;
@@ -36,7 +38,7 @@ li {
 .main-heading {
   margin-top: 25px;
   margin-bottom: 0px;
-  color: #cc6699;
+  color: $header-pink;
 
 }
 
@@ -47,9 +49,9 @@ li {
   margin-left: 5px;
   padding-top: 1px;
   padding-bottom: 1px;
-  width: 75px;
+  width: 80px;
   color: white;
-  background-color: #dddddd;
+  background-color: $button-grey;
   border-radius: 10px 10px 0px 0px;
   float: right;
 }
@@ -125,5 +127,27 @@ li {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: #f5f5f5;
+  background-color: $mainWhite;
+}
+.tag-label {
+  background-color: $header-pink;
+  margin-right: 5px;
+  font-family: $cursive-font;
+  color: white;
+  font-size: 100%;
+}
+.tag-display {
+  border-radius: 25px;
+}
+
+.mobile-button {
+  width: 20vw;
+  margin-bottom: 0px;
+  color: white;
+  background-color: $button-grey;
+  border-radius: 10px 10px 0px 0px;
+  border-style: outset;
+}
+.mobile-button:active {
+  border-style: outset;
 }
