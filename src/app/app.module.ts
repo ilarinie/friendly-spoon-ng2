@@ -39,7 +39,6 @@ import {fadeIn} from "./animations";
 import { SelectModule } from 'ng2-select/ng2-select';
 import {MypageComponent} from "./user/mypage.component";
 import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from "./guard/form.guard";
-import {CookieService} from "angular2-cookie/services/cookies.service";
 import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {SessionService} from "./services/session.service";
 import { ResponsiveModule } from 'ng2-responsive';
@@ -100,7 +99,6 @@ enableProdMode();
     FriendlyApiService,
     UserFormLeaveConfirmation,
     RecipeFormLeaveConfirmation,
-    CookieService,
     SessionService
 
   ],

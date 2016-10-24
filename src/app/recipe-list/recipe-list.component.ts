@@ -49,25 +49,31 @@ export class RecipeListComponent implements OnInit {
     this.order = "name";
     this.searchTag = "";
 
-    /*if (localStorage.getItem("recipes") == null) {
-     this.loading = true;
-     this.friendlyApiService.getRecipes().then(recipes => {
-     this.recipes = recipes;
-     localStorage.setItem("recipes", JSON.stringify(recipes));
-     this.loading = false;
-     });
-     } else {
-     this.recipes = JSON.parse(localStorage.getItem("recipes"))
-     }
-     if (localStorage.getItem("tags") == null) {
-     this.friendlyApiService.getTags().then(tags => { this.tags = tags; localStorage.setItem("tags", JSON.stringify(tags)) });
-     console.log("joo")
-     } else {
-     this.tags = JSON.parse(localStorage.getItem("tags"))
-     }*/
+    if (localStorage.getItem("recipes") == null || localStorage.getItem("listLoaded") == null || (parseInt(localStorage.getItem("listLoaded")) + 600000) < Date.now()) {
+      console.log("lataan")
+      this.loading = true;
+      this.friendlyApiService.getRecipes().then(recipes => {
+        this.recipes = recipes;
+        this.shownRecipes = recipes;
+        localStorage.setItem("recipes", JSON.stringify(recipes));
+        localStorage.setItem("listLoaded", Date.now().toString());
+        this.loading = false;
+      });
+    } else {
+      this.recipes = JSON.parse(localStorage.getItem("recipes"))
+      this.shownRecipes = JSON.parse(localStorage.getItem("recipes"));
+    }
+    if (localStorage.getItem("tags") == null) {
+      this.friendlyApiService.getTags().then(tags => { this.tags = tags; localStorage.setItem("tags", JSON.stringify(tags)) });
+      console.log("joo")
+    } else {
+      this.tags = JSON.parse(localStorage.getItem("tags"))
+    }
 
-    this.friendlyApiService.getTags().then(tags => this.tags = tags);
-    this.refreshRecipes();
+
+
+    /*this.friendlyApiService.getTags().then(tags => this.tags = tags);
+    this.refreshRecipes();*/
   }
 
   random() {
@@ -95,8 +101,8 @@ export class RecipeListComponent implements OnInit {
     this.loading = true;
     this.friendlyApiService.getRecipes().then(recipes => {
       this.recipes = recipes;
-      this.recipes = recipes;
       localStorage.setItem("recipes", JSON.stringify(recipes));
+      localStorage.setItem("listLoaded", Date.now().toString())
       this.shownRecipes = recipes;
       this.loading = false;
     })

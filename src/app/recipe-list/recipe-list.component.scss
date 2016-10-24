@@ -23,6 +23,33 @@ a:hover {
 a:active {
 
 }
+.custom-pagination {
+  display: inline-block;
+}
+.pagination-previous, .pagination-next, .pages {
+  float: left;
+  border-radius: 5px;
+  margin: 4px;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+.pagination-previous, .pagination-next {
+  button {
+    border:none;
+    background-color: $mainWhite;
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor:default;
+  }
+}
+.pages {
+
+}
+.current {
+  background-color: $darkGreen;
+  color: white;
+}
 
 .refresh {
   color: green;
