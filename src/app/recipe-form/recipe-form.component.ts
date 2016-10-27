@@ -66,6 +66,9 @@ export class RecipeFormComponent implements OnInit {
   }
 
   hasChanges() {
+    if (this.incsMoved()){
+      return true;
+    }
     return this.form.dirty;
   }
   incsMoved() {

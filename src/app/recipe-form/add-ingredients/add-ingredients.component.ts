@@ -1,5 +1,5 @@
 import {RecipeIngredientGroup} from '../../models/recipe_ingredient_group';
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit, EventEmitter} from '@angular/core';
 import { Recipe } from '../../models/recipe';
 import { RecipeIngredient } from '../../models/recipe_ingredient';
 import { Unit } from '../../models/unit';
@@ -7,6 +7,7 @@ import { FriendlyApiService} from '../../services/friendlyapi.service';
 import { Ingredient } from '../../models/ingredient';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import {fadeIn} from "../../animations";
+import {Output} from "@angular/core/src/metadata/directives";
 
 
 
@@ -24,6 +25,8 @@ import {fadeIn} from "../../animations";
 export class AddIngredients implements OnInit {
   @Input()
   recipe: Recipe;
+  @Output()
+  moved = new EventEmitter<boolean>();
 
 
 

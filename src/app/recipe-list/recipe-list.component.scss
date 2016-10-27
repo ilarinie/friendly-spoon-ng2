@@ -25,6 +25,7 @@ a:active {
 }
 .custom-pagination {
   display: inline-block;
+  margin-top: 10px;
 }
 .pagination-previous, .pagination-next, .pages {
   float: left;
@@ -91,6 +92,7 @@ a:active {
 
 md-card {
   margin: 5px;
+  margin-top: 0px;
   float: left;
   width: 100%;
   height: 225px;
@@ -98,9 +100,13 @@ md-card {
 }
 .random-recipe {
   width: 502px;
+  max-width: 95vw;
 }
 .random-image {
   margin-left: -15px
+}
+.roller {
+  height: 900px;
 }
 .modal-footer {
   margin-top: -15px;

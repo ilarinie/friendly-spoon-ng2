@@ -1,6 +1,7 @@
 <div class="container-fluid recipe-list" [@fadeIn]="on">
   <h1>Friendly Spoon</h1>
-  <h3>is here for you!</h3>
+  <h3>is here for you! </h3>
+  <h4><span *ngIf="recipes">{{recipes.length}} recipes and counting!</span></h4>
   <div class="row main-row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <md-input [typeahead]="shownRecipes" [typeaheadOptionField]="'name'" class="recipe-search" type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Filter recipes"><span md-suffix class="clearbutton glyphicon glyphicon-remove" (click)="clearSearch()"></span></md-input>
@@ -103,7 +104,7 @@
   </div>
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" >
       <div *ngIf="!rolling">
         <!-- Modal content-->
         <div class="modal-content  random-recipe" *ngIf="randomRecipe">
@@ -112,13 +113,13 @@
           <div class="modal-body">
             <div>
               <rating [(ngModel)]="randomRecipe.ratingaverage" [readonly]="true"></rating> ({{randomRecipe.ratingcount}} ratings)
-              <div style="float:right;margin-top:10px;" [ngSwitch]="randomRecipe.level.id"><span *ngSwitchCase="3" class="label label-danger">Difficult</span> <span *ngSwitchCase="1" class="label label-success">Easy</span> <span *ngSwitchCase="2" class="label label-warning">Medium</span> </div>
+              <div style="float:right;margin-top:10px;" [ngSwitch]="randomRecipe.level.id"><span *ngSwitchCase="3" class="tag tag-danger">Difficult</span> <span *ngSwitchCase="1" class="tag tag-success">Easy</span> <span *ngSwitchCase="2" class="tag tag-warning">Medium</span> </div>
             </div>
             <p><b>{{randomRecipe.duration.range}}</b></p>
             <p><i>{{randomRecipe.introduction}}</i></p>
             <p><a routerLink="/recipes/{{randomRecipe.id}}" data-dismiss="modal">Go to recipe
-                <span class="glyphicon glyphicon-menu-right"></span><span class="glyphicon glyphicon-menu-right"></span></a> </p> <span *ngIf="randomRecipe.coverpicture"><img class="random-image"
-                                                                src="{{baseUrl}}{{randomRecipe.coverpicture.picture.medium.url}}"></span> <span *ngIf="!randomRecipe.coverpicture"><img class="random-image" src="assets/cookie.jpg"></span> </div>
+                <span class="glyphicon glyphicon-menu-right"></span><span class="glyphicon glyphicon-menu-right"></span></a> </p> <span *ngIf="randomRecipe.coverpicture"><img class="random-image img-responsive"
+                                                                src="{{baseUrl}}{{randomRecipe.coverpicture.picture.medium.url}}"></span> <span *ngIf="!randomRecipe.coverpicture"><img class="random-image img-responsive" src="assets/cookie.jpg"></span> </div>
           <div class="modal-footer">
             <p style="float:left;">Random Recipe</p><br><br> <span style="float:left;" *ngIf="randomRecipe.coverpicture"><p>Picture &copy;
               {{randomRecipe.coverpicture.author}}</p></span> <button type="button" class="btn btn-default" (click)="reRoll()">Reroll</button> <button type="button" class="btn btn-default" data-dismiss="modal">Close
@@ -126,7 +127,7 @@
         </div>
       </div>
       <div *ngIf="rolling">
-        <div class="roller"><img src="assets/gears.svg"></div>
+        <div class="modal-content roller"><i class="fa fa-spin"></i></div>
       </div>
     </div>
   </div>

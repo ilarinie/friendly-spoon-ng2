@@ -314,10 +314,6 @@ ansi-escapes@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
 
-ansi-regex@*, ansi-regex@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.0.0.tgz#c5061b6e0ef8a81775e50f5d66151bf6bf371107"
-
 ansi-regex@^0.2.0, ansi-regex@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-0.2.1.tgz#0d8e946967a3d8143f93e24e298525fc1b2235f9"
@@ -325,6 +321,10 @@ ansi-regex@^0.2.0, ansi-regex@^0.2.1:
 ansi-regex@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-1.1.1.tgz#41c847194646375e6a1a5d10c3ca054ef9fc980d"
+
+ansi-regex@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.0.0.tgz#c5061b6e0ef8a81775e50f5d66151bf6bf371107"
 
 ansi-styles@^1.1.0:
   version "1.1.0"
@@ -2170,7 +2170,7 @@ dot-prop@^3.0.0:
   dependencies:
     is-obj "^1.0.0"
 
-dragula@^3.7.1, dragula@3.7.2:
+dragula@^3.7.1, dragula@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/dragula/-/dragula-3.7.2.tgz#4a35c9d3981ffac1a949c29ca7285058e87393ce"
   dependencies:
@@ -3535,7 +3535,7 @@ image-size@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.5.0.tgz#be7aed1c37b5ac3d9ba1d66a24b4c47ff8397651"
 
-imurmurhash@*, imurmurhash@^0.1.4:
+imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
 
@@ -4893,28 +4893,15 @@ ng2-bootstrap@^1.1.14:
   dependencies:
     moment "2.15.1"
 
-ng2-dnd@^1.13.1:
-  version "1.13.1"
-  resolved "https://registry.yarnpkg.com/ng2-dnd/-/ng2-dnd-1.13.1.tgz#614c8ebffa43c5d818fe2b1528738d16267c221d"
+ng2-dragula@1.2.2-0:
+  version "1.2.2-0"
+  resolved "https://registry.yarnpkg.com/ng2-dragula/-/ng2-dragula-1.2.2-0.tgz#debb3148c55e34e059446df3a27093a90f8f8032"
   dependencies:
-    core-js "^2.4.1"
-    reflect-metadata "^0.1.3"
-    rxjs "5.0.0-beta.11"
-    zone.js "^0.6.17"
+    dragula "^3.7.2"
 
-ng2-dragula@^1.2.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/ng2-dragula/-/ng2-dragula-1.2.1.tgz#a73554239769b578a380ca9c10e314599fee5b75"
-  dependencies:
-    dragula "3.7.2"
-
-ng2-file-upload@^1.0.3:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/ng2-file-upload/-/ng2-file-upload-1.1.2.tgz#63467dcc2a92cf4af1d141bad2b78dbed9564723"
-
-ng2-pagination@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/ng2-pagination/-/ng2-pagination-0.4.1.tgz#4fbe36514b47d492b9471b53303c15cbfc79834d"
+ng2-pagination@0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/ng2-pagination/-/ng2-pagination-0.5.1.tgz#f6d4bf3efa096fb9d5904df5a1cf7f398d379b7a"
 
 ng2-rating@*:
   version "0.0.6"
@@ -4923,10 +4910,6 @@ ng2-rating@*:
 ng2-responsive@^0.4.6:
   version "0.4.7"
   resolved "https://registry.yarnpkg.com/ng2-responsive/-/ng2-responsive-0.4.7.tgz#d934dd590cc9bf7ffc042aa7f0ba3f75c011ee38"
-
-ng2-select@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/ng2-select/-/ng2-select-1.1.1.tgz#1032e7198027bf2b3045e41cfcb9bc9644e4b3a7"
 
 no-case@^2.2.0:
   version "2.3.0"
@@ -6267,7 +6250,7 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "~0.1.0"
 
-reflect-metadata@^0.1.2, reflect-metadata@^0.1.3:
+reflect-metadata@^0.1.2:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.8.tgz#72426d570b60776e3688968bd5ab9537a15cecf6"
 
@@ -7081,12 +7064,6 @@ stringstream@~0.0.4:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
 
-strip-ansi@*, strip-ansi@^3.0.0, strip-ansi@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
-  dependencies:
-    ansi-regex "^2.0.0"
-
 strip-ansi@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-0.3.0.tgz#25f48ea22ca79187f3174a4db8759347bb126220"
@@ -7098,6 +7075,12 @@ strip-ansi@^2.0.1:
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-2.0.1.tgz#df62c1aa94ed2f114e1d0f21fd1d50482b79a60e"
   dependencies:
     ansi-regex "^1.0.0"
+
+strip-ansi@^3.0.0, strip-ansi@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
+  dependencies:
+    ansi-regex "^2.0.0"
 
 strip-bom@^2.0.0:
   version "2.0.0"
@@ -8049,7 +8032,7 @@ yeast@0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
 
-zone.js@^0.6.17, zone.js@^0.6.23:
+zone.js@^0.6.23:
   version "0.6.26"
   resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.6.26.tgz#067c13b8b80223a89b62e9dc82680f09762c4636"
 

@@ -111,6 +111,7 @@ export class ListIngredients implements OnDestroy {
     let item: ShoppingCartItem = new ShoppingCartItem();
     item.recipe_ingredient_id = inc.id;
     item.user_id = parseInt(user_id);
+    item.recipe_name = this.recipe.name;
     this.friendlyApiService.saveCartItem(item).then((res) => {
       let index = this.allIngredients.indexOf(inc);
       if (index > -1) {

@@ -85,8 +85,13 @@ export class RecipeListComponent implements OnInit {
     this.rolling = true;
     console.log(1);
     this.randomRecipe = this.shownRecipes[Math.floor((Math.random() * this.shownRecipes.length))];
-    let timeoutID = window.setTimeout(this.setRolling(), 2000);
+    setTimeout(() => {
+      this.rolling = false;
+    }, 2000);
   }
+
+
+
 
   setRolling() {
     console.log(2)

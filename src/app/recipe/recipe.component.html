@@ -6,14 +6,14 @@
         <div class="col-sm-3 col-md-3  heading-div">
           <h3 class="main-heading">{{recipe.name}}</h3> </div>
         <!-- RECIPE ACTION BUTTONS FOR DESKTOP -->
-        <div *showItBootstrap="['md','lg']" class="col-sm-6 col-md-6 heading-div button-group">
+        <div class="col-sm-6 col-md-6 heading-div button-group hidden-sm-down">
           <button class="btn header-btn" (click)="divide()">{{divideButton}}</button>
           <button class="btn header-btn" (click)="double()">{{doubleButton}}</button>
           <button class="btn header-btn" (click)="noteSwitch()">{{noteSwitchButton}}</button>
           <button *ngIf="user_id == recipe_user_id" class="btn header-btn" routerLink="/recipes/{{recipe.id}}/edit">Edit</button>
         </div>
         <!-- RECIPE ACTION BUTTONS FOR MOBILE -->
-        <div *showItBootstrap="['sm', 'xs']" class="col-sm-12">
+        <div  class="col-sm-12 hidden-sm-up">
           <hr>
           <button class="mobile-button" (click)="divide()">{{divideButton}}</button>
           <button class="mobile-button" (click)="double()">{{doubleButton}}</button>

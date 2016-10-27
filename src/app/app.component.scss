@@ -16,3 +16,23 @@ main {
   margin-top: -40px;
   box-shadow: 1px 1px 1px #888888;
 }
+.dropdown-menu {
+  background-color: $darkGreen;
+  color: white;
+  a:hover {
+    background-color: $darkGreen;
+    color: white;
+  }
+}
+.log-out{
+  color: red;
+}
+.cart {
+  color: green;
+}
+.badge {
+  background-color: white;
+  color:black;
+  font-size: 9px;
+  margin-left: -3px;
+}
