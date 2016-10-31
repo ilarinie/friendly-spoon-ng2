@@ -82,7 +82,7 @@ a:active {
 }
 
 .recipe-list {
-  min-height: 120em;
+
 }
 
 .loading-div {
@@ -107,6 +107,11 @@ md-card {
 }
 .roller {
   height: 900px;
+  width: 500px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 900px;
+  font-size: 56px;
 }
 .modal-footer {
   margin-top: -15px;

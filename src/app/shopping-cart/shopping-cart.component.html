@@ -20,7 +20,7 @@
         <span *ngIf="!item.content">
         <span [innerHTML]="item.recipe_ingredient.amount | fractioner:1"></span> {{item.recipe_ingredient.unit?.name}}
         {{item.recipe_ingredient.ingredient.name}} <span
-        *ngIf="item.recipe_name"><i>from {{item.recipe_name}}</i></span>
+        *ngIf="item.recipe_name"><i>for {{item.recipe_name}}</i></span>
         </span>
         <span *ngIf="item.content">
           {{item.content}}

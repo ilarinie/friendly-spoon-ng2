@@ -47,24 +47,33 @@
       <li (click)="isCollapsed = true" class="nav-item">
         <a class="nav-link" routerLink="ingredients">Edit Ingredients</a>
       </li> -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          Hello there <span class="username2">{{username}}</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="Preview">
+          <a class="dropdown-item" (click)="isCollapsed = true" routerLink="mypage">Profile</a>
+          <a class="dropdown-item" (click)="isCollapsed = true" routerLink="logout">Log Out</a>
 
-      <li (click)="isCollapsed = true" class="nav-item">
-        <a class="nav-link username" routerLink="mypage">Hello there <span class="username2">{{username}}</span></a>
+        </div>
       </li>
+     <!-- <li (click)="isCollapsed = true" class="nav-item">
+        <a class="nav-link username" routerLink="mypage">Hello there <span class="username2">{{username}}</span></a>
+      </li>-->
       <li (click)="isCollapsed = true" class="nav-item" >
           <a class="nav-link" routerLink="shoppingcart"><i class="cart fa fa-shopping-cart fa-lg" aria-hidden="true"></i><label *ngIf="count != 0" class="badge tag-pill">{{count}}</label>
           </a>
       </li>
-      <li (click)="isCollapsed = true" class="nav-item">
+      <!--<li (click)="isCollapsed = true" class="nav-item">
         <a class="nav-link float-right" routerLink="/logout"><i class="log-out fa fa-power-off" aria-hidden="true"></i></a>
-      </li>
+      </li>-->
     </ul>
   </div>
 </nav>
 <main role="main" class="container">
     <router-outlet></router-outlet>
-
+  <!--<div *ngIf=" !router.url.includes('login') && !router.url.includes('logout')" class="copyright">
+    <p>&copy; Ilari Nieminen & Hilla Rämö 2016. All rights reserved.</p>
+  </div>-->
 </main>
-<div *ngIf=" !router.url.includes('login') && !router.url.includes('logout')" class="col-md-5 copyright">
-  <p>&copy; Ilari Nieminen & Hilla Rämö 2016. All rights reserved.</p>
-</div>
+

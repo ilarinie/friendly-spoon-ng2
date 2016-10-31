@@ -4,132 +4,198 @@
   <h4><span *ngIf="recipes">{{recipes.length}} recipes and counting!</span></h4>
   <div class="row main-row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <md-input [typeahead]="shownRecipes" [typeaheadOptionField]="'name'" class="recipe-search" type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Filter recipes"><span md-suffix class="clearbutton glyphicon glyphicon-remove" (click)="clearSearch()"></span></md-input>
+      <md-input [typeahead]="shownRecipes" [typeaheadOptionField]="'name'" class="recipe-search" type="text"
+                id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Filter recipes"><span
+        md-suffix class="clearbutton glyphicon glyphicon-remove" (click)="clearSearch()"></span></md-input>
     </div>
   </div>
   <div class="row main-row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><label>Filter by tags</label> <select class="form-control" (change)="tagChange($event.target.value)">
-        <option value=""></option>
-        <option *ngFor="let tag of tags" value="{{tag.title}}">{{tag.title}}</option>
-      </select></div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><label>Filter by tags</label> <select class="form-control"
+                                                                                               (change)="tagChange($event.target.value)">
+      <option value=""></option>
+      <option *ngFor="let tag of tags" value="{{tag.title}}">{{tag.title}}</option>
+    </select></div>
   </div>
   <div class="row main-row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 buttons-row"> <button md-raised-button class="sortButton" (click)="sortByName()">ABC <i class="fa fa-sort"></i></button> <button md-raised-button class="sortButton" (click)="sortByRating()">Rating <i class="fa fa-sort"></i></button> <button md-raised-button class="sortButton"
-          (click)="sortByTime()">Time <i class="fa fa-sort"></i></button> <button md-raised-button class="sortButton" (click)="random()" data-toggle="modal" data-target="#myModal"><i class="fa fa-random" aria-hidden="true"></i></button> <button md-raised-button
-          class="sortButton" (click)="refreshRecipes()"><i class="fa fa-refresh refresh" aria-hidden="true"></i>
-      </button> <br> <span class="pagination-control">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 buttons-row">
+      <button md-raised-button class="sortButton" (click)="sortByName()">ABC <i class="fa fa-sort"></i></button>
+      <button md-raised-button class="sortButton" (click)="sortByRating()">Rating <i class="fa fa-sort"></i></button>
+      <button md-raised-button class="sortButton"
+              (click)="sortByTime()">Time <i class="fa fa-sort"></i></button>
+      <button md-raised-button class="sortButton" (click)="random()" data-toggle="modal" data-target="#myModal"><i
+        class="fa fa-random" aria-hidden="true"></i></button>
+      <button md-raised-button
+              class="sortButton" (click)="refreshRecipes()"><i class="fa fa-refresh refresh" aria-hidden="true"></i>
+      </button>
+      <br> <span class="pagination-control">
         <pagination-controls #pagination (pageChange)="p = $event">
           <div class="custom-pagination">
 
               <div class="pagination-previous" [class.disabled]="pagination.isFirstPage()">
-                <button [disabled]="pagination.isFirstPage()" (click)="pagination.previous()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> </button>
+                <button [disabled]="pagination.isFirstPage()" (click)="pagination.previous()"> <i
+                  class="fa fa-arrow-left" aria-hidden="true"></i> </button>
               </div>
 
-              <div *ngFor="let page of pagination.pages" class="pages" [class.current]="pagination.getCurrent() === page.value">
+              <div *ngFor="let page of pagination.pages" class="pages"
+                   [class.current]="pagination.getCurrent() === page.value">
                 <a (click)="pagination.setCurrent(page.value)" *ngIf="pagination.getCurrent() !== page.value">
                 <span>{{ page.label }}</span> </a>
                 <div *ngIf="pagination.getCurrent() === page.value"> <span>{{ page.label }}</span> </div>
               </div>
-          <div class="pagination-next" [class.disabled]="pagination.isLastPage()" *ngIf="pagination.directionLinks"> <button [disabled]="pagination.isLastPage()" (click)="pagination.next()"> <i class="fa fa-arrow-right" aria-hidden="true"></i> </button> </div>
+          <div class="pagination-next" [class.disabled]="pagination.isLastPage()" *ngIf="pagination.directionLinks"> <button
+            [disabled]="pagination.isLastPage()" (click)="pagination.next()"> <i class="fa fa-arrow-right"
+                                                                                 aria-hidden="true"></i> </button> </div>
           </div>
         </pagination-controls>
   </span>
-</div>
-</div>
-<div class="row main-row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div *showItBootstrap="['md','lg','xl']">
-      <div *ngIf="!loading">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order | paginate: { itemsPerPage: 10, currentPage: p }">
-          <md-card [@recipeFade]="off">
-            <md-card-title-group>
-              <div *ngIf="!recipe.coverpicture"><img md-card-sm-img src="assets/baking.png" alt="nice pic yo"></div>
-              <div *ngIf="recipe.coverpicture"><img md-card-sm-img class="img-responsive" src="{{baseUrl}}{{recipe.coverpicture.picture.thumb.url}}"></div>
-              <md-card-title><a routerLink="/recipes/{{recipe.id}}">{{recipe.name}}</a></md-card-title>
-              <md-card-subtitle><span *ngIf="recipe.ratingaverage"><rating [(ngModel)]="recipe.ratingaverage"
-                                                                             [readonly]="true"></rating></span> <span *ngIf="!recipe.ratingaverage"><rating [(ngModel)]="zeroRating" [readonly]="true"></rating></span> </md-card-subtitle>
-              <md-card-subtitle><span *ngIf="recipe.duration.range">{{recipe.duration.range}}</span> <span *ngIf="!recipe.duration.range">No duration set</span></md-card-subtitle>
-              <md-card-subtitle><span *ngIf="recipe.introduction">{{recipe.introduction}}</span> <span *ngIf="!recipe.introduction">No introduction set</span></md-card-subtitle>
-            </md-card-title-group>
-          </md-card>
+    </div>
+  </div>
+  <div class="row main-row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div *showItBootstrap="['md','lg','xl']">
+        <div *ngIf="!loading">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"
+               *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order | paginate: { itemsPerPage: 10, currentPage: p }">
+            <md-card [@recipeFade]="off">
+              <md-card-title-group>
+                <div *ngIf="!recipe.coverpicture"><img md-card-sm-img src="assets/baking.png" alt="nice pic yo"></div>
+                <div *ngIf="recipe.coverpicture"><img md-card-sm-img class="img-responsive"
+                                                      src="{{baseUrl}}{{recipe.coverpicture.picture.thumb.url}}"></div>
+                <md-card-title><a routerLink="/recipes/{{recipe.id}}">{{recipe.name}}</a></md-card-title>
+                <md-card-subtitle><span *ngIf="recipe.ratingaverage"><rating [(ngModel)]="recipe.ratingaverage"
+                                                                             [readonly]="true"></rating></span> <span
+                  *ngIf="!recipe.ratingaverage"><rating [(ngModel)]="zeroRating" [readonly]="true"></rating></span>
+                </md-card-subtitle>
+                <md-card-subtitle><span *ngIf="recipe.duration.range">{{recipe.duration.range}}</span> <span
+                  *ngIf="!recipe.duration.range">No duration set</span></md-card-subtitle>
+                <md-card-subtitle><span *ngIf="recipe.introduction">{{recipe.introduction}}</span> <span
+                  *ngIf="!recipe.introduction">No introduction set</span></md-card-subtitle>
+              </md-card-title-group>
+            </md-card>
+          </div>
+          <div class="row backtop-div">
+            <pagination-controls *ngIf="recipes.length > 10" #pagination (pageChange)="p = $event">
+              <div class="custom-pagination">
+
+                <div class="pagination-previous" [class.disabled]="pagination.isFirstPage()">
+                  <button [disabled]="pagination.isFirstPage()" (click)="pagination.previous()"><i
+                    class="fa fa-arrow-left" aria-hidden="true"></i></button>
+                </div>
+
+                <div *ngFor="let page of pagination.pages" class="pages"
+                     [class.current]="pagination.getCurrent() === page.value">
+                  <a (click)="pagination.setCurrent(page.value)" *ngIf="pagination.getCurrent() !== page.value">
+                    <span>{{ page.label }}</span> </a>
+                  <div *ngIf="pagination.getCurrent() === page.value"><span>{{ page.label }}</span></div>
+                </div>
+                <div class="pagination-next" [class.disabled]="pagination.isLastPage()"
+                     *ngIf="pagination.directionLinks">
+                  <button [disabled]="pagination.isLastPage()" (click)="pagination.next()"><i class="fa fa-arrow-right"
+                                                                                              aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </pagination-controls>
+            <div style="width:100%" class="row">
+              <span class="glyphicon glyphicon-chevron-up"></span><span class="backtop-link"
+                                                                        (click)="scrollToTop()"><strong> Back to top </strong></span><span
+              class="glyphicon glyphicon-chevron-up"></span></div>
+          </div>
         </div>
-        <div class="backtop-div">
+
+      </div>
+      <div *showItBootstrap="['sm','xs']">
+        <div *ngIf="!loading">
+          <div class="mobile-recipe-div"
+               *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order | paginate: { itemsPerPage: 10, currentPage: p }">
+            <div style="float:left; width:65%;"><strong><a routerLink="/recipes/{{recipe.id}}">
+              {{recipe.name}}</a></strong>
+              <hr style="margin-top:0px; margin-bottom:0px;"/>
+              <p class="text-muted" style="font-size:9px; margin-top:4px; margin-bottom:0px;">
+                {{recipe.introduction}}</p> <span *ngIf="recipe.ratingaverage" style="font-size:10px;"><rating
+                [ngModel]="recipe.ratingaverage" [readonly]="true"></rating></span> <span *ngIf="!recipe.ratingaverage"
+                                                                                          style="font-size:10px;"><rating
+                [(ngModel)]="zeroRating" [readonly]="true"></rating></span></div>
+            <div *ngIf="!recipe.coverpicture" class="mobile-img"><img class="img-responsive  mobile-img"
+                                                                      src="assets/baking.png" alt="nice pic yo"></div>
+            <div *ngIf="recipe.coverpicture" class="mobile-img"><img class="img-responsive mobile-img"
+                                                                     src="{{baseUrl}}{{recipe.coverpicture.picture.thumb.url}}">
+            </div>
+          </div>
+        </div>
+        <div class="row backtop-div">
           <pagination-controls #pagination (pageChange)="p = $event">
             <div class="custom-pagination">
 
-                <div class="pagination-previous" [class.disabled]="pagination.isFirstPage()">
-                  <button [disabled]="pagination.isFirstPage()" (click)="pagination.previous()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> </button>
-                </div>
+              <div class="pagination-previous" [class.disabled]="pagination.isFirstPage()">
+                <button [disabled]="pagination.isFirstPage()" (click)="pagination.previous()"><i
+                  class="fa fa-arrow-left" aria-hidden="true"></i></button>
+              </div>
 
-                <div *ngFor="let page of pagination.pages" class="pages" [class.current]="pagination.getCurrent() === page.value">
-                  <a (click)="pagination.setCurrent(page.value)" *ngIf="pagination.getCurrent() !== page.value">
+              <div *ngFor="let page of pagination.pages" class="pages"
+                   [class.current]="pagination.getCurrent() === page.value">
+                <a (click)="pagination.setCurrent(page.value)" *ngIf="pagination.getCurrent() !== page.value">
                   <span>{{ page.label }}</span> </a>
-                  <div *ngIf="pagination.getCurrent() === page.value"> <span>{{ page.label }}</span> </div>
-                </div>
-            <div class="pagination-next" [class.disabled]="pagination.isLastPage()" *ngIf="pagination.directionLinks"> <button [disabled]="pagination.isLastPage()" (click)="pagination.next()"> <i class="fa fa-arrow-right" aria-hidden="true"></i> </button> </div>
+                <div *ngIf="pagination.getCurrent() === page.value"><span>{{ page.label }}</span></div>
+              </div>
+              <div class="pagination-next" [class.disabled]="pagination.isLastPage()" *ngIf="pagination.directionLinks">
+                <button [disabled]="pagination.isLastPage()" (click)="pagination.next()"><i class="fa fa-arrow-right"
+                                                                                            aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
           </pagination-controls>
-           <span class="glyphicon glyphicon-chevron-up"></span><span class="backtop-link" (click)="scrollToTop()"><strong> Back to top </strong></span><span class="glyphicon glyphicon-chevron-up"></span></div>
+          <span class="glyphicon glyphicon-chevron-up"></span><span class="backtop-link"
+                                                                    (click)="scrollToTop()"><strong> Back to top </strong></span><span
+          class="glyphicon glyphicon-chevron-up"></span></div>
+      </div>
+      <div *ngIf="loading" class="loading-div"><i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i> <br>
+        Fetching recipes from the nether realms..
       </div>
     </div>
-    <div *showItBootstrap="['sm','xs']">
-      <div *ngIf="!loading">
-        <div class="mobile-recipe-div" *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order | paginate: { itemsPerPage: 10, currentPage: p }">
-          <div style="float:left; width:65%;"> <strong><a routerLink="/recipes/{{recipe.id}}"> {{recipe.name}}</a></strong>
-            <hr style="margin-top:0px; margin-bottom:0px;" />
-            <p class="text-muted" style="font-size:9px; margin-top:4px; margin-bottom:0px;">{{recipe.introduction}}</p> <span *ngIf="recipe.ratingaverage" style="font-size:10px;"><rating [ngModel]="recipe.ratingaverage" [readonly]="true"></rating></span> <span *ngIf="!recipe.ratingaverage" style="font-size:10px;"><rating [(ngModel)]="zeroRating" [readonly]="true"></rating></span>            </div>
-          <div *ngIf="!recipe.coverpicture" class="mobile-img"><img class="img-responsive  mobile-img" src="assets/baking.png" alt="nice pic yo"></div>
-          <div *ngIf="recipe.coverpicture" class="mobile-img"><img class="img-responsive mobile-img" src="{{baseUrl}}{{recipe.coverpicture.picture.thumb.url}}"> </div>
-        </div>
-      </div>
-      <div class="backtop-div">
-        <pagination-controls #pagination (pageChange)="p = $event">
-          <div class="custom-pagination">
 
-              <div class="pagination-previous" [class.disabled]="pagination.isFirstPage()">
-                <button [disabled]="pagination.isFirstPage()" (click)="pagination.previous()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> </button>
-              </div>
 
-              <div *ngFor="let page of pagination.pages" class="pages" [class.current]="pagination.getCurrent() === page.value">
-                <a (click)="pagination.setCurrent(page.value)" *ngIf="pagination.getCurrent() !== page.value">
-                <span>{{ page.label }}</span> </a>
-                <div *ngIf="pagination.getCurrent() === page.value"> <span>{{ page.label }}</span> </div>
-              </div>
-          <div class="pagination-next" [class.disabled]="pagination.isLastPage()" *ngIf="pagination.directionLinks"> <button [disabled]="pagination.isLastPage()" (click)="pagination.next()"> <i class="fa fa-arrow-right" aria-hidden="true"></i> </button> </div>
-          </div>
-        </pagination-controls>
-         <span class="glyphicon glyphicon-chevron-up"></span><span class="backtop-link" (click)="scrollToTop()"><strong> Back to top </strong></span><span class="glyphicon glyphicon-chevron-up"></span></div>
-    </div>
-    <div *ngIf="loading" class="loading-div"> <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i> <br> Fetching recipes from the nether realms.. </div>
-  </div>
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog" >
-      <div *ngIf="!rolling">
-        <!-- Modal content-->
-        <div class="modal-content  random-recipe" *ngIf="randomRecipe">
-          <div class="modal-header" style="background-color:#022f32;"> <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title" style="color:white;">{{randomRecipe.name}}</h4></div>
-          <div class="modal-body">
-            <div>
-              <rating [(ngModel)]="randomRecipe.ratingaverage" [readonly]="true"></rating> ({{randomRecipe.ratingcount}} ratings)
-              <div style="float:right;margin-top:10px;" [ngSwitch]="randomRecipe.level.id"><span *ngSwitchCase="3" class="tag tag-danger">Difficult</span> <span *ngSwitchCase="1" class="tag tag-success">Easy</span> <span *ngSwitchCase="2" class="tag tag-warning">Medium</span> </div>
-            </div>
-            <p><b>{{randomRecipe.duration.range}}</b></p>
-            <p><i>{{randomRecipe.introduction}}</i></p>
-            <p><a routerLink="/recipes/{{randomRecipe.id}}" data-dismiss="modal">Go to recipe
-                <span class="glyphicon glyphicon-menu-right"></span><span class="glyphicon glyphicon-menu-right"></span></a> </p> <span *ngIf="randomRecipe.coverpicture"><img class="random-image img-responsive"
-                                                                src="{{baseUrl}}{{randomRecipe.coverpicture.picture.medium.url}}"></span> <span *ngIf="!randomRecipe.coverpicture"><img class="random-image img-responsive" src="assets/cookie.jpg"></span> </div>
-          <div class="modal-footer">
-            <p style="float:left;">Random Recipe</p><br><br> <span style="float:left;" *ngIf="randomRecipe.coverpicture"><p>Picture &copy;
-              {{randomRecipe.coverpicture.author}}</p></span> <button type="button" class="btn btn-default" (click)="reRoll()">Reroll</button> <button type="button" class="btn btn-default" data-dismiss="modal">Close
-              </button> </div>
-        </div>
-      </div>
-      <div *ngIf="rolling">
-        <div class="modal-content roller"><i class="fa fa-spin"></i></div>
-      </div>
-    </div>
   </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div *ngIf="!rolling">
+      <!-- Modal content-->
+      <div class="modal-content  random-recipe" *ngIf="randomRecipe">
+        <div class="modal-header" style="background-color:#022f32;">
+          <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="color:white;">{{randomRecipe.name}}</h4></div>
+        <div class="modal-body">
+          <div>
+            <rating [(ngModel)]="randomRecipe.ratingaverage" [readonly]="true"></rating>
+            ({{randomRecipe.ratingcount}} ratings)
+            <div style="float:right;margin-top:10px;" [ngSwitch]="randomRecipe.level.id"><span *ngSwitchCase="3"
+                                                                                               class="tag tag-danger">Difficult</span>
+              <span *ngSwitchCase="1" class="tag tag-success">Easy</span> <span *ngSwitchCase="2"
+                                                                                class="tag tag-warning">Medium</span>
+            </div>
+          </div>
+          <p><b>{{randomRecipe.duration.range}}</b></p>
+          <p><i>{{randomRecipe.introduction}}</i></p>
+          <p><a routerLink="/recipes/{{randomRecipe.id}}" data-dismiss="modal">Go to recipe
+            <span class="glyphicon glyphicon-menu-right"></span><span class="glyphicon glyphicon-menu-right"></span></a>
+          </p> <span *ngIf="randomRecipe.coverpicture"><img class="random-image img-responsive"
+                                                            src="{{baseUrl}}{{randomRecipe.coverpicture.picture.medium.url}}"></span>
+          <span *ngIf="!randomRecipe.coverpicture"><img class="random-image img-responsive"
+                                                        src="assets/cookie.jpg"></span></div>
+        <div class="modal-footer">
+          <p style="float:left;">Random Recipe</p><br><br> <span style="float:left;"
+                                                                 *ngIf="randomRecipe.coverpicture"><p>Picture &copy;
+          {{randomRecipe.coverpicture.author}}</p></span>
+          <button type="button" class="btn btn-default" (click)="reRoll()">Reroll</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="rolling">
+      <div class="modal-content roller"><i class="fa fa-refresh fa-spin"></i></div>
+    </div>
+  </div>
 </div>

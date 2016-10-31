@@ -56,36 +56,7 @@ export class ShoppingCartComponent implements OnInit {
     })
   }
 
-  summarizeItems() {
-    if (this.items == []) {
-      return;
-    }
-    let tempItems = this.items;
-    let tempItems2 = this.items;
-    let checkedItems: ShoppingCartItem[] = [];
-    console.log(tempItems.length + " asd")
-    for (let item of tempItems) {
-      tempItems.slice(tempItems.indexOf(item), 1);
-      console.log("jepjee");
-      if (item.recipe_ingredient) {
-        for (let item2 of tempItems) {
-          if (item2.recipe_ingredient) {
-            if (item2.recipe_ingredient.ingredient.id == item.recipe_ingredient.ingredient.id) {
-              if (item2.recipe_ingredient.unit_id == item.recipe_ingredient.unit_id) {
-                console.log("tänneki")
-                item.recipe_ingredient.amount += item2.recipe_ingredient.amount;
-                console.log("index " + tempItems.indexOf(item2))
-                tempItems.slice(tempItems.indexOf(item2), 1);
-              }
-            }
-          }
-        }
-      }
-    }
-    this.shownItems = tempItems;
 
-
-  }
 
 
 }

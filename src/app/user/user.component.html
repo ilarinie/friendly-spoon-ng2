@@ -2,7 +2,7 @@
   <div *ngIf="user" class="col-xs-13 col-sm-13 col-md-13 col-lg-13" [@fadeIn]="on" >
     <h1>{{user.name}}'s page</h1>
 
-    <div *showItBootstrap="['md','lg']">
+    <div class="hidden-sm-down">
     <md-tab-group>
 
       <md-tab>
@@ -49,7 +49,7 @@
     </md-tab-group>
 
   </div>
-  <div *showItBootstrap="['sm', 'xs']">
+  <div class="hidden-sm-up">
     <button md-raised-button (click)="editPass()" class="user-button">Edit password</button>
     <button md-raised-button (click)="editInfo()" class="user-button">Edit information</button>
     <div *ngIf="changePas" class="password-inputs" [@fadeIn]="on">
