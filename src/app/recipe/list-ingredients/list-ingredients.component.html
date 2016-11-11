@@ -6,10 +6,13 @@
   <div>
     <md-list dense>
       <md-list-item *ngFor="let inc of recipe.recipe_ingredients | orderBy: 'indexinmukaan'">
-        <md-checkbox type="checkbox" (click)="toggleInc(inc)">
-
-          <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractioner: multiplier"></span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}}
+        <md-checkbox class="ingredient" type="checkbox" (click)="toggleInc(inc)">
+          <b>
+          <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractionize:multiplier"></span> {{inc.unit?.name}} {{inc.ingredient.name | capitalize}}
+          </b><i>{{inc.instruction}}</i>
         </md-checkbox>
+        
+          
       </md-list-item>
     </md-list>
   </div>
@@ -17,8 +20,9 @@
     <h4>{{group.name}}</h4>
     <md-list dense>
       <md-list-item *ngFor="let inc of group.recipe_ingredients | orderBy: 'indexinmukaan'">
-        <md-checkbox type="checkbox" (click)="toggleInc(inc)">
-          <span *ngIf="inc.amount"><span *ngIf="inc.amount" [innerHTML]="inc.amount | fractioner: multiplier"></span></span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}}
+        <md-checkbox class="ingredient" type="checkbox" (click)="toggleInc(inc)">
+          <b><span *ngIf="inc.amount"><span *ngIf="inc.amount" [innerHTML]="inc.amount | fractionize:multiplier"></span></span> {{inc.unit?.name}} {{inc.ingredient.name | capitalize}}</b>
+          <i>{{inc.instruction}}</i>
         </md-checkbox>
       </md-list-item>
     </md-list>
@@ -27,8 +31,8 @@
   <hr class="hline" />
   <md-list dense>
     <md-list-item *ngFor="let inc of checked">
-      <md-checkbox type="checkbox" (click)="unToggleInc(inc)" [checked]="true">
-        <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractioner:multiplier"></span> {{inc.unit?.name}} {{inc.ingredient.name}} {{inc.instruction}}
+      <md-checkbox class="checked-ingredient" type="checkbox" (click)="unToggleInc(inc)" [checked]="true">
+        <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractionize:multiplier"></span> {{inc.unit?.name}} {{inc.ingredient.name | capitalize}} <i>{{inc.instruction}}</i>
       </md-checkbox> <br/> </md-list-item>
   </md-list>
 </div>
@@ -40,9 +44,10 @@
     <div class="modal-content" *ngIf="allIngredients">
       <div class="modal-header" style="background-color:#022f32;color:white;"><h4 style="float:left;">Add to shopping cart</h4> <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button> </div>
       <div class="modal-body">
-        <p *ngFor="let inc of allIngredients" [@fadeIn]="on">
-          <span [innerHTML]="inc.amount | fractioner:multiplier"></span> <strong>{{inc.unit?.name}} {{inc.ingredient.name}}</strong> <span (click)="addToCart(inc)" ><i class="fa fa-plus"></i></span>
-        </p>
+        <div *ngFor="let inc of allIngredients" [@fadeIn]="on" class="cart-inc">
+          <span [innerHTML]="inc.amount | fractionize:multiplier"></span> <strong>{{inc.unit?.name}} {{inc.ingredient.name | capitalize}}</strong> 
+          <button md-raised-button class="cart-add"  color="primary" (click)="addToCart(inc)" >Add  <i class="fa fa-plus"></i></button>
+        </div>
         <p *ngIf="allIngredients.length == 0">
           No ingredients to be added :((())) <span class="glyphicon glyphicon-grain"></span>
         </p>

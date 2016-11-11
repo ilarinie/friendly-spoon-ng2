@@ -1,4 +1,5 @@
 import {FilterArrayPipe, ReverseArrayPipe, OrderBy, Fractioner} from "./pipes/filter-array-pipe";
+import {FractionizePipe} from "./pipes/fractioner";
 import {FriendlyApiService} from "./services/friendlyapi.service";
 import { Rating } from "ng2-rating";
 import { NgModule }       from '@angular/core';
@@ -40,6 +41,8 @@ import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {SessionService} from "./services/session.service";
 import { ResponsiveModule } from 'ng2-responsive';
 import { TypeaheadModule} from "ng2-bootstrap";
+import { CapitalizePipe } from "./pipes/capitalize";
+
 
 
 enableProdMode();
@@ -50,6 +53,8 @@ enableProdMode();
     ReverseArrayPipe,
     OrderBy,
     Fractioner,
+    FractionizePipe,
+    CapitalizePipe,
     Rating,
     AppComponent,
     RecipeListComponent,

@@ -69,17 +69,32 @@ export class SessionService {
           if (item != item2) {
             if (item2.recipe_ingredient) {
               if (item2.recipe_ingredient.ingredient.id == item.recipe_ingredient.ingredient.id) {
-                if (item2.recipe_ingredient.unit_id == item.recipe_ingredient.unit_id) {
-
-                  let result = parseFloat(item.recipe_ingredient.amount) + parseFloat(item2.recipe_ingredient.amount);
-
+                if (item.recipe_ingredient.unit && item2.recipe_ingredient.unit){
+                if (item2.recipe_ingredient.unit.id == item.recipe_ingredient.unit.id) {
+                  
+                  if (item.recipe_ingredient.amount != null || item2.recipe_ingredient.amount != null){
+                    let truu = true;
+                    let result = 0;
+                    if (item.recipe_ingredient.amount != null){
+                      result = item.recipe_ingredient.amount;
+                      truu = false;
+                    }
+                    else if (item2.recipe_ingredient.amount != null){
+                      result = item2.recipe_ingredient.amount;
+                      truu = false;
+                    } else {
+                       result = parseFloat(item.recipe_ingredient.amount) + parseFloat(item2.recipe_ingredient.amount);
+                    }
+                 
                   item.recipe_ingredient.amount = result;
+                  }
                   if (item.recipe_name != item2.recipe_name) {
 
                     item.recipe_name = item.recipe_name + ", " + item2.recipe_name;
                   }
 
                   tempItems.splice(tempItems.indexOf(item2), 1);
+                }
                 }
               }
             }

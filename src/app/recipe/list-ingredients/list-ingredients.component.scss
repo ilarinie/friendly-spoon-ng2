@@ -7,3 +7,18 @@ li {
   cursor: copy;
   color: green;
 }
+.cart-inc {
+  background-color: #eee;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: 5px 5px 5px $shadow-color;
+  height: 60px;
+}
+.cart-add {
+  float: right;
+  margin: auto;
+}
+.checked-ingredient {
+  text-decoration: line-through;
+  color: dimgray;
+}

@@ -1,27 +1,3 @@
-
-<!--
-<nav *ngIf=" !router.url.includes('login') && !router.url.includes('logout')" class="navbar navbar-default navbar-fixed-top navi">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" #navbarToggle data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" routerLink="/" (click)="closeNav()">Friendly Spoon</a> </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a routerLink="addrecipe" (click)="closeNav()">Add Recipe</a></li>
-                <li><a routerLink="tags" (click)="closeNav()">Edit Tags</a></li>
-                <li><a routerLink="ingredients" (click)="closeNav()">Edit Ingredients</a></li>
-                <li ><a routerLink="/logout" (click)="closeNav()">Log out</a></li>
-                <li><a class="username" routerLink="mypage" (click)="closeNav()">Hello there <span class="username2">{{username}}</span></a></li>
-                <li>
-                    <a routerLink="shoppingcart">
-                                        <span style="font-size:20px;color:green" class="glyphicon glyphicon-shopping-cart"></span>
-                        <span *ngIf="count != 0" class="badge">{{count}}</span>
-                    </a>
-                </li>
-             </ul>
-        </div>
-    </div>
-</nav>
--->
 <nav *ngIf=" !router.url.includes('login') && !router.url.includes('logout')" class="navbar navbar-fixed-top">
   <a class="navbar-brand hidden-md-up" routerLink="/">Friendly Spoon</a>
   <a (click)="isCollapsed = !isCollapsed" class="toggleri hidden-md-up"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></a>

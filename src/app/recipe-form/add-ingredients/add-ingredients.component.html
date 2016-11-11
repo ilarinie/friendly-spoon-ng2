@@ -10,8 +10,8 @@
         <div *ngFor="let inc of recipe.recipe_ingredients" [@fadeIn]="on">
           <md-list-item>
             <p md-line><b>
-              <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractioner:1"></span> {{inc.unit?.name}}
-               {{inc.ingredient.name}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
+              <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractionize:1"></span> {{inc.unit?.name}}
+               {{inc.ingredient.name | capitalize}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
             </b></p>
             <p md-line> {{inc.instruction}} </p>
           </md-list-item>
@@ -33,8 +33,8 @@
             <div *ngFor="let inc of group.recipe_ingredients">
               <md-list-item [@fadeIn]="on">
                 <p md-line><b>
-                  <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractioner:1"></span> {{inc.unit?.name}}
-                  {{inc.ingredient.name}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
+                  <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractionize:1"></span> {{inc.unit?.name}}
+                  {{inc.ingredient.name | capitalize}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
                 </b></p>
                 <p md-line> {{inc.instruction}} </p>
               </md-list-item>
@@ -59,7 +59,7 @@
     <div *ngIf="!addingRecInc">
       <div class="ingredient-add-box" *ngFor="let listingredient of ingredients | reverseFilter:listFilter.value"
            [@fadeIn]="on">
-        <h4 class="ingredient-header">{{listingredient.name}}</h4>
+        <h4 class="ingredient-header">{{listingredient.name | capitalize}}</h4>
         <input class="form-control ingredient-amount-field" type="text" placeholder="Amount"
                [(ngModel)]="recipe_ingredient.amount">
         <select class="form-control info ingredient-unit-select" [(ngModel)]="recipe_ingredient.unit_id">
