@@ -37,7 +37,7 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-2.0.0.tgz#724e7c68ac177aa933aa75a6b4cb11e5aa795d2c"
 
-"@angular/core@~2.1.0":
+"@angular/core@^2.0.0", "@angular/core@~2.1.0":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-2.1.2.tgz#ce39521643f3d97bc5923d5a7aa76604e973dac8"
 
@@ -292,6 +292,14 @@ angular-cli@1.0.0-beta.19-3:
 angular2-bootstrap-confirm@^0.10.0:
   version "0.10.2"
   resolved "https://registry.yarnpkg.com/angular2-bootstrap-confirm/-/angular2-bootstrap-confirm-0.10.2.tgz#23f58210167931ef03a71097e5135cddce78377d"
+
+angular2-fractionize@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/angular2-fractionize/-/angular2-fractionize-0.0.1.tgz#f6aebc38083173c94919e8338ece59e1ad662e70"
+  dependencies:
+    "@angular/core" "^2.0.0"
+    rxjs "5.0.0-beta.12"
+    zone.js "0.6.21"
 
 angular2-infinite-scroll@^0.2.2:
   version "0.2.6"
@@ -8063,6 +8071,10 @@ yeast@0.1.2:
 zone.js@^0.6.23:
   version "0.6.26"
   resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.6.26.tgz#067c13b8b80223a89b62e9dc82680f09762c4636"
+
+zone.js@0.6.21:
+  version "0.6.21"
+  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.6.21.tgz#beebbff30480e6bc975cbbb4eedc750c3080328e"
 
 zone.js@0.6.23:
   version "0.6.23"

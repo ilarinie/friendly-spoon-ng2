@@ -141,23 +141,27 @@ export class AddIngredients implements OnInit {
     this.recipe_ingredient = new RecipeIngredient;
   }
   removeRecipeIngredient(recipe_ingredient: RecipeIngredient) {
-    this.friendlyApiService.deleteRecipeIngredient(recipe_ingredient);
 
-    if (!recipe_ingredient.recipe_ingredient_group_id) {
-      let index = this.recipe.recipe_ingredients.indexOf(recipe_ingredient);
-      if (index > -1) {
-        this.recipe.recipe_ingredients.splice(index, 1);
-      }
-    } else {
-      let grpindex = this.findGroupIndex(recipe_ingredient.recipe_ingredient_group_id);
-      if (grpindex > -1) {
-        let index = this.recipe.recipe_ingredient_groups[grpindex].recipe_ingredients.indexOf(recipe_ingredient);
+    let confirmed = confirm("Really delete "+ recipe_ingredient.ingredient.name + "?");
+    if (confirmed) {
+      this.friendlyApiService.deleteRecipeIngredient(recipe_ingredient);
+
+      if (!recipe_ingredient.recipe_ingredient_group_id) {
+        let index = this.recipe.recipe_ingredients.indexOf(recipe_ingredient);
         if (index > -1) {
-          this.recipe.recipe_ingredient_groups[grpindex].recipe_ingredients.splice(index, 1);
+          this.recipe.recipe_ingredients.splice(index, 1);
+        }
+      } else {
+        let grpindex = this.findGroupIndex(recipe_ingredient.recipe_ingredient_group_id);
+        if (grpindex > -1) {
+          let index = this.recipe.recipe_ingredient_groups[grpindex].recipe_ingredients.indexOf(recipe_ingredient);
+          if (index > -1) {
+            this.recipe.recipe_ingredient_groups[grpindex].recipe_ingredients.splice(index, 1);
+          }
         }
       }
+      this.friendlyApiService.updateRecipeToList(this.recipe);
     }
-    this.friendlyApiService.updateRecipeToList(this.recipe);
   }
   saveGroup() {
     this.addingGroup = true;

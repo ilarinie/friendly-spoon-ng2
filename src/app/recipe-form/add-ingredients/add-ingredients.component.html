@@ -11,7 +11,7 @@
           <md-list-item>
             <p md-line><b>
               <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractionize:1"></span> {{inc.unit?.name}}
-               {{inc.ingredient.name | capitalize}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
+               {{inc.ingredient.name | capitalize}} <i class="fa fa-trash-o" aria-hidden="true" style="color:red" (click)="removeRecipeIngredient(inc)"></i>
             </b></p>
             <p md-line> {{inc.instruction}} </p>
           </md-list-item>
@@ -34,7 +34,7 @@
               <md-list-item [@fadeIn]="on">
                 <p md-line><b>
                   <span *ngIf="inc.amount" [innerHTML]="inc.amount | fractionize:1"></span> {{inc.unit?.name}}
-                  {{inc.ingredient.name | capitalize}} <span class="glyphicon glyphicon-remove" style="color:red" (click)="removeRecipeIngredient(inc)"></span>
+                  {{inc.ingredient.name | capitalize}} <i class="fa fa-trash-o" aria-hidden="true" style="color:red" (click)="removeRecipeIngredient(inc)"></i>
                 </b></p>
                 <p md-line> {{inc.instruction}} </p>
               </md-list-item>
