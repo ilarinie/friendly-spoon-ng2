@@ -44,6 +44,8 @@ export class RecipeFormComponent implements OnInit {
   levels: Level[];
   durations: Duration[];
 
+  pictureSet = [];
+
   shownPic: RecipePicture;
   private initialRecipe: Recipe;
 
@@ -93,6 +95,18 @@ export class RecipeFormComponent implements OnInit {
     return this.recipe.recipe_pictures.indexOf(this.shownPic);
   }
 
+  shownImages(){
+     for ( let i = 0; i < 3; i ++) {
+       if (this.recipe.recipe_pictures.length > i){
+         this.pictureSet[i] = this.recipe.recipe_pictures[i];
+       } else if (this.recipe.recipe_pictures.length > 0){
+         this.pictureSet[i] = this.recipe.recipe_pictures[0];
+       }else {
+         this.pictureSet[i] = "nopic"
+       }
+      }
+  }
+
 
   getRecipe() {
     if (this.router.url.includes('addrecipe')) {
@@ -127,6 +141,7 @@ export class RecipeFormComponent implements OnInit {
             .then(recipe => {
               this.recipe = recipe;
               this.recipe.incsMoved = false;
+              this.shownImages();
               this.recipe_user_id = recipe.user_id;
               this.form = this.fb.group({
                 'name': [this.recipe.name, Validators.required],

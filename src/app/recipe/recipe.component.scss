@@ -141,13 +141,35 @@ li {
 }
 
 .mobile-button {
-  width: 20vw;
-  margin-bottom: 0px;
-  color: white;
-  background-color: $button-grey;
-  border-radius: 10px 10px 0px 0px;
-  border-style: outset;
+  color: black;
+  
+  padding: 5px;
+  width:19vw;
+  float: left;
+  border: 1px solid black;
 }
-.mobile-button:active {
-  border-style: outset;
+
+.mobile-button1 {
+ color: black;
+  
+  padding: 5px;
+  width:19vw;
+  float: left;
+  border: 1px solid black;
+}
+.mobile-button2 {
+ color: black;
+  padding: 5px;
+  width:19vw;
+  float: right;
+  border: 1px solid black;
+}
+.mobile-button-first {
+  float: left;
+  margin-left: -15px;
+}
+.mobile-buttons {
+  width: 100vw;
+  background-color: $button-grey;
+  margin-left: -20px;
 }

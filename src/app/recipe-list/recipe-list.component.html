@@ -58,7 +58,7 @@
                *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order | paginate: { itemsPerPage: 10, currentPage: p }">
             <md-card [@recipeFade]="off">
               <md-card-title-group>
-                <div *ngIf="!recipe.coverpicture"><img md-card-sm-img src="assets/baking.png" alt="nice pic yo"></div>
+                <div *ngIf="!recipe.coverpicture"><img md-card-sm-img src="assets/placeholder_thumb.png" alt="nice pic yo"></div>
                 <div *ngIf="recipe.coverpicture"><img md-card-sm-img class="img-responsive"
                                                       src="{{baseUrl}}{{recipe.coverpicture.picture.thumb.url}}"></div>
                 <md-card-title><a routerLink="/recipes/{{recipe.id}}">{{recipe.name}}</a></md-card-title>
@@ -68,8 +68,10 @@
                 </md-card-subtitle>
                 <md-card-subtitle><span *ngIf="recipe.duration.range">{{recipe.duration.range}}</span> <span
                   *ngIf="!recipe.duration.range">No duration set</span></md-card-subtitle>
-                <md-card-subtitle><span *ngIf="recipe.introduction">{{recipe.introduction}}</span> <span
-                  *ngIf="!recipe.introduction">No introduction set</span></md-card-subtitle>
+                <md-card-subtitle>
+                  <span class="introduction-span" *ngIf="recipe.introduction">"{{recipe.introduction}}"</span>
+                  <span *ngIf="!recipe.introduction">No introduction set</span>
+                </md-card-subtitle>
               </md-card-title-group>
             </md-card>
           </div>

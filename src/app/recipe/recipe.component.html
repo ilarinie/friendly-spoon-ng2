@@ -13,12 +13,13 @@
           <button *ngIf="user_id == recipe_user_id" class="btn header-btn" routerLink="/recipes/{{recipe.id}}/edit">Edit</button>
         </div>
         <!-- RECIPE ACTION BUTTONS FOR MOBILE -->
-        <div  class="col-sm-12 hidden-sm-up">
+        <div  class="col-sm-12 hidden-sm-up mobile-buttons">
           <hr>
-          <button class="mobile-button" (click)="divide()">{{divideButton}}</button>
-          <button class="mobile-button" (click)="double()">{{doubleButton}}</button>
-          <button class="mobile-button" (click)="noteSwitch()">{{noteSwitchButton}}</button>
-          <button class="mobile-button" *ngIf="user_id == recipe_user_id" routerLink="/recipes/{{recipe.id}}/edit">Edit</button>
+          <a class="mobile-button mobile-button-first" (click)="divide()">{{divideButton}}</a>
+          <a class="mobile-button" (click)="double()">{{doubleButton}}</a>
+          <a class="mobile-button1" (click)="noteSwitch()">{{noteSwitchButton}}</a>
+          <a class="mobile-button2" *ngIf="user_id == recipe_user_id" routerLink="/recipes/{{recipe.id}}/edit">Edit</a>
+          <a class="mobile-button2">Pics</a>
         </div>
       </div>
       <!-- END yläotsikkorivi -->
@@ -26,10 +27,12 @@
       <!-- Alempi rivi, kuvat, aineosat, muut tiedot -->
       <div class="row">
         <div class="col-md-2 img-div hidden-md-down">
+          <!--
           <div *ngIf="!recipe.recipe_pictures[0]"><img class="recipe-img" src="assets/baking.png"></div>
           <div *ngIf="recipe.recipe_pictures[0]">
-            <a (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.thumb.url}}"></a><span><i>&copy;
-            {{recipe.recipe_pictures[0].author}}</i></span><br></div>
+            <a (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.thumb.url}}"></a>
+            <span><i>&copy; {{recipe.recipe_pictures[0].author}}</i></span><br>
+            </div>
           <div *ngIf="!recipe.recipe_pictures[1]"><img class=" recipe-img" src="assets/muffins.png"></div>
           <div *ngIf="recipe.recipe_pictures[1]">
             <a (click)="showPic(recipe.recipe_pictures[1])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[1].picture.thumb.url}}"></a><span><i>&copy;
@@ -37,7 +40,18 @@
           <div *ngIf="!recipe.recipe_pictures[2]"><img class="recipe-img-last" src="assets/pumpkin.png"></div>
           <div *ngIf="recipe.recipe_pictures[2]">
             <a (click)="showPic(recipe.recipe_pictures[2])" data-toggle="modal" data-target="#myModal"><img class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.thumb.url}}"></a><span><i>&copy;
-            {{recipe.recipe_pictures[2].author}}</i></span><br></div>
+            {{recipe.recipe_pictures[2].author}}</i></span><br></div>-->
+
+          <div *ngFor="let picture of pictureSet">
+            <img *ngIf="picture == 'nopic'" class="recipe-img" src="assets/placeholder_thumb.png">
+            <div *ngIf="picture != 'nopic'">
+            <a *ngIf="picture != 'nopic'" (click)="showPic(picture)" data-toggle="modal" data-target="#myModal">
+               <img *ngIf="picture != nopic" class="recipe-img" src="{{baseUrl}}/{{picture.picture.thumb.url}}">
+            </a>
+            <span><i>&copy; {{picture.author}}</i></span><br>
+            </div>
+          </div>
+
         </div>
         <!-- muuttuva näkymä aineosat, muut tiedot <-> notesit -->
         <div [ngSwitch]="noteSwitchButton" class="animate-switch-container">

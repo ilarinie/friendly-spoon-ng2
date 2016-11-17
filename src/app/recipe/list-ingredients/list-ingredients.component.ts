@@ -132,4 +132,11 @@ export class ListIngredients implements OnDestroy {
     this.sub.unsubscribe();
   }
 
+  manualMultiplier(){
+   let number =  parseFloat(prompt("Change multiplier", this.multiplier.toString()));
+   if (!isNaN(number)){
+     this.multiplier = number;
+   }
+  }
+
 }

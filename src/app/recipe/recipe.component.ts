@@ -34,6 +34,7 @@ export class RecipeComponent implements OnInit {
   duration_array;
   checked = [];
   allIncs: RecipeIngredient[];
+  pictureSet = [];
 
   baseUrl = Global.apiUrl;
 
@@ -69,6 +70,18 @@ export class RecipeComponent implements OnInit {
     return this.recipe.recipe_pictures.indexOf(this.shownPic);
   }
 
+  shownImages(){
+     for ( let i = 0; i < 3; i ++) {
+       if (this.recipe.recipe_pictures.length > i){
+         this.pictureSet[i] = this.recipe.recipe_pictures[i];
+       } else if (this.recipe.recipe_pictures.length > 0){
+         this.pictureSet[i] = this.recipe.recipe_pictures[0];
+       }else {
+         this.pictureSet[i] = "nopic"
+       }
+      }
+  }
+
 
   getRecipe() {
     this.sub = this.route.params.subscribe(params => {
@@ -95,7 +108,7 @@ export class RecipeComponent implements OnInit {
         this.friendlyApiService.getRecipe(id)
           .then(recipe => {
             this.recipe = recipe;
-
+            this.shownImages();
 
             this.recipe_user_id = recipe.user_id;
           });
