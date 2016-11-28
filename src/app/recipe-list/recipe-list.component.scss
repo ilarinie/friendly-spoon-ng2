@@ -152,3 +152,30 @@ md-card {
     word-wrap: break-word;
     font-style: italic;
 }
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.recipe-card {
+    align-self: flex-start;
+    margin: 20px auto;
+}
+
+.card-img-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.card-header-content {
+    word-wrap: break-word;
+    color: white !important;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.card-introduction {
+    color: white;
+    word-wrap: break-word;
+    font-size: 12px;
+}

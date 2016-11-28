@@ -1,17 +1,17 @@
 Arguments: 
-  C:\Program Files (x86)\nodejs\node.exe C:\Users\k843903\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add angular2-fractionize
+  C:\Program Files\nodejs\node.exe C:\Users\k843903\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
 
 PATH: 
-  Y:\bin;C:\Users\k843903\Desktop\PortableGit\mingw64\bin;C:\Users\k843903\Desktop\PortableGit\usr\local\bin;C:\Users\k843903\Desktop\PortableGit\usr\bin;C:\Users\k843903\Desktop\PortableGit\usr\bin;C:\Users\k843903\Desktop\PortableGit\mingw64\bin;C:\Users\k843903\Desktop\PortableGit\usr\bin;Y:\bin;C:\Program Files (x86)\CA\DCS\CAWIN;C:\Program Files\Microsoft Host Integration Server 2010\system;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\QS\DLL;C:\Program Files\Microsoft Host Integration Server 2010\SysWOW64;C:\Qs\Sovellukset\Exe;C:\Program Files (x86)\nodejs;C:\Users\k843903\AppData\Roaming\npm;C:\Users\k843903\Desktop\PortableGit\usr\bin\vendor_perl;C:\Users\k843903\Desktop\PortableGit\usr\bin\core_perl
+  Y:\bin;C:\Users\k843903\PortableGit\mingw64\bin;C:\Users\k843903\PortableGit\usr\local\bin;C:\Users\k843903\PortableGit\usr\bin;C:\Users\k843903\PortableGit\usr\bin;C:\Users\k843903\PortableGit\mingw64\bin;C:\Users\k843903\PortableGit\usr\bin;Y:\bin;C:\Program Files\Microsoft Host Integration Server 2013\SysWOW64;C:\Program Files\Microsoft Host Integration Server 2013\system;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\QS\DLL;C:\QS\DLL;C:\Qs\Sovellukset\Exe;C:\Program Files\nodejs;C:\Users\k843903\AppData\Roaming\npm;C:\Users\k843903\PortableGit\usr\bin\vendor_perl;C:\Users\k843903\PortableGit\usr\bin\core_perl
 
 Yarn version: 
-  0.16.1
+  0.17.9
 
 Node version: 
   6.9.1
 
 Platform: 
-  win32 ia32
+  win32 x64
 
 npm manifest: 
   {
@@ -49,6 +49,7 @@ npm manifest:
       "@angular2-material/radio": "^2.0.0-alpha.8-2",
       "@angular2-material/tabs": "^2.0.0-alpha.8-2",
       "angular2-bootstrap-confirm": "^0.10.0",
+      "angular2-fractionize": "0.0.1",
       "angular2-infinite-scroll": "^0.2.2",
       "angular2-modal": "^2.0.0-beta.12",
       "bootstrap": "^4.0.0-alpha.5",
@@ -87,9 +88,6 @@ npm manifest:
   }
 
 yarn manifest: 
-  No manifest
-
-bower manifest: 
   No manifest
 
 Lockfile: 
@@ -132,7 +130,7 @@ Lockfile:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-2.0.0.tgz#724e7c68ac177aa933aa75a6b4cb11e5aa795d2c"
   
-  "@angular/core@~2.1.0":
+  "@angular/core@^2.0.0", "@angular/core@~2.1.0":
     version "2.1.2"
     resolved "https://registry.yarnpkg.com/@angular/core/-/core-2.1.2.tgz#ce39521643f3d97bc5923d5a7aa76604e973dac8"
   
@@ -387,6 +385,14 @@ Lockfile:
   angular2-bootstrap-confirm@^0.10.0:
     version "0.10.2"
     resolved "https://registry.yarnpkg.com/angular2-bootstrap-confirm/-/angular2-bootstrap-confirm-0.10.2.tgz#23f58210167931ef03a71097e5135cddce78377d"
+  
+  angular2-fractionize@0.0.1:
+    version "0.0.1"
+    resolved "https://registry.yarnpkg.com/angular2-fractionize/-/angular2-fractionize-0.0.1.tgz#f6aebc38083173c94919e8338ece59e1ad662e70"
+    dependencies:
+      "@angular/core" "^2.0.0"
+      rxjs "5.0.0-beta.12"
+      zone.js "0.6.21"
   
   angular2-infinite-scroll@^0.2.2:
     version "0.2.6"
@@ -8159,10 +8165,14 @@ Lockfile:
     version "0.6.26"
     resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.6.26.tgz#067c13b8b80223a89b62e9dc82680f09762c4636"
   
+  zone.js@0.6.21:
+    version "0.6.21"
+    resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.6.21.tgz#beebbff30480e6bc975cbbb4eedc750c3080328e"
+  
   zone.js@0.6.23:
     version "0.6.23"
     resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.6.23.tgz#78fff1e27425e5f82fb875c8da435681850b7018"
 
 Trace: 
-  Error: ENOENT: no such file or directory, open 'C:\Users\k843903\Desktop\friendly-spoon-ng2\node_modules\@types\core-js\index.d.ts'
+  Error: ENOENT: no such file or directory, open 'C:\Users\k843903\Desktop\friendly-spoon-ng2\node_modules\@types\core-js\package.json'
       at Error (native)
