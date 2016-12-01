@@ -161,11 +161,14 @@ md-card {
 
 .recipe-card {
     align-self: flex-start;
-    margin: 20px auto;
+    margin: auto;
+    -webkit-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
+   box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
 }
 
 .card-img-overlay {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .card-header-content {

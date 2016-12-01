@@ -36,15 +36,13 @@
             <a (click)="showPic(recipe.recipe_pictures[2])" data-toggle="modal" data-target="#myModal"><img
               class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.thumb.url}}"></a><span><i>&copy;
             {{recipe.recipe_pictures[2].author}}</i></span><br></div>-->
-            <div *ngFor="let picture of pictureSet">
-            <img *ngIf="picture == 'nopic'" class="recipe-img" src="assets/placeholder_thumb.png">
-            <div *ngIf="picture != 'nopic'">
-            <a *ngIf="picture != 'nopic'" (click)="showPic(picture)" data-toggle="modal" data-target="#myModal">
-               <img *ngIf="picture != nopic" class="recipe-img" src="{{baseUrl}}/{{picture.picture.thumb.url}}">
+          <div *ngFor="let picture of recipe.recipe_pictures">
+            <a (click)="showPic(picture)" data-toggle="modal" data-target="#myModal">
+              <img class="recipe-img" src="{{baseUrl}}/{{picture.picture.thumb.url}}">
             </a>
             <span><i>&copy; {{picture.author}}</i></span><br>
-            </div>
           </div>
+          <img *ngIf="recipe.recipe_pictures.length == 0" class="recipe-img" src="assets/placeholder_thumb.png">
         </div>
         <!-- muuttuva näkymä aineosat, muut tiedot <-> notesit -->
         <div [@fadeIn]="on">
