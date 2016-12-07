@@ -49,7 +49,8 @@ export class RecipeListComponent implements OnInit {
     this.order = "name";
     this.searchTag = "";
 
-    if (localStorage.getItem("recipes") == null || localStorage.getItem("listLoaded") == null || (parseInt(localStorage.getItem("listLoaded")) + 600000) < Date.now()) {
+    console.log(localStorage.getItem('listLoaded') == "null")
+    if (localStorage.getItem("recipes") == null || localStorage.getItem("listLoaded") == "null" || (parseInt(localStorage.getItem("listLoaded")) + 600000) < Date.now()) {
       console.log("lataan")
       this.loading = true;
       this.friendlyApiService.getRecipes().then(recipes => {

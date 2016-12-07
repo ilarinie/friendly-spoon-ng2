@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {Input} from "@angular/core";
 import {Recipe} from "../../models/recipe";
 import {RecipePicture} from "../../models/recipe_picture";
@@ -21,6 +21,8 @@ export class Pictures implements OnInit {
   @Input()
   recipe: Recipe;
 
+  @ViewChild('selectedImage') selectedImage;
+
   pictures: RecipePicture[];
 
   uploaded: any;
@@ -32,7 +34,6 @@ export class Pictures implements OnInit {
 
   input: any;
 
-  //baseUrl: string = "http://localhost:3000/";
   baseUrl: string = Global.apiUrl;
   file_src: string = "";
   private saving: boolean = false;
@@ -60,6 +61,7 @@ export class Pictures implements OnInit {
       this.tickDuration = (file.size / 180000) / 100;
       this.uploaded = myReader.result;
       this.loading = false;
+      this.selectedImage.nativeElement.value = '';
     }
     myReader.readAsDataURL(file);
   }
@@ -86,8 +88,8 @@ export class Pictures implements OnInit {
     this.friendlyApiService.uploadPicture(pic).then(pic => {
       if (this.pictures.length == 0) {
         this.changeCoverPicture(pic.id);
-
       }
+      localStorage.setItem('listLoaded', null);
       this.pictures.push(pic);
       this.ticks = 100;
       this.saving = false;
@@ -105,6 +107,7 @@ export class Pictures implements OnInit {
       } else {
         this.changeCoverPicture(this.pictures[0].id);
       }
+      localStorage.setItem('listLoaded', null);
 
     }
     this.friendlyApiService.deletePicture(picture);

@@ -1,37 +1,37 @@
 <h3>Pictures {{pictures.length}}/3</h3>
-  <div class="picture-container col-md-3" *ngFor="let picture of pictures">
+<div class="picture-container col-md-3" *ngFor="let picture of pictures">
     <img style="float:left;" src="{{baseUrl}}{{picture.picture.thumb.url}}">
     <span><i>&copy; {{picture.author}}</i></span><br>
     <button md-raised-button class="picture-button" color="accent" (click)="deletePic(picture)">Delete</button>
     <div *ngIf="recipe.cover_picture_id != picture.id">
-      <button md-raised-button class="picture-button" color="primary" (click)="changeCoverPicture(picture.id)">Select</button>
+        <button md-raised-button class="picture-button" color="primary" (click)="changeCoverPicture(picture.id)">Select</button>
     </div>
     <div class="picture-button cover-indicator" *ngIf="recipe.cover_picture_id == picture.id">
-      <button md-raised-button class="picture-button" color="primary" disabled>Cover Picture</button>
+        <button md-raised-button class="picture-button" color="primary" disabled>Cover Picture</button>
     </div>
-  </div>
+</div>
 <div class="picture-container col-md-3" *ngIf="recipe.recipe_pictures.length < 3">
 
-  <div *ngIf="!saving">
+    <div *ngIf="!saving">
 
-    <h3>Upload a new picture</h3>
-    <label class="btn btn-default btn-file">
-  Browse <input type="file" style="display:none;" accept="image/*" (change)="changeListener($event)">
+        <h3>Upload a new picture</h3>
+        <label class="btn btn-default btn-file">
+  Browse <input #selectedImage type="file" style="display:none;" accept="image/*" (change)="changeListener($event)">
   </label><br>
-  <span>File: {{fileName}}</span>
-    <md-input [(ngModel)]="author">
-      <span md-prefix>&copy;</span>
-    </md-input>
-  <button  md-raised-button (click)="uploadPic()">Save</button>
-  </div>
-  <div *ngIf="saving">
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="ticks" [attr.aria-valuemin]="0" [attr.aria-valuemax]="100" [style.width]="(ticks/100)*100 + '%'">{{ticks}} %</div>
+        <span>File: {{fileName}}</span>
+        <md-input [(ngModel)]="author">
+            <span md-prefix>&copy;</span>
+        </md-input>
+        <button [disabled]="!input" md-raised-button (click)="uploadPic()">Save</button>
     </div>
-    <p><i>Uploading..</i></p>
-    <!--<md-progress-bar mode="determinate" [value]="ticks"></md-progress-bar>-->
-  </div>
-  <div *ngIf="loading">
-    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-  </div>
+    <div *ngIf="saving">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="ticks" [attr.aria-valuemin]="0" [attr.aria-valuemax]="100" [style.width]="(ticks/100)*100 + '%'">{{ticks}} %</div>
+        </div>
+        <p><i>Uploading..</i></p>
+        <!--<md-progress-bar mode="determinate" [value]="ticks"></md-progress-bar>-->
+    </div>
+    <div *ngIf="loading">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+    </div>
 </div>

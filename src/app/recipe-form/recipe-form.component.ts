@@ -165,6 +165,7 @@ export class RecipeFormComponent implements OnInit {
     this.durations = JSON.parse(localStorage.getItem("durations"));
   }
   get diagnostic() { return JSON.stringify(this.recipe); }
+
   save(value: any) {
     this.recipe.name = value.name;
     this.recipe.public = value.public;
@@ -179,6 +180,10 @@ export class RecipeFormComponent implements OnInit {
       .then(recipe => {
         this.recipe = recipe;
         this.initialRecipe = recipe;
+
+        //to force recipe list refresh
+        localStorage.setItem('listLoaded', null);
+
         //load updated recipe list to cache
         this.friendlyApiService.updateRecipeToList(this.recipe);
         if (this.router.url.includes('addrecipe')) {
