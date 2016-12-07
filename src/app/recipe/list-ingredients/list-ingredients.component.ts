@@ -128,6 +128,12 @@ export class ListIngredients implements OnDestroy {
 
   }
 
+  addAll(list: RecipeIngredient[]) {
+    for (let inc of list){
+      this.addToCart(inc);
+    }
+  }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

@@ -1,32 +1,30 @@
 <h3>Your Friendly Shopping Cart</h3>
 <h4>{{user.shopping_cart_items.length}} items</h4>
+<button md-raised-button color="warn" (click)="emptyCart()">Empty cart</button>
 
-  <md-card>
+<md-card>
     <div class="input-group">
-      <input class="form-control" placeholder="Add an item.." [(ngModel)]="newItem.content">
-      <span class="input-group-btn">
+        <input class="form-control" placeholder="Add an item.." [(ngModel)]="newItem.content">
+        <span class="input-group-btn">
     <button class="btn btn-success" (click)="saveItem()">Save</button>
     </span>
     </div>
-  </md-card>
+</md-card>
 
 
-  <div *ngIf="items.length == 0" style="text-align:center">
+<div *ngIf="items.length == 0" style="text-align:center">
     <h4>Your shopping cart is empty</h4>
-  </div>
-  <div *ngIf="items.length != 0">
+</div>
+<div *ngIf="items.length != 0">
     <div [@fadeIn]="on" *ngFor="let item of items">
-      <md-card>
-        <span *ngIf="!item.content">
-        <strong><span *ngIf="item.recipe_ingredient.amount" [innerHTML]="item.recipe_ingredient.amount | fractionize:1"></span> {{item.recipe_ingredient.unit?.name}}
-        {{item.recipe_ingredient.ingredient.name | capitalize}} </strong><span
-        *ngIf="item.recipe_name"><i>for {{item.recipe_name}}</i></span>
-        </span>
-        <span *ngIf="item.content">
+        <md-card>
+            <span *ngIf="!item.content">
+        <strong><span *ngIf="item.recipe_ingredient.amount" [innerHTML]="item.recipe_ingredient.amount | fractionize:1"></span> {{item.recipe_ingredient.unit?.name}} {{item.recipe_ingredient.ingredient.name | capitalize}} </strong><span *ngIf="item.recipe_name"><i>for {{item.recipe_name}}</i></span>
+            </span>
+            <span *ngIf="item.content">
           <strong>{{item.content}}</strong>
         </span>
-        <button style="float:right;" md-raised-button color="warn" (click)="removeFromCart(item)">Remove</button>
-      </md-card>
+            <button style="float:right;" md-raised-button color="warn" (click)="removeFromCart(item)">Remove</button>
+        </md-card>
     </div>
-  </div>
-
+</div>

@@ -56,6 +56,12 @@ export class ShoppingCartComponent implements OnInit {
     })
   }
 
+  emptyCart(){
+    for (let item of this.items){
+      this.removeFromCart(item);
+    }
+  }
+
 
 
 
