@@ -16,6 +16,7 @@
 .classpath
 *.launch
 .settings/
+.editorconfig
 
 # misc
 /.sass-cache
