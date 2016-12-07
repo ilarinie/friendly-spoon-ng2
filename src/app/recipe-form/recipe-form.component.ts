@@ -19,7 +19,7 @@ import {fadeIn} from "../animations";
 @Component({
   selector: "recipeform",
   templateUrl: "recipe-form.component.html",
-  styleUrls: ["recipe-form.component.css"],
+  styleUrls: ["recipe-form.component.scss"],
   viewProviders: [
     DragulaService
   ], animations: [
@@ -44,6 +44,8 @@ export class RecipeFormComponent implements OnInit {
   levels: Level[];
   durations: Duration[];
 
+  pictureSet = [];
+
   shownPic: RecipePicture;
   private initialRecipe: Recipe;
 
@@ -66,6 +68,9 @@ export class RecipeFormComponent implements OnInit {
   }
 
   hasChanges() {
+    if (this.incsMoved()){
+      return true;
+    }
     return this.form.dirty;
   }
   incsMoved() {
@@ -88,6 +93,18 @@ export class RecipeFormComponent implements OnInit {
   }
   shownIndex(): number {
     return this.recipe.recipe_pictures.indexOf(this.shownPic);
+  }
+
+  shownImages(){
+     for ( let i = 0; i < 3; i ++) {
+       if (this.recipe.recipe_pictures.length > i){
+         this.pictureSet[i] = this.recipe.recipe_pictures[i];
+       } else if (this.recipe.recipe_pictures.length > 0){
+         this.pictureSet[i] = this.recipe.recipe_pictures[0];
+       }else {
+         this.pictureSet[i] = "nopic"
+       }
+      }
   }
 
 
@@ -124,6 +141,7 @@ export class RecipeFormComponent implements OnInit {
             .then(recipe => {
               this.recipe = recipe;
               this.recipe.incsMoved = false;
+              this.shownImages();
               this.recipe_user_id = recipe.user_id;
               this.form = this.fb.group({
                 'name': [this.recipe.name, Validators.required],
@@ -174,6 +192,13 @@ export class RecipeFormComponent implements OnInit {
         }
       })
       .catch(error => this.error = error);
+  }
+  saveTags() {
+    for (let i = 0; i < this.recipe.recipe_tags.length; i++) {
+      if (!this.recipe.recipe_tags[i].id) {
+        this.friendlyApiService.saveRecipeTag(this.recipe.recipe_tags[i]);
+      }
+    }
   }
   saveOrders() {
     if (this.recipe.recipe_ingredients != null && this.recipe.recipe_ingredients.length != 0) {

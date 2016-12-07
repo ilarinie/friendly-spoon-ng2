@@ -1,24 +1,40 @@
 <div class="container container-fluid" [@fadeIn]="on">
-  <div class="col-md-5">
+  <div class="col-md-6">
 
     <md-card>
           <md-card-title>Edit Tags</md-card-title>
       <md-list>
         <md-list-item *ngFor="let tag of tags">
-          <md-input [(ngModel)]="tag.title"></md-input> <a class="btn btn-success" (click)="saveTag(tag)">Save</a> <a class="btn btn-danger" (click)="deleteTag(tag)">Delete</a> </md-list-item>
+
+          <div class="input-group">
+              <input type="text" class="form-control" [(ngModel)]="tag.title">
+              <span class="input-group-btn">
+                <button class="btn btn-success" type="button" click="saveTag(tag)">Save</button>
+              </span>
+              <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" (click)="deleteTag(tag)">Delete</button>
+              </span>
+          </div>
+         <!-- <md-input [(ngModel)]="tag.title"></md-input> <a class="btn btn-success" (click)="saveTag(tag)">Save</a> <a class="btn btn-danger" (click)="deleteTag(tag)">Delete</a> --></md-list-item>
           <md-list-item *ngIf="tags.length == 0">
             <h4>The list appears to be empty, huh.</h4>
           </md-list-item>
       </md-list>
     </md-card>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-6">
     <md-card *ngIf="!savingTag">
       <md-card-title>Create a Tag</md-card-title>
-      <md-input [(ngModel)]="newTag.title"></md-input> <a class="btn btn-success" (click)="saveTag(newTag)">Save</a>
+      <div class="input-group">
+        <input class="form-control" type="text" [(ngModel)]="newTag.title">
+        <span class="input-group-btn">
+          <button type="button" (click)="saveTag(newTag)" class="btn btn-success">Save</button>
+        </span>
+      </div>
+      <!--<md-input [(ngModel)]="newTag.title"></md-input> <a class="btn btn-success" (click)="saveTag(newTag)">Save</a>-->
   </md-card>
   <md-card *ngIf="savingTag">
-    <img src="assets/ellipsis.svg">
+    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
     Saving tag..
   </md-card>
      </div>

@@ -1,35 +1,53 @@
 <!-- main recipe container -->
 <div *ngIf="recipe" class="maincont container-fluid" [@fadeIn]="on">
     <div class="col-sm-13 col-md-13 maindiv col-centered">
-      <!-- Yläotsikkorivi -->
-      <div class="row">
-        <div class="col-sm-3 col-md-3  heading-div">
-          <h3 class="main-heading">{{recipe.name}}</h3> </div>
-        <!-- RECIPE ACTION BUTTONS FOR DESKTOP -->
-        <div *showItBootstrap="['md','lg']" class="col-sm-6 col-md-6  heading-div button-group">
-          <a class="btn header-btn" (click)="divide()">{{divideButton}}</a>
-          <a class="btn header-btn" (click)="double()">{{doubleButton}}</a>
-          <a class="btn header-btn" (click)="noteSwitch()">{{noteSwitchButton}}</a>
-          <a *ngIf="user_id == recipe_user_id" class="btn header-btn" routerLink="/recipes/{{recipe.id}}/edit">Edit</a>
+        <!-- Yläotsikkorivi -->
+        <div class="row">
+            <div class="col-sm-3 col-md-3  heading-div">
+                <h3 class="main-heading">{{recipe.name}}</h3>
+            </div>
+            <!-- RECIPE ACTION BUTTONS FOR DESKTOP -->
+            <div class="col-sm-6 col-md-6 heading-div button-group hidden-sm-down">
+                <button class="btn header-btn" (click)="divide()">{{divideButton}}</button>
+                <button class="btn header-btn" (click)="double()">{{doubleButton}}</button>
+                <button class="btn header-btn" (click)="noteSwitch()">{{noteSwitchButton}}</button>
+                <button *ngIf="user_id == recipe_user_id" class="btn header-btn" routerLink="/recipes/{{recipe.id}}/edit">Edit</button>
+            </div>
+            <!-- RECIPE ACTION BUTTONS FOR MOBILE -->
+            <div class="col-sm-12 hidden-sm-up mobile-buttons">
+                <div class="mobile-nav-div first">
+                    <a class="mobile-button" (click)="divide()">{{divideButton}}</a>
+                </div>
+                <div class="mobile-nav-div">
+                    <a class="mobile-button" (click)="double()">{{doubleButton}}</a>
+                </div>
+                <div class="mobile-nav-div">
+                    <a class="mobile-button" (click)="noteSwitch()">{{noteSwitchButton}}</a>
+                </div>
+                <div class="mobile-nav-div">
+                    <a class="mobile-button" *ngIf="user_id == recipe_user_id" routerLink="/recipes/{{recipe.id}}/edit">Edit</a>
+                </div>
+                <div class="mobile-nav-div">
+                    <span *ngIf="recipe.recipe_pictures.length != 0">
+                    <a class="mobile-button" (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal">Pics</a>
+                    </span>
+                    <span *ngIf="recipe.recipe_pictures.length == 0">
+                      Nopics
+                    </span>
+                </div>
+            </div>
         </div>
-        <!-- RECIPE ACTION BUTTONS FOR MOBILE -->
-        <div *showItBootstrap="['sm', 'xs']" class="col-sm-12">
-          <hr>
-          <button class="mobile-button" (click)="divide()">{{divideButton}}</button>
-          <button class="mobile-button" (click)="double()">{{doubleButton}}</button>
-          <button class="mobile-button" (click)="noteSwitch()">{{noteSwitchButton}}</button>
-          <button class="mobile-button" *ngIf="user_id == recipe_user_id" routerLink="/recipes/{{recipe.id}}/edit">Edit</button>
-        </div>
-      </div>
-      <!-- END yläotsikkorivi -->
-      <hr class="hline" />
-      <!-- Alempi rivi, kuvat, aineosat, muut tiedot -->
-      <div class="row">
-        <div class="col-md-2 img-div hidden-xs hidden-sm">
+        <!-- END yläotsikkorivi -->
+        <hr class="hline" />
+        <!-- Alempi rivi, kuvat, aineosat, muut tiedot -->
+        <div class="row">
+            <div class="col-md-2 img-div hidden-md-down">
+                <!--
           <div *ngIf="!recipe.recipe_pictures[0]"><img class="recipe-img" src="assets/baking.png"></div>
           <div *ngIf="recipe.recipe_pictures[0]">
-            <a (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.thumb.url}}"></a><span><i>&copy;
-            {{recipe.recipe_pictures[0].author}}</i></span><br></div>
+            <a (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.thumb.url}}"></a>
+            <span><i>&copy; {{recipe.recipe_pictures[0].author}}</i></span><br>
+            </div>
           <div *ngIf="!recipe.recipe_pictures[1]"><img class=" recipe-img" src="assets/muffins.png"></div>
           <div *ngIf="recipe.recipe_pictures[1]">
             <a (click)="showPic(recipe.recipe_pictures[1])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[1].picture.thumb.url}}"></a><span><i>&copy;
@@ -37,76 +55,88 @@
           <div *ngIf="!recipe.recipe_pictures[2]"><img class="recipe-img-last" src="assets/pumpkin.png"></div>
           <div *ngIf="recipe.recipe_pictures[2]">
             <a (click)="showPic(recipe.recipe_pictures[2])" data-toggle="modal" data-target="#myModal"><img class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.thumb.url}}"></a><span><i>&copy;
-            {{recipe.recipe_pictures[2].author}}</i></span><br></div>
-        </div>
-        <!-- muuttuva näkymä aineosat, muut tiedot <-> notesit -->
-        <div [ngSwitch]="noteSwitchButton" class="animate-switch-container">
-          <div class="animate-switch" *ngSwitchCase="'Notes'" [@fadeIn]="on">
-            <!-- ainesosanäkymä -->
-            <div class="col-sm-5 col-md-5 " [@fadeIn]="on">
-              <list-ingredients [recipe]="recipe" [multiplier]="multiplier"></list-ingredients>
+            {{recipe.recipe_pictures[2].author}}</i></span><br></div>-->
+
+                <div *ngFor="let picture of recipe.recipe_pictures">
+                        <a (click)="showPic(picture)" data-toggle="modal" data-target="#myModal">
+                            <img class="recipe-img" src="{{baseUrl}}/{{picture.picture.thumb.url}}">
+                        </a>
+                        <span><i>&copy; {{picture.author}}</i></span><br>
+                </div>
+              <img *ngIf="recipe.recipe_pictures.length == 0" class="recipe-img" src="assets/placeholder_thumb.png">
+
             </div>
-            <!-- muut tiedot -näkymä -->
-            <div class="col-sm-5 col-md-5 " [@fadeIn]="on">
-              <h4 class="sub-heading">Average Rating:</h4>
-              <rating name="ratingaverage" [ngModel]="recipe.ratingaverage" [readonly]="true"></rating>
-              <h4 class="headings sub-heading">Difficulty</h4>
-              <div [ngSwitch]="recipe.level.id"><span *ngSwitchCase="3" class="label label-danger">Difficult</span> <span *ngSwitchCase="1" class="label label-success">Easy</span> <span *ngSwitchCase="2" class="label label-warning">Medium</span> </div>
-              <h4 class="headings sub-heading">Preparation time</h4> <span *ngFor="let i of duration_array.slice(0,recipe.duration.id)" class="glyphicon glyphicon-time timespan"></span>
-              <h4 class="headings sub-heading">Tags</h4>
-              <md-grid-list cols="4" rowHeight="30px" gutterSize="4px">
-                <md-grid-tile *ngFor="let recipetag of recipe.recipe_tags" class="tag-label tag-display">{{recipetag.tag.title}}</md-grid-tile>
-              </md-grid-list>
+            <!-- muuttuva näkymä aineosat, muut tiedot <-> notesit -->
+            <div [ngSwitch]="noteSwitchButton" class="animate-switch-container">
+                <div class="animate-switch" *ngSwitchCase="'Notes'" [@fadeIn]="on">
+                    <!-- ainesosanäkymä -->
+                    <div class="col-sm-5 col-md-5 " [@fadeIn]="on">
+                        <list-ingredients [recipe]="recipe" [multiplier]="multiplier"></list-ingredients>
+                    </div>
+                    <!-- muut tiedot -näkymä -->
+                    <div class="col-sm-5 col-md-5 " [@fadeIn]="on">
+                        <h4 class="sub-heading">Average Rating:</h4>
+                        <rating name="ratingaverage" [ngModel]="recipe.ratingaverage" [readonly]="true"></rating>
+                        <h4 class="headings sub-heading">Difficulty</h4>
+                        <div [ngSwitch]="recipe.level.id"><span *ngSwitchCase="3" class="tag tag-danger">Difficult</span> <span *ngSwitchCase="1" class="tag tag-success">Easy</span> <span *ngSwitchCase="2" class="tag tag-warning">Medium</span> </div>
+                        <h4 class="headings sub-heading">Preparation time</h4> <span *ngFor="let i of duration_array.slice(0,recipe.duration.id)" class="glyphicon glyphicon-time timespan"></span>
+                        <h4 class="headings sub-heading">Tags</h4>
+                        <md-grid-list cols="4" rowHeight="30px" gutterSize="4px">
+                            <md-grid-tile *ngFor="let recipetag of recipe.recipe_tags" class="tag-label tag-display">{{recipetag.tag.title}}</md-grid-tile>
+                        </md-grid-list>
+                    </div>
+                    <!-- END muut tiedot -näkymä -->
+                </div>
+                <!-- END oletusreseptinäkymä -->
+                <!-- notes-näkymä -->
+                <div class="animate-switch" *ngSwitchCase="'Recipe'">
+                    <notes [recipe]="recipe"></notes>
+                </div>
+                <!-- END notes-näkymä -->
             </div>
-            <!-- END muut tiedot -näkymä -->
-          </div>
-          <!-- END oletusreseptinäkymä -->
-          <!-- notes-näkymä -->
-          <div class="animate-switch" *ngSwitchCase="'Recipe'">
-            <notes [recipe]="recipe"></notes>
-          </div>
-          <!-- END notes-näkymä -->
+            <!-- END muuttuva näkymä-containeri -->
         </div>
-        <!-- END muuttuva näkymä-containeri -->
-      </div>
-      <!-- END Alempi rivi -->
-      <!-- alarivi, jossa valmistusohje -->
-      <div [hidden]="noteSwitchButton != 'Notes'" class="row" [@fadeIn]="on">
-        <!-- tyhjä div desktop-näkymää varten, ei näy pienessä tai mobiilissa -->
-        <div class="col-md-2 hidden-sm hidden-xs empty-div">
-          <hr class="subline" /> </div>
-        <!-- END Tyhjä desktop div -->
-        <!-- valmistusohjenäkymä -->
-        <div class="col-sm-7 col-md-7 instruction-div">
-          <h4 class="sub-heading">Instruction</h4>
-          <hr class="hline" />
-          <div [innerHTML]="recipe.instruction"></div>
+        <!-- END Alempi rivi -->
+        <!-- alarivi, jossa valmistusohje -->
+        <div [hidden]="noteSwitchButton != 'Notes'" class="row" [@fadeIn]="on">
+            <!-- tyhjä div desktop-näkymää varten, ei näy pienessä tai mobiilissa -->
+            <div class="col-md-2 hidden-sm-down empty-div">
+                <hr class="subline" /> </div>
+            <!-- END Tyhjä desktop div -->
+            <!-- valmistusohjenäkymä -->
+            <div class="col-sm-7 col-md-7 instruction-div">
+                <h4 class="sub-heading">Instruction</h4>
+                <hr class="hline" />
+                <div [innerHTML]="recipe.instruction"></div>
+            </div>
+            <!-- END valmistusohjenäkymä -->
         </div>
-        <!-- END valmistusohjenäkymä -->
-      </div>
-      <!-- END alin rivi -->
+        <!-- END alin rivi -->
     </div>
     <!-- END mainDiv -->
 </div>
 <!-- END main container -->
 <div *ngIf="!recipe" class="loading-recipe">
-  <div class="loading-container"> <img src="assets/ellipsis.svg">
-    <p>Fetching recipe :E</p>
-  </div>
+    <div class="loading-container">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        <p>Fetching recipe :E</p>
+    </div>
 </div>
 <!-- Full-size picture Modal -->
 <div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content  random-recipe" *ngIf="shownPic">
-      <div class="modal-header" style="background-color:#022f32;"> <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button> </div>
-      <div class="modal-body"> <img class="random-image img-responsive" src="{{baseUrl}}{{shownPic.picture.url}}">
-        <!--
-        <div style="float:right;" *ngIf="!randomRecipe.coverpicture"><img  src="assets/baking.png" alt="nice pic yo"></div>
-        <div style="float:right;" *ngIf="randomRecipe.coverpicture"><img  class="img-responsive" src="{{baseUrl}}{{recipe.coverpicture.picture.thumb.url}}"></div>
-        --></div>
-      <div class="modal-footer">
-        <p>Photo {{(shownIndex()+1)}} / {{this.recipe.recipe_pictures.length}}</p> <button type="button" class="btn btn-default" (click)="nextPic()">Next</button> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> </div>
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content  random-recipe" *ngIf="shownPic">
+            <div class="modal-header" style="background-color:#022f32;">
+                <h3>Pictures of {{recipe.name}}</h3>
+                <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img class="random-image img-responsive" src="{{baseUrl}}{{shownPic.picture.url}}">
+                <p class="copyright"><i>&copy; {{shownPic.author}}</i></p>
+            </div>
+            <div class="modal-footer">
+                <p>Photo {{(shownIndex()+1)}} / {{this.recipe.recipe_pictures.length}}</p> <button type="button" class="btn btn-default" (click)="nextPic()">Next</button> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> </div>
+        </div>
     </div>
-  </div>
 </div>

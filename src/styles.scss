@@ -1,0 +1,53 @@
+@import 'app/styles/_variables.scss';
+
+
+//HÄXÖR OVERRIDE DEFAULT BOOTSTRAP FONTS
+h1,h2,h3,h4,h5,a {
+  font-family: $main-font;
+}
+p, div {
+  font-family: $main-font;
+}
+
+
+body {
+  background-image: url(/assets/mainbg.png);
+  min-height: 100vh;
+}
+main {
+  background-color: $mainWhite;
+  padding-bottom: 80px;
+  padding-top: 20px;
+  width: 100%;
+  margin-top: 52px;
+  margin-bottom: 50px;
+  border-radius: 0px 0px 15px 15px;
+  border: 1px solid grey;
+}
+.navbar {
+  background-color: $darkGreen !important;
+  max-width: 100vw;
+}
+.navbar-brand {
+  color: white !important;
+  font-family: $cursive-font;
+}
+
+.navbar a {
+  color: white !important;
+}
+.toggleri {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  color: white;
+}
+.nav-item{
+  margin-bottom: -20px;
+}
+.nav-item a:hover{
+  text-decoration: none;
+}
+md-card {
+  margin-top: 10px;
+}

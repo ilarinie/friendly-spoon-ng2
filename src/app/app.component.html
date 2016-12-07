@@ -1,28 +1,55 @@
-<nav *ngIf=" !router.url.includes('login') && !router.url.includes('logout')" class="navbar navbar-default navbar-fixed-top navi">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" #navbarToggle data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" routerLink="/" (click)="closeNav()">Friendly Spoon</a> </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a routerLink="addrecipe" (click)="closeNav()">Add Recipe</a></li>
-                <li><a routerLink="tags" (click)="closeNav()">Edit Tags</a></li>
-                <li><a routerLink="ingredients" (click)="closeNav()">Edit Ingredients</a></li>
-                <li ><a routerLink="/logout" (click)="closeNav()">Log out</a></li>
-                <li><a class="username" routerLink="mypage" (click)="closeNav()">Hello there <span class="username2">{{username}}</span></a></li>
-                <li>
-                    <a routerLink="shoppingcart">
-                                        <span style="font-size:20px;color:green" class="glyphicon glyphicon-shopping-cart"></span>
-                        <span *ngIf="count != 0" class="badge">{{count}}</span>
-                    </a>
-                </li>
-             </ul>
+<nav *ngIf=" !router.url.includes('login') && !router.url.includes('logout')" class="navbar navbar-fixed-top">
+  <a class="navbar-brand hidden-md-up" routerLink="/">Friendly Spoon</a>
+  <a (click)="isCollapsed = !isCollapsed" class="toggleri hidden-md-up"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></a>
+  <div class="container navbar-toggleable-sm" [attr.aria-expanded]="!isCollapsed" [ngClass]="{collapse: isCollapsed}" id="navbarResponsive">
+    <a class="navbar-brand hidden-sm-down" routerLink="/">Friendly Spoon</a>
+    <hr style="border: 1px solid rgba(0,0,0,0);" class="hidden-md-up">
+    <ul class="nav navbar-nav">
+      <li (click)="isCollapsed = true" class="nav-item">
+        <a class="nav-link" routerLink="addrecipe">Add Recipe</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          Edit
+        </a>
+        <div class="dropdown-menu" aria-labelledby="Preview">
+          <a class="dropdown-item" (click)="isCollapsed = true" routerLink="ingredients">Ingredients</a>
+          <a class="dropdown-item" (click)="isCollapsed = true" routerLink="tags">Tags</a>
         </div>
-    </div>
+      </li>
+      <!--<li (click)="isCollapsed = true" class="nav-item">
+        <a class="nav-link" routerLink="tags">Edit Tags</a>
+      </li>
+      <li (click)="isCollapsed = true" class="nav-item">
+        <a class="nav-link" routerLink="ingredients">Edit Ingredients</a>
+      </li> -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          Hello there <span class="username2">{{username}}</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="Preview">
+          <a class="dropdown-item" (click)="isCollapsed = true" routerLink="mypage">Profile</a>
+          <a class="dropdown-item" (click)="isCollapsed = true" routerLink="logout">Log Out</a>
+
+        </div>
+      </li>
+     <!-- <li (click)="isCollapsed = true" class="nav-item">
+        <a class="nav-link username" routerLink="mypage">Hello there <span class="username2">{{username}}</span></a>
+      </li>-->
+      <li (click)="isCollapsed = true" class="nav-item" >
+          <a class="nav-link" routerLink="shoppingcart"><i class="cart fa fa-shopping-cart fa-lg" aria-hidden="true"></i><label *ngIf="count != 0" class="badge tag-pill">{{count}}</label>
+          </a>
+      </li>
+      <!--<li (click)="isCollapsed = true" class="nav-item">
+        <a class="nav-link float-right" routerLink="/logout"><i class="log-out fa fa-power-off" aria-hidden="true"></i></a>
+      </li>-->
+    </ul>
+  </div>
 </nav>
 <main role="main" class="container">
     <router-outlet></router-outlet>
-
+  <!--<div *ngIf=" !router.url.includes('login') && !router.url.includes('logout')" class="copyright">
+    <p>&copy; Ilari Nieminen & Hilla Rämö 2016. All rights reserved.</p>
+  </div>-->
 </main>
-<div class="copyright">
-  <p>&copy; Ilari Nieminen & Hilla Rämö</p>
-</div>
+

@@ -19,7 +19,8 @@
       <hr class="hline"/>
       <!-- Alempi rivi, kuvat, aineosat, muut tiedot -->
       <div class="row">
-        <div class="col-md-2 img-div hidden-xs hidden-sm">
+        <div class="col-md-2 img-div hidden-md-down">
+          <!--
           <div *ngIf="!recipe.recipe_pictures[0]"><img class="recipe-img" src="assets/baking.png"></div>
           <div *ngIf="recipe.recipe_pictures[0]">
             <a (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal"><img
@@ -34,7 +35,14 @@
           <div *ngIf="recipe.recipe_pictures[2]">
             <a (click)="showPic(recipe.recipe_pictures[2])" data-toggle="modal" data-target="#myModal"><img
               class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.thumb.url}}"></a><span><i>&copy;
-            {{recipe.recipe_pictures[2].author}}</i></span><br></div>
+            {{recipe.recipe_pictures[2].author}}</i></span><br></div>-->
+          <div *ngFor="let picture of recipe.recipe_pictures">
+            <a (click)="showPic(picture)" data-toggle="modal" data-target="#myModal">
+              <img class="recipe-img" src="{{baseUrl}}/{{picture.picture.thumb.url}}">
+            </a>
+            <span><i>&copy; {{picture.author}}</i></span><br>
+          </div>
+          <img *ngIf="recipe.recipe_pictures.length == 0" class="recipe-img" src="assets/placeholder_thumb.png">
         </div>
         <!-- muuttuva näkymä aineosat, muut tiedot <-> notesit -->
         <div [@fadeIn]="on">
@@ -93,7 +101,7 @@
                   class="glyphicon glyphicon-floppy-remove"></span> Delete
                 </button>
               </md-card-actions>
-              <div *ngIf="deleting"><img src="assets/ellipsis.svg"> Recipe is kill</div>
+              <div *ngIf="deleting"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Recipe is kill</div>
             </md-card>
           </div>
           <!-- END muut tiedot -näkymä -->
@@ -125,7 +133,8 @@
 </div>
 <!-- END main container -->
 <div *ngIf="!recipe" class="loading-recipe">
-  <div class="loading-container"><img src="assets/ellipsis.svg">
+  <div class="loading-container">
+    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
     <p>Fetching recipe :E</p>
   </div>
 </div>
@@ -137,11 +146,9 @@
       <div class="modal-header" style="background-color:#022f32;">
         <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
       </div>
-      <div class="modal-body"><img class="random-image img-responsive" src="{{baseUrl}}{{shownPic.picture.url}}">
-        <!--
-        <div style="float:right;" *ngIf="!randomRecipe.coverpicture"><img  src="assets/baking.png" alt="nice pic yo"></div>
-        <div style="float:right;" *ngIf="randomRecipe.coverpicture"><img  class="img-responsive" src="{{baseUrl}}{{recipe.coverpicture.picture.thumb.url}}"></div>
-        --></div>
+      <div class="modal-body">
+        <img class="random-image img-responsive" src="{{baseUrl}}{{shownPic.picture.url}}">
+      </div>
       <div class="modal-footer">
         <p>Photo {{(shownIndex()+1)}} / {{this.recipe.recipe_pictures.length}}</p>
         <button type="button" class="btn btn-default" (click)="nextPic()">Next</button>

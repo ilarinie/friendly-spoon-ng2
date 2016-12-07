@@ -32,7 +32,7 @@ export class TinyEditor {
         selector: '[tiny-id=' + this.id + ']',
         schema: 'html5',
         height: 400,
-        plugins: "link textcolor",
+        plugins: "link lists",
         link_assume_external_targets: true,
         setup: (editor: any): void => {
           editor.on('keyup change', () => {

@@ -14,49 +14,49 @@ import {fadeIn} from "../animations";
 @Component({
   selector: 'shopping-cart',
   templateUrl: 'shopping-cart.component.html',
-  styleUrls: ['shopping-cart.component.css'],
+  styleUrls: ['shopping-cart.component.scss'],
   animations: [fadeIn]
 })
 export class ShoppingCartComponent implements OnInit {
 
   items: ShoppingCartItem[] = [];
+  shownItems: ShoppingCartItem[] = [];
   user: User;
   sub: any;
+  newItem: ShoppingCartItem = new ShoppingCartItem();
 
-  constructor(private sessionService: SessionService, private friendlyApiService:FriendlyApiService) {
+  constructor(private sessionService: SessionService, private friendlyApiService: FriendlyApiService) {
   }
 
-  removeFromCart(item: ShoppingCartItem){
+  removeFromCart(item: ShoppingCartItem) {
     this.friendlyApiService.deleteCartItem(item).then(res => {
       let index = this.items.indexOf(item);
-      if (index > -1){
+      if (index > -1) {
         this.items.splice(index, 1)
       }
       this.sessionService.getUser();
     })
   }
 
+  saveItem() {
+    this.newItem.user_id = this.user.id;
+    this.friendlyApiService.saveCartItem(this.newItem).then((res) => {
+      this.sessionService.addToCart(res);
+      this.newItem = new ShoppingCartItem();
+    });
+  }
 
   ngOnInit() {
     this.user = this.sessionService.user;
-    this.items = this.sessionService.user.shopping_cart_items;
+    this.items = this.sessionService.user.summarizedCart;
     this.sub = this.sessionService.userChange.subscribe((user) => {
       this.user = user;
-      this.items = user.shopping_cart_items;
-     // this.summarizeItems();
+      this.items = user.summarizedCart;
+
     })
   }
 
-  summarizeItems(){
-    if(this.items == []){
-      return;
-    }
 
-
-
-
-
-  }
 
 
 }

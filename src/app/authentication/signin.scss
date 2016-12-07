@@ -1,0 +1,45 @@
+@import '../styles/_variables.scss';
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+h2 {
+  font-family: $cursive-font;
+  text-align: center;
+}
+
+.sign-in-container {
+  color: white;
+  background: $darkGreen url("/assets/signinBG.png") no-repeat center top;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 200vh;
+  text-align: center;
+}
+
+.padder {
+  height: 40vh;
+}
+.signin-field-container {
+  text-align: center;
+
+  input {
+    text-align: center;
+    color: grey;
+    border-radius: 8px;
+    width: 250px;
+    height: 30px;
+  }
+
+  button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: grey;
+  }
+
+  h4 {}
+}

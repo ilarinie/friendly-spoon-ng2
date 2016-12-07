@@ -1,5 +1,5 @@
 import {RecipeIngredientGroup} from '../../models/recipe_ingredient_group';
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit, EventEmitter} from '@angular/core';
 import { Recipe } from '../../models/recipe';
 import { RecipeIngredient } from '../../models/recipe_ingredient';
 import { Unit } from '../../models/unit';
@@ -7,6 +7,7 @@ import { FriendlyApiService} from '../../services/friendlyapi.service';
 import { Ingredient } from '../../models/ingredient';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import {fadeIn} from "../../animations";
+import {Output} from "@angular/core/src/metadata/directives";
 
 
 
@@ -15,15 +16,17 @@ import {fadeIn} from "../../animations";
 @Component({
   selector: 'add-ingredients',
   templateUrl: 'add-ingredients.component.html',
-  styleUrls: ['add-ingredients.component.css', 'dragula.min.css'],
+  styleUrls: ['add-ingredients.component.scss', 'dragula.min.css'],
   viewProviders: [
     DragulaService
   ],
-  animations: [ fadeIn ]
+  animations: [fadeIn]
 })
 export class AddIngredients implements OnInit {
   @Input()
   recipe: Recipe;
+  @Output()
+  moved = new EventEmitter<boolean>();
 
 
 
@@ -76,7 +79,7 @@ export class AddIngredients implements OnInit {
   }
 
 
-  toggleMoved(){
+  toggleMoved() {
     this.recipe.incsMoved = true;
   }
   ngOnInit() {
@@ -105,11 +108,11 @@ export class AddIngredients implements OnInit {
       let amount = this.parseAmount(this.recipe_ingredient.amount);
 
       if (amount == undefined) {
-        this.amountError = "Incorrect amount \""+ this.recipe_ingredient.amount + "\", please use the format: \"2\" or \"2 1/2\""
+        this.amountError = "Incorrect amount \"" + this.recipe_ingredient.amount + "\", please use the format: \"2\" or \"2 1/2\""
         this.addingRecInc = false;
         return;
       }
-      this.recipe_ingredient.amount =  amount;
+      this.recipe_ingredient.amount = amount;
     }
     console.log(this.recipe_ingredient.recipe_ingredient_group_id + " = group id");
     if (this.recipe_ingredient.recipe_ingredient_group_id) {
@@ -138,23 +141,27 @@ export class AddIngredients implements OnInit {
     this.recipe_ingredient = new RecipeIngredient;
   }
   removeRecipeIngredient(recipe_ingredient: RecipeIngredient) {
-    this.friendlyApiService.deleteRecipeIngredient(recipe_ingredient);
 
-    if (!recipe_ingredient.recipe_ingredient_group_id) {
-      let index = this.recipe.recipe_ingredients.indexOf(recipe_ingredient);
-      if (index > -1) {
-        this.recipe.recipe_ingredients.splice(index, 1);
-      }
-    } else {
-      let grpindex = this.findGroupIndex(recipe_ingredient.recipe_ingredient_group_id);
-      if (grpindex > -1) {
-        let index = this.recipe.recipe_ingredient_groups[grpindex].recipe_ingredients.indexOf(recipe_ingredient);
+    let confirmed = confirm("Really delete "+ recipe_ingredient.ingredient.name + "?");
+    if (confirmed) {
+      this.friendlyApiService.deleteRecipeIngredient(recipe_ingredient);
+
+      if (!recipe_ingredient.recipe_ingredient_group_id) {
+        let index = this.recipe.recipe_ingredients.indexOf(recipe_ingredient);
         if (index > -1) {
-          this.recipe.recipe_ingredient_groups[grpindex].recipe_ingredients.splice(index, 1);
+          this.recipe.recipe_ingredients.splice(index, 1);
+        }
+      } else {
+        let grpindex = this.findGroupIndex(recipe_ingredient.recipe_ingredient_group_id);
+        if (grpindex > -1) {
+          let index = this.recipe.recipe_ingredient_groups[grpindex].recipe_ingredients.indexOf(recipe_ingredient);
+          if (index > -1) {
+            this.recipe.recipe_ingredient_groups[grpindex].recipe_ingredients.splice(index, 1);
+          }
         }
       }
+      this.friendlyApiService.updateRecipeToList(this.recipe);
     }
-    this.friendlyApiService.updateRecipeToList(this.recipe);
   }
   saveGroup() {
     this.addingGroup = true;

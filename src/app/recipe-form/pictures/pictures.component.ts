@@ -14,10 +14,10 @@ import {Observable} from "rxjs";
 @Component({
   selector: 'recipe-pictures',
   templateUrl: 'pictures.component.html',
-  styleUrls: ['pictures.component.css'],
+  styleUrls: ['pictures.component.scss'],
   viewProviders: [DragulaService]
 })
-export class Pictures implements OnInit{
+export class Pictures implements OnInit {
   @Input()
   recipe: Recipe;
 
@@ -28,7 +28,7 @@ export class Pictures implements OnInit{
   loading: boolean = false;
   fileName: string = "";
 
-  author:string = localStorage.getItem('username');
+  author: string = localStorage.getItem('username');
 
   input: any;
 
@@ -38,33 +38,33 @@ export class Pictures implements OnInit{
   private saving: boolean = false;
   private tickDuration;
   private ticks;
-  constructor(private friendlyApiService: FriendlyApiService, private dragulaService: DragulaService){}
+  constructor(private friendlyApiService: FriendlyApiService, private dragulaService: DragulaService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.pictures = this.recipe.recipe_pictures;
   }
 
-  changeListener($event){
+  changeListener($event) {
     this.readThis($event.target);
   }
-  readThis(inputValue: any){
+  readThis(inputValue: any) {
     this.input = inputValue;
-    var file:File = inputValue.files[0];
-    var myReader:FileReader = new FileReader();
+    var file: File = inputValue.files[0];
+    var myReader: FileReader = new FileReader();
     this.loading = true;
     this.fileName = file.name;
 
 
     myReader.onloadend = (e) => {
       console.log(file.size + " size")
-      this.tickDuration = (file.size/180000)/100;
+      this.tickDuration = (file.size / 180000) / 100;
       this.uploaded = myReader.result;
       this.loading = false;
     }
     myReader.readAsDataURL(file);
   }
 
-  changeCoverPicture(picture_id){
+  changeCoverPicture(picture_id) {
     this.recipe.cover_picture_id = picture_id;
     let savedRecipe = new Recipe();
     savedRecipe.id = this.recipe.id;
@@ -72,11 +72,11 @@ export class Pictures implements OnInit{
     this.friendlyApiService.save(savedRecipe);
   }
 
-  uploadPic(){
+  uploadPic() {
     this.saving = true;
     this.ticks = 0;
-    let timer = Observable.timer(0, this.tickDuration*1000);
-    timer.subscribe(t => {this.ticks= t;});
+    let timer = Observable.timer(0, this.tickDuration * 1000);
+    timer.subscribe(t => { this.ticks = t; });
 
 
     let pic: RecipePicture = new RecipePicture();
@@ -84,7 +84,7 @@ export class Pictures implements OnInit{
     pic.picture = this.uploaded;
     pic.author = this.author;
     this.friendlyApiService.uploadPicture(pic).then(pic => {
-      if (this.pictures.length == 0){
+      if (this.pictures.length == 0) {
         this.changeCoverPicture(pic.id);
 
       }
@@ -94,15 +94,15 @@ export class Pictures implements OnInit{
       this.input.files = null;
     });
   }
-  deletePic(picture: RecipePicture){
+  deletePic(picture: RecipePicture) {
     let index = this.pictures.indexOf(picture);
-    if ( index > -1){
-      this.pictures.splice(index,1);
+    if (index > -1) {
+      this.pictures.splice(index, 1);
     }
-    if (picture.id == this.recipe.cover_picture_id){
-      if  (this.pictures.length == 0){
+    if (picture.id == this.recipe.cover_picture_id) {
+      if (this.pictures.length == 0) {
         this.changeCoverPicture(null);
-      }else {
+      } else {
         this.changeCoverPicture(this.pictures[0].id);
       }
 

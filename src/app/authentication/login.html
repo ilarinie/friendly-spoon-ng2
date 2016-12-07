@@ -1,27 +1,25 @@
 <div class="sign-in-container container-fluid" [@fadeIn]="on">
-  <div class="container-fluid">
     <div class="row hidden-xs">
-      <div class="col-md-10 hidden-xs padder "></div>
+      <div class="col-md-10 hidden-xs padder"></div>
     </div>
     <div class="row">
-      <div class="col-centered col-md-8  signin-div">
-        <h2 class="signin-header">Welcome to Friendly Spoon</h2>
-        <h2 class="signin-header">Please log in</h2>
-        <div *ngIf="!loggingIn">
-          <div class="field-div">
-            <form [formGroup]="form" (ngSubmit)="submit(form.value, form.valid)">
-              <div class="signin-field-container col-centered ">
-                <h4 class="field-header">Username</h4> <input placeholder="Username" class="signin-field" type="email" formControlName="email"> </div>
-              <div class="signin-field-container col-centered ">
-                <h4 class="field-header">Password</h4> <input placeholder="Password" class="signin-field" type="password" formControlName="password"> </div>
-              <div class="signin-field-container col-centered signin-button"> <button md-raised-button type="submit" class="signin-button">Login</button> </div>
-            </form>
-            <div style="width:400px;" class="alert alert-danger col-centered" *ngIf="loginFailed"> <strong>Login failed:</strong> Wrong username and/or password </div>
+      <div class="col-centered col-md-8">
+        <h2>Welcome to Friendly Spoon</h2>
+        <h2>Please log in</h2>
+        <div *ngIf="!loggingIn" style="margin-top:40px;">
+          <form [formGroup]="form" (ngSubmit)="submit(form.value, form.valid)">
+            <div class="signin-field-container col-centered ">
+              <h4>Username</h4> <input placeholder="Username" type="email" formControlName="email"> </div>
+            <div class="signin-field-container col-centered ">
+              <h4>Password</h4> <input placeholder="Password" type="password" formControlName="password"> </div>
+            <div class="signin-field-container col-centered"> <button md-raised-button type="submit">Login</button> </div>
+          </form>
+          <div style="width:400px;" class="alert alert-danger col-centered" *ngIf="loginFailed">
+            <strong>Login failed:</strong> Wrong username and/or password
           </div>
         </div>
         <div *ngIf="loggingIn">
-          <h2 class="signin-header"> Logging in..</h2> <img src="assets/ellipsis.svg"> </div>
+          <h2> Logging in..</h2> <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> </div>
       </div>
     </div>
-  </div>
 </div>

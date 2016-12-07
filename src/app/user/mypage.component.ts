@@ -14,7 +14,7 @@ import {OnInit} from "@angular/core";
 @Component({
   selector: 'user-component',
   templateUrl: 'user.component.html',
-  styleUrls: ['user.component.css'],
+  styleUrls: ['user.component.scss'],
   animations: [fadeIn]
 })
 export class MypageComponent implements OnInit {
@@ -30,7 +30,7 @@ export class MypageComponent implements OnInit {
   private editInfoToggle: boolean = false;
 
   constructor(private router: Router, private friendlyApiService: FriendlyApiService,
-              private route: ActivatedRoute, private fb: FormBuilder, private sessionService: SessionService) {
+    private route: ActivatedRoute, private fb: FormBuilder, private sessionService: SessionService) {
 
     this.form = fb.group({
       'name': ['', Validators.required]
@@ -41,7 +41,7 @@ export class MypageComponent implements OnInit {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.user = this.sessionService.user;
     this.sub = this.sessionService.userChange.subscribe((user) => {
       this.user = user;
@@ -89,16 +89,16 @@ export class MypageComponent implements OnInit {
 
 
       }).catch(res => {
-      console.log(res._body);
-      let body;
-      body = JSON.parse(res._body)
-      if (body.errors.password_confirmation) {
-        this.confirmationAlert = 'Password confirmation ' + body.errors.password_confirmation;
-      }
-      if (body.errors.password) {
-        this.passwordAlert = 'Password ' + body.errors.password;
-      }
-    })
+        console.log(res._body);
+        let body;
+        body = JSON.parse(res._body)
+        if (body.errors.password_confirmation) {
+          this.confirmationAlert = 'Password confirmation ' + body.errors.password_confirmation;
+        }
+        if (body.errors.password) {
+          this.passwordAlert = 'Password ' + body.errors.password;
+        }
+      })
   }
 
 

@@ -6,8 +6,8 @@ import {fadeIn} from "../animations";
 @Component({
   selector: 'logout',
   templateUrl: 'logout.html',
-  styleUrls: [ 'signin.css'],
-  animations: [ fadeIn ]
+  styleUrls: ['signin.scss'],
+  animations: [fadeIn]
 })
 
 export class Logout implements OnInit {

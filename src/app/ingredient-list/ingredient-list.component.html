@@ -1,27 +1,44 @@
 <div class="container container-fluid" [@fadeIn]="on">
-  <div class="col-md-5">
+  <div class="col-md-6">
     <md-card>
 
-    <md-list>
-      <md-card-title>Edit Ingredients</md-card-title>
-      <md-list-item *ngFor="let inc of ingredients | filter:incFilter.value" >
+      <md-list>
+        <md-card-title>Edit Ingredients</md-card-title>
+        <md-input placeholder="Filter.." #incFilter style="min-width=100%; margin-left:10px;"></md-input>
+        <md-list-item *ngFor="let inc of ingredients | filter:incFilter.value">
         <span *ngIf="updateInc != inc.id">
-        <md-input [(ngModel)]="inc.name" ></md-input> <a class="btn btn-success" (click)="saveIngredient(inc)">Save</a> <a class="btn btn-danger" (click)="deleteIngredient(inc)">Delete</a> </span></md-list-item>
 
-    <md-list-item *ngIf="ingredients.length == 0">
-      <h4>The list appears to be empty, huh.</h4>
-    </md-list-item>
-        </md-list>
-  </md-card>
-  </div>
-  <div class="col-md-5">
-    <md-card>
-      <md-card-title>Search for ingredients</md-card-title>
-      <md-input #incFilter></md-input>
+           <div class="input-group">
+              <input type="text" class="form-control" [(ngModel)]="inc.name">
+              <span class="input-group-btn">
+                <button class="btn btn-success" type="button" click="saveIngredient(inc)">Save</button>
+              </span>
+              <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" (click)="deleteIngredient(inc)">Delete</button>
+              </span>
+          </div>
+        <!--<md-input [(ngModel)]="inc.name"></md-input> <a class="btn btn-success"
+                                                        (click)="saveIngredient(inc)">Save</a> <a class="btn btn-danger"
+                                                                                                  (click)="deleteIngredient(inc)">Delete</a> --></span>
+        </md-list-item>
+
+        <md-list-item *ngIf="ingredients.length == 0">
+          <h4>The list appears to be empty, huh.</h4>
+        </md-list-item>
+      </md-list>
     </md-card>
+  </div>
+  <div class="col-md-6">
     <md-card>
-    <md-card-title>Create Ingredient</md-card-title>
-    <md-input [(ngModel)]="newinc.name"></md-input> <a class="btn btn-success" (click)="saveIngredient(newinc)">Save</a>
-  </md-card>
+      <md-card-title>Create Ingredient</md-card-title>
+      <div class="input-group">
+        <input class="form-control" type="text" [(ngModel)]="newinc.name">
+        <span class="input-group-btn">
+          <button type="button" (click)="saveIngredient(newinc)" class="btn btn-success">Save</button>
+        </span>
+      </div>
+      <!--<md-input [(ngModel)]="newinc.name"></md-input>
+      <a class="btn btn-success" (click)="saveIngredient(newinc)">Save</a>-->
+    </md-card>
   </div>
 </div>

@@ -12,7 +12,7 @@ import {User} from "../../models/user";
 @Component({
   selector: 'list-ingredients',
   templateUrl: 'list-ingredients.component.html',
-  styleUrls: ['list-ingredients.component.css'],
+  styleUrls: ['list-ingredients.component.scss'],
   animations: [fadeIn]
 })
 export class ListIngredients implements OnDestroy {
@@ -111,6 +111,7 @@ export class ListIngredients implements OnDestroy {
     let item: ShoppingCartItem = new ShoppingCartItem();
     item.recipe_ingredient_id = inc.id;
     item.user_id = parseInt(user_id);
+    item.recipe_name = this.recipe.name;
     this.friendlyApiService.saveCartItem(item).then((res) => {
       let index = this.allIngredients.indexOf(inc);
       if (index > -1) {
@@ -129,6 +130,13 @@ export class ListIngredients implements OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  manualMultiplier(){
+   let number =  parseFloat(prompt("Change multiplier", this.multiplier.toString()));
+   if (!isNaN(number)){
+     this.multiplier = number;
+   }
   }
 
 }

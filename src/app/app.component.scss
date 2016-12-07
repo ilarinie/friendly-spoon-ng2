@@ -1,0 +1,41 @@
+@import 'styles/_variables.scss';
+
+.username2 {
+  font-family: $cursive-font;
+}
+main {
+  background-color: $mainWhite;
+}
+.copyright {
+  float:none;
+  margin: 0 auto;
+  text-align: center;
+  color: black;
+  font-family: 'Handlee', cursive;
+  margin-top: 20px;
+  margin-bottom: -95px;
+  border-top: 0.5px solid grey;
+  width: 100%;
+}
+.dropdown-menu {
+  background-color: $darkGreen;
+  color: white;
+  a:hover {
+    background-color: $darkGreen;
+    color: white;
+  }
+}
+.log-out{
+  color: red;
+}
+.cart {
+  color: green;
+  font-size: 25px;
+}
+.badge {
+  background-color: white;
+  color:black;
+  font-size: 11px;
+  margin-left: -3px;
+  cursor: pointer;
+}

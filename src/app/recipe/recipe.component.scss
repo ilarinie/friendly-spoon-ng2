@@ -1,0 +1,166 @@
+@import '../styles/_variables.scss';
+
+/* vaakasuora viiva pääotsikon ja aliotsikoiden alla */
+
+.hline {
+    margin-top: 0px;
+    width: 100%;
+}
+
+
+/* vaakasuora kikkailuviiva desktopnäkymässä kuvien alla */
+
+.subline {
+    margin-top: 29px;
+    width: 130%;
+}
+
+
+/* kuvat reseptinäkymässä */
+
+.recipe-img {
+    margin-top: 10px;
+    border-radius: 25px;
+    width: 100%;
+}
+
+.recipe-img-last {
+    margin-top: 10px;
+    border-radius: 25px;
+    width: 100%;
+}
+
+
+/* Listan tyylit, ei palloja eikä jäätävää sisennystä */
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    margin-left: -20px;
+}
+
+
+/* pääotsikon tyylit, lähemmäs viivaa */
+
+.main-heading {
+    margin-top: 25px;
+    margin-bottom: 0px;
+    color: $header-pink;
+}
+
+
+/* pääotsikkorivin nappuloiden tyylit */
+
+.header-btn {
+    margin-top: 32px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    width: 80px;
+    color: white;
+    background-color: $button-grey;
+    border-radius: 10px 10px 0px 0px;
+    float: right;
+}
+
+.button-group {
+    float: right;
+    padding-left: 0px;
+}
+
+.header-btn:hover {
+    color: white;
+}
+
+
+/* aliotsikkojen tyylit */
+
+.sub-heading {
+    color: black;
+}
+
+
+/* Valmistusohjeen divider, vähän ylemmäs kuin norm */
+
+.instruction-div {
+    margin-top: -5px;
+}
+
+
+/* Kellot "Time"-otsikon alla */
+
+.timespan {
+    margin-left: 3px;
+}
+
+.empty-div {
+    height: 200px;
+}
+
+
+/*sarakkeet note-näkymässä */
+
+.maincont {
+    position: relative;
+    min-height: 100%;
+}
+
+.maindiv {
+    margin-bottom: 60px;
+}
+
+.tag-label {
+    background-color: $header-pink;
+    margin-right: 5px;
+    font-family: $cursive-font;
+    color: white;
+    font-size: 100%;
+}
+
+.tag-display {
+    border-radius: 25px;
+}
+
+.mobile-button {
+    color: black;
+}
+
+.mobile-buttons {
+    padding-top: 20px;
+    width: 100vw;
+    display: flex;
+    overflow: hidden;
+    margin-left: -16px;
+}
+
+.mobile-nav-div {
+    flex-grow: 1;
+    text-align: center;
+    width: 20vw;
+    border-left: 1px solid white;
+    background-color: darkgray;
+    height: 40px;
+    color: white;
+    padding: 7px 0;
+    a {
+        color: white;
+    }
+}
+
+.first {
+    border-left: 0px solid black;
+}
+
+.random-recipe {
+    width: 502px;
+    max-width: 95vw;
+}
+
+.random-image {
+    margin-top: -16px;
+    margin-left: -15px;
+    max-width: 94.5vw;
+}

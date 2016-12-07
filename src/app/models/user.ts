@@ -14,6 +14,7 @@ export class User {
   averagerating: number;
 
   shopping_cart_items: ShoppingCartItem[];
+  summarizedCart : ShoppingCartItem[];
 
 
 }
