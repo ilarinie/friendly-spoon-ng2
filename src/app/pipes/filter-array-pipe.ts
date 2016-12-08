@@ -82,6 +82,9 @@ export class OrderBy implements PipeTransform {
       case "time":
         items.sort(this.byTime);
         return items;
+      case "date":
+        items.sort(this.byDate);
+        return items;
       case "namereverse":
         items.sort(this.byName);
         return items.reverse();
@@ -90,6 +93,9 @@ export class OrderBy implements PipeTransform {
         return items.reverse();
       case "timereverse":
         items.sort(this.byTime);
+        return items.reverse();
+      case "datereverse":
+        items.sort(this.byDate);
         return items.reverse();
       case "indexinmukaan":
         items.sort(this.byIndex);
@@ -140,6 +146,25 @@ export class OrderBy implements PipeTransform {
       return -1;
     }
     return a.index - b.index;
+  }
+  byDate(a, b){
+    if (a.created_at == null) {
+      return 1;
+    }
+    if (b.created_at == null) {
+      return -1;
+    }
+    let datea:Date = new Date(a.created_at);
+    let dateb:Date = new Date(b.created_at);
+
+    if (datea > dateb){
+      return 1;
+    } else if (dateb > datea){
+      return -1;
+    } else {
+      return 0;
+    }
+
   }
 }
 @Pipe({

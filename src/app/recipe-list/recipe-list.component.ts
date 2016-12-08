@@ -154,6 +154,14 @@ export class RecipeListComponent implements OnInit {
     }
   }
 
+  sortByDate(){
+    if (this.order == "date") {
+      this.order = "datereverse";
+    } else {
+      this.order = "date";
+    }
+  }
+
   scrollToTop() {
     window.scrollTo(0, 0);
   }
