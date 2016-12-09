@@ -32,7 +32,7 @@ export class Notes {
   note: Note = new Note();
   savingNote: boolean = false;
 
-  user_id = localStorage.getItem('user_id');
+  user_id = parseInt(localStorage.getItem('user_id'));
 
 
   get diagnostic() { return JSON.stringify(this.note); }
