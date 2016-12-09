@@ -1,25 +1,25 @@
-<div class="container container-fluid" >
-  <div *ngIf="user" class="col-xs-13 col-sm-13 col-md-13 col-lg-13" [@fadeIn]="on" >
-    <h1>{{user.name}}'s page</h1>
+<div class="container container-fluid">
+    <div *ngIf="user" class="col-xs-13 col-sm-13 col-md-13 col-lg-13" [@fadeIn]="on">
+        <h1>{{user.name}}'s page</h1>
 
-    <div class="hidden-sm-down">
-    <md-tab-group>
+        <div class="hidden-sm-down">
+            <md-tab-group>
 
-      <md-tab>
-        <template md-tab-label>General</template>
-        <template md-tab-content>
+                <md-tab>
+                    <template md-tab-label>General</template>
+                    <template md-tab-content>
           <h4>General information</h4>
           <p>
             <strong>Number of recipes: </strong> {{user.recipecount}}
           </p>
           <p>
-            <strong>Average Rating: </strong> <rating [(ngModel)]="user.averagerating" [readonly]="true"></rating> ( {{user.ratingcount}} ratings )
+            <strong>Average Rating: </strong> <!--<rating [(ngModel)]="user.averagerating" [readonly]="true"></rating> --> ( {{user.ratingcount}} ratings )
           </p>
         </template>
-      </md-tab>
-      <md-tab>
-        <template md-tab-label>Change Password</template>
-        <template md-tab-content>
+                </md-tab>
+                <md-tab>
+                    <template md-tab-label>Change Password</template>
+                    <template md-tab-content>
           <h4>Change Password</h4>
           <md-input [(ngModel)]="user.password" placeholder="Password" type="password"></md-input><br>
           <div *ngIf="passwordAlert" class="alert alert-danger" [@fadeIn]="on">
@@ -34,53 +34,52 @@
             {{message}}
           </div>
         </template>
-      </md-tab>
-      <md-tab>
-        <template md-tab-label>Change Information</template>
-        <template md-tab-content>
+                </md-tab>
+                <md-tab>
+                    <template md-tab-label>Change Information</template>
+                    <template md-tab-content>
           <h4>Edit Information</h4>
           <form [formGroup]="form" >
           <md-input [formControl]="form.controls['name']"  placeholder="Display Name"></md-input><br>
           <button (click)="saveUser(form.value)" md-raised-button color="primary" ><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
           </form>
         </template>
-      </md-tab>
+                </md-tab>
 
-    </md-tab-group>
+            </md-tab-group>
 
-  </div>
-  <div class="hidden-sm-up">
-    <button md-raised-button (click)="editPass()" class="user-button">Edit password</button>
-    <button md-raised-button (click)="editInfo()" class="user-button">Edit information</button>
-    <div *ngIf="changePas" class="password-inputs" [@fadeIn]="on">
-      <h4>Change Password</h4>
-      <md-input [(ngModel)]="user.password" placeholder="Password" type="password"></md-input><br>
-      <div *ngIf="passwordAlert" class="alert alert-danger" [@fadeIn]="on">
-        {{passwordAlert}}
-      </div>
-      <md-input  [(ngModel)]="user.password_confirmation" placeholder="Confirm password" type="password"></md-input><br>
-      <div *ngIf="confirmationAlert" class="alert alert-danger" [@fadeIn]="on">
-        {{confirmationAlert}}
-      </div>
-      <button md-raised-button (click)="changePassword()">Change</button>
-    </div>
-    <div *ngIf="editInfoToggle" class="info-inputs" [@fadeIn]="on">
-      <h4>Edit Information</h4>
-      <form [formGroup]="form" >
-      <md-input [formControl]="form.controls['name']"  placeholder="Display Name"></md-input><br>
-      <button (click)="saveUser(form.value)" md-raised-button color="primary" ><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
-      </form>
-    </div>
-    <div *ngIf="message" class="alert alert-success alert-dismissible" role="alert" [@fadeIn]="on">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        </div>
+        <div class="hidden-sm-up">
+            <button md-raised-button (click)="editPass()" class="user-button">Edit password</button>
+            <button md-raised-button (click)="editInfo()" class="user-button">Edit information</button>
+            <div *ngIf="changePas" class="password-inputs" [@fadeIn]="on">
+                <h4>Change Password</h4>
+                <md-input [(ngModel)]="user.password" placeholder="Password" type="password"></md-input><br>
+                <div *ngIf="passwordAlert" class="alert alert-danger" [@fadeIn]="on">
+                    {{passwordAlert}}
+                </div>
+                <md-input [(ngModel)]="user.password_confirmation" placeholder="Confirm password" type="password"></md-input><br>
+                <div *ngIf="confirmationAlert" class="alert alert-danger" [@fadeIn]="on">
+                    {{confirmationAlert}}
+                </div>
+                <button md-raised-button (click)="changePassword()">Change</button>
+            </div>
+            <div *ngIf="editInfoToggle" class="info-inputs" [@fadeIn]="on">
+                <h4>Edit Information</h4>
+                <form [formGroup]="form">
+                    <md-input [formControl]="form.controls['name']" placeholder="Display Name"></md-input><br>
+                    <button (click)="saveUser(form.value)" md-raised-button color="primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+                </form>
+            </div>
+            <div *ngIf="message" class="alert alert-success alert-dismissible" role="alert" [@fadeIn]="on">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
-      </button>
-      {{message}}
-    </div>
-  </div>
+      </button> {{message}}
+            </div>
+        </div>
 
-<!-- Old user page template
+        <!-- Old user page template
 
 -->
-  </div>
+    </div>
 </div>

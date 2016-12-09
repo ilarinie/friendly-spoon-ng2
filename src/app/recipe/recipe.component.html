@@ -58,12 +58,12 @@
             {{recipe.recipe_pictures[2].author}}</i></span><br></div>-->
 
                 <div *ngFor="let picture of recipe.recipe_pictures">
-                        <a (click)="showPic(picture)" data-toggle="modal" data-target="#myModal">
-                            <img class="recipe-img" src="{{baseUrl}}/{{picture.picture.thumb.url}}">
-                        </a>
-                        <span><i>&copy; {{picture.author}}</i></span><br>
+                    <a (click)="showPic(picture)" data-toggle="modal" data-target="#myModal">
+                        <img class="recipe-img" src="{{baseUrl}}/{{picture.picture.thumb.url}}">
+                    </a>
+                    <span><i>&copy; {{picture.author}}</i></span><br>
                 </div>
-              <img *ngIf="recipe.recipe_pictures.length == 0" class="recipe-img" src="assets/placeholder_thumb.png">
+                <img *ngIf="recipe.recipe_pictures.length == 0" class="recipe-img" src="assets/placeholder_thumb.png">
 
             </div>
             <!-- muuttuva näkymä aineosat, muut tiedot <-> notesit -->
@@ -76,7 +76,7 @@
                     <!-- muut tiedot -näkymä -->
                     <div class="col-sm-5 col-md-5 " [@fadeIn]="on">
                         <h4 class="sub-heading">Average Rating:</h4>
-                        <rating name="ratingaverage" [ngModel]="recipe.ratingaverage" [readonly]="true"></rating>
+                        <!--<rating name="ratingaverage" [ngModel]="recipe.ratingaverage" [readonly]="true"></rating> -->
                         <h4 class="headings sub-heading">Difficulty</h4>
                         <div [ngSwitch]="recipe.level.id"><span *ngSwitchCase="3" class="tag tag-danger">Difficult</span> <span *ngSwitchCase="1" class="tag tag-success">Easy</span> <span *ngSwitchCase="2" class="tag tag-warning">Medium</span> </div>
                         <h4 class="headings sub-heading">Preparation time</h4> <span *ngFor="let i of duration_array.slice(0,recipe.duration.id)" class="glyphicon glyphicon-time timespan"></span>

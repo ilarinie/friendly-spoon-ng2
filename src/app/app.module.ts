@@ -1,7 +1,6 @@
 import {FilterArrayPipe, ReverseArrayPipe, OrderBy, Fractioner} from "./pipes/filter-array-pipe";
 import {FractionizePipe} from "./pipes/fractioner";
 import {FriendlyApiService} from "./services/friendlyapi.service";
-import { Rating } from "ng2-rating";
 import { NgModule }       from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
@@ -9,16 +8,16 @@ import { routing } from './app.routes';
 import { HttpModule } from '@angular/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { Authentication } from './authentication/authentication';
-import { MdButtonModule } from '@angular/material/button';
-import {MdGridListModule} from '@angular/material/grid-list';
-import {MdCardModule} from '@angular/material/card';
-import {MdListModule} from '@angular/material/list';
-import {MdInputModule} from '@angular/material/input';
-import { MdCheckboxModule } from '@angular/material/checkbox';
-import { MdRadioModule } from '@angular/material/radio';
+import { MdButtonModule } from '@angular2-material/button';
+import {MdGridListModule} from '@angular2-material/grid-list';
+import {MdCardModule} from '@angular2-material/card';
+import {MdListModule} from '@angular2-material/list';
+import {MdInputModule} from '@angular2-material/input';
+import { MdCheckboxModule } from '@angular2-material/checkbox';
+import { MdRadioModule } from '@angular2-material/radio';
 import { DragulaModule} from "ng2-dragula/ng2-dragula";
-import {MdProgressBarModule} from "@angular/material/progress-bar";
-import { MdTabsModule } from "@angular/material/tabs";
+import {MdProgressBarModule} from "@angular2-material/progress-bar";
+import { MdTabsModule } from "@angular2-material/tabs";
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {RecipeComponent} from "./recipe/recipe.component";
 import {RecipeFormComponent} from "./recipe-form/recipe-form.component";
@@ -54,7 +53,6 @@ enableProdMode();
     Fractioner,
     FractionizePipe,
     CapitalizePipe,
-    Rating,
     AppComponent,
     RecipeListComponent,
     RecipeComponent,

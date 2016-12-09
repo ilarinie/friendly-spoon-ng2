@@ -43,12 +43,6 @@
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/@angular/http/-/http-2.2.3.tgz#84941d638c961ebae248091d6d51ac6f241be882"
 
-"@angular/material@^2.0.0-alpha.11-2":
-  version "2.0.0-alpha.9-experimental-pizza"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-2.0.0-alpha.9-experimental-pizza.tgz#fff31d82899b7daac6bf3fbeca35bc8c948c2408"
-  dependencies:
-    "@types/hammerjs" "^2.0.30"
-
 "@angular/platform-browser-dynamic@2.2.3":
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-2.2.3.tgz#80f68c13c0b51bac890beed05548bc7597b9ff6d"
@@ -67,6 +61,50 @@
   dependencies:
     tsickle "^0.1.7"
 
+"@angular2-material/button@2.0.0-alpha.8-1":
+  version "2.0.0-alpha.8-1"
+  resolved "https://registry.yarnpkg.com/@angular2-material/button/-/button-2.0.0-alpha.8-1.tgz#1bdfd9df8db2189ae274f4da2d9692490c80532f"
+
+"@angular2-material/card@2.0.0-alpha.8-1":
+  version "2.0.0-alpha.8-1"
+  resolved "https://registry.yarnpkg.com/@angular2-material/card/-/card-2.0.0-alpha.8-1.tgz#c6609e9f2e7ee8a5e1c513b180d5cc3d2a47cf5c"
+
+"@angular2-material/checkbox@2.0.0-alpha.8-1":
+  version "2.0.0-alpha.8-1"
+  resolved "https://registry.yarnpkg.com/@angular2-material/checkbox/-/checkbox-2.0.0-alpha.8-1.tgz#19b2309310206ea148042952495efef371714582"
+
+"@angular2-material/core@2.0.0-alpha.8-1":
+  version "2.0.0-alpha.8-1"
+  resolved "https://registry.yarnpkg.com/@angular2-material/core/-/core-2.0.0-alpha.8-1.tgz#5734c5e32456c82b29b15c229a22930fb45334c7"
+
+"@angular2-material/grid-list@2.0.0-alpha.8-1":
+  version "2.0.0-alpha.8-1"
+  resolved "https://registry.yarnpkg.com/@angular2-material/grid-list/-/grid-list-2.0.0-alpha.8-1.tgz#e2b40d70f6395dd42d38d4f87e538af132548d8f"
+
+"@angular2-material/icon@^2.0.0-alpha.8-2":
+  version "2.0.0-alpha.8-experimental3"
+  resolved "https://registry.yarnpkg.com/@angular2-material/icon/-/icon-2.0.0-alpha.8-experimental3.tgz#37731c5cc7ad4f2c2f009fe089f19ed1c0ef074a"
+
+"@angular2-material/input@2.0.0-alpha.8-1":
+  version "2.0.0-alpha.8-1"
+  resolved "https://registry.yarnpkg.com/@angular2-material/input/-/input-2.0.0-alpha.8-1.tgz#5d57498b0bf9c822c9b2676732c23026d1c76aa8"
+
+"@angular2-material/list@2.0.0-alpha.8-1":
+  version "2.0.0-alpha.8-1"
+  resolved "https://registry.yarnpkg.com/@angular2-material/list/-/list-2.0.0-alpha.8-1.tgz#7e3f0d9f2041da6c14cb2f92d109846df20719f7"
+
+"@angular2-material/progress-bar@^2.0.0-alpha.8-2":
+  version "2.0.0-alpha.8-experimental3"
+  resolved "https://registry.yarnpkg.com/@angular2-material/progress-bar/-/progress-bar-2.0.0-alpha.8-experimental3.tgz#0ca7041c45a7e545f757a7bf82d6a1d16e4cb37b"
+
+"@angular2-material/radio@^2.0.0-alpha.8-2":
+  version "2.0.0-alpha.8-experimental3"
+  resolved "https://registry.yarnpkg.com/@angular2-material/radio/-/radio-2.0.0-alpha.8-experimental3.tgz#d4ea8d6073dc44ed635fcc2c9bf6f18895b0f935"
+
+"@angular2-material/tabs@^2.0.0-alpha.8-2":
+  version "2.0.0-alpha.8-experimental3"
+  resolved "https://registry.yarnpkg.com/@angular2-material/tabs/-/tabs-2.0.0-alpha.8-experimental3.tgz#65354f84471c7ef513990a5829f83901e4d01674"
+
 "@ngtools/webpack@^1.0.0":
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-1.1.9.tgz#ec40fb5e0082d517ae332b76de3fb46341fb8c7f"
@@ -78,10 +116,6 @@
 "@types/core-js@^0.9.34":
   version "0.9.34"
   resolved "https://registry.yarnpkg.com/@types/core-js/-/core-js-0.9.34.tgz#72c521d8e59fdaa8b65f76db71fa53c82c7c21c5"
-
-"@types/hammerjs@^2.0.30":
-  version "2.0.33"
-  resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.33.tgz#45f57352474181425bb4b65f7313a60426d54bab"
 
 "@types/jasmine@2.5.38":
   version "2.5.38"

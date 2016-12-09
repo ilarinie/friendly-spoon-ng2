@@ -58,10 +58,10 @@
                         </a>
                         <p class="card-text card-header-content">
                             <span *ngIf="recipe.ratingaverage ">
-                             <rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>
+                             <!--<rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>-->
                             </span>
                             <span *ngIf="!recipe.ratingaverage ">
-                              <rating [(ngModel)]="zeroRating" [readonly]="true"></rating>
+                              <!--<rating [(ngModel)]="zeroRating" [readonly]="true"></rating>-->
                             </span>
                         </p>
                         <p class="card-text card-header-content">{{recipe.duration.range}}</p>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="modal-body">
                     <div>
-                        <rating [(ngModel)]="randomRecipe.ratingaverage" [readonly]="true"></rating>
+                        <!--<rating [(ngModel)]="randomRecipe.ratingaverage" [readonly]="true"></rating>-->
                         ({{randomRecipe.ratingcount}} ratings)
                         <div style="float:right;margin-top:10px;" [ngSwitch]="randomRecipe.level.id"><span *ngSwitchCase="3" class="tag tag-danger">Difficult</span>
                             <span *ngSwitchCase="1" class="tag tag-success">Easy</span> <span *ngSwitchCase="2" class="tag tag-warning">Medium</span>
