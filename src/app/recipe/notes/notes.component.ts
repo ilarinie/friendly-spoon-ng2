@@ -39,6 +39,12 @@ export class Notes {
   saveNote() {
     this.savingNote = true;
     this.note.recipe_id = this.recipe.id;
+    if (this.note.rating < 1 || this.note.rating > 5){
+      this.error = true;
+      this.savingNote = false;
+      return;
+    }
+    this.error = false;
     this.friendlyApiService.saveNote(this.note).then(note => {
       this.recipe.notes.push(note);
       this.friendlyApiService.updateRecipeToList(this.recipe).then(recipe => this.recipe = recipe);

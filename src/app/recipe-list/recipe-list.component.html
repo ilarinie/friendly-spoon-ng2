@@ -57,10 +57,12 @@
                             <h4 class="card-title ">{{recipe.name}}</h4>
                         </a>
                         <p class="card-text card-header-content">
-                            <span *ngIf="recipe.ratingaverage ">
+                            <span *ngIf="recipe.ratingaverage " style="color:gold">
+                             {{recipe.ratingaverage | number : '1.1-1'}} / 5
                              <!--<rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>-->
                             </span>
                             <span *ngIf="!recipe.ratingaverage ">
+                                No ratings
                               <!--<rating [(ngModel)]="zeroRating" [readonly]="true"></rating>-->
                             </span>
                         </p>
