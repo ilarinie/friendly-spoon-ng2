@@ -1,7 +1,6 @@
 import {FilterArrayPipe, ReverseArrayPipe, OrderBy, Fractioner} from "./pipes/filter-array-pipe";
 import {FractionizePipe} from "./pipes/fractioner";
 import {FriendlyApiService} from "./services/friendlyapi.service";
-import { Rating } from "ng2-rating";
 import { NgModule }       from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
@@ -18,7 +17,7 @@ import { MdCheckboxModule } from '@angular2-material/checkbox';
 import { MdRadioModule } from '@angular2-material/radio';
 import { DragulaModule} from "ng2-dragula/ng2-dragula";
 import {MdProgressBarModule} from "@angular2-material/progress-bar";
-import {MdTabsModule} from "@angular2-material/tabs";
+import { MdTabsModule } from "@angular2-material/tabs";
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {RecipeComponent} from "./recipe/recipe.component";
 import {RecipeFormComponent} from "./recipe-form/recipe-form.component";
@@ -33,13 +32,12 @@ import {TagList} from "./tag-list/tag-list.component";
 import {IngredientList} from "./ingredient-list/ingredient-list.component";
 import {Pictures} from "./recipe-form/pictures/pictures.component";
 import {enableProdMode} from "@angular/core";
-import {Ng2PaginationModule} from "ng2-pagination";
+import { Ng2PaginationModule } from 'ng2-pagination';
 import {fadeIn} from "./animations";
 import {MypageComponent} from "./user/mypage.component";
 import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from "./guard/form.guard";
 import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {SessionService} from "./services/session.service";
-import { ResponsiveModule } from 'ng2-responsive';
 import { TypeaheadModule} from "ng2-bootstrap";
 import { CapitalizePipe } from "./pipes/capitalize";
 
@@ -55,7 +53,6 @@ enableProdMode();
     Fractioner,
     FractionizePipe,
     CapitalizePipe,
-    Rating,
     AppComponent,
     RecipeListComponent,
     RecipeComponent,
@@ -90,7 +87,6 @@ enableProdMode();
     MdProgressBarModule,
     MdTabsModule,
     Ng2PaginationModule,
-    ResponsiveModule,
     TypeaheadModule
   ],
   providers: [
@@ -101,7 +97,6 @@ enableProdMode();
     SessionService
 
   ],
-  entryComponents: [AppComponent],
   bootstrap: [AppComponent],
 
 })

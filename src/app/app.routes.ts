@@ -1,4 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
 
 import { RecipeListComponent } from "./recipe-list/recipe-list.component";
 import { RecipeComponent } from "./recipe/recipe.component";

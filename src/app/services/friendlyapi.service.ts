@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Headers, Http} from "@angular/http";
+import { Headers, Http, Response } from '@angular/http';
 
 import {Recipe} from "../models/recipe";
 import {Duration} from "../models/duration";
@@ -22,9 +22,7 @@ import {ShoppingCartItem} from "../models/shopping_cart_item";
 @Injectable()
 export class FriendlyApiService {
 
-  private baseUrl = Global.apiUrl;//'https://api.friendlyspoon.me'; //prod api
-  //private baseUrl = 'http://friendly-spoon-api.herokuapp.com' //dev api
-  //private baseUrl = 'http://localhost:3000';
+  private baseUrl = Global.apiUrl;
 
   private recipesUrl = this.baseUrl + '/recipes';
 
@@ -145,7 +143,7 @@ export class FriendlyApiService {
       .catch(this.handleError);
   }
 
-  deleteIngredient(ingredient: Ingredient) {
+  deleteIngredient(ingredient: Ingredient):Promise<Response> {
     let url = `${this.ingredientsUrl}/${ingredient.id}`;
     return this.http
       .delete(url, {headers: this.refreshHeaders(), body: ''}).toPromise();

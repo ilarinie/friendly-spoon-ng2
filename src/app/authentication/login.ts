@@ -9,8 +9,8 @@ import {fadeIn} from "../animations";
 
 @Component({
   selector: 'login',
-  templateUrl: 'login.html',
-  styleUrls: ['signin.scss'],
+  templateUrl: './login.html',
+  styleUrls: ['./signin.scss'],
   animations: [fadeIn]
 
 })

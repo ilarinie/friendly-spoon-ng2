@@ -24,7 +24,7 @@
             <button md-raised-button class="sortButton" (click)="refreshRecipes()"><i class="fa fa-refresh refresh" aria-hidden="true"></i>
       </button>
             <br> <span class="pagination-control">
-        <pagination-controls #pagination (pageChange)="p = $event">
+        <!--<pagination-controls #pagination (pageChange)="p = $event">
           <div class="custom-pagination">
 
               <div class="pagination-previous" [class.disabled]="pagination.isFirstPage()">
@@ -41,13 +41,13 @@
         <div class="pagination-next" [class.disabled]="pagination.isLastPage()" *ngIf="pagination.directionLinks"> <button [disabled]="pagination.isLastPage()" (click)="pagination.next()"> <i class="fa fa-arrow-right"
                                                                                  aria-hidden="true"></i> </button> </div>
     </div>
-    </pagination-controls>
+    </pagination-controls> -->
     </span>
 </div>
 </div>
 <div class="row main-row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div *showItBootstrap="['sm','xs','md','lg','xl']">
+        <div>
             <div *ngIf="!loading" class="cards-container">
                 <div class="card card-inverse recipe-card " style="width: 300px; " *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order | paginate: { itemsPerPage: 9, currentPage: p } ">
                     <img *ngIf="recipe.coverpicture " class="card-img " style="width:300px " src="{{baseUrl}}{{recipe.coverpicture.picture.medium.url}} ">
@@ -57,11 +57,13 @@
                             <h4 class="card-title ">{{recipe.name}}</h4>
                         </a>
                         <p class="card-text card-header-content">
-                            <span *ngIf="recipe.ratingaverage ">
-                             <rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>
+                            <span *ngIf="recipe.ratingaverage " style="color:gold">
+                             {{recipe.ratingaverage | number : '1.1-1'}} / 5
+                             <!--<rating [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>-->
                             </span>
                             <span *ngIf="!recipe.ratingaverage ">
-                              <rating [(ngModel)]="zeroRating" [readonly]="true"></rating>
+                                No ratings
+                              <!--<rating [(ngModel)]="zeroRating" [readonly]="true"></rating>-->
                             </span>
                         </p>
                         <p class="card-text card-header-content">{{recipe.duration.range}}</p>
@@ -75,35 +77,8 @@
                     </div>
 
                 </div>
-
-
-
-
-
-
-                <!--   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 "
-               *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order | paginate: { itemsPerPage: 10, currentPage: p } ">
-            <md-card [@recipeFade]="off ">
-              <md-card-title-group>
-                <div *ngIf="!recipe.coverpicture "><img md-card-sm-img src="assets/placeholder_thumb.png " alt="nice pic yo "></div>
-                <div *ngIf="recipe.coverpicture "><img md-card-sm-img class="img-responsive "
-                                                      src="{{baseUrl}}{{recipe.coverpicture.picture.thumb.url}} "></div>
-                <md-card-title><a routerLink="/recipes/{{recipe.id}} ">{{recipe.name}}</a></md-card-title>
-                <md-card-subtitle><span *ngIf="recipe.ratingaverage "><rating [(ngModel)]="recipe.ratingaverage "
-                                                                             [readonly]="true "></rating></span> <span
-                  *ngIf="!recipe.ratingaverage "><rating [(ngModel)]="zeroRating " [readonly]="true "></rating></span>
-                </md-card-subtitle>
-                <md-card-subtitle><span *ngIf="recipe.duration.range ">{{recipe.duration.range}}</span> <span
-                  *ngIf="!recipe.duration.range ">No duration set</span></md-card-subtitle>
-                <md-card-subtitle>
-                  <span class="introduction-span " *ngIf="recipe.introduction ">"{{recipe.introduction}} "</span>
-                  <span *ngIf="!recipe.introduction ">No introduction set</span>
-                </md-card-subtitle>
-              </md-card-title-group>
-            </md-card>
-          </div> -->
                 <div class="row backtop-div ">
-                    <pagination-controls *ngIf="recipes.length> 10" #pagination (pageChange)="p = $event">
+                    <!--<pagination-controls *ngIf="recipes.length> 10" #pagination (pageChange)="p = $event">
                         <div class="custom-pagination">
 
                             <div class="pagination-previous" [class.disabled]="pagination.isFirstPage()">
@@ -122,51 +97,14 @@
                   </button>
                             </div>
                         </div>
-                    </pagination-controls>
+                    </pagination-controls> -->
                     <div style="width:100%" class="row">
                         <span class="glyphicon glyphicon-chevron-up"></span><span class="backtop-link" (click)="scrollToTop()"><strong> Back to top </strong></span><span class="glyphicon glyphicon-chevron-up"></span></div>
                 </div>
             </div>
 
         </div>
-        <!--  <div *showItBootstrap="['sm','xs']">
-            <div *ngIf="!loading">
-                <div class="mobile-recipe-div" *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order | paginate: { itemsPerPage: 10, currentPage: p }">
-                    <div style="float:left; width:65%;"><strong><a routerLink="/recipes/{{recipe.id}}">
-              {{recipe.name}}</a></strong>
-                        <hr style="margin-top:0px; margin-bottom:0px;" />
-                        <p class="text-muted" style="font-size:9px; margin-top:4px; margin-bottom:0px;">
-                            {{recipe.introduction}}</p> <span *ngIf="recipe.ratingaverage" style="font-size:10px;"><rating
-                [ngModel]="recipe.ratingaverage" [readonly]="true"></rating></span> <span *ngIf="!recipe.ratingaverage" style="font-size:10px;"><rating
-                [(ngModel)]="zeroRating" [readonly]="true"></rating></span></div>
-                    <div *ngIf="!recipe.coverpicture" class="mobile-img"><img class="img-responsive  mobile-img" src="assets/baking.png" alt="nice pic yo"></div>
-                    <div *ngIf="recipe.coverpicture" class="mobile-img"><img class="img-responsive mobile-img" src="{{baseUrl}}{{recipe.coverpicture.picture.thumb.url}}">
-                    </div>
-                </div>
-            </div>
-            <div class="row backtop-div">
-                <pagination-controls #pagination (pageChange)="p = $event">
-                    <div class="custom-pagination">
 
-                        <div class="pagination-previous" [class.disabled]="pagination.isFirstPage()">
-                            <button [disabled]="pagination.isFirstPage()" (click)="pagination.previous()"><i
-                  class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                        </div>
-
-                        <div *ngFor="let page of pagination.pages" class="pages" [class.current]="pagination.getCurrent() === page.value">
-                            <a (click)="pagination.setCurrent(page.value)" *ngIf="pagination.getCurrent() !== page.value">
-                                <span>{{ page.label }}</span> </a>
-                            <div *ngIf="pagination.getCurrent() === page.value"><span>{{ page.label }}</span></div>
-                        </div>
-                        <div class="pagination-next" [class.disabled]="pagination.isLastPage()" *ngIf="pagination.directionLinks">
-                            <button [disabled]="pagination.isLastPage()" (click)="pagination.next()"><i class="fa fa-arrow-right"
-                                                                                            aria-hidden="true"></i>
-                </button>
-                        </div>
-                    </div>
-                </pagination-controls>
-                <span class="glyphicon glyphicon-chevron-up"></span><span class="backtop-link" (click)="scrollToTop()"><strong> Back to top </strong></span><span class="glyphicon glyphicon-chevron-up"></span></div>
-        </div> -->
         <div *ngIf="loading" class="loading-div"><i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i> <br> Fetching recipes from the nether realms..
         </div>
     </div>
@@ -186,7 +124,7 @@
                 </div>
                 <div class="modal-body">
                     <div>
-                        <rating [(ngModel)]="randomRecipe.ratingaverage" [readonly]="true"></rating>
+                        <!--<rating [(ngModel)]="randomRecipe.ratingaverage" [readonly]="true"></rating>-->
                         ({{randomRecipe.ratingcount}} ratings)
                         <div style="float:right;margin-top:10px;" [ngSwitch]="randomRecipe.level.id"><span *ngSwitchCase="3" class="tag tag-danger">Difficult</span>
                             <span *ngSwitchCase="1" class="tag tag-success">Easy</span> <span *ngSwitchCase="2" class="tag tag-warning">Medium</span>

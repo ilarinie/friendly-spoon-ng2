@@ -13,8 +13,8 @@ import {OnInit} from "@angular/core";
 
 @Component({
   selector: 'user-component',
-  templateUrl: 'user.component.html',
-  styleUrls: ['user.component.scss'],
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss'],
   animations: [fadeIn]
 })
 export class MypageComponent implements OnInit {

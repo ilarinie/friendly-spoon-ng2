@@ -13,8 +13,8 @@ import {fadeIn} from "../animations";
 
 @Component({
   selector: 'shopping-cart',
-  templateUrl: 'shopping-cart.component.html',
-  styleUrls: ['shopping-cart.component.scss'],
+  templateUrl: './shopping-cart.component.html',
+  styleUrls: ['./shopping-cart.component.scss'],
   animations: [fadeIn]
 })
 export class ShoppingCartComponent implements OnInit {

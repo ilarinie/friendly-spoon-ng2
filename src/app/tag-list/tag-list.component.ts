@@ -6,7 +6,7 @@ import {fadeIn} from "../animations";
 
 @Component({
   selector: 'tag-list',
-  templateUrl: 'tag-list.component.html',
+  templateUrl: './tag-list.component.html',
   animations: [ fadeIn ]
 })
 export class TagList implements OnInit {
