@@ -16,8 +16,8 @@ import {RecipeIngredient} from "../models/recipe_ingredient";
 
 @Component({
   selector: "recipeshow",
-  templateUrl: "recipe.component.html",
-  styleUrls: ["recipe.component.scss"],
+  templateUrl: "./recipe.component.html",
+  styleUrls: ["./recipe.component.scss"],
   animations: [
     fadeIn
   ]

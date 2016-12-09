@@ -1,4 +1,4 @@
-import {trigger, state, style, transition, animate} from "@angular/core";
+import {trigger, state, style, transition, animate, AnimationEntryMetadata} from "@angular/core";
 /**
  * Created by ile on 10/4/16.
  */

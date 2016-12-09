@@ -13,8 +13,8 @@ import {Observable} from "rxjs";
 
 @Component({
   selector: 'recipe-pictures',
-  templateUrl: 'pictures.component.html',
-  styleUrls: ['pictures.component.scss'],
+  templateUrl: './pictures.component.html',
+  styleUrls: ['./pictures.component.scss'],
   viewProviders: [DragulaService]
 })
 export class Pictures implements OnInit {

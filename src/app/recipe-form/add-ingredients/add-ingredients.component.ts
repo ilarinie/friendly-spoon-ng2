@@ -15,8 +15,8 @@ import {Output} from "@angular/core/src/metadata/directives";
 
 @Component({
   selector: 'add-ingredients',
-  templateUrl: 'add-ingredients.component.html',
-  styleUrls: ['add-ingredients.component.scss', 'dragula.min.css'],
+  templateUrl: './add-ingredients.component.html',
+  styleUrls: ['./add-ingredients.component.scss', './dragula.min.css'],
   viewProviders: [
     DragulaService
   ],

@@ -9,16 +9,16 @@ import { routing } from './app.routes';
 import { HttpModule } from '@angular/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { Authentication } from './authentication/authentication';
-import { MdButtonModule } from '@angular2-material/button';
-import {MdGridListModule} from '@angular2-material/grid-list';
-import {MdCardModule} from '@angular2-material/card';
-import {MdListModule} from '@angular2-material/list';
-import {MdInputModule} from '@angular2-material/input';
-import { MdCheckboxModule } from '@angular2-material/checkbox';
-import { MdRadioModule } from '@angular2-material/radio';
+import { MdButtonModule } from '@angular/material/button';
+import {MdGridListModule} from '@angular/material/grid-list';
+import {MdCardModule} from '@angular/material/card';
+import {MdListModule} from '@angular/material/list';
+import {MdInputModule} from '@angular/material/input';
+import { MdCheckboxModule } from '@angular/material/checkbox';
+import { MdRadioModule } from '@angular/material/radio';
 import { DragulaModule} from "ng2-dragula/ng2-dragula";
-import {MdProgressBarModule} from "@angular2-material/progress-bar";
-import {MdTabsModule} from "@angular2-material/tabs";
+import {MdProgressBarModule} from "@angular/material/progress-bar";
+import { MdTabsModule } from "@angular/material/tabs";
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {RecipeComponent} from "./recipe/recipe.component";
 import {RecipeFormComponent} from "./recipe-form/recipe-form.component";
@@ -33,13 +33,12 @@ import {TagList} from "./tag-list/tag-list.component";
 import {IngredientList} from "./ingredient-list/ingredient-list.component";
 import {Pictures} from "./recipe-form/pictures/pictures.component";
 import {enableProdMode} from "@angular/core";
-import {Ng2PaginationModule} from "ng2-pagination";
+import { Ng2PaginationModule } from 'ng2-pagination';
 import {fadeIn} from "./animations";
 import {MypageComponent} from "./user/mypage.component";
 import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from "./guard/form.guard";
 import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {SessionService} from "./services/session.service";
-import { ResponsiveModule } from 'ng2-responsive';
 import { TypeaheadModule} from "ng2-bootstrap";
 import { CapitalizePipe } from "./pipes/capitalize";
 
@@ -90,7 +89,6 @@ enableProdMode();
     MdProgressBarModule,
     MdTabsModule,
     Ng2PaginationModule,
-    ResponsiveModule,
     TypeaheadModule
   ],
   providers: [
@@ -101,7 +99,6 @@ enableProdMode();
     SessionService
 
   ],
-  entryComponents: [AppComponent],
   bootstrap: [AppComponent],
 
 })

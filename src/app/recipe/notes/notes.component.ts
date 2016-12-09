@@ -10,8 +10,8 @@ import { Note } from "../../models/note";
 import {fadeIn} from "../../animations";
 
 @Component({
-  templateUrl: 'notes.component.html',
-  styleUrls: ['notes.component.scss'],
+  templateUrl: './notes.component.html',
+  styleUrls: ['./notes.component.scss'],
   selector: 'notes',
   animations: [
     fadeIn

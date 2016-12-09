@@ -8,9 +8,9 @@ import {SessionService} from "./services/session.service";
 
 @Component({
   selector: "friendly-app",
-  templateUrl: "app.component.html",
+  templateUrl: "./app.component.html",
   providers: [FriendlyApiService],
-  styleUrls: ['app.component.scss']
+  styleUrls: ['./app.component.scss']
 })
 
 

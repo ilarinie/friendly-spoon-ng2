@@ -5,7 +5,7 @@ import {fadeIn} from "../animations";
 
 @Component({
   selector: 'ingredient-list',
-  templateUrl: 'ingredient-list.component.html',
+  templateUrl: './ingredient-list.component.html',
   animations: [ fadeIn ],
 })
 export class IngredientList implements OnInit {

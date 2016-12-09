@@ -8,8 +8,8 @@ import {fadeIn} from "../../animations";
 
 
 @Component({
-  templateUrl: 'tags.component.html',
-  styleUrls: ['tags.component.scss'],
+  templateUrl: './tags.component.html',
+  styleUrls: ['./tags.component.scss'],
   selector: 'add-tags',
   animations: [
     fadeIn

@@ -18,8 +18,8 @@ import {fadeIn} from "../animations";
 
 @Component({
   selector: "recipeform",
-  templateUrl: "recipe-form.component.html",
-  styleUrls: ["recipe-form.component.scss"],
+  templateUrl: "./recipe-form.component.html",
+  styleUrls: ["./recipe-form.component.scss"],
   viewProviders: [
     DragulaService
   ], animations: [
