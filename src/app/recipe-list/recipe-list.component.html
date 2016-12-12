@@ -24,7 +24,9 @@
             <button md-raised-button class="sortButton" (click)="refreshRecipes()"><i class="fa fa-refresh refresh" aria-hidden="true"></i>
       </button>
             <br> <span class="pagination-control">
-        <!--<pagination-controls #pagination (pageChange)="p = $event">
+
+        <!-- <custom-pagination [id]="1" [maxSize]="7" #pagination (pageChange)="p = $event"></custom-pagination> -->       
+        <pagination-template #pagination="paginationApi" (pageChange)="p = $event">
           <div class="custom-pagination">
 
               <div class="pagination-previous" [class.disabled]="pagination.isFirstPage()">
@@ -38,10 +40,13 @@
                 <span>{{ page.label }}</span> </a>
             <div *ngIf="pagination.getCurrent() === page.value"> <span>{{ page.label }}</span> </div>
         </div>
-        <div class="pagination-next" [class.disabled]="pagination.isLastPage()" *ngIf="pagination.directionLinks"> <button [disabled]="pagination.isLastPage()" (click)="pagination.next()"> <i class="fa fa-arrow-right"
-                                                                                 aria-hidden="true"></i> </button> </div>
+        <div class="pagination-next" [class.disabled]="pagination.isLastPage()">
+            <button [disabled]="pagination.isLastPage()" (click)="pagination.next()">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </button>
+        </div>
     </div>
-    </pagination-controls> -->
+    </pagination-template>
     </span>
 </div>
 </div>
@@ -78,26 +83,25 @@
 
                 </div>
                 <div class="row backtop-div ">
-                    <!--<pagination-controls *ngIf="recipes.length> 10" #pagination (pageChange)="p = $event">
+                    <pagination-template #pagination="paginationApi" (pageChange)="p = $event">
                         <div class="custom-pagination">
-
                             <div class="pagination-previous" [class.disabled]="pagination.isFirstPage()">
-                                <button [disabled]="pagination.isFirstPage()" (click)="pagination.previous()"><i
-                    class="fa fa-arrow-left" aria-hidden="true"></i></button>
+                                <button [disabled]="pagination.isFirstPage()" (click)="pagination.previous()">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                </button>
                             </div>
-
                             <div *ngFor="let page of pagination.pages" class="pages" [class.current]="pagination.getCurrent() === page.value">
                                 <a (click)="pagination.setCurrent(page.value)" *ngIf="pagination.getCurrent() !== page.value">
                                     <span>{{ page.label }}</span> </a>
-                                <div *ngIf="pagination.getCurrent() === page.value"><span>{{ page.label }}</span></div>
+                                <div *ngIf="pagination.getCurrent() === page.value"> <span>{{ page.label }}</span> </div>
                             </div>
-                            <div class="pagination-next" [class.disabled]="pagination.isLastPage()" *ngIf="pagination.directionLinks">
-                                <button [disabled]="pagination.isLastPage()" (click)="pagination.next()"><i class="fa fa-arrow-right"
-                                                                                              aria-hidden="true"></i>
-                  </button>
+                            <div class="pagination-next" [class.disabled]="pagination.isLastPage()">
+                                <button [disabled]="pagination.isLastPage()" (click)="pagination.next()">
+                                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                </button>
                             </div>
                         </div>
-                    </pagination-controls> -->
+                    </pagination-template>
                     <div style="width:100%" class="row">
                         <span class="glyphicon glyphicon-chevron-up"></span><span class="backtop-link" (click)="scrollToTop()"><strong> Back to top </strong></span><span class="glyphicon glyphicon-chevron-up"></span></div>
                 </div>
