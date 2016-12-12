@@ -15,6 +15,7 @@ import {MdListModule} from '@angular2-material/list';
 import {MdInputModule} from '@angular2-material/input';
 import { MdCheckboxModule } from '@angular2-material/checkbox';
 import { MdRadioModule } from '@angular2-material/radio';
+import { MdSliderModule } from '@angular2-material/slider';
 import { DragulaModule} from "ng2-dragula/ng2-dragula";
 import {MdProgressBarModule} from "@angular2-material/progress-bar";
 import { MdTabsModule } from "@angular2-material/tabs";
@@ -40,8 +41,10 @@ import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {SessionService} from "./services/session.service";
 import { TypeaheadModule} from "ng2-bootstrap";
 import { CapitalizePipe } from "./pipes/capitalize";
+import { RatingPercentPipe } from "./pipes/rating-percent";
+import { PercentDisplayComponent } from './percent-display.component';
 
-
+import 'hammerjs';
 
 enableProdMode();
 
@@ -53,6 +56,7 @@ enableProdMode();
     Fractioner,
     FractionizePipe,
     CapitalizePipe,
+    RatingPercentPipe,
     AppComponent,
     RecipeListComponent,
     RecipeComponent,
@@ -69,6 +73,7 @@ enableProdMode();
     TagList,
     IngredientList,
     MypageComponent,
+    PercentDisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -85,6 +90,7 @@ enableProdMode();
     MdCheckboxModule,
     MdRadioModule,
     MdProgressBarModule,
+    MdSliderModule,
     MdTabsModule,
     Ng2PaginationModule,
     TypeaheadModule

@@ -23,6 +23,7 @@ export class Notes {
 
 
   error: boolean = false;
+  ratingInput: boolean = false;
 
   constructor(
     private friendlyApiService: FriendlyApiService
@@ -34,6 +35,14 @@ export class Notes {
 
   user_id = parseInt(localStorage.getItem('user_id'));
 
+  toggleRatingInput(){
+    if (this.ratingInput){
+      this.note.rating = null;
+      this.ratingInput = false;
+    } else {
+      this.ratingInput = true;
+    }
+  }
 
   get diagnostic() { return JSON.stringify(this.note); }
   saveNote() {
@@ -49,6 +58,7 @@ export class Notes {
       this.recipe.notes.push(note);
       this.friendlyApiService.updateRecipeToList(this.recipe).then(recipe => this.recipe = recipe);
       this.savingNote = false;
+      this.ratingInput = false;
       this.note = new Note();
     });
   }
