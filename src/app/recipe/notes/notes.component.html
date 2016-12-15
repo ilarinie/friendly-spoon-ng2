@@ -32,12 +32,32 @@
     </div>
     <md-card *ngIf="!savingNote" class="note-input-form">
         <h4>New Note</h4>
-        Add a Rating <i class="fa fa-caret-square-o-down" (click)="toggleRatingInput()"></i>
+        Choose a Rating <i class="fa fa-caret-square-o-down" (click)="toggleRatingInput()"></i>
         <div class="rating-input" *ngIf="ratingInput" [@fadeIn]="on">
-            <md-slider style="width:100%; margin: 0 auto;" min="0" max="5" step="0.05" [(ngModel)]="note.rating"></md-slider>
-            <p class="percent-display">
-                <percent-display [value]="note.rating"></percent-display>
-            </p>
+            <md-radio-group [(ngModel)]="note.rating">
+                <div class="checkboxes">
+                    <div class="checkboxgroup">
+                        <img src="assets/1-rating.png">
+                        <md-radio-button value="1"></md-radio-button>
+                    </div>
+                    <div class="checkboxgroup">
+                        <img src="assets/2-rating.png">
+                        <md-radio-button value="2"></md-radio-button>
+                    </div>
+                    <div class="checkboxgroup">
+                        <img src="assets/3-rating.png">
+                        <md-radio-button value="3"></md-radio-button>
+                    </div>
+                    <div class="checkboxgroup">
+                        <img src="assets/4-rating.png">
+                        <md-radio-button value="4"></md-radio-button>
+                    </div>
+                    <div class="checkboxgroup">
+                        <img src="assets/5-rating.png">
+                        <md-radio-button value="5"></md-radio-button>
+                    </div>
+                </div>
+            </md-radio-group>
         </div>
         <textarea class="form-control note-textarea" id="note" name="note" type="text" [(ngModel)]="note.note" placeholder="Type a new note here"></textarea>
         <div style="text-align:center">

@@ -63,7 +63,7 @@
                         </a>
                         <p class="card-text card-header-content">
                             <span *ngIf="recipe.ratingaverage ">
-                             <percent-display [value]="recipe.ratingaverage"></percent-display>
+                             <span [innerHTML]="recipe.ratingaverage | ratingimg"></span>
                             </span>
                             <span *ngIf="!recipe.ratingaverage ">
                                 No ratings

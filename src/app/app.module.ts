@@ -19,6 +19,7 @@ import { MdSliderModule } from '@angular2-material/slider';
 import { DragulaModule} from "ng2-dragula/ng2-dragula";
 import {MdProgressBarModule} from "@angular2-material/progress-bar";
 import { MdTabsModule } from "@angular2-material/tabs";
+import { MdUniqueSelectionDispatcher } from "@angular2-material/core";
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {RecipeComponent} from "./recipe/recipe.component";
 import {RecipeFormComponent} from "./recipe-form/recipe-form.component";
@@ -100,8 +101,8 @@ enableProdMode();
     FriendlyApiService,
     UserFormLeaveConfirmation,
     RecipeFormLeaveConfirmation,
-    SessionService
-
+    SessionService,
+    MdUniqueSelectionDispatcher
   ],
   bootstrap: [AppComponent],
 
