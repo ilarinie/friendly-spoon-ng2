@@ -37,6 +37,7 @@ export class RecipeComponent implements OnInit {
   pictureSet = [];
 
   baseUrl = Global.apiUrl;
+  ratingStates = Global.ratingStates;
 
 
   user_id: number = parseInt(localStorage.getItem('user_id'));
