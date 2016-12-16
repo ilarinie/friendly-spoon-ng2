@@ -31,7 +31,7 @@ export class RecipeListComponent implements OnInit {
   searchTag: string;
   zeroRating = 0;
 
-
+  ratingStates = Global.ratingStatesInverse;
   baseUrl: string = Global.apiUrl;
 
   loading: boolean;

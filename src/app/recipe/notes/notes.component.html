@@ -14,13 +14,13 @@
     <div class="card-columns">
         <div class="card card-block" *ngFor="let note of recipe.notes; let i = index">
             <span *ngIf="note.rating">
-                <h5 class="card-title">Rated {{note.rating}} / 5</h5>
+                <h5 class="card-title"><rating [(ngModel)]="note.rating" [readonly]="true" [ratingStates]="ratingStates"></rating></h5>
             </span>
             <blockquote class="card-blockquote">
-                <p><i>"{{note.note}}"</i></p>
+                <p *ngIf="note.note"><i>"{{note.note}}"</i></p>
                 <footer>
                     <small class="text-muted">
-                        {{i+1}}. {{note.username}} at {{note.created_at | date:'short'}}
+                        #{{i+1}} by {{note.username}} at {{note.created_at | date:'short'}}
                     </small>
                 </footer>
             </blockquote>
@@ -34,7 +34,7 @@
         <h4>New Note</h4>
         Choose a Rating <i class="fa fa-caret-square-o-down" (click)="toggleRatingInput()"></i>
         <div class="rating-input" *ngIf="ratingInput" [@fadeIn]="on">
-            <md-radio-group [(ngModel)]="note.rating">
+            <!--<md-radio-group [(ngModel)]="note.rating">
                 <div class="checkboxes">
                     <div class="checkboxgroup">
                         <img src="assets/1-rating.png">
@@ -57,7 +57,19 @@
                         <md-radio-button value="5"></md-radio-button>
                     </div>
                 </div>
-            </md-radio-group>
+            </md-radio-group> -->
+            <rating style="float:left; margin-right:20px;" [(ngModel)]="note.rating" [readonly]="false" [ratingStates]="ratingStates"></rating>
+            <div [ngSwitch]="note.rating">
+                <span *ngSwitchCase="1" class="tag tag-danger">1 spoons - bad</span>
+                <span *ngSwitchCase="2" class="tag tag-danger">2 spoons - edible</span>
+                <span *ngSwitchCase="3" class="tag tag-warning">3 spoons - its food</span>
+                <span *ngSwitchCase="4" class="tag tag-success">4 spoons - good</span>
+                <span *ngSwitchCase="5" class="tag tag-success">5 spoons - love it!</span>
+
+            </div>
+            <p>1 spoons bad - 5 spoons good</p>
+
+
         </div>
         <textarea class="form-control note-textarea" id="note" name="note" type="text" [(ngModel)]="note.note" placeholder="Type a new note here"></textarea>
         <div style="text-align:center">

@@ -8,6 +8,7 @@ import { Rating } from "ng2-rating";
 import { Recipe } from "../../models/recipe";
 import { Note } from "../../models/note";
 import {fadeIn} from "../../animations";
+import {Global} from "../../globals";
 
 @Component({
   templateUrl: './notes.component.html',
@@ -29,13 +30,18 @@ export class Notes {
     private friendlyApiService: FriendlyApiService
   ) { }
 
+  ratingStates = Global.ratingStates;
 
   note: Note = new Note();
   savingNote: boolean = false;
 
   user_id = parseInt(localStorage.getItem('user_id'));
 
+  
+
   toggleRatingInput(){
+    console.log("note.rating " + this.note.rating);
+    console.log(!this.note.rating);
     if (this.ratingInput){
       this.note.rating = null;
       this.ratingInput = false;

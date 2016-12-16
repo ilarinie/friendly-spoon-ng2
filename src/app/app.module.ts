@@ -35,15 +35,15 @@ import {IngredientList} from "./ingredient-list/ingredient-list.component";
 import {Pictures} from "./recipe-form/pictures/pictures.component";
 import {enableProdMode} from "@angular/core";
 import { Ng2PaginationModule } from 'ng2-pagination';
-import {fadeIn} from "./animations";
-import {MypageComponent} from "./user/mypage.component";
-import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from "./guard/form.guard";
-import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
-import {SessionService} from "./services/session.service";
-import { TypeaheadModule} from "ng2-bootstrap";
-import { CapitalizePipe } from "./pipes/capitalize";
-import { RatingPercentPipe } from "./pipes/rating-percent";
-import { PercentDisplayComponent } from './percent-display.component';
+import {fadeIn} from './animations';
+import {MypageComponent} from './user/mypage.component';
+import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from './guard/form.guard';
+import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
+import {SessionService} from './services/session.service';
+import { TypeaheadModule} from 'ng2-bootstrap';
+import { RatingModule } from 'ng2-bootstrap/components/rating';
+import { CapitalizePipe } from './pipes/capitalize';
+import { RandomRecipeModalComponent } from './recipe-list/random-recipe-modal.component';
 
 import 'hammerjs';
 
@@ -57,7 +57,6 @@ enableProdMode();
     Fractioner,
     FractionizePipe,
     CapitalizePipe,
-    RatingPercentPipe,
     AppComponent,
     RecipeListComponent,
     RecipeComponent,
@@ -74,7 +73,7 @@ enableProdMode();
     TagList,
     IngredientList,
     MypageComponent,
-    PercentDisplayComponent
+    RandomRecipeModalComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +93,8 @@ enableProdMode();
     MdSliderModule,
     MdTabsModule,
     Ng2PaginationModule,
-    TypeaheadModule
+    TypeaheadModule,
+    RatingModule
   ],
   providers: [
     Authentication,

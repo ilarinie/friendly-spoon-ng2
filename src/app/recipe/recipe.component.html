@@ -77,8 +77,8 @@
                     <div class="col-sm-5 col-md-5 " [@fadeIn]="on">
                         <h4 class="sub-heading">Average Rating:</h4>
 
-                        <span *ngIf="recipe.ratingaverage " style="font-size: 20px;">
-                             <percent-display [value]="recipe.ratingaverage"></percent-display>
+                        <span *ngIf="recipe.ratingaverage " style="font-size: 15px;">
+                              <rating [ratingStates]="ratingStates" [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>
                         </span>
                         <h4 class="headings sub-heading">Difficulty</h4>
                         <div [ngSwitch]="recipe.level.id"><span *ngSwitchCase="3" class="tag tag-danger">Difficult</span> <span *ngSwitchCase="1" class="tag tag-success">Easy</span> <span *ngSwitchCase="2" class="tag tag-warning">Medium</span> </div>
