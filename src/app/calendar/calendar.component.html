@@ -1,0 +1,42 @@
+<div class="container">
+    <button md-raised-button (click)="previousMonth()">Previous month</button>
+    <button md-raised-button (click)="nextMonth()">Next month</button> {{ monthDisplay | date: 'MMMM y'}}
+</div>
+<div class="month">
+    <div class="weekday" *ngFor="let weekday of weekDays">
+        {{weekday}}
+    </div>
+</div>
+
+<div class="month">
+    <div class="day" [class.current-month]="day.currentMonth" [class.current-day]="day.currentDay" [class.filler-month]="!day.currentMonth" *ngFor="let day of month">
+        {{day.date.getDate()}} <i style="float: right;" class="fa fa-plus" data-toggle="modal" data-target="#myModal" (click)="newEvent(day)"></i>
+        <div class="event" *ngFor="let event of day.events">
+            <div class="cooked" *ngIf="event.cooked">
+                {{event.recipeName}}
+            </div>
+            <div class="future" *ngIf="!event.cooked">
+                {{event.recipeName}}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Add a new recipe</h4>
+            </div>
+            <div class="modal-body">
+                <input #recipeFilter class="form-control">
+                <div *ngFor="let recipe of recipes | reverseFilter:recipeFilter.value">
+                    {{recipe.name}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

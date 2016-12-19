@@ -1,3 +1,4 @@
+import { CalendarComponent } from './calendar/calendar.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
@@ -64,6 +65,11 @@ const appRoutes: Routes = [
   {
     path: 'shoppingcart',
     component: ShoppingCartComponent,
+    canActivate: [Authentication]
+  },
+  {
+    path: 'calendar',
+    component: CalendarComponent,
     canActivate: [Authentication]
   }
 ];
