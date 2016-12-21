@@ -1,0 +1,64 @@
+@import '../styles/_variables.scss';
+@media only screen and (max-width: 500px) {
+    .day {
+        border: 1px solid black;
+        width: 100%;
+    }
+    .weekday {
+        display: none;
+    }
+    .cooked {
+        width: 100%;
+        background-color: $darkGreen;
+        color: white;
+    }
+    .future {
+        width: 100%;
+        background-color: grey;
+        color: white;
+    }
+}
+
+@media only screen and (min-width: 501px) {
+    .month {
+        display: flex;
+        flex-flow: row wrap;
+        overflow: hidden;
+    }
+    .day {
+        border: 1px solid black;
+        flex-basis: 13%;
+        height: 100px;
+        overflow: scroll;
+        overflow-x: hidden;
+
+    }
+    .day::-webkit-scrollbar { width: 0 !important }
+    .weekday {
+        flex-basis: 13%;
+    }
+    .current-month {
+        color: black;
+    }
+    .current-day {
+        color: blue;
+        background-color: pink;
+    }
+    .filler-month {
+        color: white;
+        background-color: lightgray;
+    }
+    .event {
+        border-bottom: 1px solid white;
+    }
+    .cooked {
+        width: 100%;
+        background-color: $darkGreen;
+        color: white;
+    }
+    .future {
+        width: 100%;
+        background-color: grey;
+        color: white;
+    }
+}

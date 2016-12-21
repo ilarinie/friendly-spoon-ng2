@@ -11,7 +11,10 @@ export class FilterArrayPipe implements PipeTransform {
       return null;
     }
     let regex = new RegExp(queryString, "i");
-    return items.filter((recipe) => new RegExp(queryString, "i").test(recipe.name));
+    return items.filter((recipe) => 
+
+      new RegExp(queryString, "i").test(recipe.name)
+      );
     /*return items.filter((recipe) => function(val) {
       return regex.test(recipe.name) || regex.test(recipe.instruction);
     })*/

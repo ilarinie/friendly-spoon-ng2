@@ -1,3 +1,4 @@
+import { CalendarComponent } from './calendar/calendar.component';
 import {FilterArrayPipe, ReverseArrayPipe, OrderBy, Fractioner} from "./pipes/filter-array-pipe";
 import {FractionizePipe} from "./pipes/fractioner";
 import {FriendlyApiService} from "./services/friendlyapi.service";
@@ -73,7 +74,8 @@ enableProdMode();
     TagList,
     IngredientList,
     MypageComponent,
-    RandomRecipeModalComponent
+    RandomRecipeModalComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,

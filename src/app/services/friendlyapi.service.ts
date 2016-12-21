@@ -18,6 +18,7 @@ import {RecipePicture} from "../models/recipe_picture";
 import {Global} from "../globals";
 import {User} from "../models/user";
 import {ShoppingCartItem} from "../models/shopping_cart_item";
+import {Event} from "../calendar/event";
 
 @Injectable()
 export class FriendlyApiService {
@@ -36,6 +37,7 @@ export class FriendlyApiService {
   private notesUrl = this.baseUrl + '/notes';
   private usersUrl = this.baseUrl + '/users';
   private cartItemsUrl = this.baseUrl + '/shopping_cart_items';
+  private eventsUrl = this.baseUrl + '/events';
 
   token: string;
   client: string;
@@ -481,6 +483,40 @@ export class FriendlyApiService {
     return this.http
       .delete(url, {headers: this.refreshHeaders(), body: ''})
       .toPromise()
+  }
+
+  getEvents(){
+    return this.http
+                .get(this.eventsUrl,  {headers: this.refreshHeaders(), body: ''})
+        .toPromise()
+        .then( res => res.json() as Event[]) ;
+
+  }
+
+  saveEvent(event: Event){
+    if (event.id){
+      return this.putEvent(event);
+    }
+    return this.postEvent(event);
+  }
+
+  putEvent(event: Event){
+    let url = this.eventsUrl + "/" + event.id;
+    return this.http
+        .put(url, JSON.stringify(event), {headers: this.refreshHeaders()})
+        .toPromise()
+        .then( (res) => {
+          return res.json() as Event;
+        } )
+  }
+
+  postEvent(event: Event){
+    return this.http
+        .post(this.eventsUrl, JSON.stringify(event), {headers: this.refreshHeaders()})
+        .toPromise()
+        .then( (res) => {
+          return res.json() as Event;
+        } )
   }
 
 

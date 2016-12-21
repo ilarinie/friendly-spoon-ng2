@@ -7,6 +7,7 @@ import {ShoppingCartItem} from "../../models/shopping_cart_item";
 import {FriendlyApiService} from "../../services/friendlyapi.service";
 import {SessionService} from "../../services/session.service";
 import {User} from "../../models/user";
+import {Event} from "../../calendar/event";
 
 
 @Component({
@@ -26,6 +27,8 @@ export class ListIngredients implements OnDestroy {
 
   user: User;
   sub: any;
+
+  marked: boolean = false;
 
   constructor(private friendlyApiService: FriendlyApiService, private sessionService: SessionService) {
     this.user = sessionService.user;
@@ -51,6 +54,17 @@ export class ListIngredients implements OnDestroy {
     }
 
 
+  }
+
+  cook(){
+    let event = new Event();
+    event.recipe_id = this.recipe.id;
+    event.date = new Date();
+    event.cooked = true;
+
+    this.friendlyApiService.saveEvent(event).then(res => {
+      this.marked = true;
+    });
   }
 
   unToggleInc(inc) {
