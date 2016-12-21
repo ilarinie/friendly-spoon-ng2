@@ -1,15 +1,12 @@
 import { Recipe } from '../models/recipe';
 
 export class Event {
-    recipeName: string;
+    id: number;
+    recipe: Recipe;
+    recipe_id: number;
     username: string;
     date: Date;
     cooked: boolean;
 
-    constructor(recipeName, username, date, cooked){
-        this.recipeName = recipeName;
-        this.username = username;
-        this.date = date;
-        this.cooked = cooked;
-    }
+
 }

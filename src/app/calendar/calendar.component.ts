@@ -3,6 +3,7 @@ import { Event } from './event';
 import { Day } from './dayModel';
 import { MonthPickerComponent } from 'ng2-bootstrap';
 import { Component } from '@angular/core';
+import {FriendlyApiService} from "../services/friendlyapi.service";
 
 
 @Component({
@@ -19,24 +20,21 @@ export class CalendarComponent {
     month: any = [];
     weekDays: any = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     monthDisplay: Date;
-    freshEvent: Event = new Event("", "", new Date(), false);
     selectedDay: Day;
     recipes: Recipe[] = JSON.parse(localStorage.getItem("recipes"));
 
-    events: Event[] = [
-        new Event("kalkkuna", "ile", new Date(2016, 11, 1), true),
-        new Event("salaatti", "ile", new Date(2016, 11, 13), true),
-        new Event("kana", "ile", new Date(2016, 11, 15), true),
-        new Event("liha", "ile", new Date(2016, 11, 21), false),
-    ]
+    events: Event[] = []
+
+    nEvent: Event = new Event();
 
     currentMonthOffset: number;
 
-    constructor(){
+    constructor(private friendlyApiService: FriendlyApiService){
         this.today = new Date();
         this.monthDisplay = new Date();
         this.populateMonth(this.today);
         this.currentMonthOffset = 0;
+        this.getEvents();
     }
     
     nextMonth(){
@@ -47,6 +45,22 @@ export class CalendarComponent {
         this.currentMonthOffset--;
         console.log(this.currentMonthOffset);
         this.populateMonth( new Date(this.today.getFullYear(), this.today.getMonth() + this.currentMonthOffset, this.today.getDate()));
+    }
+
+    getEvents(){
+        this.friendlyApiService.getEvents().then( (res) => {
+            this.events = res;
+            for (let event of this.events){
+                event.date = new Date(event.date);
+            }
+            this.populateMonth(new Date())
+        });
+    }
+    postEvent(){
+        this.friendlyApiService.saveEvent(this.nEvent).then((res) => {
+            this.events.push(res);
+            this.nEvent = new Event();
+        })
     }
 
     newEvent(day: Day){
@@ -89,9 +103,17 @@ export class CalendarComponent {
                 fillerDay.currentDay = true;
             }
             for (let event of this.events) {
+                event.date = new Date(event.date);
+                console.log(event.date.getFullYear() + ' year, real ' + realDate.getFullYear());
+                console.log(event.date.getMonth() + ' month, real ' + realDate.getMonth());
+                console.log(event.date.getDate() + ' date, real ' + realDate.getDate());
+
+
+
                 if (event.date.getFullYear() === realDate.getFullYear() &&
                     event.date.getMonth() === realDate.getMonth() &&
                     event.date.getDate() === realDate.getDate() ) {
+                    console.log("jea")
                     fillerDay.events.push(event);
                 }
             }

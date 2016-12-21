@@ -13,10 +13,10 @@
         {{day.date.getDate()}} <i style="float: right;" class="fa fa-plus" data-toggle="modal" data-target="#myModal" (click)="newEvent(day)"></i>
         <div class="event" *ngFor="let event of day.events">
             <div class="cooked" *ngIf="event.cooked">
-                {{event.recipeName}}
+                {{event.recipe.name}}
             </div>
             <div class="future" *ngIf="!event.cooked">
-                {{event.recipeName}}
+                {{event.recipe.name}}
             </div>
         </div>
     </div>

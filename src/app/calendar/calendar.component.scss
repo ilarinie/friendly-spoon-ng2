@@ -23,12 +23,17 @@
     .month {
         display: flex;
         flex-flow: row wrap;
+        overflow: hidden;
     }
     .day {
         border: 1px solid black;
         flex-basis: 13%;
         height: 100px;
+        overflow: scroll;
+        overflow-x: hidden;
+
     }
+    .day::-webkit-scrollbar { width: 0 !important }
     .weekday {
         flex-basis: 13%;
     }
@@ -43,7 +48,9 @@
         color: white;
         background-color: lightgray;
     }
-    .event {}
+    .event {
+        border-bottom: 1px solid white;
+    }
     .cooked {
         width: 100%;
         background-color: $darkGreen;
