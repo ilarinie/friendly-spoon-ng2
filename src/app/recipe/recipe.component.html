@@ -42,21 +42,6 @@
         <!-- Alempi rivi, kuvat, aineosat, muut tiedot -->
         <div class="row">
             <div class="col-md-2 img-div hidden-md-down">
-                <!--
-          <div *ngIf="!recipe.recipe_pictures[0]"><img class="recipe-img" src="assets/baking.png"></div>
-          <div *ngIf="recipe.recipe_pictures[0]">
-            <a (click)="showPic(recipe.recipe_pictures[0])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[0].picture.thumb.url}}"></a>
-            <span><i>&copy; {{recipe.recipe_pictures[0].author}}</i></span><br>
-            </div>
-          <div *ngIf="!recipe.recipe_pictures[1]"><img class=" recipe-img" src="assets/muffins.png"></div>
-          <div *ngIf="recipe.recipe_pictures[1]">
-            <a (click)="showPic(recipe.recipe_pictures[1])" data-toggle="modal" data-target="#myModal"><img class="recipe-img" src="{{baseUrl}}/{{recipe.recipe_pictures[1].picture.thumb.url}}"></a><span><i>&copy;
-            {{recipe.recipe_pictures[1].author}}</i></span><br></div>
-          <div *ngIf="!recipe.recipe_pictures[2]"><img class="recipe-img-last" src="assets/pumpkin.png"></div>
-          <div *ngIf="recipe.recipe_pictures[2]">
-            <a (click)="showPic(recipe.recipe_pictures[2])" data-toggle="modal" data-target="#myModal"><img class="recipe-img-last" src="{{baseUrl}}/{{recipe.recipe_pictures[2].picture.thumb.url}}"></a><span><i>&copy;
-            {{recipe.recipe_pictures[2].author}}</i></span><br></div>-->
-
                 <div *ngFor="let picture of recipe.recipe_pictures">
                     <a (click)="showPic(picture)" data-toggle="modal" data-target="#myModal">
                         <img class="recipe-img" src="{{baseUrl}}/{{picture.picture.thumb.url}}">
@@ -76,13 +61,17 @@
                     <!-- muut tiedot -näkymä -->
                     <div class="col-sm-5 col-md-5 " [@fadeIn]="on">
                         <h4 class="sub-heading">Average Rating:</h4>
-
                         <span *ngIf="recipe.ratingaverage " style="font-size: 15px;">
                               <rating [ratingStates]="ratingStates" [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>
                         </span>
                         <h4 class="headings sub-heading">Difficulty</h4>
-                        <div [ngSwitch]="recipe.level.id"><span *ngSwitchCase="3" class="tag tag-danger">Difficult</span> <span *ngSwitchCase="1" class="tag tag-success">Easy</span> <span *ngSwitchCase="2" class="tag tag-warning">Medium</span> </div>
-                        <h4 class="headings sub-heading">Preparation time</h4> <span *ngFor="let i of duration_array.slice(0,recipe.duration.id)" class="glyphicon glyphicon-time timespan"></span>
+                        <div [ngSwitch]="recipe.level.id">
+                            <span *ngSwitchCase="3" class="tag tag-danger">Difficult</span>
+                            <span *ngSwitchCase="1" class="tag tag-success">Easy</span>
+                            <span *ngSwitchCase="2" class="tag tag-warning">Medium</span>
+                        </div>
+                        <h4 class="headings sub-heading">Preparation time</h4>
+                            <i *ngFor="let i of duration_array.slice(0,recipe.duration.id)" class="fa fa-clock-o"></i>
                         <h4 class="headings sub-heading">Tags</h4>
                         <md-grid-list cols="4" rowHeight="30px" gutterSize="4px">
                             <md-grid-tile *ngFor="let recipetag of recipe.recipe_tags" class="tag-label tag-display">{{recipetag.tag.title}}</md-grid-tile>
