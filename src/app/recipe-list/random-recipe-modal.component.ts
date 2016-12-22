@@ -15,8 +15,8 @@ import { Component, Input } from '@angular/core';
                     <div>
                         <!--<rating [(ngModel)]="randomRecipe.ratingaverage" [readonly]="true"></rating>-->
                         ({{randomRecipe.ratingcount}} ratings)
-                        <div style="float:right;margin-top:10px;" [ngSwitch]="randomRecipe.level.id"><span *ngSwitchCase="3" class="tag tag-danger">Difficult</span>
-                            <span *ngSwitchCase="1" class="tag tag-success">Easy</span> <span *ngSwitchCase="2" class="tag tag-warning">Medium</span>
+                        <div style="float:right;margin-top:10px;">
+                            <span class="tag" [class.tag-danger]="randomRecipe.level.id == 3" [class.tag-warning]="randomRecipe.level.id == 2" [class.tag-success]="randomRecipe.level.id == 1">{{randomRecipe.level.level}}</span>
                         </div>
                     </div>
                     <p><b>{{randomRecipe.duration.range}}</b></p>

@@ -70,10 +70,8 @@
                             </span>
                         </p>
                         <p class="card-text card-header-content">{{recipe.duration.range}}</p>
-                        <div style="float:right; margin-top:-43px;" [ngSwitch]="recipe.level.id">
-                            <span *ngSwitchCase="3" class="tag tag-danger">Difficult</span>
-                            <span *ngSwitchCase="1" class="tag tag-success">Easy</span>
-                            <span *ngSwitchCase="2" class="tag tag-warning">Medium</span>
+                        <div style="float:right; margin-top:-43px;">
+                            <span class="tag" [class.tag-danger]="recipe.level.id == 3" [class.tag-warning]="recipe.level.id == 2" [class.tag-success]="recipe.level.id == 1">{{recipe.level.level}}</span>
                         </div>
                         <p class="card-text card-introduction"><i>{{recipe.introduction}}</i></p>
 
