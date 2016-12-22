@@ -61,4 +61,12 @@
         background-color: grey;
         color: white;
     }
+    .selected {
+        background-color: $darkGreen;
+        color: white;
+    }
+    .event-add {
+        padding: 30px;
+        
+    }
 }
