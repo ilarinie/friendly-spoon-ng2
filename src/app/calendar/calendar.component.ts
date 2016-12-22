@@ -1,4 +1,5 @@
 import { Recipe } from '../models/recipe';
+import { RecipeIngredient } from '../models/recipe_ingredient';
 import { Event } from './event';
 import { Day } from './dayModel';
 import { MonthPickerComponent } from 'ng2-bootstrap';
@@ -21,11 +22,22 @@ export class CalendarComponent {
     weekDays: any = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     monthDisplay: Date;
     selectedDay: Day;
+    filter:any = "";
+
+    addToCart: boolean = false;
+
+    fromDate: any;
+    toDate: any;
+    incList: RecipeIngredient[] = [];
+
     recipes: Recipe[] = JSON.parse(localStorage.getItem("recipes"));
 
     events: Event[] = []
 
     nEvent: Event = new Event();
+    nEventDate: string = "";
+    chosenRecipe: any = {};
+    addEvent: boolean = false;
 
     currentMonthOffset: number;
 
@@ -60,12 +72,81 @@ export class CalendarComponent {
         this.friendlyApiService.saveEvent(this.nEvent).then((res) => {
             this.events.push(res);
             this.nEvent = new Event();
+            this.addEvent = false;
+            this.populateMonth( new Date(this.today.getFullYear(), this.today.getMonth() + this.currentMonthOffset, this.today.getDate()) );
         })
     }
 
     newEvent(day: Day){
         this.selectedDay = day;
+        let daystring = ("0" + day.date.getDate()).slice(-2);
+        let monthstring = ("0" + (day.date.getMonth()+1) ).slice(-2);
+
+        let dateString = day.date.getFullYear()+"-"+monthstring+"-"+daystring;
+
+        this.nEventDate = dateString;
+        
+        this.addEvent = true;
     }
+    chooseRecipe(recipe){
+        this.chosenRecipe = recipe;
+        this.filter = "";
+    }
+
+    saveEvent(){
+        this.nEvent.date = new Date(this.nEventDate)
+        this.nEvent.recipe_id = this.chosenRecipe.id;
+        this.postEvent();
+    }
+    nextWeeksIngredients() {
+
+
+
+    }
+    listIncs(){
+        let from = new Date(this.fromDate);
+        console.log("From " + from);
+        let to = new Date(this.toDate);
+        console.log("to " + to);
+        let eventHelper  = this.events;
+        console.log(this.events.length)
+        for (let event of eventHelper){
+            let deit = new Date(event.date);
+            console.log("deit " + deit);
+          
+
+            if (deit > from && deit < to){
+                
+                
+                if (event.recipe.recipe_ingredients){
+                   
+                for (let inc of event.recipe.recipe_ingredients){
+                   
+                    this.incList.push(inc);
+                    
+                }
+                }
+                if (event.recipe.recipe_ingredient_groups) {
+                for (let group of event.recipe.recipe_ingredient_groups){
+                    if (group.recipe_ingredients){
+                    for (let inc of group.recipe_ingredients){
+                        this.incList.push(inc);
+                    }
+                    }
+                }
+                }
+
+            }
+        }
+
+        
+
+
+    }
+
+    
+
+
     populateMonth(date: Date){
         this.month = [];
         this.monthDisplay = date;
@@ -102,20 +183,15 @@ export class CalendarComponent {
                 && realDate.getMonth() == this.today.getMonth() ) {
                 fillerDay.currentDay = true;
             }
+
             for (let event of this.events) {
                 event.date = new Date(event.date);
-                console.log(event.date.getFullYear() + ' year, real ' + realDate.getFullYear());
-                console.log(event.date.getMonth() + ' month, real ' + realDate.getMonth());
-                console.log(event.date.getDate() + ' date, real ' + realDate.getDate());
-
-
-
                 if (event.date.getFullYear() === realDate.getFullYear() &&
                     event.date.getMonth() === realDate.getMonth() &&
                     event.date.getDate() === realDate.getDate() ) {
-                    console.log("jea")
                     fillerDay.events.push(event);
                 }
+                
             }
 
 

@@ -3,18 +3,18 @@
     <div class="col-sm-13 col-md-13 maindiv col-centered">
         <!-- Yläotsikkorivi -->
         <div class="row">
-            <div class="col-sm-3 col-md-3  heading-div">
+            <div class="col-sm-4 col-md-4  heading-div">
                 <h3 class="main-heading">{{recipe.name}}</h3>
             </div>
             <!-- RECIPE ACTION BUTTONS FOR DESKTOP -->
-            <div class="col-sm-6 col-md-6 heading-div button-group hidden-sm-down">
+            <div class="col-sm-8 col-md-8 heading-div button-group hidden-sm-down">
                 <button class="btn header-btn" (click)="divide()">{{divideButton}}</button>
                 <button class="btn header-btn" (click)="double()">{{doubleButton}}</button>
                 <button class="btn header-btn" (click)="noteSwitch()">{{noteSwitchButton}}</button>
                 <button *ngIf="user_id == recipe_user_id" class="btn header-btn" routerLink="/recipes/{{recipe.id}}/edit">Edit</button>
             </div>
             <!-- RECIPE ACTION BUTTONS FOR MOBILE -->
-            <div class="col-sm-12 hidden-sm-up mobile-buttons">
+            <div class="col-sm-12 col-md-12 hidden-md-up mobile-buttons">
                 <div class="mobile-nav-div first">
                     <a class="mobile-button" (click)="divide()">{{divideButton}}</a>
                 </div>
@@ -65,11 +65,7 @@
                               <rating [ratingStates]="ratingStates" [(ngModel)]="recipe.ratingaverage" [readonly]="true"></rating>
                         </span>
                         <h4 class="headings sub-heading">Difficulty</h4>
-                        <div [ngSwitch]="recipe.level.id">
-                            <span *ngSwitchCase="3" class="tag tag-danger">Difficult</span>
-                            <span *ngSwitchCase="1" class="tag tag-success">Easy</span>
-                            <span *ngSwitchCase="2" class="tag tag-warning">Medium</span>
-                        </div>
+                            <span class="tag" [class.tag-danger]="recipe.level.id == 3" [class.tag-warning]="recipe.level.id == 2" [class.tag-success]="recipe.level.id == 1">{{recipe.level.level}}</span>
                         <h4 class="headings sub-heading">Preparation time</h4>
                             <i *ngFor="let i of duration_array.slice(0,recipe.duration.id)" class="fa fa-clock-o"></i>
                         <h4 class="headings sub-heading">Tags</h4>

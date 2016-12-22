@@ -2,6 +2,39 @@
     <button md-raised-button (click)="previousMonth()">Previous month</button>
     <button md-raised-button (click)="nextMonth()">Next month</button> {{ monthDisplay | date: 'MMMM y'}}
 </div>
+
+<div *ngIf="addEvent" class="container event-add">
+
+    <p>Recipe: {{chosenRecipe.name}}</p>
+    <input type="date" class="form-control"  [(ngModel)]="nEventDate">
+    <input type="checkbox" [(ngModel)]="nEvent.cooked">Already cooked?<br />
+
+    <input #recipeFilter placeholder="Search for recipes" class="form-control" [(ngModel)]="filter" (keyup)="0" >
+    <div class="recipe-search" *ngFor="let recipe of recipes | reverseFilter:recipeFilter.value">
+        {{recipe.name}} <button md-raised-button color="primary" style="margin-left: 30px" (click)="chooseRecipe(recipe)">Choose</button>
+    </div>
+
+    <button md-raised-button color="primary" (click)="saveEvent()">Save</button>
+
+
+</div>
+
+<div style="padding: 30px; display:none;">
+    <h5>Add Ingredients to cart or some other message like that lol omg <i class="fa fa-caret-down" (click)="addToCart = !addToCart"></i></h5>
+    <div *ngIf="addToCart">
+        <div>
+            <label for="fromDate">From</label>
+            <input type="date" [(ngModel)]="fromDate" class="form-control">
+            <label for="toDate">To</label>
+            <input type="date" [(ngModel)]="toDate" class="form-control">
+            <button md-raised-button color="primary" (click)="listIncs()">List</button>
+        </div>
+        <div *ngFor="let inc of incList">
+            asd
+        </div>
+    </div>
+</div>
+
 <div class="month">
     <div class="weekday" *ngFor="let weekday of weekDays">
         {{weekday}}
@@ -9,10 +42,10 @@
 </div>
 
 <div class="month">
-    <div class="day" [class.current-month]="day.currentMonth" [class.current-day]="day.currentDay" [class.filler-month]="!day.currentMonth" *ngFor="let day of month">
-        {{day.date.getDate()}} <i style="float: right;" class="fa fa-plus" data-toggle="modal" data-target="#myModal" (click)="newEvent(day)"></i>
+    <div class="day" [class.selected]="day == selectedDay" [class.current-month]="day.currentMonth" [class.current-day]="day.currentDay" [class.filler-month]="!day.currentMonth" *ngFor="let day of month">
+        {{day.date.getDate()}} <i *ngIf="day.currentMonth" style="float: right;margin-top:3px; margin-right: 2px;" class="fa fa-plus" (click)="newEvent(day)"></i>
         <div class="event" *ngFor="let event of day.events">
-            <div class="cooked" *ngIf="event.cooked">
+            <div md-tooltip="{{event.recipe.name}} cooked by {{event.user.name}} "class="cooked" *ngIf="event.cooked">
                 {{event.recipe.name}}
             </div>
             <div class="future" *ngIf="!event.cooked">
@@ -23,20 +56,5 @@
 </div>
 
 
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4>Add a new recipe</h4>
-            </div>
-            <div class="modal-body">
-                <input #recipeFilter class="form-control">
-                <div *ngFor="let recipe of recipes | reverseFilter:recipeFilter.value">
-                    {{recipe.name}}
-                </div>
-            </div>
 
-        </div>
-    </div>
-</div>
+                

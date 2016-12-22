@@ -33,6 +33,7 @@
     "@angular2-material/radio": "^2.0.0-alpha.8-2",
     "@angular2-material/slider": "^2.0.0-alpha.8-2",
     "@angular2-material/tabs": "^2.0.0-alpha.8-2",
+    "@angular2-material/tooltip": "^2.0.0-alpha.8-2",
     "bootstrap": "^4.0.0-alpha.5",
     "core-js": "^2.4.1",
     "dragula": "^3.7.1",

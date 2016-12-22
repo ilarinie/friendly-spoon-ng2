@@ -2,7 +2,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import {FilterArrayPipe, ReverseArrayPipe, OrderBy, Fractioner} from "./pipes/filter-array-pipe";
 import {FractionizePipe} from "./pipes/fractioner";
 import {FriendlyApiService} from "./services/friendlyapi.service";
-import { NgModule }       from '@angular/core';
+import { NgModule, LOCALE_ID }       from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
 import { routing } from './app.routes';
@@ -20,7 +20,8 @@ import { MdSliderModule } from '@angular2-material/slider';
 import { DragulaModule} from "ng2-dragula/ng2-dragula";
 import {MdProgressBarModule} from "@angular2-material/progress-bar";
 import { MdTabsModule } from "@angular2-material/tabs";
-import { MdUniqueSelectionDispatcher } from "@angular2-material/core";
+import { MdTooltipModule } from '@angular2-material/tooltip';
+import { MdUniqueSelectionDispatcher, OVERLAY_PROVIDERS } from "@angular2-material/core";
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {RecipeComponent} from "./recipe/recipe.component";
 import {RecipeFormComponent} from "./recipe-form/recipe-form.component";
@@ -94,17 +95,20 @@ enableProdMode();
     MdProgressBarModule,
     MdSliderModule,
     MdTabsModule,
+    MdTooltipModule,
     Ng2PaginationModule,
     TypeaheadModule,
     RatingModule
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: "fi-FI" },
     Authentication,
     FriendlyApiService,
     UserFormLeaveConfirmation,
     RecipeFormLeaveConfirmation,
     SessionService,
-    MdUniqueSelectionDispatcher
+    MdUniqueSelectionDispatcher,
+    OVERLAY_PROVIDERS
   ],
   bootstrap: [AppComponent],
 
