@@ -519,6 +519,14 @@ export class FriendlyApiService {
         } )
   }
 
+  deleteEvent(event: Event){
+    let url = this.eventsUrl + "/" + event.id
+
+    return this.http
+        .delete(url, { headers: this.refreshHeaders(), body: ''})
+        .toPromise()
+  }
+
 
   private handleError(error: any) {
     console.error('An error occurred', error);

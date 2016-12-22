@@ -72,6 +72,9 @@
                         <md-grid-list cols="4" rowHeight="30px" gutterSize="4px">
                             <md-grid-tile *ngFor="let recipetag of recipe.recipe_tags" class="tag-label tag-display">{{recipetag.tag.title}}</md-grid-tile>
                         </md-grid-list>
+                        <div *ngIf="chosenQuote" class="quotes" [@fadeIn]="on">
+                            <i>"{{chosenQuote.note}}" - {{chosenQuote.username}}</i>
+                        </div>
                     </div>
                     <!-- END muut tiedot -näkymä -->
                 </div>

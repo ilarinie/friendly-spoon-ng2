@@ -13,6 +13,8 @@ import {RecipePicture} from "../models/recipe_picture";
 import {Global} from "../globals";
 import {fadeIn} from "../animations";
 import {RecipeIngredient} from "../models/recipe_ingredient";
+import {Observable} from "rxjs";
+import {Note} from "../models/note";
 
 @Component({
   selector: "recipeshow",
@@ -35,6 +37,8 @@ export class RecipeComponent implements OnInit {
   checked = [];
   allIncs: RecipeIngredient[];
   pictureSet = [];
+
+  chosenQuote: Note;
 
   baseUrl = Global.apiUrl;
   ratingStates = Global.ratingStates;
@@ -121,6 +125,18 @@ export class RecipeComponent implements OnInit {
   }
   ngOnInit() {
     this.getRecipe();
+    let timer = Observable.timer(5000,5000 )
+    timer.subscribe(t => {
+      this.changeQuote();
+    })
+  }
+
+  changeQuote(){
+
+    if (this.recipe.notes) {
+      let rand = Math.floor(Math.random() * this.recipe.notes.length);
+      this.chosenQuote = this.recipe.notes[rand];
+    }
   }
 
   noteSwitch() {

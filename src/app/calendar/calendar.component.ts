@@ -39,7 +39,11 @@ export class CalendarComponent {
     chosenRecipe: any = {};
     addEvent: boolean = false;
 
+    selectedEvent: Event;
+
     currentMonthOffset: number;
+
+    user_id = parseInt(localStorage.getItem('user_id'));
 
     constructor(private friendlyApiService: FriendlyApiService){
         this.today = new Date();
@@ -74,6 +78,12 @@ export class CalendarComponent {
             this.nEvent = new Event();
             this.addEvent = false;
             this.populateMonth( new Date(this.today.getFullYear(), this.today.getMonth() + this.currentMonthOffset, this.today.getDate()) );
+        })
+    }
+    deleteEvent(event) {
+        this.friendlyApiService.deleteEvent(event).then((res) => {
+            this.events.splice( this.events.indexOf(event), 1);
+            this.populateMonth(new Date(this.today.getFullYear(), this.today.getMonth() + this.currentMonthOffset, this.today.getDate()))
         })
     }
 
