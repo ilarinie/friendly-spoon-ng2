@@ -45,14 +45,20 @@
     <div class="day" [class.selected]="day == selectedDay" [class.current-month]="day.currentMonth" [class.current-day]="day.currentDay" [class.filler-month]="!day.currentMonth" *ngFor="let day of month">
         {{day.date.getDate()}} <i *ngIf="day.currentMonth" style="float: right;margin-top:3px; margin-right: 2px;" class="fa fa-plus" (click)="newEvent(day)"></i>
         <div class="event" *ngFor="let event of day.events">
-            <div md-tooltip="{{event.recipe.name}} cooked by {{event.user.name}} "class="cooked" *ngIf="event.cooked">
-                {{event.recipe.name}}
+            <div class="cooked" *ngIf="event.cooked">
+                <a (click)="selectedEvent = event">{{event.recipe.name}}</a>
             </div>
             <div class="future" *ngIf="!event.cooked">
                 {{event.recipe.name}}
             </div>
         </div>
     </div>
+</div>
+
+<div *ngIf="seletedEvent">
+    {{event.recipe.name}}
+    {{event.date | date:short}}
+    <button md-raised-button *ngIf="selectedEvent.user_id == user_id" (click)="deleteEvent(selectedEvent)">Delete</button>
 </div>
 
 
