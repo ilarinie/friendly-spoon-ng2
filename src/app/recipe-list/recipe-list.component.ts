@@ -70,15 +70,9 @@ export class RecipeListComponent implements OnInit {
     } else {
       this.tags = JSON.parse(localStorage.getItem("tags"))
     }
-
-
-
-    /*this.friendlyApiService.getTags().then(tags => this.tags = tags);
-    this.refreshRecipes();*/
   }
 
   random() {
-    //this.listfilter = this.shownRecipes[Math.floor((Math.random() * this.shownRecipes.length))].name
     this.randomRecipe = this.shownRecipes[Math.floor((Math.random() * this.shownRecipes.length))]
   }
 

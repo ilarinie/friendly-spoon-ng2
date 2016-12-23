@@ -1,29 +1,66 @@
 <div class="container-fluid recipe-list" [@fadeIn]="on">
-    <h1>Friendly Spoon</h1>
-    <h3>is here for you! </h3>
-    <h4><span *ngIf="recipes">{{recipes.length}} recipes and counting!</span></h4>
+    <h1 class="main-header">Friendly Spoon - is here for you!</h1>
+    <h4 class="sub-header">Enjoy your stay.</h4>
+    <h4 class="sub-header"><span *ngIf="recipes"><span class="recipe-count">{{recipes.length}}</span> recipes and counting!</span></h4>
+
+    <hr>
     <div class="row main-row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <md-input [typeahead]="shownRecipes" [typeaheadOptionField]="'name'" class="recipe-search" type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Filter recipes"><span md-suffix class="clearbutton glyphicon glyphicon-remove" (click)="clearSearch()"></span></md-input>
+            <md-input [typeahead]="shownRecipes" [typeaheadOptionField]="'name'" class="recipe-search" type="text" id="searchText" #listFilter [(ngModel)]="listfilter" (keyup)="0" placeholder="Search recipes"><span md-suffix class="clearbutton glyphicon glyphicon-remove" (click)="clearSearch()"></span></md-input>
         </div>
     </div>
     <div class="row main-row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><label>Filter by tags</label> <select class="form-control" (change)="tagChange($event.target.value)">
-      <option value=""></option>
-      <option *ngFor="let tag of tags" value="{{tag.title}}">{{tag.title}}</option>
-    </select></div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <!--<label>Filter by tags</label>-->
+            
+        </div>
     </div>
     <div class="row main-row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 buttons-row">
-            <button md-raised-button class="sortButton" (click)="sortByName()">ABC <i class="fa fa-sort"></i></button>
-            <button md-raised-button class="sortButton" (click)="sortByRating()">Rating <i class="fa fa-sort"></i></button>
-            <button md-raised-button class="sortButton" (click)="sortByTime()">Time <i class="fa fa-sort"></i></button>
-            <button md-raised-button class="sortButton" (click)="sortByDate()">Created <i class="fa fa-sort"></i></button>
-            <button md-raised-button class="sortButton" (click)="random()" data-toggle="modal" data-target="#myModal"><i
-        class="fa fa-random" aria-hidden="true"></i></button>
-            <button md-raised-button class="sortButton" (click)="refreshRecipes()"><i class="fa fa-refresh refresh" aria-hidden="true"></i>
-      </button>
-            <br> <span class="pagination-control">
+
+            <!--<span class="sortlabel" style="float:left">Sort by:</span>
+            <select style="width: 150px; float: left;" class="form-control" [(ngModel)]="order">
+                <option value="name">Alphabetical</option>
+                <option value="namereverse">Alphabetical - descending</option>
+                <option value="rating">Rating</option>
+                <option value="ratingreverse">Rating - descending</option>
+                <option value="time">Cooking time</option>
+                <option value="timereverse">Cooking time - descending</option>
+                <option value="date">Creation date</option>
+                <option value="datereverse">Creation date - descending</option>
+            </select>-->
+            <div class="button-row-item">
+                <select class="form-control tag-select" (change)="tagChange($event.target.value)">
+                    <option value="" selected>Filter by tags</option>
+                    <option *ngFor="let tag of tags" value="{{tag.title}}">{{tag.title}}</option>
+                </select>
+            </div>
+            <div class="button-row-item">
+                <button md-raised-button class="sortButton" (click)="sortByName()">ABC <i class="fa fa-sort"></i></button>
+            </div>
+            <div class="button-row-item">
+                <button md-raised-button class="sortButton" (click)="sortByRating()">Rating <i class="fa fa-sort"></i></button>
+            </div>
+            <div class="button-row-item">
+                <button md-raised-button class="sortButton" (click)="sortByTime()">Time <i class="fa fa-sort"></i></button>
+            </div>
+            <div class="button-row-item">
+                <button md-raised-button class="sortButton" (click)="sortByDate()">Created <i class="fa fa-sort"></i></button>
+            </div>
+
+        </div>
+        <div class="buttons-row">
+            <div class="button-row-item">
+                <button md-raised-button class="sortButton toolbutton" (click)="random()" data-toggle="modal" data-target="#myModal"><i class="fa fa-random" aria-hidden="true"></i></button>
+            </div>
+            <div class="button-row-item">
+                <button md-raised-button class="sortButton toolbutton" (click)="refreshRecipes()" ><i class="fa fa-refresh" aria-hidden="true"></i></button>
+            </div>
+            <br> 
+        </div>
+            
+            <div>
+            <span class="pagination-control">
 
         <!-- <custom-pagination [id]="1" [maxSize]="7" #pagination (pageChange)="p = $event"></custom-pagination> -->       
         <pagination-template #pagination="paginationApi" (pageChange)="p = $event">
