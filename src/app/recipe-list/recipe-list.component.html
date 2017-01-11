@@ -93,7 +93,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div>
             <div *ngIf="!loading" class="cards-container">
-                <div class="card card-inverse recipe-card " style="width: 300px; " *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order | paginate: { itemsPerPage: 9, currentPage: p } ">
+                <div class="card card-inverse recipe-card " style="width: 300px; " *ngFor="let recipe of shownRecipes | filter:listFilter.value | orderBy: order | paginate: { itemsPerPage: 9, currentPage: p } " [@recipeSlide]="in">
                     <img *ngIf="recipe.coverpicture " class="card-img " style="width:300px " src="{{baseUrl}}{{recipe.coverpicture.picture.medium.url}} ">
                     <img *ngIf="!recipe.coverpicture " class="card-img " src="assets/placeholder_thumb.png ">
                     <div class="card-img-overlay card-header-content">

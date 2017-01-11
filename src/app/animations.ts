@@ -33,3 +33,16 @@ export const recipeFade =  trigger('recipeFade', [
 
 ]);
 
+export const recipeSlide = trigger('recipeSlide', [
+    state('in', style({transform: 'translateX(0)'})),
+    transition("void => *", [
+        style({transform: 'translateY(150%)', opacity: 0}),
+        animate(300)
+    ]),
+    transition('* => void', [
+        animate(300, style({transform: 'translateY(100%)'}))
+    ])
+
+
+])
+

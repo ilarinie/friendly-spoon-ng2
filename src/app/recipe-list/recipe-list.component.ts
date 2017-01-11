@@ -9,7 +9,8 @@ import {Recipe} from "../models/recipe";
 import {Tag} from "../models/tag";
 import {FriendlyApiService} from "../services/friendlyapi.service";
 import {Global} from "../globals";
-import {fadeIn, recipeFade} from "../animations";
+import {fadeIn, recipeFade, recipeSlide} from "../animations";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -17,7 +18,7 @@ import {fadeIn, recipeFade} from "../animations";
   templateUrl: "./recipe-list.component.html",
   styleUrls: ["./recipe-list.component.scss"],
   animations: [
-    fadeIn, recipeFade
+    fadeIn, recipeSlide
   ]
 })
 
@@ -55,14 +56,14 @@ export class RecipeListComponent implements OnInit {
       this.loading = true;
       this.friendlyApiService.getRecipes().then(recipes => {
         this.recipes = recipes;
-        this.shownRecipes = recipes;
+        this.populateList(recipes)
         localStorage.setItem("recipes", JSON.stringify(recipes));
         localStorage.setItem("listLoaded", Date.now().toString());
         this.loading = false;
       });
     } else {
       this.recipes = JSON.parse(localStorage.getItem("recipes"))
-      this.shownRecipes = JSON.parse(localStorage.getItem("recipes"));
+      this.populateList(this.recipes);
     }
     if (localStorage.getItem("tags") == null) {
       this.friendlyApiService.getTags().then(tags => { this.tags = tags; localStorage.setItem("tags", JSON.stringify(tags)) });
@@ -70,6 +71,28 @@ export class RecipeListComponent implements OnInit {
     } else {
       this.tags = JSON.parse(localStorage.getItem("tags"))
     }
+  }
+
+  populateList(recipes: Recipe[]){
+    this.shownRecipes = [];
+    recipes.sort(this.sortRecipes);
+  let timer = Observable.timer(0,100);
+  timer.subscribe(t => {
+    if (t < recipes.length){
+      this.shownRecipes.push(recipes[t]);
+    }
+  });
+
+  }
+
+  sortRecipes(a,b){
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    }
+    if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      return 1;
+    }
+    return 0;
   }
 
   random() {
@@ -103,7 +126,7 @@ export class RecipeListComponent implements OnInit {
       this.recipes = recipes;
       localStorage.setItem("recipes", JSON.stringify(recipes));
       localStorage.setItem("listLoaded", Date.now().toString())
-      this.shownRecipes = recipes;
+      this.populateList(recipes)
       this.loading = false;
     })
   }

@@ -37,7 +37,7 @@ import {IngredientList} from "./ingredient-list/ingredient-list.component";
 import {Pictures} from "./recipe-form/pictures/pictures.component";
 import {enableProdMode} from "@angular/core";
 import { Ng2PaginationModule } from 'ng2-pagination';
-import {fadeIn} from './animations';
+import {fadeIn, recipeSlide} from './animations';
 import {MypageComponent} from './user/mypage.component';
 import {UserFormLeaveConfirmation, RecipeFormLeaveConfirmation} from './guard/form.guard';
 import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
